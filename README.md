@@ -20,7 +20,7 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 Tested with FreePascal 3.3.x and later.
 
 ## Usage
-It should be almost 1 to 1 as if you are using ImGui <br> 
+It should be almost 1 to 1 as if you are using C++ ImGui <br> 
 Check the demo project for more info.
 
 ### TODO
