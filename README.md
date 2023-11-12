@@ -40,6 +40,7 @@ Check the demo project for more info.
 
 #### Used Projects :
 - [cimgui](https://github.com/cimgui/cimgui)
+- [SDL2 Project](https://github.com/libsdl-org/SDL/tree/SDL2)
 - [SDL2-for-Pascal](https://github.com/PascalGameDevelopment/SDL2-for-Pascal)
 - [imgui-pas](https://github.com/dpethes/imgui-pas)
 - [ChatGPT](https://chat.openai.com)
