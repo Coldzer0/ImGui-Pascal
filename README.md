@@ -27,7 +27,7 @@ Check the demo project for more info.
 - Add Support for [cimplot](https://github.com/cimgui/cimplot)
 - Add Support for [cimnodes](https://github.com/cimgui/cimnodes)
 - Add Support for [cimnodes_r](https://github.com/cimgui/cimnodes_r)
-- Test on Mac & Linux
+- Test on Mac
 - Add missing APIs to our `ImGui Class`
 - Add record helpers for some records like `ImGuiIO` & all `ImVector_xxx` records
 
