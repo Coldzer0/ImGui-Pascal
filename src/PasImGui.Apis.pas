@@ -15,12 +15,12 @@
 
 unit PasImGui.Apis;
 {$IfDef FPC}
-  {$PACKRECORDS C}   
+  {$PACKRECORDS C}
   {$mode objfpc}{$H+}
   {$modeswitch advancedrecords}
-{$EndIf} 
+{$EndIf}
 
-interface  
+interface
 uses
     PasImGui.Enums, PasImGui.Types; // All Needed Types form cimgui
 
@@ -924,7 +924,7 @@ function igImStrlenW( str : PImWchar ) : Integer; cdecl; external CIMGUI_LIB;
 procedure igImStrncpy( dst : PChar; src : PChar; count : size_t ); cdecl; external CIMGUI_LIB;
 function igImStrnicmp( str1 : PChar; str2 : PChar; count : size_t ) : Integer; cdecl; external CIMGUI_LIB;
 function igImTextCharFromUtf8( out_char : PImU32; in_text : PChar; in_text_end : PChar ) : Integer; cdecl; external CIMGUI_LIB;
-function igImTextCharToUtf8( out_buf : PChar; c : ImU32 ) : PChar; cdecl; external CIMGUI_LIB;
+function igImTextCharToUtf8( out_buf : PAnsiChar; c : ImU32 ) : PChar; cdecl; external CIMGUI_LIB;
 function igImTextCountCharsFromUtf8( in_text : PChar; in_text_end : PChar ) : Integer; cdecl; external CIMGUI_LIB;
 function igImTextCountUtf8BytesFromChar( in_text : PChar; in_text_end : PChar ) : Integer; cdecl; external CIMGUI_LIB;
 function igImTextCountUtf8BytesFromStr( in_text : PImWchar; in_text_end : PImWchar ) : Integer; cdecl; external CIMGUI_LIB;
@@ -1504,5 +1504,6 @@ begin
   if saved <> _FPUFLAGSIDEM then
     _SetFlags(saved);
 end;
-      
-end.  
+
+end.
+
