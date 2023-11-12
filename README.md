@@ -6,6 +6,15 @@ FreePascal bindings for dear [ImGui](https://github.com/ocornut/imgui) with dock
 The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 > cimgui is c-api for imgui (https://github.com/ocornut/imgui) Look at: https://github.com/cimgui for other widgets.
 
+## Screenshots
+
+#### Running on Windows
+
+<img src="screenshots/windows.png">
+<br>
+
+#### Running on Linux
+<img src="screenshots/linux.jpg">
 
 ## Building
 Tested with FreePascal 3.3.x and later.
