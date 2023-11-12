@@ -3,46 +3,42 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Release_windows"/>
-    <Units Count="52">
+    <BuildModes Active="Release_linux"/>
+    <Units Count="47">
       <Unit0>
         <Filename Value="ImGuiDemo.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="38"/>
-        <CursorPos X="47" Y="46"/>
+        <TopLine Value="25"/>
+        <CursorPos X="20" Y="43"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
         <Filename Value="display.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="135"/>
         <CursorPos X="10" Y="143"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit1>
       <Unit2>
         <Filename Value="sdl2.pas"/>
-        <IsPartOfProject Value="True"/>
         <UnitName Value="SDL2"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="9926"/>
         <CursorPos X="30" Y="9944"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit2>
       <Unit3>
         <Filename Value="..\fpimgui.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="16" Y="6"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit3>
       <Unit4>
         <Filename Value="..\examples\fpimgui_impl_sdlgl2.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit4>
       <Unit5>
         <Filename Value="testwindow.pas"/>
@@ -71,97 +67,91 @@
       </Unit7>
       <Unit8>
         <Filename Value="..\ImGui.Types.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="518"/>
         <CursorPos X="23" Y="535"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit8>
       <Unit9>
         <Filename Value="ImGui.Enums.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="202"/>
+        <UsageCount Value="200"/>
       </Unit9>
       <Unit10>
         <Filename Value="..\impl\PasImGui.Impl.SDL2.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="27" Y="16"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit10>
       <Unit11>
         <Filename Value="..\impl\PasImGui.Impl.OpenGL3.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="36"/>
         <CursorPos X="56" Y="45"/>
-        <UsageCount Value="200"/>
+        <UsageCount Value="198"/>
       </Unit11>
       <Unit12>
         <Filename Value="..\PasImGui.Gen.Types.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="163"/>
         <CursorPos Y="177"/>
-        <UsageCount Value="205"/>
+        <UsageCount Value="203"/>
       </Unit12>
       <Unit13>
         <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="181"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\PasImGui.SDL2.pas"/>
-        <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="114"/>
         <CursorPos X="52" Y="143"/>
-        <UsageCount Value="166"/>
+        <UsageCount Value="164"/>
       </Unit14>
       <Unit15>
         <Filename Value="..\ImGui.Apis.pas"/>
         <UnitName Value="PasImGui.Apis"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="14" Y="6"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
       </Unit15>
       <Unit16>
         <Filename Value="..\PasImGui.Apis.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="106"/>
         <CursorPos X="31" Y="122"/>
-        <UsageCount Value="108"/>
+        <UsageCount Value="106"/>
       </Unit16>
       <Unit17>
         <Filename Value="..\PasImGui.Types.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="30"/>
         <CursorPos X="24" Y="40"/>
-        <UsageCount Value="106"/>
+        <UsageCount Value="105"/>
       </Unit17>
       <Unit18>
         <Filename Value="..\PasImGui.Enums.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="703"/>
         <CursorPos X="40" Y="729"/>
-        <UsageCount Value="102"/>
+        <UsageCount Value="100"/>
       </Unit18>
       <Unit19>
         <Filename Value="..\PasImGui.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="42"/>
         <CursorPos X="20" Y="58"/>
-        <UsageCount Value="100"/>
+        <UsageCount Value="98"/>
       </Unit19>
       <Unit20>
         <Filename Value="..\..\PasGen\PasImGui.Apis.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1423"/>
         <CursorPos X="7" Y="1515"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit20>
       <Unit21>
         <Filename Value="..\..\PasGen\Full.pas"/>
@@ -169,21 +159,21 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="709"/>
         <CursorPos X="23" Y="722"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit21>
       <Unit22>
         <Filename Value="..\..\PasGen\PasImGui.Enums.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1461"/>
         <CursorPos Y="1487"/>
-        <UsageCount Value="5"/>
+        <UsageCount Value="4"/>
       </Unit22>
       <Unit23>
         <Filename Value="..\..\cimgui\imgui\backends\imgui_impl_opengl3.cpp"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="387"/>
         <CursorPos Y="405"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
         <DefaultSyntaxHighlighter Value="C_2B_2B"/>
       </Unit23>
       <Unit24>
@@ -191,200 +181,164 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="792"/>
         <CursorPos Y="793"/>
-        <UsageCount Value="3"/>
+        <UsageCount Value="2"/>
         <DefaultSyntaxHighlighter Value="C_2B_2B"/>
       </Unit24>
       <Unit25>
-        <Filename Value="..\..\cimgui\cimgui.cpp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="617"/>
-        <CursorPos Y="630"/>
-        <UsageCount Value="0"/>
-        <DefaultSyntaxHighlighter Value="C_2B_2B"/>
-      </Unit25>
-      <Unit26>
-        <Filename Value="..\..\cimgui\imgui\imgui_widgets.cpp"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="684"/>
-        <CursorPos Y="700"/>
-        <UsageCount Value="0"/>
-        <DefaultSyntaxHighlighter Value="C_2B_2B"/>
-      </Unit26>
-      <Unit27>
-        <Filename Value="..\..\PasGen\org.pas"/>
-        <UnitName Value="fpimgui"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="1"/>
-      </Unit27>
-      <Unit28>
-        <Filename Value="..\..\PasGen\PasImGui.Gen.Types.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="109"/>
-        <UsageCount Value="1"/>
-      </Unit28>
-      <Unit29>
         <Filename Value="F:\FPCross\fpcsrc\rtl\win\wininc\base.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="135"/>
         <CursorPos X="6" Y="150"/>
-        <UsageCount Value="25"/>
-      </Unit29>
-      <Unit30>
+        <UsageCount Value="24"/>
+      </Unit25>
+      <Unit26>
         <Filename Value="F:\FPCross\fpcsrc\rtl\inc\systemh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="517"/>
         <CursorPos X="3" Y="530"/>
-        <UsageCount Value="9"/>
-      </Unit30>
-      <Unit31>
+        <UsageCount Value="8"/>
+      </Unit26>
+      <Unit27>
         <Filename Value="F:\FPCross\fpcsrc\rtl\win\wininc\defines.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="3011"/>
         <CursorPos X="6" Y="3021"/>
-        <UsageCount Value="8"/>
-      </Unit31>
-      <Unit32>
-        <Filename Value="F:\FPCross\fpcsrc\rtl\objpas\sysutils\syspchh.inc"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="6"/>
-        <CursorPos X="10" Y="27"/>
-        <UsageCount Value="0"/>
-      </Unit32>
-      <Unit33>
+        <UsageCount Value="7"/>
+      </Unit27>
+      <Unit28>
         <Filename Value="..\..\..\zydis-pascal-old\Zydis\Zydis.Enums.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="34"/>
         <CursorPos X="49" Y="47"/>
-        <UsageCount Value="3"/>
-      </Unit33>
-      <Unit34>
+        <UsageCount Value="2"/>
+      </Unit28>
+      <Unit29>
         <Filename Value="F:\FPCross\fpcsrc\rtl\inc\resh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="48"/>
         <CursorPos X="10" Y="64"/>
-        <UsageCount Value="12"/>
-      </Unit34>
-      <Unit35>
+        <UsageCount Value="11"/>
+      </Unit29>
+      <Unit30>
         <Filename Value="..\SDL2-for-Pascal\units\sdlkeycode.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="37" Y="37"/>
-        <UsageCount Value="13"/>
-      </Unit35>
-      <Unit36>
+        <UsageCount Value="12"/>
+      </Unit30>
+      <Unit31>
         <Filename Value="..\SDL2-for-Pascal\units\sdlsyswm.inc"/>
-        <EditorIndex Value="4"/>
+        <EditorIndex Value="5"/>
         <TopLine Value="224"/>
         <CursorPos X="4" Y="240"/>
-        <UsageCount Value="16"/>
+        <UsageCount Value="24"/>
         <Loaded Value="True"/>
-      </Unit36>
-      <Unit37>
+      </Unit31>
+      <Unit32>
         <Filename Value="..\SDL2-for-Pascal\units\sdlversion.inc"/>
-        <EditorIndex Value="2"/>
+        <EditorIndex Value="3"/>
         <TopLine Value="20"/>
         <CursorPos X="3" Y="34"/>
-        <UsageCount Value="15"/>
+        <UsageCount Value="23"/>
         <Loaded Value="True"/>
-      </Unit37>
-      <Unit38>
+      </Unit32>
+      <Unit33>
         <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
-        <EditorIndex Value="3"/>
+        <EditorIndex Value="4"/>
         <TopLine Value="186"/>
         <CursorPos X="10" Y="202"/>
-        <UsageCount Value="17"/>
+        <UsageCount Value="25"/>
         <Loaded Value="True"/>
-      </Unit38>
-      <Unit39>
+      </Unit33>
+      <Unit34>
         <Filename Value="..\SDL2-for-Pascal\units\sdlvideo.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1333"/>
         <CursorPos X="10" Y="1348"/>
-        <UsageCount Value="10"/>
-      </Unit39>
-      <Unit40>
+        <UsageCount Value="9"/>
+      </Unit34>
+      <Unit35>
         <Filename Value="..\SDL2-for-Pascal\units\sdllog.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="76"/>
         <CursorPos X="11" Y="97"/>
-        <UsageCount Value="7"/>
-      </Unit40>
-      <Unit41>
+        <UsageCount Value="6"/>
+      </Unit35>
+      <Unit36>
         <Filename Value="..\SDL2-for-Pascal\units\sdlerror.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="10" Y="30"/>
-        <UsageCount Value="8"/>
-      </Unit41>
-      <Unit42>
+        <UsageCount Value="7"/>
+      </Unit36>
+      <Unit37>
         <Filename Value="F:\FPCross\fpcsrc\rtl\inc\currh.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="14" Y="22"/>
-        <UsageCount Value="8"/>
-      </Unit42>
-      <Unit43>
+        <UsageCount Value="7"/>
+      </Unit37>
+      <Unit38>
         <Filename Value="..\SDL2-for-Pascal\units\sdlmessagebox.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="92"/>
         <CursorPos X="10" Y="107"/>
-        <UsageCount Value="9"/>
-      </Unit43>
-      <Unit44>
+        <UsageCount Value="8"/>
+      </Unit38>
+      <Unit39>
         <Filename Value="..\impl\CImGui.Impl.OpenGL3.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="55"/>
-        <CursorPos X="6" Y="59"/>
-        <UsageCount Value="15"/>
-      </Unit44>
-      <Unit45>
-        <Filename Value="..\impl\PasImGui.SDL2.pas"/>
         <EditorIndex Value="1"/>
-        <TopLine Value="133"/>
-        <UsageCount Value="12"/>
+        <UsageCount Value="13"/>
         <Loaded Value="True"/>
-      </Unit45>
-      <Unit46>
+      </Unit39>
+      <Unit40>
+        <Filename Value="..\impl\PasImGui.SDL2.pas"/>
+        <EditorIndex Value="2"/>
+        <TopLine Value="133"/>
+        <UsageCount Value="19"/>
+        <Loaded Value="True"/>
+      </Unit40>
+      <Unit41>
         <Filename Value="..\impl\CImGui.Impl.SDL2.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="9"/>
         <CursorPos Y="16"/>
-        <UsageCount Value="14"/>
-      </Unit46>
-      <Unit47>
+        <UsageCount Value="12"/>
+      </Unit41>
+      <Unit42>
         <Filename Value="F:\FPCross\fpcsrc\rtl\inc\dynlibs.pas"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="17"/>
         <CursorPos X="3" Y="30"/>
-        <UsageCount Value="13"/>
-      </Unit47>
-      <Unit48>
+        <UsageCount Value="12"/>
+      </Unit42>
+      <Unit43>
         <Filename Value="F:\FPCross\fpcsrc\rtl\unix\sysdlh.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="28"/>
-        <UsageCount Value="13"/>
-      </Unit48>
-      <Unit49>
+        <UsageCount Value="12"/>
+      </Unit43>
+      <Unit44>
         <Filename Value="F:\FPCross\fpcsrc\rtl\win\sysdlh.inc"/>
         <EditorIndex Value="-1"/>
         <CursorPos X="3" Y="23"/>
-        <UsageCount Value="9"/>
-      </Unit49>
-      <Unit50>
+        <UsageCount Value="8"/>
+      </Unit44>
+      <Unit45>
         <Filename Value="F:\FPCross\fpcsrc\rtl\objpas\math.pp"/>
         <UnitName Value="Math"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="845"/>
         <CursorPos X="3" Y="861"/>
-        <UsageCount Value="10"/>
-      </Unit50>
-      <Unit51>
+        <UsageCount Value="9"/>
+      </Unit45>
+      <Unit46>
         <Filename Value="F:\FPCross\fpcsrc\rtl\inc\mathh.inc"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="54"/>
         <CursorPos X="45" Y="70"/>
-        <UsageCount Value="10"/>
-      </Unit51>
+        <UsageCount Value="9"/>
+      </Unit46>
     </Units>
-    <JumpHistory Count="22" HistoryIndex="21">
+    <JumpHistory Count="26" HistoryIndex="24">
       <Position1>
         <Filename Value="ImGuiDemo.lpr"/>
         <Caret Line="23" Column="15" TopLine="7"/>
@@ -473,6 +427,21 @@
         <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
         <Caret Line="202" Column="10" TopLine="186"/>
       </Position22>
+      <Position23>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="45" Column="45" TopLine="45"/>
+      </Position23>
+      <Position24>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="63" Column="60" TopLine="40"/>
+      </Position24>
+      <Position25>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="37" Column="8" TopLine="25"/>
+      </Position25>
+      <Position26>
+        <Filename Value="..\impl\CImGui.Impl.OpenGL3.pas"/>
+      </Position26>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
