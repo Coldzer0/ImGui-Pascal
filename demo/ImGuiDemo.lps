@@ -3,14 +3,14 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Release_linux"/>
+    <BuildModes Active="Release_windows"/>
     <Units Count="49">
       <Unit0>
         <Filename Value="ImGuiDemo.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="52"/>
-        <CursorPos X="11" Y="31"/>
+        <TopLine Value="31"/>
+        <CursorPos X="9" Y="31"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
