@@ -18,9 +18,7 @@ Program ImGuiDemo;
   {$mode objfpc}{$H+}{$J-}
 {$ENDIF}
 {$IfDef LINUX}
-  {$LinkLib C}
   {$LinkLib m}
-  {$LinkLib SDL2}
 {$EndIf}
 {$IfOpt D-}
   {$IfDef MSWINDOWS}

@@ -9,38 +9,12 @@
         <Filename Value="ImGuiDemo.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="25"/>
-        <CursorPos X="20" Y="43"/>
+        <TopLine Value="7"/>
+        <CursorPos X="15" Y="20"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="display.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="135"/>
-        <CursorPos X="10" Y="143"/>
-        <UsageCount Value="198"/>
-      </Unit1>
-      <Unit2>
-        <Filename Value="sdl2.pas"/>
-        <UnitName Value="SDL2"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="9926"/>
-        <CursorPos X="30" Y="9944"/>
-        <UsageCount Value="198"/>
-      </Unit2>
-      <Unit3>
-        <Filename Value="..\fpimgui.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="16" Y="6"/>
-        <UsageCount Value="198"/>
-      </Unit3>
-      <Unit4>
-        <Filename Value="..\examples\fpimgui_impl_sdlgl2.pas"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="198"/>
-      </Unit4>
-      <Unit5>
         <Filename Value="testwindow.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestWindow"/>
@@ -48,61 +22,87 @@
         <TopLine Value="110"/>
         <CursorPos X="48" Y="108"/>
         <UsageCount Value="200"/>
-      </Unit5>
-      <Unit6>
+      </Unit1>
+      <Unit2>
         <Filename Value="imgui_extra.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <CursorPos Y="15"/>
         <UsageCount Value="200"/>
-      </Unit6>
-      <Unit7>
+      </Unit2>
+      <Unit3>
         <Filename Value="glad_gl.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="1275"/>
         <CursorPos X="3" Y="1291"/>
         <UsageCount Value="200"/>
-      </Unit7>
-      <Unit8>
-        <Filename Value="..\ImGui.Types.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="518"/>
-        <CursorPos X="23" Y="535"/>
-        <UsageCount Value="198"/>
-      </Unit8>
-      <Unit9>
-        <Filename Value="ImGui.Enums.pas"/>
-        <EditorIndex Value="-1"/>
-        <UsageCount Value="200"/>
-      </Unit9>
-      <Unit10>
-        <Filename Value="..\impl\PasImGui.Impl.SDL2.pas"/>
-        <EditorIndex Value="-1"/>
-        <CursorPos X="27" Y="16"/>
-        <UsageCount Value="198"/>
-      </Unit10>
-      <Unit11>
-        <Filename Value="..\impl\PasImGui.Impl.OpenGL3.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="36"/>
-        <CursorPos X="56" Y="45"/>
-        <UsageCount Value="198"/>
-      </Unit11>
-      <Unit12>
-        <Filename Value="..\PasImGui.Gen.Types.pas"/>
-        <EditorIndex Value="-1"/>
-        <TopLine Value="163"/>
-        <CursorPos Y="177"/>
-        <UsageCount Value="203"/>
-      </Unit12>
-      <Unit13>
+      </Unit3>
+      <Unit4>
         <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
         <TopLine Value="13"/>
         <UsageCount Value="181"/>
+      </Unit4>
+      <Unit5>
+        <Filename Value="display.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="135"/>
+        <CursorPos X="10" Y="143"/>
+        <UsageCount Value="198"/>
+      </Unit5>
+      <Unit6>
+        <Filename Value="sdl2.pas"/>
+        <UnitName Value="SDL2"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="9926"/>
+        <CursorPos X="30" Y="9944"/>
+        <UsageCount Value="198"/>
+      </Unit6>
+      <Unit7>
+        <Filename Value="..\fpimgui.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="16" Y="6"/>
+        <UsageCount Value="198"/>
+      </Unit7>
+      <Unit8>
+        <Filename Value="..\examples\fpimgui_impl_sdlgl2.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="198"/>
+      </Unit8>
+      <Unit9>
+        <Filename Value="..\ImGui.Types.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="518"/>
+        <CursorPos X="23" Y="535"/>
+        <UsageCount Value="198"/>
+      </Unit9>
+      <Unit10>
+        <Filename Value="ImGui.Enums.pas"/>
+        <EditorIndex Value="-1"/>
+        <UsageCount Value="200"/>
+      </Unit10>
+      <Unit11>
+        <Filename Value="..\impl\PasImGui.Impl.SDL2.pas"/>
+        <EditorIndex Value="-1"/>
+        <CursorPos X="27" Y="16"/>
+        <UsageCount Value="198"/>
+      </Unit11>
+      <Unit12>
+        <Filename Value="..\impl\PasImGui.Impl.OpenGL3.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="36"/>
+        <CursorPos X="56" Y="45"/>
+        <UsageCount Value="198"/>
+      </Unit12>
+      <Unit13>
+        <Filename Value="..\PasImGui.Gen.Types.pas"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="163"/>
+        <CursorPos Y="177"/>
+        <UsageCount Value="203"/>
       </Unit13>
       <Unit14>
         <Filename Value="..\PasImGui.SDL2.pas"/>
@@ -338,7 +338,7 @@
         <UsageCount Value="9"/>
       </Unit46>
     </Units>
-    <JumpHistory Count="26" HistoryIndex="24">
+    <JumpHistory Count="25" HistoryIndex="23">
       <Position1>
         <Filename Value="ImGuiDemo.lpr"/>
         <Caret Line="23" Column="15" TopLine="7"/>
@@ -361,35 +361,35 @@
       </Position5>
       <Position6>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="283" Column="3" TopLine="288"/>
+        <Caret Line="310" Column="31" TopLine="289"/>
       </Position6>
       <Position7>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="310" Column="31" TopLine="289"/>
+        <Caret Line="328" Column="33" TopLine="310"/>
       </Position7>
       <Position8>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="33" TopLine="310"/>
+        <Caret Line="324" Column="32" TopLine="310"/>
       </Position8>
       <Position9>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="324" Column="32" TopLine="310"/>
+        <Caret Line="326" Column="33" TopLine="310"/>
       </Position9>
       <Position10>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="326" Column="33" TopLine="310"/>
+        <Caret Line="325" Column="34" TopLine="310"/>
       </Position10>
       <Position11>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="325" Column="34" TopLine="310"/>
+        <Caret Line="326" Column="35" TopLine="310"/>
       </Position11>
       <Position12>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="326" Column="35" TopLine="310"/>
+        <Caret Line="328" Column="31" TopLine="310"/>
       </Position12>
       <Position13>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="31" TopLine="310"/>
+        <Caret Line="328" Column="28" TopLine="310"/>
       </Position13>
       <Position14>
         <Filename Value="ImGuiDemo.lpr"/>
@@ -397,51 +397,48 @@
       </Position14>
       <Position15>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="28" TopLine="310"/>
+        <Caret Line="323" Column="25" TopLine="298"/>
       </Position15>
       <Position16>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="323" Column="25" TopLine="298"/>
+        <Caret Line="188" Column="17" TopLine="172"/>
       </Position16>
       <Position17>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="188" Column="17" TopLine="172"/>
+        <Caret Line="319" Column="82" TopLine="38"/>
       </Position17>
       <Position18>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="319" Column="82" TopLine="38"/>
-      </Position18>
-      <Position19>
-        <Filename Value="..\impl\PasImGui.SDL2.pas"/>
-        <Caret TopLine="133"/>
-      </Position19>
-      <Position20>
         <Filename Value="..\SDL2-for-Pascal\units\sdlversion.inc"/>
         <Caret Line="75" Column="10" TopLine="59"/>
-      </Position20>
-      <Position21>
+      </Position18>
+      <Position19>
         <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
         <Caret Line="211" Column="3" TopLine="209"/>
-      </Position21>
-      <Position22>
+      </Position19>
+      <Position20>
         <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
         <Caret Line="202" Column="10" TopLine="186"/>
+      </Position20>
+      <Position21>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="45" Column="45" TopLine="45"/>
+      </Position21>
+      <Position22>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="63" Column="60" TopLine="40"/>
       </Position22>
       <Position23>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="45" Column="45" TopLine="45"/>
+        <Caret Line="37" Column="8" TopLine="25"/>
       </Position23>
       <Position24>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="63" Column="60" TopLine="40"/>
+        <Caret Line="22" Column="18" TopLine="7"/>
       </Position24>
       <Position25>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="37" Column="8" TopLine="25"/>
+        <Caret Line="363" TopLine="334"/>
       </Position25>
-      <Position26>
-        <Filename Value="..\impl\CImGui.Impl.OpenGL3.pas"/>
-      </Position26>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
