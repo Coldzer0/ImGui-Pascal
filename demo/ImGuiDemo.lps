@@ -3,13 +3,15 @@
   <ProjectSession>
     <PathDelim Value="\"/>
     <Version Value="12"/>
-    <BuildModes Active="Release_windows"/>
-    <Units Count="51">
+    <BuildModes Active="Debug_windows"/>
+    <Units Count="53">
       <Unit0>
         <Filename Value="ImGuiDemo.lpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <CursorPos X="18" Y="45"/>
+        <TopLine Value="28"/>
+        <CursorPos X="26" Y="54"/>
+        <FoldState Value=" T3iT2y1 PdiJ2a"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -18,7 +20,8 @@
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestWindow"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="2" Y="14"/>
+        <TopLine Value="141"/>
+        <CursorPos X="31" Y="156"/>
         <UsageCount Value="200"/>
       </Unit1>
       <Unit2>
@@ -40,7 +43,7 @@
         <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
         <IsPartOfProject Value="True"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="194"/>
+        <UsageCount Value="197"/>
       </Unit4>
       <Unit5>
         <Filename Value="display.pas"/>
@@ -284,8 +287,9 @@
       <Unit40>
         <Filename Value="..\impl\PasImGui.SDL2.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="2" Y="14"/>
-        <UsageCount Value="18"/>
+        <TopLine Value="691"/>
+        <CursorPos X="40" Y="696"/>
+        <UsageCount Value="19"/>
       </Unit40>
       <Unit41>
         <Filename Value="..\impl\CImGui.Impl.SDL2.pas"/>
@@ -330,124 +334,113 @@
       <Unit47>
         <Filename Value="..\src\PasImGui.Types.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="2" Y="14"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="2259"/>
+        <CursorPos X="37" Y="2263"/>
+        <UsageCount Value="11"/>
       </Unit47>
       <Unit48>
         <Filename Value="..\src\PasImGui.Apis.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="2" Y="14"/>
-        <UsageCount Value="10"/>
+        <TopLine Value="68"/>
+        <CursorPos X="29" Y="75"/>
+        <UsageCount Value="11"/>
       </Unit48>
       <Unit49>
         <Filename Value="..\src\PasImGui.Enums.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="2" Y="14"/>
+        <TopLine Value="453"/>
+        <CursorPos X="5" Y="469"/>
         <UsageCount Value="13"/>
       </Unit49>
       <Unit50>
         <Filename Value="..\src\PasImGui.pas"/>
         <EditorIndex Value="-1"/>
-        <UsageCount Value="11"/>
+        <TopLine Value="47"/>
+        <CursorPos X="20" Y="61"/>
+        <UsageCount Value="12"/>
       </Unit50>
+      <Unit51>
+        <Filename Value="..\SDL2-for-Pascal\units\sdlevents.inc"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="46"/>
+        <CursorPos X="27" Y="59"/>
+        <UsageCount Value="10"/>
+      </Unit51>
+      <Unit52>
+        <Filename Value="F:\FPCross\fpcsrc\rtl\inc\cmem.pp"/>
+        <EditorIndex Value="-1"/>
+        <TopLine Value="25"/>
+        <UsageCount Value="10"/>
+      </Unit52>
     </Units>
-    <JumpHistory Count="23" HistoryIndex="22">
+    <JumpHistory Count="13" HistoryIndex="12">
       <Position1>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="22" Column="15" TopLine="7"/>
+        <Caret Line="182" Column="23" TopLine="297"/>
       </Position1>
       <Position2>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="352" TopLine="330"/>
+        <Caret Line="309" Column="20" TopLine="300"/>
       </Position2>
       <Position3>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="48" Column="7" TopLine="30"/>
+        <Caret Line="308" Column="32" TopLine="300"/>
       </Position3>
       <Position4>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="272" Column="27" TopLine="252"/>
+        <Caret Line="309" Column="28" TopLine="300"/>
       </Position4>
       <Position5>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="310" Column="31" TopLine="289"/>
+        <Caret Line="310" Column="19" TopLine="300"/>
       </Position5>
       <Position6>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="33" TopLine="310"/>
+        <Caret Line="307" Column="71" TopLine="300"/>
       </Position6>
       <Position7>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="324" Column="32" TopLine="310"/>
+        <Caret Line="264" Column="24" TopLine="247"/>
       </Position7>
       <Position8>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="326" Column="33" TopLine="310"/>
+        <Caret Line="265" Column="32" TopLine="247"/>
       </Position8>
       <Position9>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="325" Column="34" TopLine="310"/>
+        <Caret Line="175" Column="34" TopLine="166"/>
       </Position9>
       <Position10>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="326" Column="35" TopLine="310"/>
+        <Caret Line="34" Column="7" TopLine="13"/>
       </Position10>
       <Position11>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="31" TopLine="310"/>
+        <Caret Line="194" Column="39" TopLine="178"/>
       </Position11>
       <Position12>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="28" TopLine="310"/>
+        <Caret Line="193" Column="44" TopLine="178"/>
       </Position12>
       <Position13>
         <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="328" Column="28" TopLine="310"/>
+        <Caret Line="54" Column="26" TopLine="28"/>
       </Position13>
-      <Position14>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="323" Column="25" TopLine="298"/>
-      </Position14>
-      <Position15>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="188" Column="17" TopLine="172"/>
-      </Position15>
-      <Position16>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="319" Column="82" TopLine="38"/>
-      </Position16>
-      <Position17>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="45" Column="45" TopLine="45"/>
-      </Position17>
-      <Position18>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="63" Column="60" TopLine="40"/>
-      </Position18>
-      <Position19>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="37" Column="8" TopLine="25"/>
-      </Position19>
-      <Position20>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="22" Column="18" TopLine="7"/>
-      </Position20>
-      <Position21>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="53" Column="60" TopLine="31"/>
-      </Position21>
-      <Position22>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="2" Column="3" TopLine="25"/>
-      </Position22>
-      <Position23>
-        <Filename Value="ImGuiDemo.lpr"/>
-        <Caret Line="45" Column="18" TopLine="29"/>
-      </Position23>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
       <Modes ActiveMode="default"/>
     </RunParams>
   </ProjectSession>
+  <Debugging>
+    <BreakPoints>
+      <Item>
+        <Kind Value="bpkSource"/>
+        <WatchScope Value="wpsLocal"/>
+        <WatchKind Value="wpkWrite"/>
+        <Source Value="..\impl\PasImGui.SDL2.pas"/>
+        <Line Value="1102"/>
+      </Item>
+    </BreakPoints>
+  </Debugging>
 </CONFIG>
