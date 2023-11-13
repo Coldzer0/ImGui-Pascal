@@ -1,5 +1,5 @@
 # ImGui-Pascal
-[![License: AGPL v3](https://img.shields.io/badge/License-AGPL%20v3-blue.svg)](https://www.gnu.org/licenses/agpl-3.0)
+[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
 FreePascal bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.99
 
