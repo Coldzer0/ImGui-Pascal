@@ -25,6 +25,7 @@ unit PasImGui.Enums;
 interface
 
 Type
+
   ImGuiWindowFlags = (
     ImGuiWindowFlags_None = 0,
     ImGuiWindowFlags_NoTitleBar = 1 shl 0,
@@ -426,26 +427,6 @@ Type
     ImGuiNavLayer_COUNT = 2
   );
 
-  ImGuiNavInput = (
-    ImGuiNavInput_Activate = 0,
-    ImGuiNavInput_Cancel = 1,
-    ImGuiNavInput_Input = 2,
-    ImGuiNavInput_Menu = 3,
-    ImGuiNavInput_DpadLeft = 4,
-    ImGuiNavInput_DpadRight = 5,
-    ImGuiNavInput_DpadUp = 6,
-    ImGuiNavInput_DpadDown = 7,
-    ImGuiNavInput_LStickLeft = 8,
-    ImGuiNavInput_LStickRight = 9,
-    ImGuiNavInput_LStickUp = 10,
-    ImGuiNavInput_LStickDown = 11,
-    ImGuiNavInput_FocusPrev = 12,
-    ImGuiNavInput_FocusNext = 13,
-    ImGuiNavInput_TweakSlow = 14,
-    ImGuiNavInput_TweakFast = 15,
-    ImGuiNavInput_COUNT = 16
-  );
-
   ImGuiNavHighlightFlags = (
     ImGuiNavHighlightFlags_None = 0,
     ImGuiNavHighlightFlags_TypeDefault = 1 shl 0,
@@ -677,8 +658,8 @@ Type
     ImGuiKey_NamedKey_BEGIN = 512,
     ImGuiKey_NamedKey_END = ImGuiKey_COUNT,
     ImGuiKey_NamedKey_COUNT = ImGuiKey_NamedKey_END - ImGuiKey_NamedKey_BEGIN,
-    ImGuiKey_KeysData_SIZE = ImGuiKey_COUNT,
-    ImGuiKey_KeysData_OFFSET = 0
+    ImGuiKey_KeysData_SIZE = ImGuiKey_NamedKey_COUNT,
+    ImGuiKey_KeysData_OFFSET = ImGuiKey_NamedKey_BEGIN
   );
 
   ImGuiItemStatusFlags = (
@@ -1087,7 +1068,11 @@ Type
     ImGuiChildFlags_Border = 1 shl 0,
     ImGuiChildFlags_AlwaysUseWindowPadding = 1 shl 1,
     ImGuiChildFlags_ResizeX = 1 shl 2,
-    ImGuiChildFlags_ResizeY = 1 shl 3
+    ImGuiChildFlags_ResizeY = 1 shl 3,
+    ImGuiChildFlags_AutoResizeX = 1 shl 4,
+    ImGuiChildFlags_AutoResizeY = 1 shl 5,
+    ImGuiChildFlags_AlwaysAutoResize = 1 shl 6,
+    ImGuiChildFlags_FrameStyle = 1 shl 7
   );
 
   ImGuiButtonFlags = (
@@ -1397,11 +1382,6 @@ Type
   operator and (const a,b:ImGuiNavHighlightFlags):ImGuiNavHighlightFlags;
   operator or (const a,b:ImGuiNavHighlightFlags):ImGuiNavHighlightFlags;
   operator not(const a: ImGuiNavHighlightFlags): ImGuiNavHighlightFlags;
-
-  // ImGuiNavInput
-  operator and (const a,b:ImGuiNavInput):ImGuiNavInput;
-  operator or (const a,b:ImGuiNavInput):ImGuiNavInput;
-  operator not(const a: ImGuiNavInput): ImGuiNavInput;
 
   // ImGuiNavLayer
   operator and (const a,b:ImGuiNavLayer):ImGuiNavLayer;
@@ -2178,20 +2158,6 @@ end;
 operator not(const a: ImGuiNavHighlightFlags): ImGuiNavHighlightFlags;
 begin
   Result:= ImGuiNavHighlightFlags(not Ord(a));
-end;
-
-// ImGuiNavInput
-operator and (const a,b:ImGuiNavInput):ImGuiNavInput;inline;
-begin
-  Result:= ImGuiNavInput(Ord(a) and Ord(b));
-end;
-operator or (const a,b:ImGuiNavInput):ImGuiNavInput;inline;
-begin
-  Result:= ImGuiNavInput(Ord(a) or Ord(b));
-end;
-operator not(const a: ImGuiNavInput): ImGuiNavInput;
-begin
-  Result:= ImGuiNavInput(not Ord(a));
 end;
 
 // ImGuiNavLayer
