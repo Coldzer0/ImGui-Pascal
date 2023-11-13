@@ -99,7 +99,7 @@ Begin
   If (ImGui.TreeNode('Basic trees')) Then
   Begin
     For i := 0 To 4 Do
-      If (ImGui.TreeNode(PImGuiID(i), 'Child %d', [i])) Then
+      If (ImGui.TreeNode({%H-}PImGuiID(i), 'Child %d', [i])) Then
       Begin
         ImGui.Text('blah blah');
         ImGui.SameLine();
@@ -138,7 +138,7 @@ Begin
       If (i < 3) Then
       Begin
         // Node
-        node_open := ImGui.TreeNodeEx(PImGuiID(i), node_flags,
+        node_open := ImGui.TreeNodeEx({%H-}PImGuiID(i), node_flags,
           'Selectable Node %d', [i]);
         If (ImGui.IsItemClicked()) Then
           node_clicked := i;
@@ -153,7 +153,7 @@ Begin
         // Leaf: The only reason we have a TreeNode at all is to allow selection of the leaf. Otherwise we can use BulletText() or TreeAdvanceToLabelPos()+Text().
         node_flags := node_flags Or ImGuiTreeNodeFlags_Leaf Or
           ImGuiTreeNodeFlags_NoTreePushOnOpen;
-        ImGui.TreeNodeEx(PImGuiID(i), node_flags, 'Selectable Leaf %d', [i]);
+        ImGui.TreeNodeEx({%H-}PImGuiID(i), node_flags, 'Selectable Leaf %d', [i]);
         If (ImGui.IsItemClicked()) Then
           node_clicked := i;
       End;
