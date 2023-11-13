@@ -325,7 +325,7 @@ End;
 
 // Done
 Procedure ImGui_ImplSDL2_RenderWindow(viewport: PImGuiViewport;
-  render_arg: Pointer); Cdecl;
+  {%H-}render_arg: Pointer); Cdecl;
 Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
@@ -336,7 +336,7 @@ End;
 
 // Done
 Procedure ImGui_ImplSDL2_SwapBuffers(viewport: PImGuiViewport;
-  render_arg: Pointer); Cdecl;
+  {%H-}render_arg: Pointer); Cdecl;
 Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
@@ -404,7 +404,7 @@ End;
 //------------------------------------------------------------------------------
 
 // Done
-Function ImGui_ImplSDL2_GetClipboardText(user_data: Pointer): PChar; Cdecl;
+Function ImGui_ImplSDL2_GetClipboardText({%H-}user_data: Pointer): PChar; Cdecl;
 Var
   bd: PImGui_ImplSDL2_Data;
 Begin
@@ -417,7 +417,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_SetClipboardText(user_data: Pointer; Text: PChar); Cdecl;
+Procedure ImGui_ImplSDL2_SetClipboardText({%H-}user_data: Pointer; Text: PChar); Cdecl;
 Begin
   SDL_SetClipboardText(Text);
 End;
@@ -643,12 +643,12 @@ Begin
   main_viewport^.PlatformHandle := window;
   main_viewport^.PlatformHandleRaw := nil;
 
-  FillByte(info, SizeOf(TSDL_SysWMinfo), 0);
+  Initialize(info);
   SDL_VERSION(info.version);
   If SDL_GetWindowWMInfo(window, @info) = SDL_TRUE Then
   Begin
     {$IfDef MSWINDOWS}
-    main_viewport^.PlatformHandleRaw := Pointer(info.win.window);
+    main_viewport^.PlatformHandleRaw := {%H-}Pointer(info.win.window);
     {$ElseIf defined(DARWIN)}
       main_viewport^.PlatformHandleRaw = Pointer(info.cocoa.window);
     {$EndIf}
@@ -704,12 +704,19 @@ Var
 Begin
   bd := ImGui_ImplSDL2_GetBackendData();
   platform_io := ImGui.GetPlatformIO();
-  platform_io^.Monitors.Size := 0;
+
 
   bd^.WantUpdateMonitors := False;
+
   display_count := SDL_GetNumVideoDisplays();
 
-  platform_io^.Monitors.Capacity := display_count;
+  // Allocate Monitors Vector
+  If platform_io^.Monitors.Data = nil Then
+  Begin
+    platform_io^.Monitors.Data := AllocMem(SizeOf(ImGuiPlatformMonitor) * 8);
+    platform_io^.Monitors.Capacity := 8;
+  End;
+
   For n := 0 To Pred(display_count) Do
   Begin
     FillChar(monitor, SizeOf(ImGuiPlatformMonitor), 0);
@@ -737,13 +744,8 @@ Begin
       If Not Boolean(SDL_GetDisplayDPI(n, @dpi, nil, nil)) Then
         monitor.DpiScale := dpi / 96.0;
     End;
-    monitor.PlatformHandle := Pointer(UIntPtr(n));
+    monitor.PlatformHandle := {%H-}Pointer(UIntPtr(n));
 
-    If platform_io^.Monitors.Data = nil Then
-    Begin
-      platform_io^.Monitors.Data := AllocMem(SizeOf(ImGuiPlatformMonitor) * 8);
-      platform_io^.Monitors.Capacity := 8;
-    End;
     platform_io^.Monitors.Data[n] := monitor;
     Inc(platform_io^.Monitors.Size, 1);
   End;
