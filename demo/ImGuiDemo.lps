@@ -10,7 +10,7 @@
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
         <TopLine Value="275"/>
-        <CursorPos X="61" Y="298"/>
+        <CursorPos X="19" Y="298"/>
         <FoldState Value=" T3iU2yd"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
@@ -334,8 +334,8 @@
       <Unit47>
         <Filename Value="..\src\PasImGui.Types.pas"/>
         <EditorIndex Value="-1"/>
-        <TopLine Value="185"/>
-        <CursorPos X="30" Y="201"/>
+        <TopLine Value="1256"/>
+        <CursorPos X="24" Y="1272"/>
         <UsageCount Value="11"/>
       </Unit47>
       <Unit48>
@@ -388,7 +388,7 @@
         <UsageCount Value="10"/>
       </Unit54>
     </Units>
-    <JumpHistory Count="5" HistoryIndex="4">
+    <JumpHistory Count="6" HistoryIndex="5">
       <Position1>
         <Filename Value="ImGuiDemo.lpr"/>
         <Caret Line="226" Column="3" TopLine="202"/>
@@ -409,6 +409,10 @@
         <Filename Value="ImGuiDemo.lpr"/>
         <Caret Line="295" Column="6" TopLine="275"/>
       </Position5>
+      <Position6>
+        <Filename Value="ImGuiDemo.lpr"/>
+        <Caret Line="298" Column="19" TopLine="275"/>
+      </Position6>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>

@@ -10,6 +10,10 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 
 #### Running on Windows
 
+##### Add new font to the UI
+<img src="screenshots/fonts.png">
+<br>
+
 <img src="screenshots/windows.png">
 <br>
 
