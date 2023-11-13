@@ -41,6 +41,10 @@ Const
   {$endif}
   CIMGUI_LIB = 'cimgui.' + SharedSuffix;
 
+CONST
+  IMGUI_VERSION      = '1.90 WIP';
+  IMGUI_VERSION_NUM  = 18998;
+
 Type
   { ImGui }
   ImGui = Class
@@ -640,9 +644,6 @@ Type
       hide_text_after_double_hash: Boolean = False;
       wrap_width: Single = -1): ImVec2; {$IfDef INLINE} inline;{$EndIf}
 
-    Class Function BeginChildFrame(id: ImGuiID; size: ImVec2;
-      extra_flags: ImGuiWindowFlags): Boolean; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure EndChildFrame; {$IfDef INLINE} inline;{$EndIf}
 
     Class Procedure ColorConvertU32ToFloat4(pOut: PImVec4; in_: ImU32);
     {$IfDef INLINE} inline;{$EndIf}
@@ -664,8 +665,8 @@ Type
     {$IfDef INLINE} inline;{$EndIf}
     Class Function IsMouseClicked(_button: ImGuiMouseButton;
       _repeat: Boolean): Boolean; {$IfDef INLINE} inline;{$EndIf}
-    Class Function IsMouseDoubleClicked(_button: ImGuiMouseButton): Boolean;
-    {$IfDef INLINE} inline;{$EndIf}
+    class function IsMouseDoubleClicked(_button: ImGuiMouseButton): Boolean;
+    class function IsMouseDoubleClicked(_button: ImGuiMouseButton; owner_id: ImGuiID): Boolean;
     Class Function IsMouseReleased(_button: ImGuiMouseButton): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function IsMouseHoveringRect(r_min: ImVec2; r_max: ImVec2;
@@ -3431,24 +3432,6 @@ End;
 
 { TODO: Add ImGuiListClipper - Time : 11/4/2023 12:42:03 AM }
 
-class function ImGui.BeginChildFrame(id: ImGuiID; size: ImVec2; extra_flags: ImGuiWindowFlags): Boolean;
-Var
-  saved: Cardinal;
-Begin
-  saved := SetFpuFlags();
-  Result := igBeginChildFrame(id, size, extra_flags);
-  ResetFpuFlags(saved);
-End;
-
-class procedure ImGui.EndChildFrame;
-Var
-  saved: Cardinal;
-Begin
-  saved := SetFpuFlags();
-  igEndChildFrame;
-  ResetFpuFlags(saved);
-End;
-
 class procedure ImGui.ColorConvertU32ToFloat4(pOut: PImVec4; in_: ImU32);
 Var
   saved: Cardinal;
@@ -3544,7 +3527,16 @@ Var
   saved: Cardinal;
 Begin
   saved := SetFpuFlags();
-  Result := igIsMouseDoubleClicked(_button);
+  Result := igIsMouseDoubleClicked_Nil(_button);
+  ResetFpuFlags(saved);
+End;
+
+class function ImGui.IsMouseDoubleClicked(_button : ImGuiMouseButton; owner_id : ImGuiID): Boolean;
+Var
+  saved: Cardinal;
+Begin
+  saved := SetFpuFlags();
+  Result := igIsMouseDoubleClicked_ID(_button, owner_id);
   ResetFpuFlags(saved);
 End;
 
