@@ -31,6 +31,7 @@ Program ImGuiDemo;
 {$EndIf}
 
 Uses
+  cmem,
   SysUtils,
   sdl2,
   glad_gl,
@@ -174,12 +175,12 @@ Var
 
   Function PasAllocMem(sz: size_t; {%H-}user_data: Pointer): Pointer; Cdecl;
   Begin
-    Result := AllocMem(sz);
+    Result := cmem.Malloc(sz);
   End;
 
   Procedure PasFreeMem(ptr: Pointer; {%H-}user_data: Pointer); Cdecl;
   Begin
-    Freemem(ptr);
+    cmem.Free(ptr);
   End;
 
 Var
@@ -261,6 +262,7 @@ Begin
 
   // Enable Logging
   ImGuiCtx := ImGui.GetCurrentContext();
+  ImGuiCtx^.LogType := ImGuiLogType_File;
   ImGuiCtx^.LogEnabled := True;
 
   // Enable Keyboard Controls
