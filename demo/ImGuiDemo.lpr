@@ -26,7 +26,7 @@ Program ImGuiDemo;
   {$EndIf}
 {$ELSE}
 {$IfDef MSWINDOWS}
-  {$AppType console}
+{$AppType console}
 {$EndIf}
 {$EndIf}
 
@@ -51,15 +51,16 @@ Var
   showAnotherWindow: Boolean = False;
   showDemoWindow: Boolean = False;
   clearColor: ImVec4;
-  float_value : Single;
+  float_value: Single;
 
 Var
-  ImGuiCtx : PImGuiContext;
+  ImGuiCtx: PImGuiContext;
   ioptr: PImGuiIO;
+  style : PImGuiStyle;
   quit: Boolean;
   window: PSDL_Window;
   e: TSDL_Event;
-  testwin : TTestWindow;
+  testwin: TTestWindow;
   backup_current_window: PSDL_Window;
   backup_current_context: TSDL_GLContext;
   current: TSDL_DisplayMode;
@@ -80,7 +81,7 @@ Var
     Begin
       //ImGui.SetWindowPos(ImVec2.New(100, 100), ImGuiCond_FirstUseEver);
       ImGui.SetNextWindowPosCenter(ImGuiCond_FirstUseEver);
-      if not ImGui.Begin_('Greeting') then
+      If Not ImGui.Begin_('Greeting') Then
       Begin
         // Early out if the window is collapsed, as an optimization.
         ImGui.End_;
@@ -119,8 +120,8 @@ Var
     End;
     Pos := ImGui.GetCenterViewPort(ImGui.GetMainViewport());
     Pos.y += 100;
-    ImGui.SetNextWindowPos(Pos,ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
-    begin
+    ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
+    Begin
       ImGui.Begin_('Another greeting');
       ImGui.SetWindowPos(ImVec2.New(400, 200), ImGuiCond_FirstUseEver);
       ImGui.Text('Hello, next world %d', [counter]);
@@ -129,17 +130,17 @@ Var
         Dec(counter);
       End;
       ImGui.End_;
-    end;
+    End;
   End;
 
-  procedure RenderPascalCode();
-  var
-    Pos : ImVec2;
-  begin
+  Procedure RenderPascalCode();
+  Var
+    Pos: ImVec2;
+  Begin
     //draw your scene or simple windows
     Pos := ImGui.GetCenterViewPort(ImGui.GetMainViewport());
     Pos.y -= 160;
-    ImGui.SetNextWindowPos(Pos,ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
+    ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
     Begin
       ImGui.Begin_('Hello From FreePascal', nil, ImGuiWindowFlags_None);
       ImGui.Text('This is some useful text', []);
@@ -163,15 +164,15 @@ Var
     End;
 
     If showAnotherWindow Then
-    begin
+    Begin
       ShowGreetingWindows;
-    end;
+    End;
 
     If showDemoWindow Then
-    begin
+    Begin
       ImGui.ShowDemoWindow();
-    end;
-  end;
+    End;
+  End;
 
   Function PasAllocMem(sz: size_t; {%H-}user_data: Pointer): Pointer; Cdecl;
   Begin
@@ -186,7 +187,7 @@ Var
 Var
   saved_FpuFlags: Cardinal;
 
-{$R *.res}
+  {$R *.res}
 
 Begin
   { TODO: This is here for testing - Remove this later :V }
@@ -228,12 +229,12 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
   SDL_GetCurrentDisplayMode(0, @current);
 
-  flags := SDL_WINDOW_SHOWN Or SDL_WINDOW_OPENGL Or SDL_WINDOW_RESIZABLE;
+  flags := SDL_WINDOW_OPENGL Or SDL_WINDOW_RESIZABLE Or SDL_WINDOW_ALLOW_HIGHDPI;
   //flags := flags or SDL_WINDOW_FULLSCREEN_DESKTOP;
 
-  h := 768;
-  w := 1024;
-  window := SDL_CreateWindow('Hello From FreePascal', SDL_WINDOWPOS_CENTERED,
+  h := 720;
+  w := 1280;
+  window := SDL_CreateWindow('Hello From FreePascal (SDL2+OpenGL3)', SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED, w, h, flags);
   If window = nil Then
   Begin
@@ -283,6 +284,19 @@ Begin
   //Imgui.StyleColorsDark(nil);
   //Imgui.StyleColorsLight(ImGui.GetStyle());
 
+  // When viewports are enabled we tweak WindowRounding/WindowBg
+  //  so platform windows can look identical to regular ones.
+  If Ord(ioptr^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
+  begin
+    style := ImGui.GetStyle();
+    style^.WindowRounding := 0.0;
+    style^.Colors[Ord(ImGuiCol_WindowBg)].w := 1.0;
+  end;
+
+  // Fonts
+  //ioptr^.Fonts^.AddFontDefault();
+  ioptr^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 20.0);
+
 
   // Background Color
   clearColor.x := 0.45;
@@ -312,11 +326,11 @@ Begin
     ImGui.NewFrame();
 
     // Main UI Code
-    begin
+    Begin
       RenderPascalCode();
-      if showPascalDemoWindow then
+      If showPascalDemoWindow Then
         testwin.Show(showPascalDemoWindow);
-    end;
+    End;
 
     // render
     ImGui.Render();

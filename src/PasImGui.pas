@@ -702,9 +702,14 @@ Type
   { TImFontAtlasHelper }
 
   TImFontAtlasHelper = Record helper For ImFontAtlas
+
+    // Fonts APIs
+    function AddFontDefault() : PImFont;
+    function AddFontFromFileTTF(filename: PAnsiChar; size_pixels: Single; font_cfg: PImFontConfig = nil; glyph_ranges: PImWchar = nil): PImFont;
+
     Procedure GetTexDataAsAlpha8(out_pixels: PPImU8; out_width: PInt32;
       out_height: PInt32; out_bytes_per_pixel: PInt32);
-    Procedure SetTexID(id: ImTextureID); Cdecl;
+    Procedure SetTexID(id: ImTextureID);
   End;
 
 
@@ -3688,8 +3693,25 @@ End;
 
 { TImFontAtlasHelper }
 
-Procedure TImFontAtlasHelper.GetTexDataAsAlpha8(out_pixels: PPImU8;
-  out_width: PInt32; out_height: PInt32; out_bytes_per_pixel: PInt32);
+function TImFontAtlasHelper.AddFontDefault: PImFont;
+Var
+  saved: Cardinal;
+Begin
+  saved := SetFpuFlags();
+  Result := ImFontAtlas_AddFontDefault(@Self,nil);
+  ResetFpuFlags(saved);
+end;
+
+function TImFontAtlasHelper.AddFontFromFileTTF(filename : PAnsiChar; size_pixels : Single; font_cfg : PImFontConfig; glyph_ranges : PImWchar): PImFont;
+Var
+  saved: Cardinal;
+Begin
+  saved := SetFpuFlags();
+  Result := ImFontAtlas_AddFontFromFileTTF(@Self,filename, size_pixels, font_cfg, glyph_ranges);
+  ResetFpuFlags(saved);
+end;
+
+procedure TImFontAtlasHelper.GetTexDataAsAlpha8(out_pixels: PPImU8; out_width: PInt32; out_height: PInt32; out_bytes_per_pixel: PInt32);
 Var
   saved: Cardinal;
 Begin
@@ -3699,7 +3721,7 @@ Begin
   ResetFpuFlags(saved);
 End;
 
-Procedure TImFontAtlasHelper.SetTexID(id: ImTextureID); Cdecl;
+procedure TImFontAtlasHelper.SetTexID(id: ImTextureID);
 Var
   saved: Cardinal;
 Begin
