@@ -43,8 +43,9 @@ Uses
   OpenGl3.Loader,
   PasImGui.SDL2,
   CImGui.Impl.OpenGL3,
+  TestWindow,
   imgui_extra,
-  TestWindow, CustomNodeGraph;
+  CustomNodeGraph;
 
 Var
   counter: Integer;

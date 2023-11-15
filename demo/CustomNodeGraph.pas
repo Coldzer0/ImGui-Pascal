@@ -19,15 +19,12 @@ unit CustomNodeGraph;
   {$ModeSwitch advancedrecords}
 {$EndIf}
 
-{$J+} // Allow const var change
-
 Interface
 
 Uses
   Generics.Collections,
   SysUtils,
   PasImGui,
-  PasImGui.Apis,
   PasImGui.Types,
   PasImGui.Enums;
 
@@ -63,7 +60,16 @@ Implementation
 var
   nodes : TList<TNode>;
   links : TList<TNodeLink>;
-  scrolling  : ImVec2;
+  scrolling  : ImVec2 = (x:0.0; y:0.0);
+
+  node_hovered_in_list : Integer = -1;
+  node_hovered_in_scene : Integer = -1;
+  node_selected : Integer = -1;
+
+  open_context_menu : Boolean = False;
+  inited : Boolean = False;
+  show_grid : Boolean = False;
+
 
 Procedure ShowExampleAppCustomNodeGraph(opened: PBoolean);
 var
@@ -78,18 +84,9 @@ var
   GRID_SZ, x, y: Single;
   old_any_active, node_widgets_active, node_moving_active: Boolean;
 const
-  open_context_menu : Boolean = False;
-  node_hovered_in_list : Integer = -1;
-  node_hovered_in_scene : Integer = -1;
-
-  inited : Boolean = False;
-  show_grid : Boolean = False;
-  node_selected : Integer = -1;
-
   NODE_SLOT_RADIUS : Single = 4.0;
   NODE_WINDOW_PADDING : ImVec2 = (x:8.0; y:8.0);
 Begin
-  scrolling := ImVec2.New(0.0, 0.0);
   ImGui.SetNextWindowSize(ImVec2.New(700, 600), ImGuiCond_FirstUseEver);
   ImGui.SetNextWindowPosCenter(ImGuiCond_FirstUseEver);
   If Not ImGui.Begin_('Greeting') Then
@@ -104,7 +101,6 @@ Begin
   begin
     nodes := TList<TNode>.Create();
     links := TList<TNodeLink>.Create();
-
 
     nodes.Add(TNode.Create(0, 'MainTex', ImVec2.New(40, 50), 0.5, ImVec4.New(255, 100, 100), 1, 1));
     nodes.Add(TNode.Create(1, 'BumpMap', ImVec2.New(40, 150), 0.42, ImVec4.New(200, 100, 200), 1, 1));
@@ -123,20 +119,21 @@ Begin
   begin
     node := &nodes[node_idx];
     ImGui.PushIdInt(node.ID);
-    if ImGui.Selectable(String(node.Name), node.ID = node_selected) then
+    if ImGui.Selectable(node.Name, node.ID = node_selected) then
       node_selected := node.ID;
 
     if ImGui.IsItemHovered() then
     begin
       node_hovered_in_list := node.ID;
-      open_context_menu := open_context_menu or ImGui.IsMouseClicked(1);
+      open_context_menu := Boolean(Ord(open_context_menu) or Ord(ImGui.IsMouseClicked(ImGuiMouseButton_Left)));
     end;
     ImGui.PopID();
   end;
   ImGui.EndChild();
-  ImGui.SameLine();
 
+  ImGui.SameLine();
   ImGui.BeginGroup();
+
   // Create our child canvas
   ImGui.Text('Hold middle mouse button to scroll (%.2f,%.2f)', [scrolling.x, scrolling.y]);
   ImGui.SameLine(ImGui.GetWindowWidth() - 100);
@@ -206,7 +203,7 @@ Begin
     ImGui.EndGroup();
 
     // Save the size of what we have emitted and whether any of the widgets are being used
-    node_widgets_active := (not old_any_active and ImGui.IsAnyItemActive());
+    node_widgets_active := ((not old_any_active) and ImGui.IsAnyItemActive());
     node.Size := ImGui.GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
     node_rect_max := node_rect_min + node.Size;
 
@@ -245,7 +242,7 @@ Begin
   // Open context menu
   if ImGui.IsMouseReleased(ImGuiMouseButton_Right) then
   begin
-    if ImGui.IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup) or not ImGui.IsAnyItemHovered() then
+    if ImGui.IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup) or (not ImGui.IsAnyItemHovered()) then
     begin
       node_hovered_in_list := -1;
       node_hovered_in_scene := -1;;
@@ -265,15 +262,11 @@ Begin
   ImGui.PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2.New(8, 8));
   if ImGui.BeginPopup('context_menu') then
   begin
-    if node_selected <> -1 then
-      node := &nodes[node_selected]
-    else
-      node.ID := -1;
-
     scene_pos := ImGui.GetMousePosOnOpeningCurrentPopup() - offset;
 
-    if node.ID <> -1 then
+    if node_selected <> -1 then
     begin
+      node := &nodes[node_selected];
       ImGui.Text('Node "%s"', [node.Name]);
       ImGui.Separator();
       if ImGui.MenuItem('Rename..', nil, false, false) then begin end;
@@ -291,7 +284,7 @@ Begin
   ImGui.PopStyleVar();
 
   // Scrolling
-  if (ImGui.IsWindowHovered() and not ImGui.IsAnyItemActive() and ImGui.IsMouseDragging(ImGuiMouseButton_Middle, 0.0)) then
+  if (ImGui.IsWindowHovered() and (not ImGui.IsAnyItemActive()) and ImGui.IsMouseDragging(ImGuiMouseButton_Middle, 0.0)) then
       scrolling := scrolling + io.MouseDelta;
 
   ImGui.PopItemWidth();
@@ -308,13 +301,13 @@ End;
 function TNode.GetInputSlotPos(slotNo: Integer): ImVec2;
 begin
   Result.x := Pos.x;
-  Result.y := Pos.y + Size.y * (slotNo + 1) / (InputsCount + 1);
+  Result.y := Pos.y + Size.y * Single(slotNo + 1) / (InputsCount + 1);
 end;
 
 function TNode.GetOutputSlotPos(slotNo: Integer): ImVec2;
 begin
   Result.x := Pos.x + Size.x;
-  Result.y := Pos.y + Size.y * (slotNo + 1) / (OutputsCount + 1);
+  Result.y := Pos.y + Size.y * Single(slotNo + 1) / (OutputsCount + 1);
 end;
 
 constructor TNode.Create(id_: Integer;
