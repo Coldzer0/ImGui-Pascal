@@ -133,19 +133,19 @@ Begin
 
   sdl_flags := sdl_flags Or SDL_WINDOW_HIDDEN;
 
-  If Ord(viewport^.Flags And ImGuiViewportFlags_NoDecoration) <> 0 Then
+  If (viewport^.Flags And ImGuiViewportFlags_NoDecoration) <> 0 Then
     sdl_flags := sdl_flags Or SDL_WINDOW_BORDERLESS
   Else
     sdl_flags := sdl_flags Or SDL_WINDOW_RESIZABLE;
 
   {$IfNDef MSWINDOWS}
-  if Ord(viewport^.Flags and ImGuiViewportFlags_NoTaskBarIcon) <> 0 then
+  if (viewport^.Flags and ImGuiViewportFlags_NoTaskBarIcon) <> 0 then
     sdl_flags := sdl_flags or SDL_WINDOW_SKIP_TASKBAR;
   {$EndIf}
 
   If SDL_VERSION_ATLEAST(2, 0, 5) Then
   Begin
-    If Ord(viewport^.Flags And ImGuiViewportFlags_TopMost) <> 0 Then
+    If (viewport^.Flags And ImGuiViewportFlags_TopMost) <> 0 Then
       sdl_flags := sdl_flags Or SDL_WINDOW_ALWAYS_ON_TOP;
   End;
 
@@ -216,7 +216,7 @@ Begin
   // SDL hack: Hide icon from task bar
   // Note: SDL 2.0.6+ has a SDL_WINDOW_SKIP_TASKBAR flag which is supported
   // under Windows but the way it create the window breaks our seamless transition.
-  If Ord(viewport^.Flags And ImGuiViewportFlags_NoTaskBarIcon) <> 0 Then
+  If (viewport^.Flags And ImGuiViewportFlags_NoTaskBarIcon) <> 0 Then
   Begin
     ex_style := GetWindowLong(_hwnd, GWL_EXSTYLE);
     ex_style := ex_style And Not WS_EX_APPWINDOW;
@@ -224,7 +224,7 @@ Begin
     SetWindowLong(_hwnd, GWL_EXSTYLE, ex_style);
   End;
   // SDL hack: SDL always activate/focus windows :/
-  If Ord(viewport^.Flags And ImGuiViewportFlags_NoFocusOnAppearing) <> 0 Then
+  If (viewport^.Flags And ImGuiViewportFlags_NoFocusOnAppearing) <> 0 Then
   Begin
     ShowWindow(_hwnd, SW_SHOWNA);
     Exit;
@@ -310,7 +310,7 @@ Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
   vd := viewport^.PlatformUserData;
-  Result := Ord(SDL_GetWindowFlags(vd^.Window) And SDL_WINDOW_INPUT_FOCUS) <> 0;
+  Result := (SDL_GetWindowFlags(vd^.Window) And SDL_WINDOW_INPUT_FOCUS) <> 0;
 End;
 
 // Done
@@ -319,7 +319,7 @@ Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
   vd := viewport^.PlatformUserData;
-  Result := Ord(SDL_GetWindowFlags(vd^.Window) And SDL_WINDOW_MINIMIZED) <> 0;
+  Result := (SDL_GetWindowFlags(vd^.Window) And SDL_WINDOW_MINIMIZED) <> 0;
 End;
 
 // Done
@@ -628,15 +628,15 @@ Begin
   io^.SetPlatformImeDataFn := @ImGui_ImplSDL2_SetPlatformImeData;
 
   // Load mouse cursors
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_Arrow)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_TextInput)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_IBEAM);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_ResizeAll)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEALL);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_ResizeNS)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENS);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_ResizeEW)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEWE);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_ResizeNESW)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENESW);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_ResizeNWSE)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENWSE);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_Hand)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
-  bd^.MouseCursors[Ord(ImGuiMouseCursor_NotAllowed)] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_NO);
+  bd^.MouseCursors[ImGuiMouseCursor_Arrow] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW);
+  bd^.MouseCursors[ImGuiMouseCursor_TextInput] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_IBEAM);
+  bd^.MouseCursors[ImGuiMouseCursor_ResizeAll] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEALL);
+  bd^.MouseCursors[ImGuiMouseCursor_ResizeNS] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENS);
+  bd^.MouseCursors[ImGuiMouseCursor_ResizeEW] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZEWE);
+  bd^.MouseCursors[ImGuiMouseCursor_ResizeNESW] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENESW);
+  bd^.MouseCursors[ImGuiMouseCursor_ResizeNWSE] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_SIZENWSE);
+  bd^.MouseCursors[ImGuiMouseCursor_Hand] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
+  bd^.MouseCursors[ImGuiMouseCursor_NotAllowed] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_NO);
 
   main_viewport := ImGui.GetMainViewport();
   main_viewport^.PlatformHandle := window;
@@ -674,8 +674,8 @@ Begin
   {$EndIf}
 
 
-  If (Ord(io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0) And
-    (Ord(io^.BackendFlags And ImGuiBackendFlags_PlatformHasViewports) <> 0) Then
+  If ((io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0) And
+    ((io^.BackendFlags And ImGuiBackendFlags_PlatformHasViewports) <> 0) Then
   Begin
     ImGui_ImplSDL2_InitPlatformInterface(window, sdl_gl_context);
   End;
@@ -791,7 +791,7 @@ Begin
     If io^.WantSetMousePos Then
     Begin
       {$IfDef SDL_HAS_CAPTURE_AND_GLOBAL_MOUSE}
-      If Ord(io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
+      If (io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
         SDL_WarpMouseGlobal(Trunc(io^.MousePos.x), Trunc(io^.MousePos.y))
       Else
       {$EndIf}
@@ -805,7 +805,7 @@ Begin
       // Single-viewport mode: mouse position in client window coordinates (io.MousePos is (0,0) when the mouse is on the upper-left corner of the app window)
       // Multi-viewport mode: mouse position in OS absolute coordinates (io.MousePos is (0,0) when the mouse is on the upper-left of the primary monitor)
       SDL_GetGlobalMouseState(@mouse_x, @mouse_y);
-      If Ord(io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) = 0 Then
+      If (io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) = 0 Then
       Begin
         SDL_GetWindowPosition(focused_window, @window_x, @window_y);
         Dec(mouse_x, window_x);
@@ -822,7 +822,7 @@ Begin
   //       for docking, the viewport has the _NoInputs flag in order to allow us to find the viewport under), then Dear ImGui is forced to ignore the value reported
   //       by the backend, and use its flawed heuristic to guess the viewport behind.
   // - [X] SDL backend correctly reports this regardless of another viewport behind focused and dragged from (we need this to find a useful drag and drop target).
-  If Ord(io^.BackendFlags And ImGuiBackendFlags_HasMouseHoveredViewport) <> 0 Then
+  If (io^.BackendFlags And ImGuiBackendFlags_HasMouseHoveredViewport) <> 0 Then
   Begin
     mouse_viewport_id := 0;
     sdl_mouse_window := SDL_GetWindowFromID(bd^.MouseWindowID);
@@ -847,7 +847,7 @@ Var
   expected_cursor: PSDL_Cursor;
 Begin
   io := ImGui.GetIO;
-  If Ord(io^.ConfigFlags And ImGuiConfigFlags_NoMouseCursorChange) <> 0 Then
+  If (io^.ConfigFlags And ImGuiConfigFlags_NoMouseCursorChange) <> 0 Then
     Exit;
 
   bd := ImGui_ImplSDL2_GetBackendData;
@@ -861,9 +861,9 @@ Begin
   Else
   Begin
     // Show OS mouse cursor
-    expected_cursor := bd^.MouseCursors[Ord(imgui_cursor)];
+    expected_cursor := bd^.MouseCursors[imgui_cursor];
     If expected_cursor = nil Then
-      expected_cursor := bd^.MouseCursors[Ord(ImGuiMouseCursor_Arrow)];
+      expected_cursor := bd^.MouseCursors[ImGuiMouseCursor_Arrow];
 
     If bd^.LastMouseCursor <> expected_cursor Then
     Begin
@@ -896,7 +896,7 @@ Begin
 
   // Setup display size (every frame to accommodate for window resizing)
   SDL_GetWindowSize(bd^.Window, @w, @h);
-  If Ord(SDL_GetWindowFlags(bd^.Window) And SDL_WINDOW_MINIMIZED) <> 0 Then
+  If (SDL_GetWindowFlags(bd^.Window) And SDL_WINDOW_MINIMIZED) <> 0 Then
   Begin
     w := 0;
     h := 0;
@@ -973,7 +973,7 @@ Begin
   If bd^.ClipboardTextData <> nil Then
     SDL_free(bd^.ClipboardTextData);
 
-  For cursor_n := 0 To Pred(Ord(ImGuiMouseCursor_COUNT)) Do
+  For cursor_n := 0 To Pred(ImGuiMouseCursor_COUNT) Do
   Begin
     SDL_FreeCursor(bd^.MouseCursors[cursor_n]);
   End;

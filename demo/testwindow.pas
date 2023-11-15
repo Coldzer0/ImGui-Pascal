@@ -328,7 +328,7 @@ Begin
         draw_list := ImGui.GetWindowDrawList();
         draw_list^.PushClipRectFullScreen;
         draw_list^.AddLine(io^.MouseClickedPos[0], io^.MousePos,
-          ImGui.GetColorU32Vec(ImGui.GetStyle()^.Colors[Ord(ImGuiCol_DragDropTarget)]),
+          ImGui.GetColorU32Vec(ImGui.GetStyle()^.Colors[ImGuiCol_DragDropTarget]),
           4.0);
         draw_list^.PopClipRect;
 
