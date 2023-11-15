@@ -136,12 +136,12 @@ Begin
 
   // Create our child canvas
   ImGui.Text('Hold middle mouse button to scroll (%.2f,%.2f)', [scrolling.x, scrolling.y]);
-  ImGui.SameLine(ImGui.GetWindowWidth() - 100);
+  ImGui.SameLine({ImGui.GetWindowWidth() - 100});
   ImGui.Checkbox('Show grid', @show_grid);
   ImGui.PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2.New(1, 1));
   ImGui.PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2.New(0, 0));
   ImGui.PushStyleColor(ImGuiCol_ChildBg, IM_COL32(60, 60, 70, 200));
-  ImGui.BeginChild('scrolling_region', ImVec2.New(0, 0), ImGuiChildFlags_Border, ImGuiWindowFlags_NoScrollbar or ImGuiWindowFlags_NoMove);
+  ImGui.BeginChild('scrolling_region', ImVec2.New(0, 0), ImGuiChildFlags_None, ImGuiWindowFlags_NoScrollbar or ImGuiWindowFlags_NoMove);
   ImGui.PopStyleVar(); // WindowPadding
   ImGui.PushItemWidth(120.0);
 
@@ -156,17 +156,17 @@ Begin
     canvas_sz := ImGui.GetWindowSize();
 
     x := fmod(scrolling.x, GRID_SZ);
-    while x < canvas_sz.x do
+    while (x > 0) and (x < canvas_sz.x) do
     begin
       draw_list^.AddLine(ImVec2.New(x, 0.0) + win_pos, ImVec2.New(x, canvas_sz.y) + win_pos, GRID_COLOR);
-      x := fmod(scrolling.x, GRID_SZ);
+      x := x + GRID_SZ;
     end;
 
     y := fmod(scrolling.y, GRID_SZ);
-    while y < canvas_sz.y do
+    while (y > 0) and  (y < canvas_sz.y) do
     begin
       draw_list^.AddLine(ImVec2.New(0.0, y) + win_pos, ImVec2.New(canvas_sz.x, y) + win_pos, GRID_COLOR);
-      y := fmod(scrolling.y, GRID_SZ);
+      y := y + GRID_SZ;
     end;
   end;
 
