@@ -4,13 +4,12 @@
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
   This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by
-  the Free Software Foundation, version 3 of the License.
+  it under the terms of the MIT License.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU LESSER GENERAL PUBLIC LICENSE for more details.
+  MIT License for more details.
 }
 
 Unit PasImGui.Types;
@@ -29,6 +28,12 @@ Uses
 
 Const
   FLT_MAX : Single = 3.40282347e+038; // This is the same as in compiled cimgui
+
+  IM_COL32_R_SHIFT = 0;
+  IM_COL32_G_SHIFT = 8;
+  IM_COL32_B_SHIFT = 16;
+  IM_COL32_A_SHIFT = 24;
+  IM_COL32_A_MASK  = $FF000000;
 
 // Main Types
 Type
@@ -380,6 +385,8 @@ Type
   ImVec2 = Record
     x, y: Single;
     constructor New(const _x, _y: Single);
+    class operator Add(lhs,rhs : ImVec2) : ImVec2;
+    class operator Subtract(lhs,rhs : ImVec2) : ImVec2;
   End;
   PImVec2 = ^ImVec2;
 
@@ -393,7 +400,7 @@ Type
   { ImVec4 }
   ImVec4 = Record
     x, y, z, w: Single;
-    constructor New(const _x, _y, _z, _w: Single);
+    constructor New(const _x, _y, _z : Single; _w: Single = 1.0);
   End;
   PImVec4 = ^ImVec4;
 
@@ -2475,6 +2482,16 @@ Begin
   Self.y := _y;
 End;
 
+class operator ImVec2.Add(lhs, rhs: ImVec2): ImVec2;
+begin
+  Result := ImVec2.new(lhs.x + rhs.x, lhs.y + rhs.y);
+end;
+
+class operator ImVec2.Subtract(lhs, rhs: ImVec2): ImVec2;
+begin
+  Result := ImVec2.new(lhs.x - rhs.x, lhs.y - rhs.y);
+end;
+
 { ImVec3 }
 
 constructor ImVec3.New(const _x, _y, _z: Single);
@@ -2486,7 +2503,7 @@ end;
 
 { ImVec4 }
 
-constructor ImVec4.New(const _x, _y, _z, _w: Single);
+constructor ImVec4.New(const _x, _y, _z: Single; _w: Single);
 begin
   Self.x := _x;
   Self.y := _y;
