@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -38,7 +38,9 @@ Type
   T2Bits = 0..3;
   T1Bit = 0..1;
 
-  size_t = NativeUInt;
+
+  QWord = NativeUInt;
+  size_t = QWord;
   ImS8 = Shortint;
   ImU8 = Byte;
   ImS16 = Smallint;
@@ -79,14 +81,92 @@ Type
   PImWchar32 = ^ImWchar32;
   PImWchar = ^ImWchar;
 
+  ImPoolIdx = Integer;
 
+  ImGuiWindowFlags = Integer;
+  ImGuiWindowDockStyleCol = Integer;
+  ImGuiViewportFlags = Integer;
+  ImGuiTypingSelectFlags = Integer;
+  ImGuiTreeNodeFlags = Integer;
+  ImGuiTreeNodeFlagsPrivate = Integer;
+  ImGuiTooltipFlags = Integer;
+  ImGuiTextFlags = Integer;
+  ImGuiTableRowFlags = Integer;
+  ImGuiTableFlags = Integer;
+  ImGuiTableColumnFlags = Integer;
+  ImGuiTableBgTarget = Integer;
+  ImGuiTabItemFlags = Integer;
+  ImGuiTabItemFlagsPrivate = Integer;
+  ImGuiTabBarFlags = Integer;
+  ImGuiTabBarFlagsPrivate = Integer;
+  ImGuiStyleVar = Integer;
+  ImGuiSortDirection = Integer;
+  ImGuiSliderFlags = Integer;
+  ImGuiSliderFlagsPrivate = Integer;
+  ImGuiSeparatorFlags = Integer;
+  ImGuiSelectableFlags = Integer;
+  ImGuiSelectableFlagsPrivate = Integer;
+  ImGuiScrollFlags = Integer;
+  ImGuiPopupPositionPolicy = Integer;
+  ImGuiPopupFlags = Integer;
+  ImGuiPlotType = Integer;
+  ImGuiOldColumnFlags = Integer;
+  ImGuiNextWindowDataFlags = Integer;
+  ImGuiNextItemDataFlags = Integer;
+  ImGuiNavMoveFlags = Integer;
+  ImGuiNavLayer = Integer;
+  ImGuiNavHighlightFlags = Integer;
+  ImGuiMouseSource = Integer;
+  ImGuiMouseCursor = Integer;
+  ImGuiMouseButton = Integer;
+  ImGuiLogType = Integer;
+  ImGuiLocKey = Integer;
+  ImGuiLayoutType = Integer;
+  ImGuiKey = Integer;
+  ImGuiItemStatusFlags = Integer;
+  ImGuiItemFlags = Integer;
+  ImGuiInputTextFlags = Integer;
+  ImGuiInputTextFlagsPrivate = Integer;
+  ImGuiInputSource = Integer;
+  ImGuiInputFlags = Integer;
+  ImGuiInputEventType = Integer;
+  ImGuiHoveredFlags = Integer;
+  ImGuiHoveredFlagsPrivate = Integer;
+  ImGuiFocusedFlags = Integer;
+  ImGuiFocusRequestFlags = Integer;
+  ImGuiDragDropFlags = Integer;
+  ImGuiDockNodeState = Integer;
+  ImGuiDockNodeFlags = Integer;
+  ImGuiDockNodeFlagsPrivate = Integer;
+  ImGuiDir = Integer;
+  ImGuiDebugLogFlags = Integer;
+  ImGuiDataType = Integer;
+  ImGuiDataTypePrivate = Integer;
+  ImGuiDataAuthority = Integer;
+  ImGuiContextHookType = Integer;
+  ImGuiConfigFlags = Integer;
+  ImGuiCond = Integer;
+  ImGuiComboFlags = Integer;
+  ImGuiComboFlagsPrivate = Integer;
+  ImGuiColorEditFlags = Integer;
+  ImGuiCol = Integer;
+  ImGuiChildFlags = Integer;
+  ImGuiButtonFlags = Integer;
+  ImGuiButtonFlagsPrivate = Integer;
+  ImGuiBackendFlags = Integer;
+  ImGuiAxis = Integer;
+  ImGuiActivateFlags = Integer;
+  ImFontAtlasFlags = Integer;
+  ImDrawListFlags = Integer;
+  ImDrawFlags = Integer;
+  ImGuiKeyChord = Integer;
+
+  PImRect = ^ImRect;
   PImGuiTableColumnIdx = ^ImGuiTableColumnIdx;
   PImGuiTableDrawChannelIdx = ^ImGuiTableDrawChannelIdx;
 
   PImGuiItemFlags = ^ImGuiItemFlags;
 
-  PImRect = ^ImRect;
-  ImPoolIdx = Integer;
   PImGuiWindowTempData = ^ImGuiWindowTempData;
   PImGuiWindowStackData = ^ImGuiWindowStackData;
   PImGuiWindowSettings = ^ImGuiWindowSettings;
@@ -152,14 +232,12 @@ Type
   PImGuiListClipperRange = ^ImGuiListClipperRange;
   PImGuiListClipperData = ^ImGuiListClipperData;
   PImGuiListClipper = ^ImGuiListClipper;
-  ImGuiLayoutType = Integer;
   PImGuiLastItemData = ^ImGuiLastItemData;
   PImGuiKeyRoutingTable = ^ImGuiKeyRoutingTable;
   ImGuiKeyRoutingIndex = ImS16;
   PImGuiKeyRoutingData = ^ImGuiKeyRoutingData;
   PImGuiKeyOwnerData = ^ImGuiKeyOwnerData;
   PImGuiKeyData = ^ImGuiKeyData;
-  ImGuiKeyChord = Integer;
   PImGuiInputTextState = ^ImGuiInputTextState;
   PImGuiInputTextDeactivatedState = ^ImGuiInputTextDeactivatedState;
   PImGuiInputTextCallbackData = ^ImGuiInputTextCallbackData;
@@ -176,18 +254,15 @@ Type
   PImGuiIDStackTool = ^ImGuiIDStackTool;
   ImGuiID = ImU32;
   PImGuiGroupData = ^ImGuiGroupData;
-  ImGuiErrorLogCallback = procedure(user_data : Pointer; fmt : PChar; args : array of const); Cdecl;
+  ImGuiErrorLogCallback = procedure(user_data : Pointer; fmt : PAnsiChar; args : array of const); Cdecl;
   PImGuiDockRequest = ^ImGuiDockRequest;
   PImGuiDockNodeSettings = ^ImGuiDockNodeSettings;
   PImGuiDockNode = ^ImGuiDockNode;
   PImGuiDockContext = ^ImGuiDockContext;
-  ImGuiDir = Integer;
   PImGuiDebugAllocInfo = ^ImGuiDebugAllocInfo;
   PImGuiDebugAllocEntry = ^ImGuiDebugAllocEntry;
   PImGuiDataVarInfo = ^ImGuiDataVarInfo;
   PImGuiDataTypeInfo = ^ImGuiDataTypeInfo;
-  ImGuiDataType = Byte;
-  ImGuiDataAuthority = Integer;
   PImGuiContextHook = ^ImGuiContextHook;
   PImGuiContext = ^ImGuiContext;
   ImGuiContextHookCallback = procedure(ctx : PImGuiContext; hook : PImGuiContextHook); Cdecl;
@@ -758,7 +833,7 @@ Type
     WantFullRebuild: Boolean;
   End;
 
-  ImGuiTableColumnSettings = Bitpacked Record
+  ImGuiTableColumnSettings = {$IFDEF FPC}Bitpacked{$ELSE}packed{$ENDIF} Record
     WidthOrWeight: Single;
     UserID: ImGuiID;
     Index: ImGuiTableColumnIdx;
@@ -841,7 +916,7 @@ Type
     TabsNames: ImGuiTextBuffer;
   End;
 
-  ImGuiTableColumn = bitpacked Record
+  ImGuiTableColumn = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
     Flags: ImGuiTableColumnFlags;
     WidthGiven: Single;
     MinX: Single;
@@ -1071,12 +1146,12 @@ Type
 
 
   ImGuiSettingsHandler = Record
-    TypeName : PChar;
+    TypeName : PAnsiChar;
     TypeHash : ImGuiID;
     ClearAllFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler) : Pointer;
     ReadInitFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler) : Pointer;
-    ReadOpenFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler; name : PChar) : Pointer;
-    ReadLineFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler; entry : Pointer; line : PChar) : Pointer;
+    ReadOpenFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler; name : PAnsiChar) : Pointer;
+    ReadLineFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler; entry : Pointer; line : PAnsiChar) : Pointer;
     ApplyAllFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler) : Pointer;
     WriteAllFn : function(ctx : PImGuiContext; handler : PImGuiSettingsHandler; out_buf : PImGuiTextBuffer) : Pointer;
     UserData : Pointer;
@@ -1266,8 +1341,8 @@ Type
     DisplaySize: ImVec2;
     DeltaTime: Single;
     IniSavingRate: Single;
-    IniFilename: PChar;
-    LogFilename: PChar;
+    IniFilename: PAnsiChar;
+    LogFilename: PAnsiChar;
     UserData: Pointer;
     Fonts: PImFontAtlas;
     FontGlobalScale: Single;
@@ -1300,13 +1375,13 @@ Type
     ConfigDebugBeginReturnValueLoop: Boolean;
     ConfigDebugIgnoreFocusLoss: Boolean;
     ConfigDebugIniSettings: Boolean;
-    BackendPlatformName: PChar;
-    BackendRendererName: PChar;
+    BackendPlatformName: PAnsiChar;
+    BackendRendererName: PAnsiChar;
     BackendPlatformUserData: Pointer;
     BackendRendererUserData: Pointer;
     BackendLanguageUserData: Pointer;
-    GetClipboardTextFn: function(user_data : Pointer) : PChar; Cdecl;
-    SetClipboardTextFn: procedure(user_data : Pointer; text : PChar); Cdecl;
+    GetClipboardTextFn: function(user_data : Pointer) : PAnsiChar; Cdecl;
+    SetClipboardTextFn: procedure(user_data : Pointer; text : PAnsiChar); Cdecl;
     ClipboardUserData: Pointer;
     SetPlatformImeDataFn: procedure(viewport : PImGuiViewport; data : PImGuiPlatformImeData); Cdecl;
     PlatformLocaleDecimalPoint: ImWchar;
@@ -1474,6 +1549,13 @@ Type
     DpiScale: Single;
     PlatformHandle: Pointer;
   End;
+  // Too much monitors :P
+  {$IFDEF FPC}
+  TMonArray = Array [0..99] of ImGuiPlatformMonitor;
+  {$ELSE}
+  TMonArray = Array of ImGuiPlatformMonitor;
+  {$ENDIF}
+
 
   ImGuiPlatformImeData = Record
     WantVisible: Boolean;
@@ -1512,7 +1594,7 @@ Type
     Platform_SetWindowFocus : procedure(viewport : PImGuiViewport); Cdecl;
     Platform_GetWindowFocus : function(viewport : PImGuiViewport) : Boolean; Cdecl;
     Platform_GetWindowMinimized : function(viewport : PImGuiViewport) : Boolean; Cdecl;
-    Platform_SetWindowTitle : procedure(viewport : PImGuiViewport; title : PChar); Cdecl;
+    Platform_SetWindowTitle : procedure(viewport : PImGuiViewport; title : PAnsiChar); Cdecl;
     Platform_SetWindowAlpha : procedure(viewport : PImGuiViewport; alpha : Single); Cdecl;
     Platform_UpdateWindow : procedure(viewport : PImGuiViewport); Cdecl;
     Platform_RenderWindow : procedure(viewport : PImGuiViewport; render_arg : Pointer); Cdecl;
@@ -1620,7 +1702,7 @@ Type
     Data: PImGuiWindow;
   End;
 
-  ImGuiDockNode = Bitpacked Record
+  ImGuiDockNode = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
     ID: ImGuiID;
     SharedFlags: ImGuiDockNodeFlags;
     LocalFlags: ImGuiDockNodeFlags;
@@ -1717,7 +1799,7 @@ Type
     Flags: ImDrawListFlags;
     _VtxCurrentIdx: ImU32;
     _Data: PImDrawListSharedData;
-    _OwnerName: PChar;
+    _OwnerName: PAnsiChar;
     _VtxWritePtr: PImDrawVert;
     _IdxWritePtr: PImDrawIdx;
     _ClipRectStack: ImVector_ImVec4;
@@ -2255,13 +2337,13 @@ Type
     SettingsTables: ImChunkStream_ImGuiTableSettings;
     Hooks: ImVector_ImGuiContextHook;
     HookIdNext: ImGuiID;
-    LocalizationTable: Array[0..11 - 1] of PChar;
+    LocalizationTable: Array[0..11 - 1] of PAnsiChar;
     LogEnabled: Boolean;
     LogType: ImGuiLogType;
     LogFile: ImFileHandle;
     LogBuffer: ImGuiTextBuffer;
-    LogNextPrefix: PChar;
-    LogNextSuffix: PChar;
+    LogNextPrefix: PAnsiChar;
+    LogNextSuffix: PAnsiChar;
     LogLinePosY: Single;
     LogLineFirstItem: Boolean;
     LogDepthRef: Integer;
@@ -2374,7 +2456,7 @@ Type
     constructor New(SplitAxis_: ImGuiAxis);
   End;
 
-  ImFontGlyph = bitpacked Record
+  ImFontGlyph = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
     Colored: T1Bit;
     Visible: T1Bit;
     Codepoint: T30Bits;

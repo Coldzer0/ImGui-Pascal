@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -29,7 +29,7 @@ function ImGLInit(): Boolean;
 
 implementation
 
-Function GLFuncLoad(proc: PChar): Pointer;
+Function GLFuncLoad(proc: PAnsiChar): Pointer;
 Begin
   Result := SDL_GL_GetProcAddress(proc);
   Assert(Result <> nil, 'couldn''t load ' + proc);

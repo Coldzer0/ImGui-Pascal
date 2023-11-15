@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 

@@ -1,7 +1,7 @@
 # ImGui-Pascal
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-FreePascal bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.99
+FreePascal / Delphi bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.99
 
 The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 > cimgui is c-api for imgui (https://github.com/ocornut/imgui) Look at: https://github.com/cimgui for other widgets.
@@ -10,18 +10,20 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 
 #### Running on Windows
 
-##### Add new font to the UI
+##### FreePascal
 <img src="screenshots/fonts.png">
 <br>
 
+#### Delphi
 <img src="screenshots/windows.png">
 <br>
 
-#### Running on Linux
+#### Running on Linux (FreePascal)
 <img src="screenshots/linux.jpg">
 
 ## Building
-Tested with FreePascal 3.3.x and later.
+Tested with FreePascal 3.2 and later.
+Tested with Delphi 12.0
 
 ## Usage
 It should be almost 1 to 1 as if you are using C++ ImGui <br> 

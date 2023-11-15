@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -168,7 +168,7 @@ Begin
   viewport^.PlatformHandle := vd^.Window;
   viewport^.PlatformHandleRaw := nil;
 
-  FillByte(info, SizeOf(TSDL_SysWMinfo), 0);
+  FillChar(info, SizeOf(TSDL_SysWMinfo), 0);
   SDL_VERSION(info.version);
   If SDL_GetWindowWMInfo(vd^.window, @info) = SDL_TRUE Then
   Begin
@@ -279,7 +279,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_SetWindowTitle(viewport: PImGuiViewport; title: PChar); Cdecl;
+Procedure ImGui_ImplSDL2_SetWindowTitle(viewport: PImGuiViewport; title: PAnsiChar); Cdecl;
 Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
@@ -404,7 +404,7 @@ End;
 //------------------------------------------------------------------------------
 
 // Done
-Function ImGui_ImplSDL2_GetClipboardText({%H-}user_data: Pointer): PChar; Cdecl;
+Function ImGui_ImplSDL2_GetClipboardText({%H-}user_data: Pointer): PAnsiChar; Cdecl;
 Var
   bd: PImGui_ImplSDL2_Data;
 Begin
@@ -417,7 +417,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_SetClipboardText({%H-}user_data: Pointer; Text: PChar); Cdecl;
+Procedure ImGui_ImplSDL2_SetClipboardText({%H-}user_data: Pointer; Text: PAnsiChar); Cdecl;
 Begin
   SDL_SetClipboardText(Text);
 End;
@@ -434,7 +434,7 @@ Begin
     r.x := Trunc(Data^.InputPos.x - viewport^.Pos.x);
     r.y := Trunc(Data^.InputPos.y - viewport^.Pos.y + Data^.InputLineHeight);
     r.w := 1;
-    r.h := Integer(Data^.InputLineHeight);
+    r.h := Trunc(Data^.InputLineHeight);
     SDL_SetTextInputRect(@r);
   End;
 End;
@@ -746,7 +746,7 @@ Begin
     End;
     monitor.PlatformHandle := {%H-}Pointer(UIntPtr(n));
 
-    platform_io^.Monitors.Data[n] := monitor;
+    TMonArray(platform_io^.Monitors.Data)[n] := monitor;
     Inc(platform_io^.Monitors.Size, 1);
   End;
 End;
@@ -1025,8 +1025,8 @@ Begin
       Begin
         SDL_GetWindowPosition(SDL_GetWindowFromID(event^.motion.windowID),
           @window_x, @window_y);
-        mouse_pos.x += window_x;
-        mouse_pos.y += window_y;
+        mouse_pos.x := mouse_pos.x + window_x;
+        mouse_pos.y := mouse_pos.y + window_y;
       End;
 
       If event^.motion.which = SDL_TOUCH_MOUSEID Then

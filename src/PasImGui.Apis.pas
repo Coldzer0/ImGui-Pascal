@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -348,7 +348,7 @@ function ImGuiStorage_GetFloatRef( self : PImGuiStorage; key : ImGuiID; default_
 function ImGuiStorage_GetInt( self : PImGuiStorage; key : ImGuiID; default_val : Integer ) : Integer; cdecl; external CIMGUI_LIB;
 function ImGuiStorage_GetIntRef( self : PImGuiStorage; key : ImGuiID; default_val : Integer ) : PInteger; cdecl; external CIMGUI_LIB;
 function ImGuiStorage_GetVoidPtr( self : PImGuiStorage; key : ImGuiID ) : Pointer; cdecl; external CIMGUI_LIB;
-function ImGuiStorage_GetVoidPtrRef( self : PImGuiStorage; key : ImGuiID; default_val : Pointer ) : PPPointer; cdecl; external CIMGUI_LIB;
+function ImGuiStorage_GetVoidPtrRef( self : PImGuiStorage; key : ImGuiID; default_val : Pointer ) : PPointer; cdecl; external CIMGUI_LIB;
 procedure ImGuiStorage_SetAllInt( self : PImGuiStorage; val : Integer ); cdecl; external CIMGUI_LIB;
 procedure ImGuiStorage_SetBool( self : PImGuiStorage; key : ImGuiID; val : Boolean ); cdecl; external CIMGUI_LIB;
 procedure ImGuiStorage_SetFloat( self : PImGuiStorage; key : ImGuiID; val : Single ); cdecl; external CIMGUI_LIB;
@@ -724,7 +724,7 @@ procedure igGcAwakeTransientWindowBuffers( window : PImGuiWindow ); cdecl; exter
 procedure igGcCompactTransientMiscBuffers( ); cdecl; external CIMGUI_LIB;
 procedure igGcCompactTransientWindowBuffers( window : PImGuiWindow ); cdecl; external CIMGUI_LIB;
 function igGetActiveID( ) : ImGuiID; cdecl; external CIMGUI_LIB;
-procedure igGetAllocatorFunctions( p_alloc_func : PImGuiMemAllocFunc; p_free_func : PImGuiMemFreeFunc; p_user_data : PPPointer ); cdecl; external CIMGUI_LIB;
+procedure igGetAllocatorFunctions( p_alloc_func : PImGuiMemAllocFunc; p_free_func : PImGuiMemFreeFunc; p_user_data : PPointer ); cdecl; external CIMGUI_LIB;
 function igGetBackgroundDrawList_Nil( ) : PImDrawList; cdecl; external CIMGUI_LIB;
 function igGetBackgroundDrawList_ViewportPtr( viewport : PImGuiViewport ) : PImDrawList; cdecl; external CIMGUI_LIB;
 function igGetClipboardText( ) : PAnsiChar; cdecl; external CIMGUI_LIB;
@@ -1403,6 +1403,7 @@ procedure igWindowPosRelToAbs( pOut : PImVec2; window : PImGuiWindow; p : ImVec2
 procedure igWindowRectAbsToRel( pOut : PImRect; window : PImGuiWindow; r : ImRect ); cdecl; external CIMGUI_LIB;
 procedure igWindowRectRelToAbs( pOut : PImRect; window : PImGuiWindow; r : ImRect ); cdecl; external CIMGUI_LIB;
 
+{$IFDEF FPC}
 // From mORMot2 "mormot.lib.static.pas"
 type
   /// define SetFpuFlags/ResetFpuFlags context
@@ -1448,8 +1449,12 @@ function SetFpuFlags(flags: TFpuFlags = ffLibrary): cardinal;
 /// restore the FPU exceptions flags as overriden by SetFpuFlags()
 // - do nothing if the saved flags are the one already set, i.e. -1
 procedure ResetFpuFlags(saved: cardinal);
+{$ELSE}
+
+{$ENDIF}
 
 implementation
+{$IFDEF FPC}
   uses
     math;
 
@@ -1502,5 +1507,6 @@ begin
   if saved <> _FPUFLAGSIDEM then
     _SetFlags(saved);
 end;
+{$ENDIF}
 
 end.
