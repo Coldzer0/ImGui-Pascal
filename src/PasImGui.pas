@@ -41,8 +41,8 @@ Const
   CIMGUI_LIB = 'cimgui.' + SharedSuffix;
 
 CONST
-  IMGUI_VERSION      = '1.90 WIP';
-  IMGUI_VERSION_NUM  = 18998;
+  IMGUI_VERSION      = '1.90.0';
+  IMGUI_VERSION_NUM  = 19000;
 
 Type
   { ImGui }

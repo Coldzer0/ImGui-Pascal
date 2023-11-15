@@ -52,7 +52,7 @@
         <EditorIndex Value="-1"/>
         <TopLine Value="43"/>
         <CursorPos X="48" Y="21"/>
-        <UsageCount Value="31"/>
+        <UsageCount Value="32"/>
       </Unit5>
       <Unit6>
         <Filename Value="display.pas"/>
@@ -337,7 +337,8 @@
       <Unit47>
         <Filename Value="..\src\PasImGui.pas"/>
         <EditorIndex Value="-1"/>
-        <CursorPos X="10" Y="3"/>
+        <TopLine Value="19"/>
+        <CursorPos X="31" Y="44"/>
         <UsageCount Value="16"/>
       </Unit47>
       <Unit48>

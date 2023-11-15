@@ -1,7 +1,7 @@
 # ImGui-Pascal
 [![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
 
-FreePascal / Delphi bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.99
+FreePascal / Delphi bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.90.0
 
 The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 > cimgui is c-api for imgui (https://github.com/ocornut/imgui) Look at: https://github.com/cimgui for other widgets.
