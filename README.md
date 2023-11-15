@@ -22,8 +22,8 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 <img src="screenshots/linux.jpg">
 
 ## Building
-Tested with FreePascal 3.2 and later.
-Tested with Delphi 12.0
+- Tested with FreePascal 3.2 and later.
+- Tested with Delphi 12.0
 
 ## Usage
 It should be almost 1 to 1 as if you are using C++ ImGui <br> 
