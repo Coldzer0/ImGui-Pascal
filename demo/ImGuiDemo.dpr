@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -31,7 +31,9 @@ Program ImGuiDemo;
 {$EndIf}
 
 Uses
+  {$IFDEF FPC}
   cmem,
+  {$ENDIF}
   SysUtils,
   sdl2,
   glad_gl,
@@ -67,7 +69,7 @@ Var
   flags: Longword;
   gl_context: TSDL_GLContext;
   w, h: Integer;
-  glsl_version: PChar = '';
+  glsl_version: PAnsiChar = '';
 
 
 
@@ -76,7 +78,7 @@ Var
     draw_list: PImDrawList;
     pos: ImVec2;
   Const
-    HelloPascal: PChar = ' Hello From FreePascal ';
+    HelloPascal: PAnsiChar = ' Hello From FreePascal / Delphi ';
   Begin
     Begin
       //ImGui.SetWindowPos(ImVec2.New(100, 100), ImGuiCond_FirstUseEver);
@@ -109,7 +111,7 @@ Var
       ImGui.SetCursorScreenPos(pos);
 
       draw_list^.AddRectFilled(pos, ImVec2.New(pos.x +
-        ImGui.CalcTextSize(HelloPascal).x, pos.y + 20), $88005500);
+        ImGui.CalcTextSize(HelloPascal).x, pos.y + Trunc(ImGui.GetFont()^.EllipsisWidth * 2)), $88005500);
       ImGui.Text(HelloPascal);
 
       If ImGui.IsWindowHovered() Then
@@ -118,11 +120,12 @@ Var
         ImGui.Text('some window hovered');
       ImGui.End_;
     End;
+
     Pos := ImGui.GetCenterViewPort(ImGui.GetMainViewport());
-    Pos.y += 100;
+    Pos.y := Pos.y + 100;
     ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
     Begin
-      ImGui.Begin_('Another greeting');
+      ImGui.Begin_('Another greeting', @showAnotherWindow);
       ImGui.SetWindowPos(ImVec2.New(400, 200), ImGuiCond_FirstUseEver);
       ImGui.Text('Hello, next world %d', [counter]);
       If ImGui.Button('Not OK!') Then
@@ -139,11 +142,12 @@ Var
   Begin
     //draw your scene or simple windows
     Pos := ImGui.GetCenterViewPort(ImGui.GetMainViewport());
-    Pos.y -= 160;
+    Pos.y := Pos.y - 160;
     ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
     Begin
-      ImGui.Begin_('Hello From FreePascal', nil, ImGuiWindowFlags_None);
+      ImGui.Begin_('Hello From FreePascal / Delphi', nil, ImGuiWindowFlags_None);
       ImGui.Text('This is some useful text', []);
+
       ImGui.Checkbox('Demo window', @showDemoWindow);
       ImGui.Checkbox('Another Pascal window', @showAnotherWindow);
       ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
@@ -151,8 +155,10 @@ Var
       ImGui.SliderFloat('Float', @float_value, 0.0, 1.0, '%.3f', ImGuiSliderFlags_None);
       ImGui.ColorEdit3('Background color', @clearColor, ImGuiColorEditFlags_None);
 
-      If (ImGui.Button('Button')) Then
-        counter += 1;
+      If (ImGui.Button('Add')) Then
+      begin
+         Inc(counter);
+      end;
 
       ImGui.SameLine(0.0, -1.0);
       ImGui.Text('counter = %d', [counter]);
@@ -176,16 +182,19 @@ Var
 
   Function PasAllocMem(sz: size_t; {%H-}user_data: Pointer): Pointer; Cdecl;
   Begin
-    Result := cmem.Malloc(sz);
+    Result := {$IFDEF FPC}cmem.Malloc(sz);{$ELSE}AllocMem(sz);{$ENDIF}
   End;
 
   Procedure PasFreeMem(ptr: Pointer; {%H-}user_data: Pointer); Cdecl;
   Begin
-    cmem.Free(ptr);
+    {$IFDEF FPC}cmem.Free(ptr);{$ELSE}FreeMem(ptr);{$ENDIF}
   End;
 
+{$IFDEF FPC}
 Var
   saved_FpuFlags: Cardinal;
+{$ENDIF}  
+
 
   {$R *.res}
 
@@ -200,9 +209,13 @@ Begin
   SDL_SetHint(SDL_HINT_WINDOWS_DISABLE_THREAD_NAMING, '1');
 
   //open new SDL window with OpenGL rendering support
-  If SDL_Init(SDL_INIT_VIDEO) < 0 Then
+  If SDL_Init(SDL_INIT_VIDEO or SDL_INIT_TIMER) < 0 Then
   Begin
+    {$IFDEF FPC}
     SDL_Log('failed to init: %s', [SDL_GetError()]);
+    {$ELSE}
+    Writeln(Format('failed to init: %s', [SDL_GetError()]));
+    {$ENDIF}
   End;
 
   // Decide GL+GLSL versions
@@ -223,6 +236,9 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
   {$EndIf}
 
+  // From 2.0.18: Enable native IME.
+  SDL_SetHint(SDL_HINT_IME_SHOW_UI, '1');
+
   SDL_SetHint(SDL_HINT_RENDER_DRIVER, 'opengl');
   SDL_GL_SetAttribute(SDL_GL_DEPTH_SIZE, 24);
   SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
@@ -234,11 +250,15 @@ Begin
 
   h := 720;
   w := 1280;
-  window := SDL_CreateWindow('Hello From FreePascal (SDL2+OpenGL3)', SDL_WINDOWPOS_CENTERED,
+  window := SDL_CreateWindow('Hello From FreePascal / Delphi (SDL2+OpenGL3)', SDL_WINDOWPOS_CENTERED,
     SDL_WINDOWPOS_CENTERED, w, h, flags);
   If window = nil Then
   Begin
+    {$IFDEF FPC}
     SDL_Log('Failed to create window: %s', [SDL_GetError()]);
+    {$ELSE}
+    Writeln(Format('Failed to create window: %s', [SDL_GetError()]));
+    {$ENDIF}  
     halt;
   End;
 
@@ -249,11 +269,25 @@ Begin
   // Loading OpenGL APIs
   If Not ImGLInit() Then
   Begin
+    {$IFDEF FPC}
     SDL_Log('Error while Loading OpenGL3', []);
+    {$ELSE}
+    {$IFDEF DEBUG}
+    Writeln('Error while Loading OpenGL3');
+    {$ENDIF}
+    {$ENDIF}   
+    Halt;
   End;
 
   // Show opengl version sdl uses
-  SDL_Log('opengl version: %s', [glGetString(GL_VERSION)]);
+  {$IFDEF FPC}
+  SDL_Log('Opengl version: %s', [glGetString(GL_VERSION)]);
+  {$ELSE}
+  {$IFDEF DEBUG}
+  Writeln(Format('Opengl version: %s', [PAnsiChar(glGetString(GL_VERSION))]));
+  {$ENDIF}
+  {$ENDIF}   
+  
 
   // setup imgui
   ImGui.CreateContext(nil);
@@ -293,7 +327,7 @@ Begin
     style^.Colors[Ord(ImGuiCol_WindowBg)].w := 1.0;
   end;
 
-  // Fonts
+  // Load Fonts
   //ioptr^.Fonts^.AddFontDefault();
   ioptr^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 20.0);
 
@@ -337,12 +371,12 @@ Begin
     SDL_GL_MakeCurrent(window, gl_context);
 
 
-    saved_FpuFlags := SetFpuFlags();
+    {$IFDEF FPC}saved_FpuFlags := SetFpuFlags();{$ENDIF}
     glViewport(0, 0, Trunc(ioptr^.DisplaySize.x), Trunc(ioptr^.DisplaySize.y));
     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
-    ResetFpuFlags(saved_FpuFlags);
-
+    {$IFDEF FPC}ResetFpuFlags(saved_FpuFlags);{$ENDIF}
+    
     ImGui_Impl_OpenGL3_RenderDrawData(ImGui.GetDrawData());
 
 
@@ -376,3 +410,4 @@ Begin
   End;
   SDL_Quit();
 End.
+

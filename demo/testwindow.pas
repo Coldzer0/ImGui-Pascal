@@ -1,5 +1,5 @@
 {
-  FreePascal bindings for ImGui
+  FreePascal / Delphi bindings for ImGui
 
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
@@ -23,7 +23,12 @@
     * a quick guide if something isn't translated in a straightforward way
 }
 Unit TestWindow;
-{$mode objfpc}{$H+}
+
+{$IFDEF FPC}
+  {$mode objfpc}{$H+}
+{$ENDIF}
+
+{$J+}
 
 Interface
 
@@ -70,7 +75,7 @@ Type
 
 Implementation
 
-Procedure ShowHelpMarker(Const desc: string);
+Procedure ShowHelpMarker(Const desc: AnsiString);
 Begin
   ImGui.TextDisabled('(?)');
   If (ImGui.IsItemHovered()) Then
@@ -88,7 +93,7 @@ End;
 Procedure TTestWindow.Trees;
 Const  //static vars
   align_label_with_current_x_position: boolean = False;
-  selection_mask: integer = 1 << 2;
+  selection_mask: integer = 1 shl 2;
   // Dumb representation of what may be user-side selection state. You may carry selection state inside or outside your objects in whatever format you see fit.
 Var
   node_open: Boolean;
@@ -115,8 +120,7 @@ Begin
 
   If (ImGui.TreeNode('Advanced, with Selectable nodes')) Then
   Begin
-    ShowHelpMarker('This is a more standard looking tree with selectable nodes.' +
-      LineEnding +
+    ShowHelpMarker('This is a more standard looking tree with selectable nodes.' + #10 +
       'Click to select, CTRL+Click to toggle, click on arrows or double-click to open.');
     ImGui.Checkbox('Align label with current X position)',
       @align_label_with_current_x_position);
@@ -133,7 +137,7 @@ Begin
       //ImGuiTreeNodeFlags node_flags := ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick | ((selection_mask & (1 << i)) ? ImGuiTreeNodeFlags_Selected : 0);
       node_flags := ImGuiTreeNodeFlags_OpenOnArrow Or
         ImGuiTreeNodeFlags_OpenOnDoubleClick;
-      If (selection_mask And (1 << i)) > 0 Then
+      If (selection_mask And (1 shl i)) > 0 Then
         node_flags := node_flags Or ImGuiTreeNodeFlags_Selected;
       If (i < 3) Then
       Begin
@@ -144,7 +148,7 @@ Begin
           node_clicked := i;
         If (node_open) Then
         Begin
-          ImGui.Text('Blah blah' + LineEnding + 'Blah Blah');
+          ImGui.Text('Blah blah' + #10 + 'Blah Blah');
           ImGui.TreePop();
         End;
       End
@@ -162,11 +166,10 @@ Begin
     Begin
       // Update selection state. Process outside of tree loop to avoid visual inconsistencies during the clicking-frame.
       If (ImGui.GetIO()^.KeyCtrl) Then
-        selection_mask :=
-          selection_mask Xor (1 << node_clicked)          // CTRL+click to toggle
+        selection_mask := selection_mask Xor (1 shl node_clicked)          // CTRL+click to toggle
       Else
         //if (!(selection_mask & (1 << node_clicked))) // Depending on selection behavior you want, this commented bit preserve selection when clicking on item that is part of the selection
-        selection_mask := (1 << node_clicked);           // Click to single-select
+        selection_mask := (1 shl node_clicked);           // Click to single-select
     End;
     ImGui.PopStyleVar();
     If (align_label_with_current_x_position) Then
@@ -205,10 +208,11 @@ End;
 Procedure TTestWindow.Show(Var p_open: boolean);
 Var
   io: PImGuiIO;
-  window_flags: ImGuiWindowFlags = ImGuiWindowFlags_None;
+  window_flags: ImGuiWindowFlags;
   draw_list: PImDrawList;
   value_raw, value_with_lock_threshold, mouse_delta: ImVec2;
 Begin
+  window_flags := ImGuiWindowFlags_None;
   // Demonstrate the various window flags. Typically you would just use the default.
   If (no_titlebar) Then window_flags := window_flags Or ImGuiWindowFlags_NoTitleBar;
   If (no_resize) Then window_flags := window_flags Or ImGuiWindowFlags_NoResize;
@@ -216,8 +220,9 @@ Begin
   If (no_scrollbar) Then window_flags := window_flags Or ImGuiWindowFlags_NoScrollbar;
   If (no_collapse) Then window_flags := window_flags Or ImGuiWindowFlags_NoCollapse;
   If (Not no_menu) Then window_flags := window_flags Or ImGuiWindowFlags_MenuBar;
+
   ImGui.SetNextWindowSize(ImVec2.New(550, 680), ImGuiCond_FirstUseEver);
-  If Not ImGui.Begin_('ImGui Demo (FreePascal version)', @p_open, window_flags) Then
+  If Not ImGui.Begin_('ImGui Demo (FreePascal / Delphi version)', @p_open, window_flags) Then
   Begin
     // Early out if the window is collapsed, as an optimization.
     ImGui.End_;
@@ -271,8 +276,8 @@ Begin
   Begin
     ImGui.TextWrapped(
       'This window is being created by the ShowTestWindow() function. Please refer to the code for programming reference.'
-      +
-      LineEnding + LineEnding + 'User Guide:');
+      + #10#10 +
+      'User Guide:');
     ImGui.ShowUserGuide();
   End;
 
@@ -324,7 +329,7 @@ Begin
         draw_list := ImGui.GetWindowDrawList();
         draw_list^.PushClipRectFullScreen;
         draw_list^.AddLine(io^.MouseClickedPos[0], io^.MousePos,
-          ImGui.GetColorU32Vec(ImGui.GetStyle()^.Colors[Ord(ImGuiCol_Button)]),
+          ImGui.GetColorU32Vec(ImGui.GetStyle()^.Colors[Ord(ImGuiCol_DragDropTarget)]),
           4.0);
         draw_list^.PopClipRect;
 
@@ -332,7 +337,7 @@ Begin
         value_with_lock_threshold := ImGui.GetMouseDragDelta(ImGuiMouseButton_Left);
         mouse_delta := ImGui.GetIO()^.MouseDelta;
         ImGui.SameLine();
-        ImGui.Text(
+        ImGui.TextWrapped(
           'Raw (%.1f, %.1f), WithLockThresold (%.1f, %.1f), MouseDelta (%.1f, %.1f)',
           [value_raw.x, value_raw.y, value_with_lock_threshold.x,
           value_with_lock_threshold.y, mouse_delta.x, mouse_delta.y]);

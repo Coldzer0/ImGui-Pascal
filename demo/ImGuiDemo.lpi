@@ -136,7 +136,7 @@
     </RunParams>
     <Units Count="5">
       <Unit0>
-        <Filename Value="ImGuiDemo.lpr"/>
+        <Filename Value="ImGuiDemo.dpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
