@@ -44,47 +44,23 @@ function  ImGui_ImplOpenGL3_CreateDeviceObjects(): Boolean; cdecl; external CIMG
 Procedure ImGui_ImplOpenGL3_DestroyDeviceObjects(); cdecl; external CIMGUI_LIB;
 
 function ImGui_Impl_OpenGL3_Init(const glsl_version: PAnsiChar): Boolean;
-{$IFDEF FPC}
-Var
-  saved: Cardinal;
-{$ENDIF}
 Begin
-  {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
   Result := ImGui_ImplOpenGL3_Init(glsl_version);
-  {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 end;
 
 procedure ImGui_Impl_OpenGL3_RenderDrawData(draw_data: PImDrawData);
-{$IFDEF FPC}
-Var
-  saved: Cardinal;
-{$ENDIF}
 Begin
-  {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
   ImGui_ImplOpenGL3_RenderDrawData(draw_data);
-  {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 end;
 
 procedure ImGui_Impl_OpenGL3_NewFrame();
-{$IFDEF FPC}
-Var
-  saved: Cardinal;
-{$ENDIF}
 Begin
-  {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
   ImGui_ImplOpenGL3_NewFrame();
-  {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 end;
 
 procedure ImGui_Impl_OpenGL3_Shutdown();
-{$IFDEF FPC}
-Var
-  saved: Cardinal;
-{$ENDIF}
 Begin
-  {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
   ImGui_ImplOpenGL3_Shutdown();
-  {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 end;
 
 

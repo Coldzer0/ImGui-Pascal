@@ -193,11 +193,6 @@ Var
     {$IFDEF FPC}cmem.Free(ptr);{$ELSE}FreeMem(ptr);{$ENDIF}
   End;
 
-{$IFDEF FPC}
-Var
-  saved_FpuFlags: Cardinal;
-{$ENDIF}  
-
 
   {$R *.res}
 
@@ -375,15 +370,10 @@ Begin
     ImGui.Render();
     SDL_GL_MakeCurrent(window, gl_context);
 
-
-    {$IFDEF FPC}saved_FpuFlags := SetFpuFlags();{$ENDIF}
     glViewport(0, 0, Trunc(ioptr^.DisplaySize.x), Trunc(ioptr^.DisplaySize.y));
     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
-    {$IFDEF FPC}ResetFpuFlags(saved_FpuFlags);{$ENDIF}
-    
     ImGui_Impl_OpenGL3_RenderDrawData(ImGui.GetDrawData());
-
 
 
     // IMGUI_DOCK
