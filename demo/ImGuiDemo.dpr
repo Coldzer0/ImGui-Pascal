@@ -58,7 +58,7 @@ Var
 
 Var
   ImGuiCtx: PImGuiContext;
-  ioptr: PImGuiIO;
+  IO: PImGuiIO;
   style : PImGuiStyle;
   quit: Boolean;
   window: PSDL_Window;
@@ -127,7 +127,6 @@ Var
     ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
     Begin
       ImGui.Begin_('Another greeting', @showAnotherWindow);
-      ImGui.SetWindowPos(ImVec2.New(400, 200), ImGuiCond_FirstUseEver);
       ImGui.Text('Hello, next world %d', [counter]);
       If ImGui.Button('Not OK!') Then
       Begin
@@ -167,7 +166,7 @@ Var
       ImGui.Text('counter = %d', [counter]);
 
       ImGui.Text('Application average %.3f ms/frame (%.1f FPS)',
-        [1000.0 / ioptr^.Framerate, ioptr^.Framerate]);
+        [1000.0 / IO^.Framerate, IO^.Framerate]);
 
       ImGui.End_();
     End;
@@ -179,7 +178,7 @@ Var
 
     If showDemoWindow Then
     Begin
-      ImGui.ShowDemoWindow();
+      ImGui.ShowDemoWindow(@showDemoWindow);
     End;
   End;
 
@@ -291,7 +290,10 @@ Begin
   ImGui.CreateContext(nil);
 
   //set docking
-  ioptr := ImGui.GetIO();
+  IO := ImGui.GetIO();
+
+  // Ini Config File name
+  IO^.IniFilename := 'MyApp.ini';
 
   // Enable Logging
   ImGuiCtx := ImGui.GetCurrentContext();
@@ -299,11 +301,11 @@ Begin
   ImGuiCtx^.LogEnabled := True;
 
   // Enable Keyboard Controls
-  ioptr^.ConfigFlags := ioptr^.ConfigFlags Or ImGuiConfigFlags_NavEnableKeyboard;
+  IO^.ConfigFlags := IO^.ConfigFlags Or ImGuiConfigFlags_NavEnableKeyboard;
   // Enable Docking
-  ioptr^.ConfigFlags := ioptr^.ConfigFlags Or ImGuiConfigFlags_DockingEnable;
+  IO^.ConfigFlags := IO^.ConfigFlags Or ImGuiConfigFlags_DockingEnable;
   // Enable Multi-Viewport / Platform Windows
-  ioptr^.ConfigFlags := ioptr^.ConfigFlags Or ImGuiConfigFlags_ViewportsEnable;
+  IO^.ConfigFlags := IO^.ConfigFlags Or ImGuiConfigFlags_ViewportsEnable;
 
 
   // Init ImGui SDL2 OpenGL using Pure Pascal
@@ -318,16 +320,18 @@ Begin
 
   // When viewports are enabled we tweak WindowRounding/WindowBg
   //  so platform windows can look identical to regular ones.
-  If Ord(ioptr^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
+  If (IO^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
   begin
     style := ImGui.GetStyle();
     style^.WindowRounding := 0.0;
-    style^.Colors[Ord(ImGuiCol_WindowBg)].w := 1.0;
+    style^.Colors[ImGuiCol_WindowBg].w := 1.0;
   end;
 
   // Load Fonts
-  //ioptr^.Fonts^.AddFontDefault();
-  ioptr^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 20.0);
+  //IO^.Fonts^.AddFontDefault();
+  IO^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 25.0);
+  IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
+
 
 
   // Background Color
@@ -370,14 +374,14 @@ Begin
     ImGui.Render();
     SDL_GL_MakeCurrent(window, gl_context);
 
-    glViewport(0, 0, Trunc(ioptr^.DisplaySize.x), Trunc(ioptr^.DisplaySize.y));
+    glViewport(0, 0, Trunc(IO^.DisplaySize.x), Trunc(IO^.DisplaySize.y));
     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
     ImGui_Impl_OpenGL3_RenderDrawData(ImGui.GetDrawData());
 
 
     // IMGUI_DOCK
-    If Ord(ioptr^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
+    If (IO^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
     Begin
       backup_current_window := SDL_GL_GetCurrentWindow();
       backup_current_context := SDL_GL_GetCurrentContext();
