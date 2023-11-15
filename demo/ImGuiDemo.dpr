@@ -4,13 +4,12 @@
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
   This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by
-  the Free Software Foundation, version 3 of the License.
+  it under the terms of the MIT License.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU LESSER GENERAL PUBLIC LICENSE for more details.
+  MIT License for more details.
 }
 
 Program ImGuiDemo;
@@ -45,13 +44,14 @@ Uses
   PasImGui.SDL2,
   CImGui.Impl.OpenGL3,
   imgui_extra,
-  TestWindow;
+  TestWindow, CustomNodeGraph;
 
 Var
   counter: Integer;
   showPascalDemoWindow: Boolean = False;
   showAnotherWindow: Boolean = False;
   showDemoWindow: Boolean = False;
+  showNodeWindow: Boolean = False;
   clearColor: ImVec4;
   float_value: Single;
 
@@ -151,6 +151,8 @@ Var
       ImGui.Checkbox('Demo window', @showDemoWindow);
       ImGui.Checkbox('Another Pascal window', @showAnotherWindow);
       ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
+      ImGui.Checkbox('Pascal Node Window', @showNodeWindow);
+
 
       ImGui.SliderFloat('Float', @float_value, 0.0, 1.0, '%.3f', ImGuiSliderFlags_None);
       ImGui.ColorEdit3('Background color', @clearColor, ImGuiColorEditFlags_None);
@@ -362,6 +364,8 @@ Begin
     // Main UI Code
     Begin
       RenderPascalCode();
+      if showNodeWindow then
+        ShowExampleAppCustomNodeGraph(@showNodeWindow);
       If showPascalDemoWindow Then
         testwin.Show(showPascalDemoWindow);
     End;

@@ -134,7 +134,7 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <Units Count="5">
+    <Units Count="6">
       <Unit0>
         <Filename Value="ImGuiDemo.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -156,6 +156,10 @@
         <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
+      <Unit5>
+        <Filename Value="CustomNodeGraph.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit5>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

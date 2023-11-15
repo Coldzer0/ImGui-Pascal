@@ -4,13 +4,12 @@
   Copyright (C) 2023 Coldzer0 <Coldzer0 [at] protonmail.ch>
 
   This program is free software: you can redistribute it and/or modify
-  it under the terms of the GNU LESSER GENERAL PUBLIC LICENSE as published by
-  the Free Software Foundation, version 3 of the License.
+  it under the terms of the MIT License.
 
   This program is distributed in the hope that it will be useful,
   but WITHOUT ANY WARRANTY; without even the implied warranty of
   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU LESSER GENERAL PUBLIC LICENSE for more details.
+  MIT License for more details.
 }
 
 Unit PasImGui;
@@ -114,7 +113,7 @@ Type
     {$IfDef INLINE} inline;{$EndIf}
     Class Procedure End_; {$IfDef INLINE} inline;{$EndIf}
     Class Function BeginChild(str_id: AnsiString; size: ImVec2;
-      child_flags: ImGuiChildFlags; extra_flags: ImGuiWindowFlags): Boolean;
+      child_flags: ImGuiChildFlags = ImGuiChildFlags_None; extra_flags: ImGuiWindowFlags = ImGuiWindowFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function BeginChildEx(id: ImGuiID; size: ImVec2;
       child_flags: ImGuiChildFlags; extra_flags: ImGuiWindowFlags): Boolean;
@@ -128,8 +127,8 @@ Type
     Class Function GetWindowContentRegionMax(): ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowContentRegionWidth: Single; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowDrawList(): PImDrawList; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetWindowPos(out_: PImVec2); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetWindowSize(out_: PImVec2); {$IfDef INLINE} inline;{$EndIf}
+    class function GetWindowPos: ImVec2; {$IfDef INLINE} inline;{$EndIf}
+    class function GetWindowSize: ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowWidth(): Single; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowHeight(): Single; {$IfDef INLINE} inline;{$EndIf}
     Class Function IsWindowCollapsed(): Boolean; {$IfDef INLINE} inline;{$EndIf}
@@ -180,12 +179,12 @@ Type
     { Parameters stacks (shared) }
     Class Procedure PushFont(font: PImFont); {$IfDef INLINE} inline;{$EndIf}
     Class Procedure PopFont; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PushStyleColor(idx: ImGuiCol; col: ImVec4);
+    Class Procedure PushStyleColor(idx: ImGuiCol; col: ImU32); overload; {$IfDef INLINE} inline;{$EndIf}
+    Class Procedure PushStyleColor(idx: ImGuiCol; col: ImVec4); overload; {$IfDef INLINE} inline;{$EndIf}
+    Class Procedure PopStyleColor(Count: Longint = 1); {$IfDef INLINE} inline;{$EndIf}
+    Class Procedure PushStyleVar(idx: ImGuiStyleVar; val: Single); overload;
     {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PopStyleColor(Count: Longint); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PushStyleVar(idx: ImGuiStyleVar; val: Single);
-    {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PushStyleVarVec(idx: ImGuiStyleVar; val: ImVec2);
+    Class Procedure PushStyleVar(idx: ImGuiStyleVar; val: ImVec2); overload;
     {$IfDef INLINE} inline;{$EndIf}
     Class Procedure PopStyleVar(Count: Longint = 1); {$IfDef INLINE} inline;{$EndIf}
     Class Function GetFont(): PImFont; {$IfDef INLINE} inline;{$EndIf}
@@ -293,7 +292,7 @@ Type
     Class Function Button(_label: AnsiString): Boolean; overload; //overload for default size (0,0)
     Class Function SmallButton(_label: PAnsiChar): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function InvisibleButton(str_id: PAnsiChar; size: ImVec2;
-      flags: ImGuiButtonFlags): Boolean; {$IfDef INLINE} inline;{$EndIf}
+      flags: ImGuiButtonFlags = ImGuiButtonFlags_None): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Procedure Image(user_texture_id: ImTextureID; size: ImVec2;
       uv0: ImVec2; uv1: ImVec2; tint_col: ImVec4; border_col: ImVec4);
     {$IfDef INLINE} inline;{$EndIf}
@@ -621,9 +620,9 @@ Type
     Class Function IsItemVisible: Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function IsAnyItemHovered: Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function IsAnyItemActive: Boolean; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetItemRectMin(pOut: PImVec2); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetItemRectMax(pOut: PImVec2); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetItemRectSize(pOut: PImVec2); {$IfDef INLINE} inline;{$EndIf}
+    class function GetItemRectMin: ImVec2; {$IfDef INLINE} inline;{$EndIf}
+    class function GetItemRectMax: ImVec2; {$IfDef INLINE} inline;{$EndIf}
+    class function GetItemRectSize: ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Procedure SetNextItemAllowOverlap; {$IfDef INLINE} inline;{$EndIf}
     Class Function IsWindowFocused(flags: ImGuiFocusedFlags): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
@@ -663,7 +662,7 @@ Type
     Class Function IsMouseDown(_button: ImGuiMouseButton): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function IsMouseClicked(_button: ImGuiMouseButton;
-      _repeat: Boolean): Boolean; {$IfDef INLINE} inline;{$EndIf}
+      _repeat: Boolean = False): Boolean; {$IfDef INLINE} inline;{$EndIf}
     class function IsMouseDoubleClicked(_button: ImGuiMouseButton): Boolean;overload;
     class function IsMouseDoubleClicked(_button: ImGuiMouseButton; owner_id: ImGuiID): Boolean; overload;
     Class Function IsMouseReleased(_button: ImGuiMouseButton): Boolean;
@@ -671,7 +670,7 @@ Type
     Class Function IsMouseHoveringRect(r_min: ImVec2; r_max: ImVec2;
       clip: Boolean = True): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function IsMouseDragging(_button: ImGuiMouseButton;
-      lock_threshold: Single): Boolean; {$IfDef INLINE} inline;{$EndIf}
+      lock_threshold: Single = -1.0): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetMousePos: ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetMousePosOnOpeningCurrentPopup: ImVec2;
     {$IfDef INLINE} inline;{$EndIf}
@@ -723,7 +722,7 @@ Type
     Procedure PopTextureID(); {$IfDef INLINE} inline;{$EndIf}
 
     { Primitives }
-    procedure AddLine(p1: ImVec2; p2: ImVec2; col: ImU32; thickness: Single);
+    procedure AddLine(p1: ImVec2; p2: ImVec2; col: ImU32; thickness: Single = 1.0);
     {$IfDef INLINE} inline;{$EndIf}
     Procedure AddRect(a: ImVec2; b: ImVec2; col: ImU32; rounding: Single = 0;
       rounding_corners_flags: ImDrawFlags = ImDrawFlags_Closed;
@@ -747,7 +746,7 @@ Type
     Procedure AddCircle(centre: ImVec2; radius: Single; col: ImU32;
       num_segments: Longint; thickness: Single); {$IfDef INLINE} inline;{$EndIf}
     Procedure AddCircleFilled(centre: ImVec2; radius: Single; col: ImU32;
-      num_segments: Longint); {$IfDef INLINE} inline;{$EndIf}
+      num_segments: Longint = 0); {$IfDef INLINE} inline;{$EndIf}
     Procedure AddText(pos: ImVec2; col: ImU32; text_begin: PAnsiChar; text_end: PAnsiChar);
     {$IfDef INLINE} inline;{$EndIf}
     Procedure AddTextExt(font: ImFont; font_size: Single; pos: ImVec2;
@@ -763,7 +762,7 @@ Type
     Procedure AddConvexPolyFilled(points: PImVec2; num_points: Integer; col: ImU32);
     {$IfDef INLINE} inline;{$EndIf}
     Procedure AddBezierCubic(p1: ImVec2; p2: ImVec2; p3: ImVec2;
-      p4: ImVec2; col: ImU32; thickness: Single; num_segments: Integer);
+      p4: ImVec2; col: ImU32; thickness: Single; num_segments: Integer = 0);
     {$IfDef INLINE} inline;{$EndIf}
 
     { Stateful path API, add points then finish with PathFill() or PathStroke() }
@@ -814,7 +813,14 @@ Type
 { ImGuiPlatformMonitor }
 Function ImGuiPlatformMonitor_Create(): PImGuiPlatformMonitor;
 
+function IM_COL32(R,G,B,A : ImU32): ImU32;
+
 Implementation
+
+function IM_COL32(R,G,B,A : ImU32): ImU32;
+begin
+  Result := (A shl IM_COL32_A_SHIFT) or (B shl IM_COL32_B_SHIFT) or (G shl IM_COL32_G_SHIFT) or (R shl IM_COL32_R_SHIFT);
+end;
 
 Function ImGuiPlatformMonitor_Create(): PImGuiPlatformMonitor;
 {$IFDEF FPC}
@@ -1302,25 +1308,25 @@ Begin
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.GetWindowPos(out_: PImVec2);
+class function ImGui.GetWindowPos(): ImVec2;
 {$IFDEF FPC}
 Var
   saved: Cardinal;
 {$ENDIF}
 Begin
   {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
-  igGetWindowPos(out_);
+  igGetWindowPos(@Result);
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.GetWindowSize(out_: PImVec2);
+class function ImGui.GetWindowSize() : ImVec2;
 {$IFDEF FPC}
 Var
   saved: Cardinal;
 {$ENDIF}
 Begin
   {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
-  igGetWindowSize(out_);
+  igGetWindowSize(@Result);
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
@@ -1680,6 +1686,17 @@ Begin
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
+class procedure ImGui.PushStyleColor(idx: ImGuiCol; col: ImU32);
+{$IFDEF FPC}
+Var
+  saved: Cardinal;
+{$ENDIF}
+Begin
+  {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
+  igPushStyleColor_U32(idx, col);
+  {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
+End;
+
 class procedure ImGui.PushStyleColor(idx: ImGuiCol; col: ImVec4);
 {$IFDEF FPC}
 Var
@@ -1713,7 +1730,7 @@ Begin
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.PushStyleVarVec(idx: ImGuiStyleVar; val: ImVec2);
+class procedure ImGui.PushStyleVar(idx: ImGuiStyleVar; val: ImVec2);
 {$IFDEF FPC}
 Var
   saved: Cardinal;
@@ -3874,36 +3891,36 @@ Begin
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.GetItemRectMin(pOut: PImVec2);
+class function ImGui.GetItemRectMin() : ImVec2;
 {$IFDEF FPC}
 Var
   saved: Cardinal;
 {$ENDIF}
 Begin
   {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
-  igGetItemRectMin(pOut);
+  igGetItemRectMin(@Result);
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.GetItemRectMax(pOut: PImVec2);
+class function ImGui.GetItemRectMax() : ImVec2;
 {$IFDEF FPC}
 Var
   saved: Cardinal;
 {$ENDIF}
 Begin
   {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
-  igGetItemRectMax(pOut);
+  igGetItemRectMax(@Result);
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
-class procedure ImGui.GetItemRectSize(pOut: PImVec2);
+class function ImGui.GetItemRectSize() : ImVec2;
 {$IFDEF FPC}
 Var
   saved: Cardinal;
 {$ENDIF}
 Begin
   {$IFDEF FPC}saved := SetFpuFlags();{$ENDIF}
-  igGetItemRectSize(pOut);
+  igGetItemRectSize(@Result);
   {$IFDEF FPC}ResetFpuFlags(saved);{$ENDIF}
 End;
 
