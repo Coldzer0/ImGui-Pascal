@@ -36,13 +36,13 @@ Uses
   {$ENDIF}
   SysUtils,
   sdl2,
-  glad_gl,
   PasImGui,
   PasImGui.Apis,
   PasImGui.Types,
   PasImGui.Enums,
   PasImGui.Backend.SDL2,
   PasImGui.Renderer.OpenGL3,
+  glad_gl,
   TestWindow,
   imgui_extra,
   CustomNodeGraph;
