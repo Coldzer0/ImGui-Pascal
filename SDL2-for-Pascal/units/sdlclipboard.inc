@@ -20,7 +20,7 @@
  * \sa SDL_HasClipboardText
   }
 function SDL_SetClipboardText(text: PAnsiChar): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetClipboardText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetClipboardText' {$ENDIF} {$ENDIF};
 
 {*
  * Get UTF-8 text from the clipboard, which must be freed with SDL_free().
@@ -39,7 +39,7 @@ function SDL_SetClipboardText(text: PAnsiChar): cint; cdecl;
  * \sa SDL_SetClipboardText
   }
 function SDL_GetClipboardText(): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetClipboardText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetClipboardText' {$ENDIF} {$ENDIF};
 
 {*
  * Query whether the clipboard exists and contains a non-empty text string.
@@ -52,7 +52,7 @@ function SDL_GetClipboardText(): PAnsiChar; cdecl;
  * \sa SDL_SetClipboardText
   }
 function SDL_HasClipboardText(): TSDL_bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasClipboardText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasClipboardText' {$ENDIF} {$ENDIF};
 
 {*
  * Put UTF-8 text into the primary selection.
@@ -67,7 +67,7 @@ function SDL_HasClipboardText(): TSDL_bool; cdecl;
  * \sa SDL_HasPrimarySelectionText
   }
 function SDL_SetPrimarySelectionText(text: PAnsiChar): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetPrimarySelectionText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetPrimarySelectionText' {$ENDIF} {$ENDIF};
 
 {*
  * Get UTF-8 text from the primary selection, which must be freed with
@@ -87,7 +87,7 @@ function SDL_SetPrimarySelectionText(text: PAnsiChar): cint; cdecl;
  * \sa SDL_SetPrimarySelectionText
   }
 function SDL_GetPrimarySelectionText(): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPrimarySelectionText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPrimarySelectionText' {$ENDIF} {$ENDIF};
 
 {*
  * Query whether the primary selection exists and contains a non-empty text
@@ -102,4 +102,4 @@ function SDL_GetPrimarySelectionText(): PAnsiChar; cdecl;
  * \sa SDL_SetPrimarySelectionText
   }
 function SDL_HasPrimarySelectionText(): TSDL_bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasPrimarySelectionText' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasPrimarySelectionText' {$ENDIF} {$ENDIF};

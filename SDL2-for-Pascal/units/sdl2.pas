@@ -60,6 +60,7 @@ unit sdl2;
 {$DEFINE SDL}
 
 {$I jedi.inc}
+{$I ImGuiPasDef.inc}
 
 interface
 
@@ -91,6 +92,9 @@ interface
       UnixType;
   {$ENDIF}
 
+{$IfNDef DYNAMIC_LINK}
+  {$LinkLib SDL2}
+{$ELSE}
 const
 
   {$IFDEF WINDOWS}
@@ -119,7 +123,7 @@ const
       {$linklib libSDL2}
     {$ENDIF}
   {$ENDIF}
-
+{$EndIf}
 
 {$DEFINE WANT_CWCHAR_T}
 {$I ctypes.inc}                  // C data types

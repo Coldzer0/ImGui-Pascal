@@ -296,4 +296,4 @@ Type
  *  \endcode
  *)
 Function SDL_GetWindowWMInfo(window:PSDL_Window; info : PSDL_SysWMinfo):TSDL_bool; cdecl;
-   external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowWMInfo' {$ENDIF} {$ENDIF};
+   external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowWMInfo' {$ENDIF} {$ENDIF};

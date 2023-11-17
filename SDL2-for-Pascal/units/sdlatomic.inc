@@ -18,13 +18,13 @@ type
  * Try to lock a spin lock by setting it to a non-zero value.
  *}
 function SDL_AtomicTryLock(lock: PSDL_SpinLock): TSDL_bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicTryLock' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicTryLock' {$ENDIF} {$ENDIF};
 
 {**
  * Lock a spin lock by setting it to a non-zero value.
  *}
 function SDL_AtomicLock(lock: PSDL_SpinLock): TSDL_bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicLock' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicLock' {$ENDIF} {$ENDIF};
 
 {**
  * Unlock a spin lock by setting it to 0.
@@ -32,7 +32,7 @@ function SDL_AtomicLock(lock: PSDL_SpinLock): TSDL_bool; cdecl;
  * Always returns immediately.
  *}
 procedure SDL_AtomicUnlock(lock: PSDL_SpinLock); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicUnlock' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicUnlock' {$ENDIF} {$ENDIF};
 
 {**
  * The compiler barrier prevents the compiler from reordering
@@ -55,7 +55,7 @@ type
  * Set an atomic variable to a new value if it is currently an old value.
  *}
 function SDL_AtomicCAS(atomic: PSDL_Atomic; oldValue, newValue: cint): TSDL_bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicCAS' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicCAS' {$ENDIF} {$ENDIF};
 
 {**
  * Set an atomic variable to a new value and return the old one.
@@ -63,13 +63,13 @@ function SDL_AtomicCAS(atomic: PSDL_Atomic; oldValue, newValue: cint): TSDL_bool
  * This function also acts as a full memory barrier.
  *}
 function SDL_AtomicSet(atomic: PSDL_Atomic; value: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicSet' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicSet' {$ENDIF} {$ENDIF};
 
 {**
  * Get the value of an atomic variable.
  *}
 function SDL_AtomicGet(atomic: PSDL_Atomic): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicGet' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicGet' {$ENDIF} {$ENDIF};
 
 {**
  * Add to an atomic variable, and return the old value.
@@ -77,7 +77,7 @@ function SDL_AtomicGet(atomic: PSDL_Atomic): cint; cdecl;
  * This function also acts as a full memory barrier.
  *}
 function SDL_AtomicAdd(atomic: PSDL_Atomic; value: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicAdd' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicAdd' {$ENDIF} {$ENDIF};
 
 {**
  * Increment an atomic variable used as a reference count.
@@ -93,17 +93,17 @@ function SDL_AtomicDecRef(atomic: PSDL_Atomic): Boolean;
  * Set a pointer to a new value if it is currently an old value.
  *}
 function SDL_AtomicCASPtr(ptr: PPointer; oldValue, newValue: Pointer): TSDL_bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicCASPtr' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicCASPtr' {$ENDIF} {$ENDIF};
 
 {**
  * Set a pointer to a new value atomically, and return the old value.
  *}
 function SDL_AtomicSetPtr(ptr: PPointer; value: Pointer): Pointer; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicSetPtr' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicSetPtr' {$ENDIF} {$ENDIF};
 
 {**
  * Get the value of a pointer atomically.
  *}
 function SDL_AtomicGetPtr(ptr: PPointer): Pointer; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicGetPtr' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AtomicGetPtr' {$ENDIF} {$ENDIF};
 

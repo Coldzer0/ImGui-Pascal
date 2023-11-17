@@ -244,7 +244,7 @@ const
    *}
 
 function SDL_GetNumVideoDrivers: cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumVideoDrivers' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumVideoDrivers' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the name of a built in video driver.
@@ -256,7 +256,7 @@ function SDL_GetNumVideoDrivers: cint; cdecl;
    *}
 
 function SDL_GetVideoDriver(index: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetVideoDriver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetVideoDriver' {$ENDIF} {$ENDIF};
 
   {**
    *  Initialize the video subsystem, optionally specifying a video driver.
@@ -274,7 +274,7 @@ function SDL_GetVideoDriver(index: cint): PAnsiChar; cdecl;
    *}
 
 function SDL_VideoInit(const driver_name: PAnsiChar): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_VideoInit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_VideoInit' {$ENDIF} {$ENDIF};
 
   {**
    *  Shuts down the video subsystem.
@@ -284,7 +284,7 @@ function SDL_VideoInit(const driver_name: PAnsiChar): cint; cdecl;
    *  SDL_VideoInit()
    *}
 procedure SDL_VideoQuit; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_VideoQuit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_VideoQuit' {$ENDIF} {$ENDIF};
 
   {**
    *  Returns the name of the currently initialized video driver.
@@ -297,7 +297,7 @@ procedure SDL_VideoQuit; cdecl;
    *}
 
 function SDL_GetCurrentVideoDriver: PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentVideoDriver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentVideoDriver' {$ENDIF} {$ENDIF};
 
   {**
    *  Returns the number of available video displays.
@@ -306,7 +306,7 @@ function SDL_GetCurrentVideoDriver: PAnsiChar; cdecl;
    *}
 
 function SDL_GetNumVideoDisplays: cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumVideoDisplays' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumVideoDisplays' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the name of a display in UTF-8 encoding
@@ -317,7 +317,7 @@ function SDL_GetNumVideoDisplays: cint; cdecl;
    *}
 
 function SDL_GetDisplayName(displayIndex: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayName' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayName' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the desktop area represented by a display, with the primary
@@ -329,7 +329,7 @@ function SDL_GetDisplayName(displayIndex: cint): PAnsiChar; cdecl;
    *}
 
 function SDL_GetDisplayBounds(displayIndex: cint; rect: PSDL_Rect): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayBounds' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayBounds' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Get the usable desktop area represented by a display, with the
@@ -349,7 +349,7 @@ function SDL_GetDisplayBounds(displayIndex: cint; rect: PSDL_Rect): cint; cdecl;
  *  \sa SDL_GetNumVideoDisplays()
  *}
 function SDL_GetDisplayUsableBounds(displayIndex: cint; rect: PSDL_Rect): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayUsableBounds' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayUsableBounds' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Get the dots/pixels-per-inch for a display
@@ -362,7 +362,7 @@ function SDL_GetDisplayUsableBounds(displayIndex: cint; rect: PSDL_Rect): cint; 
    *  \sa SDL_GetNumVideoDisplays()
    *}
 function SDL_GetDisplayDPI(displayIndex: cint; ddpi, hdpi, vdpi: pcfloat): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayDPI' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayDPI' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Get the orientation of a display
@@ -372,7 +372,7 @@ function SDL_GetDisplayDPI(displayIndex: cint; ddpi, hdpi, vdpi: pcfloat): cint;
  *  \sa SDL_GetNumVideoDisplays()
  *}
 function SDL_GetDisplayOrientation(displayIndex: cint): TSDL_DisplayOrientation; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayOrientation' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayOrientation' {$ENDIF} {$ENDIF};
 
   {**
    *  Returns the number of available display modes.
@@ -381,7 +381,7 @@ function SDL_GetDisplayOrientation(displayIndex: cint): TSDL_DisplayOrientation;
    *}
 
 function SDL_GetNumDisplayModes(displayIndex: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumDisplayModes' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumDisplayModes' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill in information about a specific display mode.
@@ -396,21 +396,21 @@ function SDL_GetNumDisplayModes(displayIndex: cint): cint; cdecl;
    *}
 
 function SDL_GetDisplayMode(displayIndex: cint; modeIndex: cint; mode: PSDL_DisplayMode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayMode' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDisplayMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill in information about the desktop display mode.
    *}
 
 function SDL_GetDesktopDisplayMode(displayIndex: cint; mode: PSDL_DisplayMode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDesktopDisplayMode' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDesktopDisplayMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill in information about the current display mode.
    *}
 
 function SDL_GetCurrentDisplayMode(displayIndex: cint; mode: PSDL_DisplayMode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentDisplayIndex' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentDisplayIndex' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the closest match to the requested display mode.
@@ -434,7 +434,7 @@ function SDL_GetCurrentDisplayMode(displayIndex: cint; mode: PSDL_DisplayMode): 
    *}
 
 function SDL_GetClosestDisplayMode(displayIndex: cint; const mode: PSDL_DisplayMode; closest: PSDL_DisplayMode): PSDL_DisplayMode; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetClosestDisplayMode' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetClosestDisplayMode' {$ENDIF} {$ENDIF};
 
 {**
  * Get the index of the display containing a point
@@ -449,7 +449,7 @@ function SDL_GetClosestDisplayMode(displayIndex: cint; const mode: PSDL_DisplayM
  * \sa SDL_GetNumVideoDisplays
  *}
 function SDL_GetPointDisplayIndex(const point: PSDL_Point): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPointDisplayIndex' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPointDisplayIndex' {$ENDIF} {$ENDIF};
 
 {**
  * Get the index of the display primarily containing a rect
@@ -465,7 +465,7 @@ function SDL_GetPointDisplayIndex(const point: PSDL_Point): cint; cdecl;
  * \sa SDL_GetNumVideoDisplays
  *}
 function SDL_GetRectDisplayIndex(const rect: PSDL_Rect): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRectDisplayIndex' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRectDisplayIndex' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the display index associated with a window.
@@ -475,7 +475,7 @@ function SDL_GetRectDisplayIndex(const rect: PSDL_Rect): cint; cdecl;
    *}
 
 function SDL_GetWindowDisplayIndex(window: PSDL_Window): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowDisplayIndex' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowDisplayIndex' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the display mode used when a fullscreen window is visible.
@@ -492,7 +492,7 @@ function SDL_GetWindowDisplayIndex(window: PSDL_Window): cint; cdecl;
    *}
 
 function SDL_SetWindowDisplayMode(window: PSDL_Window; const mode: PSDL_DisplayMode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowDisplayMode' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowDisplayMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill in information about the display mode used when a fullscreen
@@ -503,7 +503,7 @@ function SDL_SetWindowDisplayMode(window: PSDL_Window; const mode: PSDL_DisplayM
    *}
 
 function SDL_GetWindowDisplayMode(window: PSDL_Window; mode: PSDL_DisplayMode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowDisplayMode' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowDisplayMode' {$ENDIF} {$ENDIF};
 
 {**
  * Get the raw ICC profile data for the screen the window is currently on.
@@ -518,14 +518,14 @@ function SDL_GetWindowDisplayMode(window: PSDL_Window; mode: PSDL_DisplayMode): 
  * \since This function is available since SDL 2.0.18.
  *}
 function SDL_GetWindowICCProfile(window: PSDL_Window; size: pcsize_t): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowICCProfile' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowICCProfile' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the pixel format associated with the window.
    *}
 
 function SDL_GetWindowPixelFormat(window: PSDL_Window): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowPixelFormat' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowPixelFormat' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Create a window with the specified position, dimensions, and flags.
@@ -571,7 +571,7 @@ function SDL_GetWindowPixelFormat(window: PSDL_Window): cuint32; cdecl;
    *}
 
 function SDL_CreateWindow(const title: PAnsiChar; x: cint; y: cint; w: cint; h: cint; flags: TSDL_WindowFlags): PSDL_Window; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Create an SDL window from an existing native window.
@@ -584,28 +584,28 @@ function SDL_CreateWindow(const title: PAnsiChar; x: cint; y: cint; w: cint; h: 
    *}
 
 function SDL_CreateWindowFrom(const data: Pointer): PSDL_Window; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindowFrom' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindowFrom' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the numeric ID of a window, for logging purposes.
    *}
 
 function SDL_GetWindowID(window: PSDL_Window): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowID' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowID' {$ENDIF} {$ENDIF};
 
   {**
    *  Get a window from a stored ID, or nil if it doesn't exist.
    *}
 
 function SDL_GetWindowFromID(id: cuint32): PSDL_Window; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowFromID' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowFromID' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the window flags.
    *}
 
 function SDL_GetWindowFlags(window: PSDL_Window): TSDL_WindowFlags; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowFlags' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowFlags' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the title of a window, in UTF-8 format.
@@ -614,7 +614,7 @@ function SDL_GetWindowFlags(window: PSDL_Window): TSDL_WindowFlags; cdecl;
    *}
 
 procedure SDL_SetWindowTitle(window: PSDL_Window; const title: PAnsiChar); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowTitle' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowTitle' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the title of a window, in UTF-8 format.
@@ -623,7 +623,7 @@ procedure SDL_SetWindowTitle(window: PSDL_Window; const title: PAnsiChar); cdecl
    *}
 
 function SDL_GetWindowTitle(window: PSDL_Window): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowTitle' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowTitle' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the icon for a window.
@@ -632,7 +632,7 @@ function SDL_GetWindowTitle(window: PSDL_Window): PAnsiChar; cdecl;
    *}
 
 procedure SDL_SetWindowIcon(window: PSDL_Window; icon: PSDL_Surface); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowIcon' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowIcon' {$ENDIF} {$ENDIF};
 
   {**
    *  Associate an arbitrary named pointer with a window.
@@ -649,7 +649,7 @@ procedure SDL_SetWindowIcon(window: PSDL_Window; icon: PSDL_Surface); cdecl;
    *}
 
 function SDL_SetWindowData(window: PSDL_Window; const name: PAnsiChar; userdata: Pointer): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowData' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowData' {$ENDIF} {$ENDIF};
 
   {**
    *  Retrieve the data pointer associated with a window.
@@ -663,7 +663,7 @@ function SDL_SetWindowData(window: PSDL_Window; const name: PAnsiChar; userdata:
    *}
 
 function SDL_GetWindowData(window: PSDL_Window; const name: PAnsiChar): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowData' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowData' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the position of a window.
@@ -680,7 +680,7 @@ function SDL_GetWindowData(window: PSDL_Window; const name: PAnsiChar): Pointer;
    *}
 
 procedure SDL_SetWindowPosition(window: PSDL_Window; x: cint; y: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowPosition' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowPosition' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the position of a window.
@@ -692,7 +692,7 @@ procedure SDL_SetWindowPosition(window: PSDL_Window; x: cint; y: cint); cdecl;
    *}
 
 procedure SDL_GetWindowPosition(window: PSDL_Window; x: pcint; y: pcint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowPosition' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowPosition' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the size of a window's client area.
@@ -707,7 +707,7 @@ procedure SDL_GetWindowPosition(window: PSDL_Window; x: pcint; y: pcint); cdecl;
    *}
 
 procedure SDL_SetWindowSize(window: PSDL_Window; w: cint; h: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the size of a window's client area.
@@ -719,7 +719,7 @@ procedure SDL_SetWindowSize(window: PSDL_Window; w: cint; h: cint); cdecl;
    *}
 
 procedure SDL_GetWindowSize(window: PSDL_Window; w: pcint; h: pcint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowSize' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Get the size of a window's borders (decorations) around the client area.
@@ -737,7 +737,7 @@ procedure SDL_GetWindowSize(window: PSDL_Window; w: pcint; h: pcint); cdecl;
    *        if the window in question was borderless.
    *}
 function SDL_GetWindowBordersSize(window: PSDL_Window; top, left, bottom, right: pcint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowBordersSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowBordersSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the minimum size of a window's client area.
@@ -753,7 +753,7 @@ function SDL_GetWindowBordersSize(window: PSDL_Window; top, left, bottom, right:
    *}
 
 procedure SDL_SetWindowMinimumSize(window: PSDL_Window; min_w: cint; min_h: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMinimumSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMinimumSize' {$ENDIF} {$ENDIF};
     
   {**
    *  Get the minimum size of a window's client area.
@@ -766,7 +766,7 @@ procedure SDL_SetWindowMinimumSize(window: PSDL_Window; min_w: cint; min_h: cint
    *}
 
 procedure SDL_GetWindowMinimumSize(window: PSDL_Window; w: pcint; h: pcint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMinimumSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMinimumSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the maximum size of a window's client area.
@@ -782,7 +782,7 @@ procedure SDL_GetWindowMinimumSize(window: PSDL_Window; w: pcint; h: pcint); cde
    *}
 
 procedure SDL_SetWindowMaximumSize(window: PSDL_Window; max_w: cint; max_h: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMaximumSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMaximumSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the maximum size of a window's client area.
@@ -795,7 +795,7 @@ procedure SDL_SetWindowMaximumSize(window: PSDL_Window; max_w: cint; max_h: cint
    *}
 
 procedure SDL_GetWindowMaximumSize(window: PSDL_Window; w: pcint; h: pcint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMaximumSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMaximumSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the border state of a window.
@@ -813,7 +813,7 @@ procedure SDL_GetWindowMaximumSize(window: PSDL_Window; w: pcint; h: pcint); cde
    *}
 
 procedure SDL_SetWindowBordered(window: PSDL_Window; bordered: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowBordered' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowBordered' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Set the user-resizable state of a window.
@@ -830,7 +830,7 @@ procedure SDL_SetWindowBordered(window: PSDL_Window; bordered: TSDL_Bool); cdecl
    *  \sa SDL_GetWindowFlags()
    *}
 procedure SDL_SetWindowResizable(window: PSDL_Window; resizable: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowResizable' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowResizable' {$ENDIF} {$ENDIF};
 
 {**
  * Set the window to always be above the others.
@@ -847,7 +847,7 @@ procedure SDL_SetWindowResizable(window: PSDL_Window; resizable: TSDL_Bool); cde
  * \sa SDL_GetWindowFlags
  *}
 procedure SDL_SetWindowAlwaysOnTop(window: PSDL_Window; on_top: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowAlwaysOnTop' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowAlwaysOnTop' {$ENDIF} {$ENDIF};
 
   {**
    *  Show a window.
@@ -856,7 +856,7 @@ procedure SDL_SetWindowAlwaysOnTop(window: PSDL_Window; on_top: TSDL_Bool); cdec
    *}
 
 procedure SDL_ShowWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ShowWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ShowWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Hide a window.
@@ -865,14 +865,14 @@ procedure SDL_ShowWindow(window: PSDL_Window); cdecl;
    *}
 
 procedure SDL_HideWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HideWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HideWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Raise a window above other windows and set the input focus.
    *}
 
 procedure SDL_RaiseWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RaiseWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RaiseWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Make a window as large as possible.
@@ -881,7 +881,7 @@ procedure SDL_RaiseWindow(window: PSDL_Window); cdecl;
    *}
 
 procedure SDL_MaximizeWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MaximizeWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MaximizeWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Minimize a window to an iconic representation.
@@ -890,7 +890,7 @@ procedure SDL_MaximizeWindow(window: PSDL_Window); cdecl;
    *}
 
 procedure SDL_MinimizeWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MinimizeWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MinimizeWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Restore the size and position of a minimized or maximized window.
@@ -900,7 +900,7 @@ procedure SDL_MinimizeWindow(window: PSDL_Window); cdecl;
    *}
 
 procedure SDL_RestoreWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RestoreWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RestoreWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Set a window's fullscreen state.
@@ -912,7 +912,7 @@ procedure SDL_RestoreWindow(window: PSDL_Window); cdecl;
    *}
 
 function SDL_SetWindowFullscreen(window: PSDL_Window; flags: TSDL_WindowFlags): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowFullscreen' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowFullscreen' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the SDL surface associated with the window.
@@ -929,7 +929,7 @@ function SDL_SetWindowFullscreen(window: PSDL_Window; flags: TSDL_WindowFlags): 
    *}
 
 function SDL_GetWindowSurface(window: PSDL_Window): PSDL_Surface; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowSurface' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowSurface' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy the window surface to the screen.
@@ -941,7 +941,7 @@ function SDL_GetWindowSurface(window: PSDL_Window): PSDL_Surface; cdecl;
    *}
 
 function SDL_UpdateWindowSurface(window: PSDL_Window): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateWindowSurface' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateWindowSurface' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy a number of rectangles on the window surface to the screen.
@@ -953,7 +953,7 @@ function SDL_UpdateWindowSurface(window: PSDL_Window): cint; cdecl;
    *}
 
 function SDL_UpdateWindowSurfaceRects(window: PSDL_Window; rects: PSDL_Rect; numrects: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateWindowSurfaceRects' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateWindowSurfaceRects' {$ENDIF} {$ENDIF};
 
   {**
    *  Set a window's input grab mode.
@@ -964,7 +964,7 @@ function SDL_UpdateWindowSurfaceRects(window: PSDL_Window; rects: PSDL_Rect; num
    *}
 
 procedure SDL_SetWindowGrab(window: PSDL_Window; grabbed: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowGrab' {$ENDIF} {$ENDIF};
 
   {**
    *  Get a window's input grab mode.
@@ -975,7 +975,7 @@ procedure SDL_SetWindowGrab(window: PSDL_Window; grabbed: TSDL_Bool); cdecl;
    *}
 
 function SDL_GetWindowGrab(window: PSDL_Window): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowGrab' {$ENDIF} {$ENDIF};
 
 {**
  * Set a window's keyboard grab mode.
@@ -1006,7 +1006,7 @@ function SDL_GetWindowGrab(window: PSDL_Window): TSDL_Bool; cdecl;
  * \sa SDL_SetWindowGrab
  *}
 procedure SDL_SetWindowKeyboardGrab(window: PSDL_Window; grabbed: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowKeyboardGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowKeyboardGrab' {$ENDIF} {$ENDIF};
 
   {**
    *  Get a window's keyboard grab mode.
@@ -1017,7 +1017,7 @@ procedure SDL_SetWindowKeyboardGrab(window: PSDL_Window; grabbed: TSDL_Bool); cd
    *}
 
 function SDL_GetWindowKeyboardGrab(window: PSDL_Window): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowKeyboardGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowKeyboardGrab' {$ENDIF} {$ENDIF};
 
   {**
    *  Set a window's mouse grab mode.
@@ -1029,7 +1029,7 @@ function SDL_GetWindowKeyboardGrab(window: PSDL_Window): TSDL_Bool; cdecl;
    *}
 
 procedure SDL_SetWindowMouseGrab(window: PSDL_Window; grabbed: TSDL_Bool); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMouseGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMouseGrab' {$ENDIF} {$ENDIF};
 
   {**
    *  Get a window's mouse grab mode.
@@ -1040,7 +1040,7 @@ procedure SDL_SetWindowMouseGrab(window: PSDL_Window; grabbed: TSDL_Bool); cdecl
    *}
 
 function SDL_GetWindowMouseGrab(window: PSDL_Window): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMouseGrab' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMouseGrab' {$ENDIF} {$ENDIF};
 
   {**
    *  Confines the cursor to the specified area of a window.
@@ -1052,7 +1052,7 @@ function SDL_GetWindowMouseGrab(window: PSDL_Window): TSDL_Bool; cdecl;
    *}
 
 procedure SDL_SetWindowMouseRect(window: PSDL_Window; rect: PSDL_Rect); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMouseRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowMouseRect' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the mouse confinement rectangle of a window.
@@ -1063,7 +1063,7 @@ procedure SDL_SetWindowMouseRect(window: PSDL_Window; rect: PSDL_Rect); cdecl;
    *}
 
 function SDL_GetWindowMouseRect(window: PSDL_Window): PSDL_Rect; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMouseRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowMouseRect' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Get the window that currently has an input grab enabled.
@@ -1073,7 +1073,7 @@ function SDL_GetWindowMouseRect(window: PSDL_Window): PSDL_Rect; cdecl;
    *  \sa SDL_SetWindowGrab()
    *}
 function SDL_GetGrabbedWindow(): PSDL_Window; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetGrabbedWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetGrabbedWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the brightness (gamma correction) for a window.
@@ -1085,7 +1085,7 @@ function SDL_GetGrabbedWindow(): PSDL_Window; cdecl;
    *}
 
 function SDL_SetWindowBrightness(window: PSDL_Window; brightness: cfloat): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowBrightness' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowBrightness' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the brightness (gamma correction) for a window.
@@ -1096,7 +1096,7 @@ function SDL_SetWindowBrightness(window: PSDL_Window; brightness: cfloat): cint;
    *}
 
 function SDL_GetWindowBrightness(window: PSDL_Window): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowBrightness' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowBrightness' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Set the opacity for a window
@@ -1110,7 +1110,7 @@ function SDL_GetWindowBrightness(window: PSDL_Window): cfloat; cdecl;
    *  \sa SDL_GetWindowOpacity()
    *}
 function SDL_SetWindowOpacity(window: PSDL_Window; opacity: cfloat): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowOpacity' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowOpacity' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Get the opacity of a window.
@@ -1126,7 +1126,7 @@ function SDL_SetWindowOpacity(window: PSDL_Window; opacity: cfloat): cint; cdecl
    *  \sa SDL_SetWindowOpacity()
    *}
 function SDL_GetWindowOpacity(window: PSDL_Window; out_opacity: pcfloat): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowOpacity' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowOpacity' {$ENDIF} {$ENDIF};
 
   {** 
    *  \brief Sets the window as a modal for another window
@@ -1137,7 +1137,7 @@ function SDL_GetWindowOpacity(window: PSDL_Window; out_opacity: pcfloat): cint; 
    *  \return 0 on success, or -1 otherwise.
    *}
 function SDL_SetWindowModalFor(modal_window, parent_window: PSDL_Window): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowModalFor' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowModalFor' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Explicitly sets input focus to the window.
@@ -1152,7 +1152,7 @@ function SDL_SetWindowModalFor(modal_window, parent_window: PSDL_Window): cint; 
    *  \sa SDL_RaiseWindow()
    *}
 function SDL_SetWindowInputFocus(window: PSDL_Window): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowInputFocus' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowInputFocus' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the gamma ramp for a window.
@@ -1173,7 +1173,7 @@ function SDL_SetWindowInputFocus(window: PSDL_Window): cint; cdecl;
    *}
 
 function SDL_SetWindowGammaRamp(window: PSDL_Window; const red: pcuint16; const green: pcuint16; const blue: pcuint16): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowGammaRamp' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowGammaRamp' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the gamma ramp for a window.
@@ -1191,7 +1191,7 @@ function SDL_SetWindowGammaRamp(window: PSDL_Window; const red: pcuint16; const 
    *}
 
 function SDL_GetWindowGammaRamp(window: PSDL_Window; red: pcuint16; green: pcuint16; blue: pcuint16): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowGammaRamp' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetWindowGammaRamp' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Possible return values from the SDL_HitTest callback.
@@ -1263,7 +1263,7 @@ type
    *  \return 0 on success, -1 on error (including unsupported).
    *}
 function SDL_SetWindowHitTest(window: PSDL_Window; callback: TSDL_HitTest; callback_data: Pointer): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowHitTest' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetWindowHitTest' {$ENDIF} {$ENDIF};
 
   {**
    * Request a window to demand attention from the user.
@@ -1276,14 +1276,14 @@ function SDL_SetWindowHitTest(window: PSDL_Window; callback: TSDL_HitTest; callb
    * \since This function is available since SDL 2.0.16.
    *}
 function SDL_FlashWindow(window: PSDL_Window; operation: TSDL_FlashOperation): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FlashWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FlashWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Destroy a window.
    *}
 
 procedure SDL_DestroyWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Returns whether the screensaver is currently enabled (default on).
@@ -1293,7 +1293,7 @@ procedure SDL_DestroyWindow(window: PSDL_Window); cdecl;
    *}
 
 function SDL_IsScreenSaverEnabled: TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IsScreenSaverEnabled' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IsScreenSaverEnabled' {$ENDIF} {$ENDIF};
 
   {**
    *  Allow the screen to be blanked by a screensaver
@@ -1303,7 +1303,7 @@ function SDL_IsScreenSaverEnabled: TSDL_Bool; cdecl;
    *}
 
 procedure SDL_EnableScreenSaver; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EnableScreenSaver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EnableScreenSaver' {$ENDIF} {$ENDIF};
 
   {**
    *  Prevent the screen from being blanked by a screensaver
@@ -1313,7 +1313,7 @@ procedure SDL_EnableScreenSaver; cdecl;
    *}
 
 procedure SDL_DisableScreenSaver; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DisableScreenSaver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DisableScreenSaver' {$ENDIF} {$ENDIF};
 
   {**
    *  OpenGL support functions
@@ -1339,14 +1339,14 @@ procedure SDL_DisableScreenSaver; cdecl;
    *}
 
 function SDL_GL_LoadLibrary(const path: PAnsiChar): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_LoadLibrary' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_LoadLibrary' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the address of an OpenGL function.
    *}
 
 function SDL_GL_GetProcAddress(const proc: PAnsiChar): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetProcAddress' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetProcAddress' {$ENDIF} {$ENDIF};
 
   {**
    *  Unload the OpenGL library previously loaded by SDL_GL_LoadLibrary().
@@ -1355,7 +1355,7 @@ function SDL_GL_GetProcAddress(const proc: PAnsiChar): Pointer; cdecl;
    *}
 
 procedure SDL_GL_UnloadLibrary; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_UnloadLibrary' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_UnloadLibrary' {$ENDIF} {$ENDIF};
 
   {**
    *  Return true if an OpenGL extension is supported for the current
@@ -1363,27 +1363,27 @@ procedure SDL_GL_UnloadLibrary; cdecl;
    *}
 
 function SDL_GL_ExtensionSupported(const extension: PAnsiChar): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_ExtensionSupported' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_ExtensionSupported' {$ENDIF} {$ENDIF};
 
   {**
    *  Reset all previously set OpenGL context attributes to their default values
    *}
 procedure SDL_GL_ResetAttributes(); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_ResetAttributes' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_ResetAttributes' {$ENDIF} {$ENDIF};
 
   {**
    *  Set an OpenGL window attribute before window creation.
    *}
 
 function SDL_GL_SetAttribute(attr: TSDL_GLattr; value: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SetAttribute' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SetAttribute' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the actual value for an attribute from the current context.
    *}
 
 function SDL_GL_GetAttribute(attr: TSDL_GLattr; value: pcint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetAttribute' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetAttribute' {$ENDIF} {$ENDIF};
 
   {**
    *  Create an OpenGL context for use with an OpenGL window, and make it
@@ -1393,7 +1393,7 @@ function SDL_GL_GetAttribute(attr: TSDL_GLattr; value: pcint): cint; cdecl;
    *}
 
 function SDL_GL_CreateContext(window: PSDL_Window): TSDL_GLContext; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_CreateContext' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_CreateContext' {$ENDIF} {$ENDIF};
 
   {**
    *  Set up an OpenGL context for rendering into an OpenGL window.
@@ -1402,19 +1402,19 @@ function SDL_GL_CreateContext(window: PSDL_Window): TSDL_GLContext; cdecl;
    *}
 
 function SDL_GL_MakeCurrent(window: PSDL_Window; context: TSDL_GLContext): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_MakeCurrent' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_MakeCurrent' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the currently active OpenGL window.
    *}
 function SDL_GL_GetCurrentWindow: PSDL_Window; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetCurrentWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetCurrentWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the currently active OpenGL context.
    *}
 function SDL_GL_GetCurrentContext: TSDL_GLContext; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetCurrentContext' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetCurrentContext' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the size of a window's underlying drawable in pixels (for use
@@ -1434,7 +1434,7 @@ function SDL_GL_GetCurrentContext: TSDL_GLContext; cdecl;
    *}
    
 procedure SDL_GL_GetDrawableSize(window: PSDL_Window; w: pcint; h: pcint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetDrawableSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetDrawableSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the swap interval for the current OpenGL context.
@@ -1450,7 +1450,7 @@ procedure SDL_GL_GetDrawableSize(window: PSDL_Window; w: pcint; h: pcint); cdecl
    *}
 
 function SDL_GL_SetSwapInterval(interval: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SetSwapInterval' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SetSwapInterval' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the swap interval for the current OpenGL context.
@@ -1465,7 +1465,7 @@ function SDL_GL_SetSwapInterval(interval: cint): cint; cdecl;
    *}
 
 function SDL_GL_GetSwapInterval: cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetSwapInterval' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_GetSwapInterval' {$ENDIF} {$ENDIF};
 
   {**
    *  Swap the OpenGL buffers for a window, if double-buffering is
@@ -1473,7 +1473,7 @@ function SDL_GL_GetSwapInterval: cint; cdecl;
    *}
 
 procedure SDL_GL_SwapWindow(window: PSDL_Window); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SwapWindow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_SwapWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Delete an OpenGL context.
@@ -1482,6 +1482,6 @@ procedure SDL_GL_SwapWindow(window: PSDL_Window); cdecl;
    *}
 
 procedure SDL_GL_DeleteContext(context: TSDL_GLContext); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_DeleteContext' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_DeleteContext' {$ENDIF} {$ENDIF};
 
   {*OpenGL support functions*}

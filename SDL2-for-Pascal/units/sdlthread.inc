@@ -87,7 +87,7 @@ type
    *}
 function SDL_CreateThread(fn: TSDL_ThreadFunction; name: PAnsiChar;
   data: Pointer; pfnBeginThread: TpfnSDL_CurrentBeginThread; pfnEndThread: TpfnSDL_CurrentEndThread): PSDL_Thread; cdecl; overload;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateThread' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateThread' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a thread.
@@ -117,7 +117,7 @@ function SDL_CreateThread(fn: TSDL_ThreadFunction; name: PAnsiChar;
    *}
 function SDL_CreateThread(fn: TSDL_ThreadFunction; name: PAnsiChar;
   data: Pointer): PSDL_Thread; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateThread' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateThread' {$ENDIF} {$ENDIF};
 
 {$ENDIF}
 
@@ -128,24 +128,24 @@ function SDL_CreateThread(fn: TSDL_ThreadFunction; name: PAnsiChar;
    *  memory, not to be free()'d by the caller, and remains valid until the
    *  specified thread is cleaned up by SDL_WaitThread().
    *}
-function SDL_GetThreadName(thread: PSDL_Thread): PAnsiChar cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetThreadName' {$ENDIF}{$ENDIF};
+function SDL_GetThreadName(thread: PSDL_Thread): PAnsiChar cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetThreadName' {$ENDIF}{$ENDIF};
 
   {**
    *  Get the thread identifier for the current thread.
    *}
-function SDL_ThreadID: TSDL_ThreadID cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ThreadID' {$ENDIF}{$ENDIF};
+function SDL_ThreadID: TSDL_ThreadID cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ThreadID' {$ENDIF}{$ENDIF};
 
   {**
    *  Get the thread identifier for the specified thread.
    *
    *  Equivalent to SDL_ThreadID() if the specified thread is NULL.
    *}
-function SDL_GetThreadID(thread: PSDL_Thread): TSDL_ThreadID cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetThreadID' {$ENDIF}{$ENDIF};
+function SDL_GetThreadID(thread: PSDL_Thread): TSDL_ThreadID cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetThreadID' {$ENDIF}{$ENDIF};
 
   {**
    *  Set the priority for the current thread
    *}
-function SDL_SetThreadPriority(priority: TSDL_ThreadPriority): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetThreadPriority' {$ENDIF}{$ENDIF};
+function SDL_SetThreadPriority(priority: TSDL_ThreadPriority): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetThreadPriority' {$ENDIF}{$ENDIF};
 
   {**
    *  Wait for a thread to finish.
@@ -153,7 +153,7 @@ function SDL_SetThreadPriority(priority: TSDL_ThreadPriority): cint32 cdecl; ext
    *  The return code for the thread function is placed in the area
    *  pointed to by status, if status is not NULL.
    *}
-procedure SDL_WaitThread(thread: PSDL_Thread; status: pcint) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WaitThread' {$ENDIF}{$ENDIF};
+procedure SDL_WaitThread(thread: PSDL_Thread; status: pcint) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WaitThread' {$ENDIF}{$ENDIF};
 
   {**
    *  A thread may be "detached" to signify that it should not remain until
@@ -181,7 +181,7 @@ procedure SDL_WaitThread(thread: PSDL_Thread; status: pcint) cdecl; external SDL
    *
    *  It is safe to pass NIL to this function; it is a no-op.
    *}
-procedure SDL_DetachThread(thread:TSDL_Thread); cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DetachThread' {$ENDIF}{$ENDIF};
+procedure SDL_DetachThread(thread:TSDL_Thread); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DetachThread' {$ENDIF}{$ENDIF};
 
   {**
    *  Create an identifier that is globally visible to all threads but refers to data that is thread-specific.
@@ -212,7 +212,7 @@ procedure SDL_DetachThread(thread:TSDL_Thread); cdecl; external SDL_LibName {$IF
    *   SDL_TLSGet()
    *   SDL_TLSSet()
    *}
-function SDL_TLSCreate: TSDL_TLSID cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSCreate' {$ENDIF} {$ENDIF};
+function SDL_TLSCreate: TSDL_TLSID cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSCreate' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the value associated with a thread local storage ID for the current thread.
@@ -224,7 +224,7 @@ function SDL_TLSCreate: TSDL_TLSID cdecl; external SDL_LibName {$IFDEF DELPHI} {
    *   SDL_TLSCreate()
    *   SDL_TLSSet()
    *}
-function SDL_TLSGet(id: TSDL_TLSID): Pointer cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSGet' {$ENDIF} {$ENDIF};
+function SDL_TLSGet(id: TSDL_TLSID): Pointer cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSGet' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the value associated with a thread local storage ID for the current thread.
@@ -238,4 +238,4 @@ function SDL_TLSGet(id: TSDL_TLSID): Pointer cdecl; external SDL_LibName {$IFDEF
    *   SDL_TLSCreate()
    *   SDL_TLSGet()
    *}
-function SDL_TLSSet(id: TSDL_TLSID; value: Pointer; destructor_: Pointer): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSSet' {$ENDIF} {$ENDIF};
+function SDL_TLSSet(id: TSDL_TLSID; value: Pointer; destructor_: Pointer): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_TLSSet' {$ENDIF} {$ENDIF};

@@ -16,7 +16,7 @@ type
  * \since This function is available since SDL 2.0.4.
  *}
 procedure SDL_SetWindowsMessageHook(callback: TSDL_WindowsMessageHook; userdata: Pointer); cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the D3D9 adapter index that matches the specified display index.
@@ -32,7 +32,7 @@ procedure SDL_SetWindowsMessageHook(callback: TSDL_WindowsMessageHook; userdata:
  * \since This function is available since SDL 2.0.1.
  *}
 function SDL_Direct3D9GetAdapterIndex(displayIndex:cint):cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 type
   PIDirect3DDevice9 = type Pointer;
@@ -52,7 +52,7 @@ type
  * \since This function is available since SDL 2.0.1.
  *}
 function SDL_RenderGetD3D9Device(renderer:PSDL_Renderer):PIDirect3DDevice9; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the D3D11 device associated with a renderer.
@@ -67,7 +67,7 @@ function SDL_RenderGetD3D9Device(renderer:PSDL_Renderer):PIDirect3DDevice9; cdec
  * \since This function is available since SDL 2.0.16.
  *}
 function SDL_RenderGetD3D11Device(renderer:PSDL_Renderer):PID3D11Device; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the D3D12 device associated with a renderer.
@@ -82,7 +82,7 @@ function SDL_RenderGetD3D11Device(renderer:PSDL_Renderer):PID3D11Device; cdecl;
  * \since This function is available since SDL 2.24.0.
  *}
 function SDL_RenderGetD3D12Device(renderer:PSDL_Renderer):PID3D12Device; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the DXGI Adapter and Output indices for the specified display index.
@@ -103,7 +103,7 @@ function SDL_RenderGetD3D12Device(renderer:PSDL_Renderer):PID3D12Device; cdecl;
  * \since This function is available since SDL 2.0.2.
  *}
 function SDL_DXGIGetOutputInfo(displayIndex: cint; adapterIndex, outputIndex: pcint): TSDL_Bool;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF WIN32 OR WIN64}
 
 
@@ -121,7 +121,7 @@ function SDL_DXGIGetOutputInfo(displayIndex: cint; adapterIndex, outputIndex: pc
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_LinuxSetThreadPriority(threadID: cint64; priority: cint): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Sets the priority (not nice level) and scheduling policy for a thread.
@@ -137,7 +137,7 @@ function SDL_LinuxSetThreadPriority(threadID: cint64; priority: cint): cint; cde
  * \since This function is available since SDL 2.0.18.
  *}
 function SDL_LinuxSetThreadPriorityAndPolicy(threadID: cint64; sdlPriority, schedPolicy: cint): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF LINUX}
 
 
@@ -169,7 +169,7 @@ type
  * \sa SDL_iPhoneSetEventPump
  *}
 function SDL_iPhoneSetAnimationCallback(window: PSDL_Window; interval: cint; callback: TSDL_iPhoneAnimationCallback; callbackParam: Pointer); cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Use this function to enable or disable the SDL event pump on Apple iOS.
@@ -183,7 +183,7 @@ function SDL_iPhoneSetAnimationCallback(window: PSDL_Window; interval: cint; cal
  * \sa SDL_iPhoneSetAnimationCallback
  *}
 procedure SDL_iPhoneSetEventPump(enabled: TSDL_Bool); cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF __IPHONEOS__}
 
 
@@ -208,7 +208,7 @@ procedure SDL_iPhoneSetEventPump(enabled: TSDL_Bool); cdecl;
  * \sa SDL_AndroidGetActivity
  *}
 function SDL_AndroidGetJNIEnv(): Pointer; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 (**
  * Retrieve the Java instance of the Android activity class.
@@ -231,7 +231,7 @@ function SDL_AndroidGetJNIEnv(): Pointer; cdecl;
  * \sa SDL_AndroidGetJNIEnv
  *)
 function SDL_AndroidGetActivity(): Pointer; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Query Android API level of the current device.
@@ -267,7 +267,7 @@ function SDL_AndroidGetActivity(): Pointer; cdecl;
  * \since This function is available since SDL 2.0.12.
  *}
 function SDL_GetAndroidSDKVersion(): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Query if the application is running on Android TV.
@@ -277,7 +277,7 @@ function SDL_GetAndroidSDKVersion(): cint; cdecl;
  * \since This function is available since SDL 2.0.8.
  *}
 function SDL_IsAndroidTV(): TSDL_Bool; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Query if the application is running on a Chromebook.
@@ -287,7 +287,7 @@ function SDL_IsAndroidTV(): TSDL_Bool; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_IsChromebook(): TSDL_Bool; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Query if the application is running on a Samsung DeX docking station.
@@ -297,7 +297,7 @@ function SDL_IsChromebook(): TSDL_Bool; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_IsDeXMode(): TSDL_Bool; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Trigger the Android system back button behavior.
@@ -305,7 +305,7 @@ function SDL_IsDeXMode(): TSDL_Bool; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 procedure SDL_AndroidBackButton(); cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
    See the official Android developer guide for more information:
@@ -332,7 +332,7 @@ const
  * \sa SDL_AndroidGetExternalStorageState
  *}
 function SDL_AndroidGetInternalStoragePath(): PAnsiChar; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the current state of external storage.
@@ -350,7 +350,7 @@ function SDL_AndroidGetInternalStoragePath(): PAnsiChar; cdecl;
  * \sa SDL_AndroidGetExternalStoragePath
  *}
 function SDL_AndroidGetExternalStorageState(): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Get the path used for external storage for this application.
@@ -369,7 +369,7 @@ function SDL_AndroidGetExternalStorageState(): cint; cdecl;
  * \sa SDL_AndroidGetExternalStorageState
  *}
 function SDL_AndroidGetExternalStoragePath(): PAnsiChar; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Request permissions at runtime.
@@ -385,7 +385,7 @@ function SDL_AndroidGetExternalStoragePath(): PAnsiChar; cdecl;
  * \since This function is available since SDL 2.0.14.
  *}
 function SDL_AndroidRequestPermission(const permission: PAnsiChar): TSDL_Bool; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Shows an Android toast notification.
@@ -411,7 +411,7 @@ function SDL_AndroidRequestPermission(const permission: PAnsiChar): TSDL_Bool; c
  * \since This function is available since SDL 2.0.16.
  *}
 function SDL_AndroidShowToast(const message: PAnsiChar; duration, gravity, xoffset, yoffset: cint): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 {**
  * Send a user command to SDLActivity.
@@ -424,7 +424,7 @@ function SDL_AndroidShowToast(const message: PAnsiChar; duration, gravity, xoffs
  * \since This function is available since SDL 2.0.22.
  *}
 function SDL_AndroidSendMessage(command: cUint32; param: cint): cint; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF ANDROID}
 
 
@@ -478,7 +478,7 @@ Type
    *      supported where.
    *}
 function SDL_WinRTGetFSPathUNICODE(pathType :TSDL_WinRT_Path):PWideChar;
-   cdecl; external SDL_LibName;
+   cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 
   {**
@@ -497,7 +497,7 @@ function SDL_WinRTGetFSPathUNICODE(pathType :TSDL_WinRT_Path):PWideChar;
    *      supported where.
    *}
 function SDL_WinRTGetFSPathUTF8(pathType :TSDL_WinRT_Path):PChar;
-   cdecl; external SDL_LibName;
+   cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 
 {**
@@ -508,7 +508,7 @@ function SDL_WinRTGetFSPathUTF8(pathType :TSDL_WinRT_Path):PChar;
  * \since This function is available since SDL 2.0.8.
  *}
 function SDL_WinRTGetDeviceFamily(): TSDL_WinRT_DeviceFamily;
-  cdecl; external SDL_LibName;
+  cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF __WINRT__}
 
 
@@ -522,16 +522,16 @@ function SDL_WinRTGetDeviceFamily(): TSDL_WinRT_DeviceFamily;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_IsTablet(): TSDL_Bool; cdecl;
-  external SDL_LibName;
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 
 
 { Functions used by iOS application delegates to notify SDL about state changes }
-procedure SDL_OnApplicationWillTerminate(); cdecl; external SDL_LibName;
-procedure SDL_OnApplicationDidReceiveMemoryWarning(); cdecl; external SDL_LibName;
-procedure SDL_OnApplicationWillResignActive(); cdecl; external SDL_LibName;
-procedure SDL_OnApplicationDidEnterBackground(); cdecl; external SDL_LibName;
-procedure SDL_OnApplicationWillEnterForeground(); cdecl; external SDL_LibName;
-procedure SDL_OnApplicationDidBecomeActive(); cdecl; external SDL_LibName;
+procedure SDL_OnApplicationWillTerminate(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
+procedure SDL_OnApplicationDidReceiveMemoryWarning(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
+procedure SDL_OnApplicationWillResignActive(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
+procedure SDL_OnApplicationDidEnterBackground(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
+procedure SDL_OnApplicationWillEnterForeground(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
+procedure SDL_OnApplicationDidBecomeActive(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$IFDEF __IPHONEOS__}
-procedure SDL_OnApplicationDidChangeStatusBarOrientation(); cdecl; external SDL_LibName;
+procedure SDL_OnApplicationDidChangeStatusBarOrientation(); cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF};
 {$ENDIF}

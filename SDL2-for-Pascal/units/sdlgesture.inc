@@ -21,7 +21,7 @@ type
  * \sa SDL_GetTouchDevice
  *}
 function SDL_RecordGesture(touchId: TSDL_TouchID): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RecordGesture' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RecordGesture' {$ENDIF} {$ENDIF};
 
   {**
  * Save all currently loaded Dollar Gesture templates.
@@ -36,7 +36,7 @@ function SDL_RecordGesture(touchId: TSDL_TouchID): cint; cdecl;
  * \sa SDL_SaveDollarTemplate
  *}
 function SDL_SaveAllDollarTemplates(dst: PSDL_RWops): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SaveAllDollarTemplates' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SaveAllDollarTemplates' {$ENDIF} {$ENDIF};
 
   {**
  * Save a currently loaded Dollar Gesture template.
@@ -52,7 +52,7 @@ function SDL_SaveAllDollarTemplates(dst: PSDL_RWops): cint; cdecl;
  * \sa SDL_SaveAllDollarTemplates
  *}
 function SDL_SaveDollarTemplate(gestureId: TSDL_GestureID; dst: PSDL_RWops): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SaveDollarTemplate' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SaveDollarTemplate' {$ENDIF} {$ENDIF};
 
 
   {**
@@ -69,4 +69,4 @@ function SDL_SaveDollarTemplate(gestureId: TSDL_GestureID; dst: PSDL_RWops): cin
  * \sa SDL_SaveDollarTemplate
  *}
 function SDL_LoadDollarTemplates(touchId: TSDL_TouchID; src: PSDL_RWops): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadDollarTemplates' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadDollarTemplates' {$ENDIF} {$ENDIF};

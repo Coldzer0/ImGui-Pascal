@@ -14,7 +14,7 @@
  *  \return -1, there is no error handling for this function
  *}
 function SDL_SetError(const fmt: PAnsiChar; args: array of const): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetError' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetError' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Get the last error message that was set
@@ -28,7 +28,7 @@ function SDL_SetError(const fmt: PAnsiChar; args: array of const): cint; cdecl;
  *  \return a pointer to the last error message that was set
  *}
 function SDL_GetError: PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetError' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetError' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Get the last error message that was set for the current thread
@@ -43,12 +43,12 @@ function SDL_GetError: PAnsiChar; cdecl;
  *  \return errstr
  *}
 function SDL_GetErrorMsg(const errstr: PAnsiChar; maxlen: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetErrorMsg' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetErrorMsg' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Clear the error message for the current thread
  *}
-procedure SDL_ClearError cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearError' {$ENDIF} {$ENDIF};
+procedure SDL_ClearError cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearError' {$ENDIF} {$ENDIF};
 
 {*Internal error functions*}
 {**
@@ -75,4 +75,4 @@ type
 
 {* SDL_Error() unconditionally returns -1. *}
 function SDL_Error(code: TSDL_ErrorCode): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Error' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Error' {$ENDIF} {$ENDIF};

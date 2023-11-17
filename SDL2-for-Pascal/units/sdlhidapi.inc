@@ -107,7 +107,7 @@ type
  * \sa SDL_hid_exit
  *)
 function SDL_hid_init(): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_init' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_init' {$ENDIF} {$ENDIF};
 
 (**
  * Finalize the HIDAPI library.
@@ -122,7 +122,7 @@ function SDL_hid_init(): cint; cdecl;
  * \sa SDL_hid_init
  *)
 function SDL_hid_exit(): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_exit' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_exit' {$ENDIF} {$ENDIF};
 
 (**
  * Check to see if devices may have been added or removed.
@@ -144,7 +144,7 @@ function SDL_hid_exit(): cint; cdecl;
  * \sa SDL_hid_enumerate
  *)
 function SDL_hid_device_change_count(): cUint32; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_device_change_count' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_device_change_count' {$ENDIF} {$ENDIF};
 
 (**
  * Enumerate the HID Devices.
@@ -167,7 +167,7 @@ function SDL_hid_device_change_count(): cUint32; cdecl;
  * \sa SDL_hid_device_change_count
  *)
 function SDL_hid_enumerate(vendor_id, product_id: cushort): PSDL_hid_device_info; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_enumerate' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_enumerate' {$ENDIF} {$ENDIF};
 
 (**
  * Free an enumeration Linked List
@@ -180,7 +180,7 @@ function SDL_hid_enumerate(vendor_id, product_id: cushort): PSDL_hid_device_info
  * \since This function is available since SDL 2.0.18.
  *)
 procedure SDL_hid_free_enumeration(devs: PSDL_hid_device_info); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_free_enumeration' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_free_enumeration' {$ENDIF} {$ENDIF};
 
 (**
  * Open a HID device using a Vendor ID (VID), Product ID (PID) and optionally
@@ -199,7 +199,7 @@ procedure SDL_hid_free_enumeration(devs: PSDL_hid_device_info); cdecl;
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_open(vendor_id, product_id: cushort; serial_number: pcwchar_t): PSDL_hid_device; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_open' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_open' {$ENDIF} {$ENDIF};
 
 (**
  * Open a HID device by its path name.
@@ -214,7 +214,7 @@ function SDL_hid_open(vendor_id, product_id: cushort; serial_number: pcwchar_t):
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_open_path(path: PAnsiChar; bExclusive: cuint): PSDL_hid_device; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_open_path' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_open_path' {$ENDIF} {$ENDIF};
 
 (**
  * Write an Output report to a HID device.
@@ -241,7 +241,7 @@ function SDL_hid_open_path(path: PAnsiChar; bExclusive: cuint): PSDL_hid_device;
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_write(dev: PSDL_hid_device; data: pcUint8; length: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_write' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_write' {$ENDIF} {$ENDIF};
 
 (**
  * Read an Input report from a HID device with timeout.
@@ -263,7 +263,7 @@ function SDL_hid_write(dev: PSDL_hid_device; data: pcUint8; length: csize_t): ci
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_read_timeout(dev: PSDL_hid_device; data: pcUint8; length: csize_t; milliseconds: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_read_timeout' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_read_timeout' {$ENDIF} {$ENDIF};
 
 (**
  * Read an Input report from a HID device.
@@ -284,7 +284,7 @@ function SDL_hid_read_timeout(dev: PSDL_hid_device; data: pcUint8; length: csize
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_read(dev: PSDL_hid_device; data: pcUint8; length: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_read' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_read' {$ENDIF} {$ENDIF};
 
 (**
  * Set the device handle to be non-blocking.
@@ -303,7 +303,7 @@ function SDL_hid_read(dev: PSDL_hid_device; data: pcUint8; length: csize_t): cin
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_set_nonblocking(dev: PSDL_hid_device; nonblock: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_set_nonblocking' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_set_nonblocking' {$ENDIF} {$ENDIF};
 
 (**
  * Send a Feature report to the device.
@@ -328,7 +328,7 @@ function SDL_hid_set_nonblocking(dev: PSDL_hid_device; nonblock: cint): cint; cd
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_send_feature_report(dev: PSDL_hid_device; data: pcUint8; length: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_send_feature_report' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_send_feature_report' {$ENDIF} {$ENDIF};
 
 (**
  * Get a feature report from a HID device.
@@ -351,7 +351,7 @@ function SDL_hid_send_feature_report(dev: PSDL_hid_device; data: pcUint8; length
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_get_feature_report(dev: PSDL_hid_device; data: pcUint8; length: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_feature_report' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_feature_report' {$ENDIF} {$ENDIF};
 
 (**
  * Close a HID device.
@@ -361,7 +361,7 @@ function SDL_hid_get_feature_report(dev: PSDL_hid_device; data: pcUint8; length:
  * \since This function is available since SDL 2.0.18.
  *)
 procedure SDL_hid_close(dev: PSDL_hid_device); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_close' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_close' {$ENDIF} {$ENDIF};
 
 (**
  * Get The Manufacturer String from a HID device.
@@ -374,7 +374,7 @@ procedure SDL_hid_close(dev: PSDL_hid_device); cdecl;
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_get_manufacturer_string(dev: PSDL_hid_device; str: pcwchar_t; maxlen: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_manufacturer_string' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_manufacturer_string' {$ENDIF} {$ENDIF};
 
 (**
  * Get The Product String from a HID device.
@@ -387,7 +387,7 @@ function SDL_hid_get_manufacturer_string(dev: PSDL_hid_device; str: pcwchar_t; m
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_get_product_string(dev: PSDL_hid_device; str: pcwchar_t; maxlen: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_product_string' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_product_string' {$ENDIF} {$ENDIF};
 
 (**
  * Get The Serial Number String from a HID device.
@@ -400,7 +400,7 @@ function SDL_hid_get_product_string(dev: PSDL_hid_device; str: pcwchar_t; maxlen
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_get_serial_number_string(dev: PSDL_hid_device; str: pcwchar_t; maxlen: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_serial_number_string' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_serial_number_string' {$ENDIF} {$ENDIF};
 
 (**
  * Get a string from a HID device, based on its string index.
@@ -414,7 +414,7 @@ function SDL_hid_get_serial_number_string(dev: PSDL_hid_device; str: pcwchar_t; 
  * \since This function is available since SDL 2.0.18.
  *)
 function SDL_hid_get_indexed_string(dev: PSDL_hid_device; string_index: cint; str: pcwchar_t; maxlen: csize_t): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_indexed_string' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_get_indexed_string' {$ENDIF} {$ENDIF};
 
 (**
  * Start or stop a BLE scan on iOS and tvOS to pair Steam Controllers
@@ -424,4 +424,4 @@ function SDL_hid_get_indexed_string(dev: PSDL_hid_device; string_index: cint; st
  * \since This function is available since SDL 2.0.18.
  *)
 procedure SDL_hid_ble_scan(active: TSDL_bool); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_ble_scan' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_hid_ble_scan' {$ENDIF} {$ENDIF};

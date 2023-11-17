@@ -111,9 +111,9 @@ const
  * \since This function is available since SDL 2.0.14.
  *}
 procedure SDL_LockSensors(); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockSensors' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockSensors' {$ENDIF} {$ENDIF};
 procedure SDL_UnlockSensors(); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnlockSensors' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnlockSensors' {$ENDIF} {$ENDIF};
 
 {**
  * Count the number of sensors attached to the system right now.
@@ -123,7 +123,7 @@ procedure SDL_UnlockSensors(); cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_NumSensors(): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_NumSensors' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_NumSensors' {$ENDIF} {$ENDIF};
 
 {**
  * Get the implementation dependent name of a sensor.
@@ -134,7 +134,7 @@ function SDL_NumSensors(): cint; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetDeviceName(device_index: cint): PAnsiChar; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceName' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceName' {$ENDIF} {$ENDIF};
 
 {**
  * Get the type of a sensor.
@@ -146,7 +146,7 @@ function SDL_SensorGetDeviceName(device_index: cint): PAnsiChar; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetDeviceType(device_index: cint): TSDL_SensorType; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceType' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceType' {$ENDIF} {$ENDIF};
 
 {**
  * Get the platform dependent type of a sensor.
@@ -158,7 +158,7 @@ function SDL_SensorGetDeviceType(device_index: cint): TSDL_SensorType; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetDeviceNonPortableType(device_index: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceNonPortableType' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceNonPortableType' {$ENDIF} {$ENDIF};
 
 {**
  * Get the instance ID of a sensor.
@@ -169,7 +169,7 @@ function SDL_SensorGetDeviceNonPortableType(device_index: cint): cint; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetDeviceInstanceID(device_index: cint): TSDL_SensorID; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceInstanceID' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDeviceInstanceID' {$ENDIF} {$ENDIF};
 
 {**
  * Open a sensor for use.
@@ -180,7 +180,7 @@ function SDL_SensorGetDeviceInstanceID(device_index: cint): TSDL_SensorID; cdecl
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorOpen(device_index: cint): PSDL_Sensor; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorOpen' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorOpen' {$ENDIF} {$ENDIF};
 
 {**
  * Return the SDL_Sensor associated with an instance id.
@@ -191,7 +191,7 @@ function SDL_SensorOpen(device_index: cint): PSDL_Sensor; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorFromInstanceID(instance_id: TSDL_SensorID): PSDL_Sensor; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorFromInstanceID' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorFromInstanceID' {$ENDIF} {$ENDIF};
 
 {**
  * Get the implementation dependent name of a sensor
@@ -202,7 +202,7 @@ function SDL_SensorFromInstanceID(instance_id: TSDL_SensorID): PSDL_Sensor; cdec
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetName(sensor: PSDL_Sensor): PAnsiChar; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetName' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetName' {$ENDIF} {$ENDIF};
 
 {**
  * Get the type of a sensor.
@@ -214,7 +214,7 @@ function SDL_SensorGetName(sensor: PSDL_Sensor): PAnsiChar; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetType(sensor: PSDL_Sensor): TSDL_SensorType; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetType' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetType' {$ENDIF} {$ENDIF};
 
 {**
  * Get the platform dependent type of a sensor.
@@ -225,7 +225,7 @@ function SDL_SensorGetType(sensor: PSDL_Sensor): TSDL_SensorType; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetNonPortableType(sensor: PSDL_Sensor): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetNonPortableType' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetNonPortableType' {$ENDIF} {$ENDIF};
 
 {**
  * Get the instance ID of a sensor.
@@ -236,7 +236,7 @@ function SDL_SensorGetNonPortableType(sensor: PSDL_Sensor): cint; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetInstanceID(sensor: PSDL_Sensor): TSDL_SensorID; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetInstanceID' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetInstanceID' {$ENDIF} {$ENDIF};
 
 {**
  * Get the current state of an opened sensor.
@@ -251,7 +251,7 @@ function SDL_SensorGetInstanceID(sensor: PSDL_Sensor): TSDL_SensorID; cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 function SDL_SensorGetData(sensor: PSDL_Sensor; data: pcfloat; num_values: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetData' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetData' {$ENDIF} {$ENDIF};
 
 {**
  * Get the current state of an opened sensor with the timestamp of the last
@@ -269,7 +269,7 @@ function SDL_SensorGetData(sensor: PSDL_Sensor; data: pcfloat; num_values: cint)
  * \since This function is available since SDL 2.26.0.
  *}
 function SDL_SensorGetDataWithTimestamp(sensor: PSDL_Sensor; timestamp: pcuint64; data: pcfloat; num_values: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDataWithTimestamp' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorGetDataWithTimestamp' {$ENDIF} {$ENDIF};
 
 {**
  * Close a sensor previously opened with SDL_SensorOpen().
@@ -279,7 +279,7 @@ function SDL_SensorGetDataWithTimestamp(sensor: PSDL_Sensor; timestamp: pcuint64
  * \since This function is available since SDL 2.0.9.
  *}
 procedure SDL_SensorClose(sensor: PSDL_Sensor); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorClose' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorClose' {$ENDIF} {$ENDIF};
 
 {**
  * Update the current state of the open sensors.
@@ -293,4 +293,4 @@ procedure SDL_SensorClose(sensor: PSDL_Sensor); cdecl;
  * \since This function is available since SDL 2.0.9.
  *}
 procedure SDL_SensorUpdate(); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorUpdate' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SensorUpdate' {$ENDIF} {$ENDIF};

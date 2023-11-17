@@ -132,26 +132,26 @@ type
  *  Functions to create SDL_RWops structures from various data streams.
  *}
 function SDL_RWFromFile(const _file: PAnsiChar; const mode: PAnsiChar): PSDL_RWops; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromFile' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromFile' {$ENDIF} {$ENDIF};
 
-{function SDL_RWFromFP(fp: file; autoclose: TSDL_Bool): PSDL_RWops; cdecl;
-   external SDL_LibName;} //don't know if this works
+//function SDL_RWFromFP(fp: file; autoclose: TSDL_Bool): PSDL_RWops; cdecl;
+//   external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}; //don't know if this works
 
 function SDL_RWFromFP(fp: Pointer; autoclose: TSDL_Bool): PSDL_RWops; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromFP' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromFP' {$ENDIF} {$ENDIF};
 
 function SDL_RWFromMem(mem: Pointer; size: cint): PSDL_RWops; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromMem' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromMem' {$ENDIF} {$ENDIF};
 
 function SDL_RWFromConstMem(const mem: Pointer; size: cint): PSDL_RWops; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromConstMem' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWFromConstMem' {$ENDIF} {$ENDIF};
 
 {*RWFrom functions*}
 function SDL_AllocRW: PSDL_RWops; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AllocRW' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AllocRW' {$ENDIF} {$ENDIF};
 
 procedure SDL_FreeRW(area: PSDL_RWops); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeRW' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeRW' {$ENDIF} {$ENDIF};
 
 const
   RW_SEEK_SET = 0;       {**< Seek from the beginning of data *}
@@ -162,7 +162,7 @@ const
  *  Return the size of the file in this rwops, or -1 if unknown
  *}
 function SDL_RWsize(context: PSDL_RWops): cint64; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWsize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWsize' {$ENDIF} {$ENDIF};
 
 {**
  *  Seek to \c offset relative to \c whence, one of stdio's whence values:
@@ -171,13 +171,13 @@ function SDL_RWsize(context: PSDL_RWops): cint64; cdecl;
  *  \return the final offset in the data stream, or -1 on error.
  *}
 function SDL_RWseek(context: PSDL_RWops; offset: cint64; whence: cint): cint64; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_RWseek' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_RWseek' {$ENDIF} {$ENDIF};
 
 {**
  *  Return the current offset in the data stream, or -1 on error.
  *}
 function SDL_RWtell(context: PSDL_RWops): cint64; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWtell' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWtell' {$ENDIF} {$ENDIF};
 
 {**
  *  Read up to \c maxnum objects each of size \c size from the data
@@ -186,7 +186,7 @@ function SDL_RWtell(context: PSDL_RWops): cint64; cdecl;
  *  \return the number of objects read, or 0 at error or end of file.
  *}
 function SDL_RWread(context: PSDL_RWops; ptr: Pointer; size: csize_t; n: csize_t): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWread' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWread' {$ENDIF} {$ENDIF};
 
 {**
  *  Write exactly \c num objects each of size \c size from the area
@@ -195,7 +195,7 @@ function SDL_RWread(context: PSDL_RWops; ptr: Pointer; size: csize_t; n: csize_t
  *  \return the number of objects written, or 0 at error or end of file.
  *}
 function SDL_RWwrite(context: PSDL_RWops; ptr: Pointer; size: csize_t; n: csize_t): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWwrite' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWwrite' {$ENDIF} {$ENDIF};
 
 {**
  *  Close and free an allocated SDL_RWops structure.
@@ -203,7 +203,7 @@ function SDL_RWwrite(context: PSDL_RWops; ptr: Pointer; size: csize_t; n: csize_
  *  \return 0 if successful or -1 on write error when flushing data.
  *}
 function SDL_RWclose(context: PSDL_RWops): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWclose' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RWclose' {$ENDIF} {$ENDIF};
 
 {**
  *  Load all the data from an SDL data stream.
@@ -219,7 +219,7 @@ function SDL_RWclose(context: PSDL_RWops): cint; cdecl;
  *  \return the data, or NULL if there was an error.
  *}
 function SDL_LoadFile_RW(src: PSDL_RWops; datasize: pcsize_t; freesrc: cint): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFile_RW' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFile_RW' {$ENDIF} {$ENDIF};
 
 {**
  *  Load an entire file.
@@ -235,7 +235,7 @@ function SDL_LoadFile_RW(src: PSDL_RWops; datasize: pcsize_t; freesrc: cint): Po
  *  \return the data, or NULL if there was an error.
  *}
 function SDL_LoadFile(file_: PAnsiChar; datasize: pcsize_t): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFile' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFile' {$ENDIF} {$ENDIF};
 
 {**
  *  Read endian functions
@@ -243,19 +243,19 @@ function SDL_LoadFile(file_: PAnsiChar; datasize: pcsize_t): Pointer; cdecl;
  *  Read an item of the specified endianness and return in native format.
  *}
 function SDL_ReadU8(src: PSDL_RWops): cuint8; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadU8' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadU8' {$ENDIF} {$ENDIF};
 function SDL_ReadLE16(src: PSDL_RWops): cuint16; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE16' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE16' {$ENDIF} {$ENDIF};
 function SDL_ReadBE16(src: PSDL_RWops): cuint16; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE16' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE16' {$ENDIF} {$ENDIF};
 function SDL_ReadLE32(src: PSDL_RWops): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE32' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE32' {$ENDIF} {$ENDIF};
 function SDL_ReadBE32(src: PSDL_RWops): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE32' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE32' {$ENDIF} {$ENDIF};
 function SDL_ReadLE64(src: PSDL_RWops): cuint64; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE64' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadLE64' {$ENDIF} {$ENDIF};
 function SDL_ReadBE64(src: PSDL_RWops): cuint64; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE64' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ReadBE64' {$ENDIF} {$ENDIF};
 { Read endian functions }
 
 {**
@@ -264,17 +264,17 @@ function SDL_ReadBE64(src: PSDL_RWops): cuint64; cdecl;
  *  Write an item of native format to the specified endianness.
  *}
 function SDL_WriteU8(dst: PSDL_RWops; value: cuint8): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteU8' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteU8' {$ENDIF} {$ENDIF};
 function SDL_WriteLE16(dst: PSDL_RWops; value: cuint16): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE16' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE16' {$ENDIF} {$ENDIF};
 function SDL_WriteBE16(dst: PSDL_RWops; value: cuint16): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE16' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE16' {$ENDIF} {$ENDIF};
 function SDL_WriteLE32(dst: PSDL_RWops; value: cuint32): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE32' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE32' {$ENDIF} {$ENDIF};
 function SDL_WriteBE32(dst: PSDL_RWops; value: cuint32): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE32' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE32' {$ENDIF} {$ENDIF};
 function SDL_WriteLE64(dst: PSDL_RWops; value: cuint64): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE64' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteLE64' {$ENDIF} {$ENDIF};
 function SDL_WriteBE64(dst: PSDL_RWops; value: cuint64): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE64' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_WriteBE64' {$ENDIF} {$ENDIF};
 { Write endian functions }

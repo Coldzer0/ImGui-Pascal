@@ -32,7 +32,7 @@
  * \sa SDL_UnloadObject
   }
 function SDL_LoadObject(sofile: PAnsiChar): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadObject' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadObject' {$ENDIF} {$ENDIF};
 
 {*
  * Look up the address of the named function in a shared object.
@@ -60,7 +60,7 @@ function SDL_LoadObject(sofile: PAnsiChar): Pointer; cdecl;
  * \sa SDL_UnloadObject
   }
 function SDL_LoadFunction(handle: Pointer; name: PAnsiChar): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFunction' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadFunction' {$ENDIF} {$ENDIF};
 
 {*
  * Unload a shared object from memory.
@@ -73,4 +73,4 @@ function SDL_LoadFunction(handle: Pointer; name: PAnsiChar): Pointer; cdecl;
  * \sa SDL_LoadObject
   }
 procedure SDL_UnloadObject(handle: Pointer); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnloadObject' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnloadObject' {$ENDIF} {$ENDIF};

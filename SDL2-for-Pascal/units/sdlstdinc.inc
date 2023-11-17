@@ -77,7 +77,7 @@ procedure SDL_GetOriginalMemoryFunctions(
   realloc_func: PSDL_realloc_func;
   free_func: PSDL_free_func
 ); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetOriginalMemoryFunctions' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetOriginalMemoryFunctions' {$ENDIF} {$ENDIF};
 
 (**
  * Get the current set of SDL memory functions
@@ -90,7 +90,7 @@ procedure SDL_GetMemoryFunctions(
   realloc_func: PSDL_realloc_func;
   free_func: PSDL_free_func
 ); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetMemoryFunctions' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetMemoryFunctions' {$ENDIF} {$ENDIF};
 
 (**
  * Replace SDL's memory allocation functions with a custom set
@@ -103,7 +103,7 @@ function SDL_SetMemoryFunctions(
   realloc_func: TSDL_realloc_func;
   free_func: TSDL_free_func
 ): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetMemoryFunctions' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetMemoryFunctions' {$ENDIF} {$ENDIF};
 
 (**
  * Get the number of outstanding (unfreed) allocations
@@ -111,20 +111,20 @@ function SDL_SetMemoryFunctions(
  * \since This function is available since SDL 2.0.7.
  *)
 function SDL_GetNumAllocations(): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAllocations' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAllocations' {$ENDIF} {$ENDIF};
 
 (**
  * Allocate a block of memory. The memory is *not* initialized.
  *)
 function SDL_malloc(size: csize_t): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_malloc' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_malloc' {$ENDIF} {$ENDIF};
 
 (**
  * Allocate a block of memory that can fit an array of nmemb elements, each of given size.
  * The memory is initialized by setting every byte to 0.
  *)
 function SDL_calloc(nmemb, size: csize_t): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_calloc' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_calloc' {$ENDIF} {$ENDIF};
 
 (**
  * Resize a block of memory allocated previously with SDL_malloc() or SDL_calloc().
@@ -133,7 +133,7 @@ function SDL_calloc(nmemb, size: csize_t): Pointer; cdecl;
  * If the new size is larger than the old size, any new memory will *not* be initialized.
  *)
 function SDL_realloc(mem: Pointer; size: csize_t): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_realloc' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_realloc' {$ENDIF} {$ENDIF};
 
 (**
  * Free memory returned by functions like SDL_GetBasePath(), SDL_GetPrefPath(), etc.
@@ -142,7 +142,7 @@ function SDL_realloc(mem: Pointer; size: csize_t): Pointer; cdecl;
  * your program to crash or behave in unexpected ways.
  *)
 procedure SDL_free(mem: Pointer); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_free' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_free' {$ENDIF} {$ENDIF};
 
 
 
@@ -159,7 +159,7 @@ SDL2-for-Pascal: All comments are added by us and not found in the include file.
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isalpha(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isalpha' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isalpha' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is an alphanumeric character.
@@ -169,7 +169,7 @@ function SDL_isalpha(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isalnum(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isalnum' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isalnum' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a blank character (a space or a tab).
@@ -179,7 +179,7 @@ function SDL_isalnum(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isblank(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isblank' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isblank' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a control character.
@@ -189,7 +189,7 @@ function SDL_isblank(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_iscntrl(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iscntrl' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iscntrl' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a decimal digit.
@@ -199,7 +199,7 @@ function SDL_iscntrl(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_isdigit(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isdigit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isdigit' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a hexadecimal digit.
@@ -209,7 +209,7 @@ function SDL_isdigit(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isxdigit(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isxdigit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isxdigit' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is any printable character
@@ -220,7 +220,7 @@ function SDL_isxdigit(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_ispunct(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ispunct' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ispunct' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a whitespace character.
@@ -233,7 +233,7 @@ function SDL_ispunct(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_isspace(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isspace' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isspace' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is an uppercase letter.
@@ -243,7 +243,7 @@ function SDL_isspace(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.12.
  *)
 function SDL_isupper(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isupper' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isupper' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a lowercase letter.
@@ -253,7 +253,7 @@ function SDL_isupper(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.12.
  *)
 function SDL_islower(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_islower' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_islower' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a printable character (including space).
@@ -263,7 +263,7 @@ function SDL_islower(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isprint(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isprint' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isprint' {$ENDIF} {$ENDIF};
 
 (**
  * Check if the provided ASCII character is a printable character (excluding space).
@@ -273,7 +273,7 @@ function SDL_isprint(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_isgraph(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isgraph' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_isgraph' {$ENDIF} {$ENDIF};
 
 (**
  * If the given ASCII character is a lowercase letter, converts it to uppercase.
@@ -282,7 +282,7 @@ function SDL_isgraph(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_toupper(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_toupper' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_toupper' {$ENDIF} {$ENDIF};
 
 (**
  * If the given ASCII character is an uppercase letter, converts it to lowercase.
@@ -291,7 +291,7 @@ function SDL_toupper(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_tolower(x: cint):cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tolower' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tolower' {$ENDIF} {$ENDIF};
 
 
 
@@ -305,7 +305,7 @@ function SDL_tolower(x: cint):cint; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_acos(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_acos' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_acos' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc cosine of x;
@@ -314,7 +314,7 @@ function SDL_acos(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_acosf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_acosf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_acosf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc sine of x;
@@ -323,7 +323,7 @@ function SDL_acosf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_asin(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_asin' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_asin' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc sine of x;
@@ -332,7 +332,7 @@ function SDL_asin(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_asinf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_asinf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_asinf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc tangent of x;
@@ -341,7 +341,7 @@ function SDL_asinf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_atan(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc tangent of x;
@@ -350,7 +350,7 @@ function SDL_atan(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_atanf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atanf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atanf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc tangent of y/x, using the signs of the two arguments
@@ -359,7 +359,7 @@ function SDL_atanf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_atan2(y, x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan2' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan2' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the arc tangent of y/x, using the signs of the two arguments
@@ -368,7 +368,7 @@ function SDL_atan2(y, x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_atan2f(y, x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan2f' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_atan2f' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the smallest integral value that is not less than x.
@@ -376,7 +376,7 @@ function SDL_atan2f(y, x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_ceil(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ceil' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ceil' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the smallest integral value that is not less than x.
@@ -384,7 +384,7 @@ function SDL_ceil(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_ceilf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ceilf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ceilf' {$ENDIF} {$ENDIF};
 
 (**
  * Return a number whose absolute value matches that of x,
@@ -393,7 +393,7 @@ function SDL_ceilf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_copysign(x, y: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_copysign' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_copysign' {$ENDIF} {$ENDIF};
 
 (**
  * Return a number whose absolute value matches that of x,
@@ -402,7 +402,7 @@ function SDL_copysign(x, y: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_copysignf(x, y: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_copysignf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_copysignf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the cosine of x, where x is given in radians.
@@ -410,7 +410,7 @@ function SDL_copysignf(x, y: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_cos(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_cos' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_cos' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the cosine of x, where x is given in radians.
@@ -418,7 +418,7 @@ function SDL_cos(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_cosf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_cosf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_cosf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the value of e (the base of natural logarithms)
@@ -427,7 +427,7 @@ function SDL_cosf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.9.
  *)
 function SDL_exp(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_exp' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_exp' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the value of e (the base of natural logarithms)
@@ -436,7 +436,7 @@ function SDL_exp(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.9.
  *)
 function SDL_expf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_expf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_expf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the absolute value of x.
@@ -444,7 +444,7 @@ function SDL_expf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_fabs(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fabs' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fabs' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the absolute value of x.
@@ -452,7 +452,7 @@ function SDL_fabs(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_fabsf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fabsf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fabsf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the largest integral value that is not greater than x.
@@ -460,7 +460,7 @@ function SDL_fabsf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_floor(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_floor' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_floor' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the largest integral value that is not greater than x.
@@ -468,7 +468,7 @@ function SDL_floor(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_floorf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_floorf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_floorf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the floating-point remainder of dividing x by y.
@@ -476,7 +476,7 @@ function SDL_floorf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_fmod(x, y: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fmod' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fmod' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the floating-point remainder of dividing x by y.
@@ -484,7 +484,7 @@ function SDL_fmod(x, y: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_fmodf(x, y: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fmodf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_fmodf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the natural logarithm of x.
@@ -496,7 +496,7 @@ function SDL_fmodf(x, y: cfloat): cfloat; cdecl;
  Hence we decided to rename it.
  *)
 function SDL_nlog(x: cdouble): cdouble; cdecl;
-  external SDL_LibName
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}
   name {$IF DEFINED(DELPHI) AND DEFINED(MACOS)} '_SDL_log' {$ELSE} 'SDL_log' {$ENDIF};
 
 (**
@@ -509,7 +509,7 @@ function SDL_nlog(x: cdouble): cdouble; cdecl;
  for details), we decided to rename it.
  *)
 function SDL_nlogf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}
   name {$IF DEFINED(DELPHI) AND DEFINED(MACOS)} '_SDL_logf' {$ELSE} 'SDL_logf' {$ENDIF};
 
 (**
@@ -518,7 +518,7 @@ function SDL_nlogf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_log10(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_log10' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_log10' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the base 10 logarithm of x.
@@ -526,7 +526,7 @@ function SDL_log10(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_log10f(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_log10f' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_log10f' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integer, away from zero.
@@ -534,7 +534,7 @@ function SDL_log10f(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_lround(x: cdouble): clong; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_lround' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_lround' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integer, away from zero.
@@ -542,7 +542,7 @@ function SDL_lround(x: cdouble): clong; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_lroundf(x: cfloat): clong; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_lroundf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_lroundf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the value of x raised to the power of y.
@@ -550,7 +550,7 @@ function SDL_lroundf(x: cfloat): clong; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_pow(x, y: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_pow' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_pow' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the value of x raised to the power of y.
@@ -558,7 +558,7 @@ function SDL_pow(x, y: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_powf(x, y: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_powf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_powf' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integral value, away from zero.
@@ -566,7 +566,7 @@ function SDL_powf(x, y: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_round(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_round' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_round' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integral value, away from zero.
@@ -574,7 +574,7 @@ function SDL_round(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.16.
  *)
 function SDL_roundf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_roundf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_roundf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate x multiplied by the floating-point radix to the power of n.
@@ -583,7 +583,7 @@ function SDL_roundf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_scalbn(x: cdouble; n: cint): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_scalbn' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_scalbn' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate x multiplied by the floating-point radix to the power of n.
@@ -592,7 +592,7 @@ function SDL_scalbn(x: cdouble; n: cint): cdouble; cdecl;
  * \since This function is available since SDL 2.0.8.
  *)
 function SDL_scalbnf(x: cfloat; n: cint): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_scalbnf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_scalbnf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the sine of x, where x is given in radians.
@@ -600,7 +600,7 @@ function SDL_scalbnf(x: cfloat; n: cint): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_sin(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sin' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sin' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the sine of x, where x is given in radians.
@@ -608,7 +608,7 @@ function SDL_sin(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_sinf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sinf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sinf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the non-negative square root of x.
@@ -616,7 +616,7 @@ function SDL_sinf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_sqrt(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sqrt' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sqrt' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the non-negative square root of x.
@@ -624,7 +624,7 @@ function SDL_sqrt(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_sqrtf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sqrtf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_sqrtf' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the tangent of x, where x is given in radians.
@@ -632,7 +632,7 @@ function SDL_sqrtf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_tan(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tan' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tan' {$ENDIF} {$ENDIF};
 
 (**
  * Calculate the tangent of x, where x is given in radians.
@@ -640,7 +640,7 @@ function SDL_tan(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.4.
  *)
 function SDL_tanf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tanf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_tanf' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integral value, towards zero.
@@ -648,7 +648,7 @@ function SDL_tanf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.14.
  *)
 function SDL_trunc(x: cdouble): cdouble; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_trunc' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_trunc' {$ENDIF} {$ENDIF};
 
 (**
  * Round to nearest integral value, towards zero.
@@ -656,7 +656,7 @@ function SDL_trunc(x: cdouble): cdouble; cdecl;
  * \since This function is available since SDL 2.0.14.
  *)
 function SDL_truncf(x: cfloat): cfloat; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_truncf' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_truncf' {$ENDIF} {$ENDIF};
 
 
 
@@ -670,7 +670,7 @@ function SDL_truncf(x: cfloat): cfloat; cdecl;
  * \since This function is available since SDL 2.0.0.
  *)
 function SDL_iconv_string(Const tocode, fromcode, inbuf: PAnsiChar; inbytesleft: csize_t): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_string' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_string' {$ENDIF} {$ENDIF};
 
 // These are macros in the original C headers, we will reimplement them as simple Pascal functions.
 function SDL_iconv_utf8_locale(Const str: PAnsiChar): PAnsiChar; cdecl;
@@ -689,10 +689,10 @@ type
   PSDL_iconv = ^TSDL_iconv;
 
 function SDL_iconv_open(Const tocode, fromcode: PAnsiChar): PSDL_iconv; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_open' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_open' {$ENDIF} {$ENDIF};
 
 function SDL_iconv_close(cd: PSDL_iconv): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_close' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv_close' {$ENDIF} {$ENDIF};
 
 function SDL_iconv(cd: PSDL_iconv; Const inbuf: PPAnsiChar; inbytesleft: pcsize_t; outbuf: PPAnsiChar; outbytesleft: pcsize_t): csize_t; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_iconv' {$ENDIF} {$ENDIF};

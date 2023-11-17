@@ -81,7 +81,7 @@ function SDL_RectEquals(const a, b: PSDL_Rect): Boolean; inline;
  *  SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
  *}
 function SDL_HasIntersection(const a, b: PSDL_Rect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasIntersection' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasIntersection' {$ENDIF} {$ENDIF};
 
 {**
  *  Calculate the intersection of two rectangles.
@@ -89,13 +89,13 @@ function SDL_HasIntersection(const a, b: PSDL_Rect): TSDL_Bool; cdecl;
  *  SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
  *}
 function SDL_IntersectRect(const A, B: PSDL_Rect; result: PSDL_Rect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectRect' {$ENDIF} {$ENDIF};
 
 {**
  *  Calculate the union of two rectangles.
  *}
 procedure SDL_UnionRect(const A, B: PSDL_Rect; result: PSDL_Rect); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnionRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnionRect' {$ENDIF} {$ENDIF};
 
 {**
  *  Calculate a minimal rectangle enclosing a set of points
@@ -103,7 +103,7 @@ procedure SDL_UnionRect(const A, B: PSDL_Rect; result: PSDL_Rect); cdecl;
  *  SDL_TRUE if any points were within the clipping rect
  *}
 function SDL_EnclosePoints(const points: PSDL_Point; count: cint; const clip: PSDL_Rect; result: PSDL_Rect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EnclosePoints' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EnclosePoints' {$ENDIF} {$ENDIF};
 
 {**
  *  Calculate the intersection of a rectangle and line segment.
@@ -111,7 +111,7 @@ function SDL_EnclosePoints(const points: PSDL_Point; count: cint; const clip: PS
  *  SDL_TRUE if there is an intersection, SDL_FALSE otherwise.
  *}
 function SDL_IntersectRectAndLine(const rect: PSDL_Rect; X1, Y1, X2, Y2: pcint): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectRectAndLine' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectRectAndLine' {$ENDIF} {$ENDIF};
 
 {**
  *  Returns true if point resides inside a rectangle.
@@ -151,7 +151,7 @@ function SDL_FRectEquals(const a, b: PSDL_FRect): Boolean; Inline;
  * \sa SDL_IntersectRect
  *}
 function SDL_HasIntersectionF(const a, b: PSDL_FRect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasIntersectionF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasIntersectionF' {$ENDIF} {$ENDIF};
 
 {**
  * Calculate the intersection of two rectangles with float precision.
@@ -169,7 +169,7 @@ function SDL_HasIntersectionF(const a, b: PSDL_FRect): TSDL_Bool; cdecl;
  * \sa SDL_HasIntersectionF
  *}
 function SDL_IntersectFRect(const a, b: PSDL_FRect; result: PSDL_FRect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectFRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectFRect' {$ENDIF} {$ENDIF};
 
 {**
  * Calculate the union of two rectangles with float precision.
@@ -182,7 +182,7 @@ function SDL_IntersectFRect(const a, b: PSDL_FRect; result: PSDL_FRect): TSDL_Bo
  * \since This function is available since SDL 2.0.22.
  *}
 function SDL_UnionFRect(const a, b: PSDL_FRect; result: PSDL_FRect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnionFRect' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnionFRect' {$ENDIF} {$ENDIF};
 
 {**
  * Calculate a minimal rectangle enclosing a set of points with float
@@ -203,7 +203,7 @@ function SDL_UnionFRect(const a, b: PSDL_FRect; result: PSDL_FRect): TSDL_Bool; 
  * \since This function is available since SDL 2.0.22.
  *}
 function SDL_EncloseFPoints(const points: PSDL_FPoint; count: cint; const clip: PSDL_FRect; result: PSDL_FRect): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EncloseFPoints' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_EncloseFPoints' {$ENDIF} {$ENDIF};
 
 {**
  * Calculate the intersection of a rectangle and line segment with float
@@ -225,4 +225,4 @@ function SDL_EncloseFPoints(const points: PSDL_FPoint; count: cint; const clip: 
  * \since This function is available since SDL 2.0.22.
  *}
 function SDL_IntersectFRectAndLine(const rect: PSDL_FRect; X1, Y1, X2, Y2: pcfloat): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectFRectAndLine' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_IntersectFRectAndLine' {$ENDIF} {$ENDIF};

@@ -12,7 +12,7 @@ const
  * This function returns the number of CPU cores available.
  *}
 function SDL_GetCPUCount(): cint; cdecl;
-	 external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCPUCount' {$ENDIF} {$ENDIF};
+	 external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCPUCount' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns the L1 cache line size of the CPU.
@@ -21,7 +21,7 @@ function SDL_GetCPUCount(): cint; cdecl;
  * or SIMD prefetch sizes.
  *}
 function SDL_GetCPUCacheLineSize(): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCPUCacheLineSize' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCPUCacheLineSize' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has the RDTSC instruction.
@@ -29,7 +29,7 @@ function SDL_GetCPUCacheLineSize(): cint; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasRDTSC(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasRDTSC' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasRDTSC' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has AltiVec features.
@@ -38,7 +38,7 @@ function SDL_HasRDTSC(): TSDL_Bool; cdecl;
  * instruction sets.
  *}
 function SDL_HasAltiVec(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAltiVec' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAltiVec' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has MMX features.
@@ -46,7 +46,7 @@ function SDL_HasAltiVec(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasMMX(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasMMX' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasMMX' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has 3DNow! features.
@@ -54,7 +54,7 @@ function SDL_HasMMX(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using AMD instruction sets.
  *}
 function SDL_Has3DNow(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Has3DNow' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Has3DNow' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has SSE features.
@@ -62,7 +62,7 @@ function SDL_Has3DNow(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasSSE(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE' {$ENDIF} {$ENDIF};
 
 {**
  *  This function returns true if the CPU has SSE2 features.
@@ -70,7 +70,7 @@ function SDL_HasSSE(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasSSE2(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE2' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE2' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has SSE3 features.
@@ -78,7 +78,7 @@ function SDL_HasSSE2(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasSSE3(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE3' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE3' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has SSE4.1 features.
@@ -86,7 +86,7 @@ function SDL_HasSSE3(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasSSE41(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE41' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE41' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has SSE4.2 features.
@@ -94,7 +94,7 @@ function SDL_HasSSE41(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasSSE42(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE42' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasSSE42' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has AVX features.
@@ -102,7 +102,7 @@ function SDL_HasSSE42(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasAVX(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns true if the CPU has AVX2 features.
@@ -110,7 +110,7 @@ function SDL_HasAVX(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasAVX2(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX2' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX2' {$ENDIF} {$ENDIF};
 
 {**
  * Determine whether the CPU has AVX-512F (foundation) features.
@@ -118,7 +118,7 @@ function SDL_HasAVX2(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using Intel instruction sets.
  *}
 function SDL_HasAVX512F(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX512F' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasAVX512F' {$ENDIF} {$ENDIF};
 
 {**
  * Determine whether the CPU has ARM SIMD (ARMv6) features.
@@ -127,7 +127,7 @@ function SDL_HasAVX512F(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using ARM instruction sets.
  *}
 function SDL_HasARMSIMD(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasARMSIMD' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasARMSIMD' {$ENDIF} {$ENDIF};
 
 {**
  * Determine whether the CPU has NEON (ARM SIMD) features.
@@ -135,13 +135,13 @@ function SDL_HasARMSIMD(): TSDL_Bool; cdecl;
  * This always returns false on CPUs that aren't using ARM instruction sets.
  *}
 function SDL_HasNEON(): TSDL_Bool; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasNEON' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_HasNEON' {$ENDIF} {$ENDIF};
 
 {**
  * This function returns the amount of RAM configured in the system, in MB.
  *}
 function SDL_GetSystemRAM(): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetSystemRAM' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetSystemRAM' {$ENDIF} {$ENDIF};
 
 {**
  * Report the alignment this system needs for SIMD allocations.
@@ -156,7 +156,7 @@ function SDL_GetSystemRAM(): cint; cdecl;
  * Plan accordingly.
  *}
 function SDL_SIMDGetAlignment(): csize_t; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDGetAlignment' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDGetAlignment' {$ENDIF} {$ENDIF};
 
 {*
  * Allocate memory in a SIMD-friendly way.
@@ -185,7 +185,7 @@ function SDL_SIMDGetAlignment(): csize_t; cdecl;
  * own zero bytes of that buffer).
  *}
 function SDL_SIMDAlloc(const len: csize_t): Pointer; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDAlloc' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDAlloc' {$ENDIF} {$ENDIF};
 
 {**
  * Reallocate memory obtained from SDL_SIMDAlloc.
@@ -194,7 +194,7 @@ function SDL_SIMDAlloc(const len: csize_t): Pointer; cdecl;
  * SDL_SIMDAlloc(). It can't be used on pointers from SDL_malloc, GetMem, etc.
  *}
 function SDL_SIMDRealloc(mem: Pointer; const len: csize_t): Pointer; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDRealloc' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDRealloc' {$ENDIF} {$ENDIF};
 
 {**
  * Deallocate memory obtained from SDL_SIMDAlloc.
@@ -211,5 +211,5 @@ function SDL_SIMDRealloc(mem: Pointer; const len: csize_t): Pointer; cdecl;
  * function returns, and should be discarded.
  *}
 procedure SDL_SIMDFree(mem: Pointer); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDFree' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SIMDFree' {$ENDIF} {$ENDIF};
 

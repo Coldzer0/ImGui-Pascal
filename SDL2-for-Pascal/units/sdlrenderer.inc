@@ -116,7 +116,7 @@ type
    *   SDL_GetRenderDriverInfo()
    *   SDL_CreateRenderer()
    *}
-function SDL_GetNumRenderDrivers: cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumRenderDrivers' {$ENDIF} {$ENDIF};
+function SDL_GetNumRenderDrivers: cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumRenderDrivers' {$ENDIF} {$ENDIF};
 
   {**
    *  Get information about a specific 2D rendering driver for the current
@@ -130,7 +130,7 @@ function SDL_GetNumRenderDrivers: cint32 cdecl; external SDL_LibName {$IFDEF DEL
    *
    *   SDL_CreateRenderer()
    *}
-function SDL_GetRenderDriverInfo(index: cint32; info: PSDL_RendererInfo): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDriverInfo' {$ENDIF} {$ENDIF};
+function SDL_GetRenderDriverInfo(index: cint32; info: PSDL_RendererInfo): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDriverInfo' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a window and default renderer
@@ -143,7 +143,7 @@ function SDL_GetRenderDriverInfo(index: cint32; info: PSDL_RendererInfo): cint32
    *
    *   0 on success, or -1 on error
    *}
-function SDL_CreateWindowAndRenderer(width: cint32; height: cint32; window_flags: cuint32; window: PPSDL_Window; renderer: PPSDL_Renderer): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindowAndRenderer' {$ENDIF} {$ENDIF};
+function SDL_CreateWindowAndRenderer(width: cint32; height: cint32; window_flags: cuint32; window: PPSDL_Window; renderer: PPSDL_Renderer): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateWindowAndRenderer' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a 2D rendering context for a window.
@@ -159,7 +159,7 @@ function SDL_CreateWindowAndRenderer(width: cint32; height: cint32; window_flags
    *   SDL_GetRendererInfo()
    *   SDL_DestroyRenderer()
    *}
-function SDL_CreateRenderer(window: PSDL_Window; index: cint32; flags: cuint32): PSDL_Renderer cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateRenderer' {$ENDIF} {$ENDIF};
+function SDL_CreateRenderer(window: PSDL_Window; index: cint32; flags: cuint32): PSDL_Renderer cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateRenderer' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a 2D software rendering context for a surface.
@@ -171,28 +171,28 @@ function SDL_CreateRenderer(window: PSDL_Window; index: cint32; flags: cuint32):
    *   SDL_CreateRenderer()
    *   SDL_DestroyRenderer()
    *}
-function SDL_CreateSoftwareRenderer(surface: PSDL_Surface): PSDL_Renderer cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateSoftwareRenderer' {$ENDIF} {$ENDIF};
+function SDL_CreateSoftwareRenderer(surface: PSDL_Surface): PSDL_Renderer cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateSoftwareRenderer' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the renderer associated with a window.
    *}
-function SDL_GetRenderer(window: PSDL_Window): PSDL_Renderer cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderer' {$ENDIF} {$ENDIF};
+function SDL_GetRenderer(window: PSDL_Window): PSDL_Renderer cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderer' {$ENDIF} {$ENDIF};
 
 {**
  * Get the window associated with a renderer.
  *}
 function SDL_RenderGetWindow(renderer: PSDL_Renderer): PSDL_Window; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetWindow' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Get information about a rendering context.
    *}
-function SDL_GetRendererInfo(renderer: PSDL_Renderer; info: PSDL_RendererInfo): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRendererInfo' {$ENDIF} {$ENDIF};
+function SDL_GetRendererInfo(renderer: PSDL_Renderer; info: PSDL_RendererInfo): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRendererInfo' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the output size of a rendering context.
    *}
-function SDL_GetRendererOutputSize(renderer: PSDL_Renderer; w: pcint; h: pcint): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRendererOutputSize' {$ENDIF} {$ENDIF};
+function SDL_GetRendererOutputSize(renderer: PSDL_Renderer; w: pcint; h: pcint): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRendererOutputSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a texture for a rendering context.
@@ -211,7 +211,7 @@ function SDL_GetRendererOutputSize(renderer: PSDL_Renderer; w: pcint; h: pcint):
    *  SDL_UpdateTexture()
    *  SDL_DestroyTexture()
    *}
-function SDL_CreateTexture(renderer: PSDL_Renderer; format: cuint32; access: cint32; w: cint32; h: cint32): PSDL_Texture cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateTexture' {$ENDIF} {$ENDIF};
+function SDL_CreateTexture(renderer: PSDL_Renderer; format: cuint32; access: cint32; w: cint32; h: cint32): PSDL_Texture cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Create a texture from an existing surface.
@@ -226,7 +226,7 @@ function SDL_CreateTexture(renderer: PSDL_Renderer; format: cuint32; access: cin
    *   SDL_QueryTexture()
    *   SDL_DestroyTexture()
    *}
-function SDL_CreateTextureFromSurface(renderer: PSDL_Renderer; surface: PSDL_Surface): PSDL_Texture cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateTextureFromSurface' {$ENDIF} {$ENDIF};
+function SDL_CreateTextureFromSurface(renderer: PSDL_Renderer; surface: PSDL_Surface): PSDL_Texture cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CreateTextureFromSurface' {$ENDIF} {$ENDIF};
 
   {**
    *  Query the attributes of a texture
@@ -241,7 +241,7 @@ function SDL_CreateTextureFromSurface(renderer: PSDL_Renderer; surface: PSDL_Sur
    *
    *   0 on success, or -1 if the texture is not valid.
    *}
-function SDL_QueryTexture(texture: PSDL_Texture; format: pcuint32; access: pcint; w: pcint; h: pcint): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_QueryTexture' {$ENDIF} {$ENDIF};
+function SDL_QueryTexture(texture: PSDL_Texture; format: pcuint32; access: pcint; w: pcint; h: pcint): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_QueryTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Set an additional color value used in render copy operations.
@@ -256,7 +256,7 @@ function SDL_QueryTexture(texture: PSDL_Texture; format: pcuint32; access: pcint
    *
    *   SDL_GetTextureColorMod()
    *}
-function SDL_SetTextureColorMod(texture: PSDL_Texture; r: cuint8; g: cuint8; b: cuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureColorMod' {$ENDIF} {$ENDIF};
+function SDL_SetTextureColorMod(texture: PSDL_Texture; r: cuint8; g: cuint8; b: cuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureColorMod' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the additional color value used in render copy operations.
@@ -270,7 +270,7 @@ function SDL_SetTextureColorMod(texture: PSDL_Texture; r: cuint8; g: cuint8; b: 
    *
    *   SDL_SetTextureColorMod()
    *}
-function SDL_GetTextureColorMod(texture: PSDL_Texture; r: pcuint8; g: pcuint8; b: pcuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureColorMod' {$ENDIF} {$ENDIF};
+function SDL_GetTextureColorMod(texture: PSDL_Texture; r: pcuint8; g: pcuint8; b: pcuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureColorMod' {$ENDIF} {$ENDIF};
 
   {**
    *  Set an additional alpha value used in render copy operations.
@@ -283,7 +283,7 @@ function SDL_GetTextureColorMod(texture: PSDL_Texture; r: pcuint8; g: pcuint8; b
    *
    *   SDL_GetTextureAlphaMod()
    *}
-function SDL_SetTextureAlphaMod(texture: PSDL_Texture; alpha: cuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureAlphaMod' {$ENDIF} {$ENDIF};
+function SDL_SetTextureAlphaMod(texture: PSDL_Texture; alpha: cuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureAlphaMod' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the additional alpha value used in render copy operations.
@@ -295,7 +295,7 @@ function SDL_SetTextureAlphaMod(texture: PSDL_Texture; alpha: cuint8): cint32 cd
    *
    *   SDL_SetTextureAlphaMod()
    *}
-function SDL_GetTextureAlphaMod(texture: PSDL_Texture; alpha: pcuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureAlphaMod' {$ENDIF} {$ENDIF};
+function SDL_GetTextureAlphaMod(texture: PSDL_Texture; alpha: pcuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureAlphaMod' {$ENDIF} {$ENDIF};
 
   {**
    *   Set the blend mode used for texture copy operations.
@@ -311,7 +311,7 @@ function SDL_GetTextureAlphaMod(texture: PSDL_Texture; alpha: pcuint8): cint32 c
    *
    *   SDL_GetTextureBlendMode()
    *}
-function SDL_SetTextureBlendMode(texture: PSDL_Texture; blendMode: TSDL_BlendMode): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureBlendMode' {$ENDIF} {$ENDIF};
+function SDL_SetTextureBlendMode(texture: PSDL_Texture; blendMode: TSDL_BlendMode): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureBlendMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the blend mode used for texture copy operations.
@@ -323,32 +323,32 @@ function SDL_SetTextureBlendMode(texture: PSDL_Texture; blendMode: TSDL_BlendMod
    *
    *   SDL_SetTextureBlendMode()
    *}
-function SDL_GetTextureBlendMode(texture: PSDL_Texture; blendMode: PSDL_BlendMode): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureBlendMode' {$ENDIF} {$ENDIF};
+function SDL_GetTextureBlendMode(texture: PSDL_Texture; blendMode: PSDL_BlendMode): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureBlendMode' {$ENDIF} {$ENDIF};
 
 {**
  * Set the scale mode used for texture scale operations.
  * If the scale mode is not supported, the closest supported mode is chosen.
  *}
 function SDL_SetTextureScaleMode(texture: PSDL_Texture; scaleMode: TSDL_ScaleMode): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureScaleMode' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureScaleMode' {$ENDIF} {$ENDIF};
 
 {**
  * Get the scale mode used for texture scale operations.
  *}
 function SDL_GetTextureScaleMode(texture: PSDL_Texture; scaleMode: PSDL_ScaleMode): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureScaleMode' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureScaleMode' {$ENDIF} {$ENDIF};
 
 {**
  * Associate a user-specified pointer with a texture.
  *}
 function SDL_SetTextureUserData(texture: PSDL_Texture; userdata: Pointer): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureUserData' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetTextureUserData' {$ENDIF} {$ENDIF};
 
 {**
  * Get the user-specified pointer associated with a texture.
  *}
 function SDL_GetTextureUserData(texture: PSDL_Texture): Pointer; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureUserData' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTextureUserData' {$ENDIF} {$ENDIF};
 
   {**
    *  Update the given texture rectangle with new pixel data.
@@ -363,7 +363,7 @@ function SDL_GetTextureUserData(texture: PSDL_Texture): Pointer; cdecl;
    *
    *   This is a fairly slow function.
    *}
-function SDL_UpdateTexture(texture: PSDL_Texture; rect: PSDL_Rect; pixels: Pointer; pitch: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateTexture' {$ENDIF} {$ENDIF};
+function SDL_UpdateTexture(texture: PSDL_Texture; rect: PSDL_Rect; pixels: Pointer; pitch: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Lock a portion of the texture for write-only pixel access.
@@ -381,7 +381,7 @@ function SDL_UpdateTexture(texture: PSDL_Texture; rect: PSDL_Rect; pixels: Point
    *   SDL_UnlockTexture()
    *}
 function SDL_LockTexture(texture: PSDL_Texture; const rect: PSDL_Rect; pixels: PPointer; pitch: pcint): cint; cdecl;
-     external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTexture' {$ENDIF} {$ENDIF};
+     external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTexture' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Lock a portion of the texture for write-only pixel access.
@@ -399,14 +399,14 @@ function SDL_LockTexture(texture: PSDL_Texture; const rect: PSDL_Rect; pixels: P
  *  \sa SDL_UnlockTexture()
  *}
 function SDL_LockTextureToSurface(texture: PSDL_Texture; const rect: PSDL_Rect; surface: PPSDL_Surface): cint; cdecl;
-     external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTextureToSurface' {$ENDIF} {$ENDIF};
+     external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTextureToSurface' {$ENDIF} {$ENDIF};
 
   {**
    *  Unlock a texture, uploading the changes to video memory, if needed.
    *
    *   SDL_LockTexture()
    *}
-procedure SDL_UnlockTexture(texture: PSDL_Texture) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTexture' {$ENDIF} {$ENDIF};
+procedure SDL_UnlockTexture(texture: PSDL_Texture) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Determines whether a window supports the use of render targets
@@ -415,7 +415,7 @@ procedure SDL_UnlockTexture(texture: PSDL_Texture) cdecl; external SDL_LibName {
    *
    *  SDL_TRUE if supported, SDL_FALSE if not.
    *}
-function SDL_RenderTargetSupported(renderer: PSDL_Renderer): Boolean cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderTargetSupported' {$ENDIF} {$ENDIF};
+function SDL_RenderTargetSupported(renderer: PSDL_Renderer): Boolean cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderTargetSupported' {$ENDIF} {$ENDIF};
 
   {**
    *  Set a texture as the current rendering target.
@@ -427,7 +427,7 @@ function SDL_RenderTargetSupported(renderer: PSDL_Renderer): Boolean cdecl; exte
    *
    *   SDL_GetRenderTarget()
    *}
-function SDL_SetRenderTarget(renderer: PSDL_Renderer; texture: PSDL_Texture): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderTarget' {$ENDIF} {$ENDIF};
+function SDL_SetRenderTarget(renderer: PSDL_Renderer; texture: PSDL_Texture): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderTarget' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the current render target or NULL for the default render target.
@@ -436,7 +436,7 @@ function SDL_SetRenderTarget(renderer: PSDL_Renderer; texture: PSDL_Texture): ci
    *
    *   SDL_SetRenderTarget()
    *}
-function SDL_GetRenderTarget(renderer: PSDL_Renderer): PSDL_Texture cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderTarget' {$ENDIF} {$ENDIF};
+function SDL_GetRenderTarget(renderer: PSDL_Renderer): PSDL_Texture cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderTarget' {$ENDIF} {$ENDIF};
 
   {**
    *  Set device independent resolution for rendering
@@ -461,7 +461,7 @@ function SDL_GetRenderTarget(renderer: PSDL_Renderer): PSDL_Texture cdecl; exter
    *   SDL_RenderSetScale()
    *   SDL_RenderSetViewport()
    *}
-function SDL_RenderSetLogicalSize(renderer: PSDL_Renderer; w: cint32; h: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetLogicalSize' {$ENDIF} {$ENDIF};
+function SDL_RenderSetLogicalSize(renderer: PSDL_Renderer; w: cint32; h: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetLogicalSize' {$ENDIF} {$ENDIF};
 
   {**
    *  Get device independent resolution for rendering
@@ -472,7 +472,7 @@ function SDL_RenderSetLogicalSize(renderer: PSDL_Renderer; w: cint32; h: cint32)
    *
    *   SDL_RenderSetLogicalSize()
    *}
-procedure SDL_RenderGetLogicalSize(renderer: PSDL_Renderer; w: pcint; h: pcint) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetLogicalSize' {$ENDIF} {$ENDIF};
+procedure SDL_RenderGetLogicalSize(renderer: PSDL_Renderer; w: pcint; h: pcint) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetLogicalSize' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Set whether to force integer scales for resolution-independent rendering
@@ -486,7 +486,7 @@ procedure SDL_RenderGetLogicalSize(renderer: PSDL_Renderer; w: pcint; h: pcint) 
  *
  *  \sa SDL_RenderSetLogicalSize()
  *}
-function SDL_RenderSetIntegerScale(renderer: PSDL_Renderer; enable : TSDL_bool): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetIntegerScale' {$ENDIF} {$ENDIF};
+function SDL_RenderSetIntegerScale(renderer: PSDL_Renderer; enable : TSDL_bool): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetIntegerScale' {$ENDIF} {$ENDIF};
 
 {**
  *  \brief Get whether integer scales are forced for resolution-independent rendering
@@ -495,7 +495,7 @@ function SDL_RenderSetIntegerScale(renderer: PSDL_Renderer; enable : TSDL_bool):
  *
  *  \sa SDL_RenderSetIntegerScale()
  *}
-function SDL_RenderGetIntegerScale(renderer: PSDL_Renderer): TSDL_bool cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetIntegerScale' {$ENDIF} {$ENDIF};
+function SDL_RenderGetIntegerScale(renderer: PSDL_Renderer): TSDL_bool cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetIntegerScale' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the drawing area for rendering on the current target.
@@ -512,14 +512,14 @@ function SDL_RenderGetIntegerScale(renderer: PSDL_Renderer): TSDL_bool cdecl; ex
    *   SDL_RenderGetViewport()
    *   SDL_RenderSetLogicalSize()
    *}
-function SDL_RenderSetViewport(renderer: PSDL_Renderer; const rect: PSDL_Rect): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetViewport' {$ENDIF} {$ENDIF};
+function SDL_RenderSetViewport(renderer: PSDL_Renderer; const rect: PSDL_Rect): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetViewport' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the drawing area for the current target.
    *
    *   SDL_RenderSetViewport()
    *}
-procedure SDL_RenderGetViewport(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetViewport' {$ENDIF} {$ENDIF};
+procedure SDL_RenderGetViewport(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetViewport' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the clip rectangle for the current target.
@@ -532,7 +532,7 @@ procedure SDL_RenderGetViewport(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl;
    *
    *   SDL_RenderGetClipRect()
    *}
-function SDL_RenderSetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetClipRect' {$ENDIF} {$ENDIF};
+function SDL_RenderSetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetClipRect' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the clip rectangle for the current target.
@@ -543,7 +543,7 @@ function SDL_RenderSetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32
    *
    *   SDL_RenderSetClipRect()
    *}
-procedure SDL_RenderGetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetClipRect' {$ENDIF} {$ENDIF};
+procedure SDL_RenderGetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetClipRect' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Get whether clipping is enabled on the given renderer.
@@ -553,7 +553,7 @@ procedure SDL_RenderGetClipRect(renderer: PSDL_Renderer; rect: PSDL_Rect) cdecl;
    *  \sa SDL_RenderGetClipRect()
    *}
 function SDL_RenderIsClipEnabled(renderer: PSDL_Renderer): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderIsClipEnabled' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderIsClipEnabled' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the drawing scale for rendering on the current target.
@@ -573,7 +573,7 @@ function SDL_RenderIsClipEnabled(renderer: PSDL_Renderer): TSDL_Bool; cdecl;
    *   SDL_RenderGetScale()
    *   SDL_RenderSetLogicalSize()
    *}
-function SDL_RenderSetScale(renderer: PSDL_Renderer; scaleX: cfloat; scaleY: cfloat): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetScale' {$ENDIF} {$ENDIF};
+function SDL_RenderSetScale(renderer: PSDL_Renderer; scaleX: cfloat; scaleY: cfloat): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetScale' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the drawing scale for the current target.
@@ -584,7 +584,7 @@ function SDL_RenderSetScale(renderer: PSDL_Renderer; scaleX: cfloat; scaleY: cfl
    *
    *   SDL_RenderSetScale()
    *}
-procedure SDL_RenderGetScale(renderer: PSDL_Renderer; scaleX: pcfloat; scaleY: pcfloat) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetScale' {$ENDIF} {$ENDIF};
+procedure SDL_RenderGetScale(renderer: PSDL_Renderer; scaleX: pcfloat; scaleY: pcfloat) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetScale' {$ENDIF} {$ENDIF};
 
 {**
  * Get logical coordinates of point in renderer when given real coordinates of
@@ -592,7 +592,7 @@ procedure SDL_RenderGetScale(renderer: PSDL_Renderer; scaleX: pcfloat; scaleY: p
  * render is scaled and logical renderer size set.
  *}
 procedure SDL_RenderWindowToLogical(renderer: PSDL_Renderer; windowX, windowY: cint; logicalX, logicalY: PSingle); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderWindowToLogical' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderWindowToLogical' {$ENDIF} {$ENDIF};
 
 {**
  * Get real coordinates of point in window when given logical coordinates of
@@ -600,7 +600,7 @@ procedure SDL_RenderWindowToLogical(renderer: PSDL_Renderer; windowX, windowY: c
  * when render is scaled and logical renderer size set.
  *}
 procedure SDL_RenderLogicalToWindow(renderer: PSDL_Renderer; logicalX, logicalY: Single; windowX, windowY: Pcint); cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderLogicalToWindow' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderLogicalToWindow' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the color used for drawing operations (Rect, Line and Clear).
@@ -614,7 +614,7 @@ procedure SDL_RenderLogicalToWindow(renderer: PSDL_Renderer; logicalX, logicalY:
    *
    *   0 on success, or -1 on error
    *}
-function SDL_SetRenderDrawColor(renderer: PSDL_Renderer; r: cuint8; g: cuint8; b: cuint8; a: cuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderDrawColor' {$ENDIF} {$ENDIF};
+function SDL_SetRenderDrawColor(renderer: PSDL_Renderer; r: cuint8; g: cuint8; b: cuint8; a: cuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderDrawColor' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the color used for drawing operations (Rect, Line and Clear).
@@ -628,7 +628,7 @@ function SDL_SetRenderDrawColor(renderer: PSDL_Renderer; r: cuint8; g: cuint8; b
    *
    *   0 on success, or -1 on error
    *}
-function SDL_GetRenderDrawColor(renderer: PSDL_Renderer; r: pcuint8; g: pcuint8; b: pcuint8; a: pcuint8): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDrawColor' {$ENDIF} {$ENDIF};
+function SDL_GetRenderDrawColor(renderer: PSDL_Renderer; r: pcuint8; g: pcuint8; b: pcuint8; a: pcuint8): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDrawColor' {$ENDIF} {$ENDIF};
 
   {**
    *  Set the blend mode used for drawing operations (Fill and Line).
@@ -643,7 +643,7 @@ function SDL_GetRenderDrawColor(renderer: PSDL_Renderer; r: pcuint8; g: pcuint8;
    *
    *   SDL_GetRenderDrawBlendMode()
    *}
-function SDL_SetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: TSDL_BlendMode): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderDrawBlendMode' {$ENDIF} {$ENDIF};
+function SDL_SetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: TSDL_BlendMode): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetRenderDrawBlendMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the blend mode used for drawing operations.
@@ -655,7 +655,7 @@ function SDL_SetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: TSDL_Ble
    *
    *   SDL_SetRenderDrawBlendMode()
    *}
-function SDL_GetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: PSDL_BlendMode): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDrawBlendMode' {$ENDIF} {$ENDIF};
+function SDL_GetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: PSDL_BlendMode): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRenderDrawBlendMode' {$ENDIF} {$ENDIF};
 
   {**
    *  Clear the current rendering target with the drawing color
@@ -664,7 +664,7 @@ function SDL_GetRenderDrawBlendMode(renderer: PSDL_Renderer; blendMode: PSDL_Ble
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderClear(renderer: PSDL_Renderer): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderClear' {$ENDIF} {$ENDIF};
+function SDL_RenderClear(renderer: PSDL_Renderer): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderClear' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a point on the current rendering target.
@@ -675,7 +675,7 @@ function SDL_RenderClear(renderer: PSDL_Renderer): cint32 cdecl; external SDL_Li
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderDrawPoint(renderer: PSDL_Renderer; x: cint32; y: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPoint' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawPoint(renderer: PSDL_Renderer; x: cint32; y: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPoint' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a point on the current rendering target.
@@ -687,7 +687,7 @@ function SDL_RenderDrawPoint(renderer: PSDL_Renderer; x: cint32; y: cint32): cin
    *    0 on success, or -1 on error
    *}
 function SDL_RenderDrawPointF(renderer: PSDL_Renderer; x, y: single): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPointF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPointF' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw multiple points on the current rendering target.
@@ -698,7 +698,7 @@ function SDL_RenderDrawPointF(renderer: PSDL_Renderer; x, y: single): cint32 cde
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderDrawPoints(renderer: PSDL_Renderer; points: PSDL_Point; count: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPoints' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawPoints(renderer: PSDL_Renderer; points: PSDL_Point; count: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPoints' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw multiple points on the current rendering target.
@@ -710,7 +710,7 @@ function SDL_RenderDrawPoints(renderer: PSDL_Renderer; points: PSDL_Point; count
    *    0 on success, or -1 on error
    *}
 function SDL_RenderDrawPointsF(renderer: PSDL_Renderer; points: PSDL_FPoint; count: cint32): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPointsF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawPointsF' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a line on the current rendering target.
@@ -723,7 +723,7 @@ function SDL_RenderDrawPointsF(renderer: PSDL_Renderer; points: PSDL_FPoint; cou
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderDrawLine(renderer: PSDL_Renderer; x1: cint32; y1: cint32; x2: cint32; y2: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLine' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawLine(renderer: PSDL_Renderer; x1: cint32; y1: cint32; x2: cint32; y2: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLine' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a line on the current rendering target.
@@ -737,7 +737,7 @@ function SDL_RenderDrawLine(renderer: PSDL_Renderer; x1: cint32; y1: cint32; x2:
    *  0 on success, or -1 on error
    *}
 function SDL_RenderDrawLineF(renderer: PSDL_Renderer; x1, y1, x2, y2: single): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLineF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLineF' {$ENDIF} {$ENDIF};
 
   {**
    *  \brief Draw a series of connected lines on the current rendering target.
@@ -748,7 +748,7 @@ function SDL_RenderDrawLineF(renderer: PSDL_Renderer; x1, y1, x2, y2: single): c
    *
    *  \return 0 on success, or -1 on error
    *}
-function SDL_RenderDrawLines(renderer: PSDL_Renderer; points: PSDL_Point; count: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLines' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawLines(renderer: PSDL_Renderer; points: PSDL_Point; count: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLines' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a series of connected lines on the current rendering target.
@@ -760,7 +760,7 @@ function SDL_RenderDrawLines(renderer: PSDL_Renderer; points: PSDL_Point; count:
    *    0 on success, or -1 on error
    *}
 function SDL_RenderDrawLinesF(renderer: PSDL_Renderer; points: PSDL_FPoint; count: cint32): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLinesF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawLinesF' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a rectangle on the current rendering target.
@@ -770,7 +770,7 @@ function SDL_RenderDrawLinesF(renderer: PSDL_Renderer; points: PSDL_FPoint; coun
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderDrawRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRect' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRect' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw a rectangle on the current rendering target.
@@ -781,7 +781,7 @@ function SDL_RenderDrawRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cd
    *    0 on success, or -1 on error
    *}
 function SDL_RenderDrawRectF(renderer: PSDL_Renderer; rect: PSDL_FRect): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRectF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRectF' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw some number of rectangles on the current rendering target.
@@ -792,7 +792,7 @@ function SDL_RenderDrawRectF(renderer: PSDL_Renderer; rect: PSDL_FRect): cint32 
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderDrawRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRects' {$ENDIF} {$ENDIF};
+function SDL_RenderDrawRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRects' {$ENDIF} {$ENDIF};
 
   {**
    *  Draw some number of rectangles on the current rendering target.
@@ -804,7 +804,7 @@ function SDL_RenderDrawRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: c
    *    0 on success, or -1 on error
    *}
 function SDL_RenderDrawRectsF(renderer: PSDL_Renderer; rects: PSDL_FRect; count: cint32): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRectsF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderDrawRectsF' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill a rectangle on the current rendering target with the drawing color.
@@ -815,7 +815,7 @@ function SDL_RenderDrawRectsF(renderer: PSDL_Renderer; rects: PSDL_FRect; count:
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderFillRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRect' {$ENDIF} {$ENDIF};
+function SDL_RenderFillRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRect' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill a rectangle on the current rendering target with the drawing color.
@@ -826,7 +826,7 @@ function SDL_RenderFillRect(renderer: PSDL_Renderer; rect: PSDL_Rect): cint32 cd
    *    0 on success, or -1 on error
    *}
 function SDL_RenderFillRectF(renderer: PSDL_Renderer; rect: PSDL_FRect): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRectF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRectF' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill some number of rectangles on the current rendering target with the drawing color.
@@ -837,7 +837,7 @@ function SDL_RenderFillRectF(renderer: PSDL_Renderer; rect: PSDL_FRect): cint32 
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderFillRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRects' {$ENDIF} {$ENDIF};
+function SDL_RenderFillRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRects' {$ENDIF} {$ENDIF};
 
   {**
    *  Fill some number of rectangles on the current rendering target with the drawing color.
@@ -849,7 +849,7 @@ function SDL_RenderFillRects(renderer: PSDL_Renderer; rects: PSDL_Rect; count: c
    *    0 on success, or -1 on error
    *}
 function SDL_RenderFillRectsF(renderer: PSDL_Renderer; rects: PSDL_FRect; count: cint32): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRectsF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFillRectsF' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy a portion of the texture to the current rendering target.
@@ -863,7 +863,7 @@ function SDL_RenderFillRectsF(renderer: PSDL_Renderer; rects: PSDL_FRect; count:
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderCopy(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect: PSDL_Rect; dstrect: PSDL_Rect): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopy' {$ENDIF} {$ENDIF};
+function SDL_RenderCopy(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect: PSDL_Rect; dstrect: PSDL_Rect): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopy' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy a portion of the texture to the current rendering target.
@@ -876,7 +876,7 @@ function SDL_RenderCopy(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect:
    *    0 on success, or -1 on error
    *}
 function SDL_RenderCopyF(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect: PSDL_Rect; dstrect: PSDL_FRect): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyF' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy a portion of the source texture to the current rendering target, rotating it by angle around the given center
@@ -893,7 +893,7 @@ function SDL_RenderCopyF(renderer: PSDL_Renderer; texture: PSDL_Texture; srcrect
    *
    *   0 on success, or -1 on error
    *}
-function SDL_RenderCopyEx(renderer: PSDL_Renderer; texture: PSDL_Texture; const srcrect: PSDL_Rect; dstrect: PSDL_Rect; angle: Double; center: PSDL_Point; flip: cint): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyEx' {$ENDIF} {$ENDIF};
+function SDL_RenderCopyEx(renderer: PSDL_Renderer; texture: PSDL_Texture; const srcrect: PSDL_Rect; dstrect: PSDL_Rect; angle: Double; center: PSDL_Point; flip: cint): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyEx' {$ENDIF} {$ENDIF};
 
   {**
    *  Copy a portion of the source texture to the current rendering target, rotating it by angle around the given center
@@ -909,7 +909,7 @@ function SDL_RenderCopyEx(renderer: PSDL_Renderer; texture: PSDL_Texture; const 
    *    0 on success, or -1 on error
    *}
 function SDL_RenderCopyExF(renderer: PSDL_Renderer; texture: PSDL_Texture; const srcrect: PSDL_Rect; dstrect: PSDL_FRect; angle: Double; center: PSDL_FPoint; flip: cint): cint32 cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyExF' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderCopyExF' {$ENDIF} {$ENDIF};
 
 {**
  * Render a list of triangles, optionally using a texture and indices into the
@@ -922,7 +922,7 @@ function SDL_RenderGeometry(
 	Const vertices: PSDL_Vertex; num_vertices: cint;
 	Const indices: Pcint; num_indices: cint
 ): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGeometry' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGeometry' {$ENDIF} {$ENDIF};
 
 {**
  * Render a list of triangles, optionally using a texture and indices into the
@@ -938,7 +938,7 @@ function SDL_RenderGeometryRaw(
 	num_vertices: cint;
 	Const indices: Pointer; num_indices, size_indices: cint
 ): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGeometryRaw' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGeometryRaw' {$ENDIF} {$ENDIF};
 
   {**
    *  Read pixels from the current rendering target.
@@ -955,12 +955,12 @@ function SDL_RenderGeometryRaw(
    *
    *   This is a very slow operation, and should not be used frequently.
    *}
-function SDL_RenderReadPixels(renderer: PSDL_Renderer; rect: PSDL_Rect; format: cuint32; pixels: Pointer; pitch: cint32): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderReadPixels' {$ENDIF} {$ENDIF};
+function SDL_RenderReadPixels(renderer: PSDL_Renderer; rect: PSDL_Rect; format: cuint32; pixels: Pointer; pitch: cint32): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderReadPixels' {$ENDIF} {$ENDIF};
 
   {**
    *  Update the screen with rendering performed.
    *}
-procedure SDL_RenderPresent(renderer: PSDL_Renderer) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderPresent' {$ENDIF} {$ENDIF};
+procedure SDL_RenderPresent(renderer: PSDL_Renderer) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderPresent' {$ENDIF} {$ENDIF};
 
   {**
    *  Destroy the specified texture.
@@ -968,7 +968,7 @@ procedure SDL_RenderPresent(renderer: PSDL_Renderer) cdecl; external SDL_LibName
    *   SDL_CreateTexture()
    *   SDL_CreateTextureFromSurface()
    *}
-procedure SDL_DestroyTexture(texture: PSDL_Texture) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyTexture' {$ENDIF} {$ENDIF};
+procedure SDL_DestroyTexture(texture: PSDL_Texture) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Destroy the rendering context for a window and free associated
@@ -976,7 +976,7 @@ procedure SDL_DestroyTexture(texture: PSDL_Texture) cdecl; external SDL_LibName 
    *
    *   SDL_CreateRenderer()
    *}
-procedure SDL_DestroyRenderer(renderer: PSDL_Renderer) cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyRenderer' {$ENDIF} {$ENDIF};
+procedure SDL_DestroyRenderer(renderer: PSDL_Renderer) cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DestroyRenderer' {$ENDIF} {$ENDIF};
 
 {**
  * Force the rendering context to flush any pending commands to the underlying
@@ -1002,7 +1002,7 @@ procedure SDL_DestroyRenderer(renderer: PSDL_Renderer) cdecl; external SDL_LibNa
  * instead flushing them to the OS immediately.
  *}
 function SDL_RenderFlush(renderer: PSDL_Renderer): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFlush' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderFlush' {$ENDIF} {$ENDIF};
 
   {**
    *  Bind the texture to the current OpenGL/ES/ES2 context for use with
@@ -1014,7 +1014,7 @@ function SDL_RenderFlush(renderer: PSDL_Renderer): cint; cdecl;
    *
    *   0 on success, or -1 if the operation is not supported
    *}
-function SDL_GL_BindTexture(texture: PSDL_Texture; texw: pcfloat; texh: pcfloat): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_BindTexture' {$ENDIF} {$ENDIF};
+function SDL_GL_BindTexture(texture: PSDL_Texture; texw: pcfloat; texh: pcfloat): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_BindTexture' {$ENDIF} {$ENDIF};
 
   {**
    *  Unbind a texture from the current OpenGL/ES/ES2 context.
@@ -1023,7 +1023,7 @@ function SDL_GL_BindTexture(texture: PSDL_Texture; texw: pcfloat; texh: pcfloat)
    *
    *   0 on success, or -1 if the operation is not supported
    *}
-function SDL_GL_UnbindTexture(texture: PSDL_Texture): cint32 cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_UnbindTexture' {$ENDIF} {$ENDIF};
+function SDL_GL_UnbindTexture(texture: PSDL_Texture): cint32 cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GL_UnbindTexture' {$ENDIF} {$ENDIF};
 
 {**
  * Get the CAMetalLayer associated with the given Metal renderer.
@@ -1033,7 +1033,7 @@ function SDL_GL_UnbindTexture(texture: PSDL_Texture): cint32 cdecl; external SDL
  *
  *}
 function SDL_RenderGetMetalLayer(renderer: PSDL_Renderer): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetMetalLayer' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetMetalLayer' {$ENDIF} {$ENDIF};
 
 {**
  * Get the Metal command encoder for the current frame
@@ -1047,13 +1047,13 @@ function SDL_RenderGetMetalLayer(renderer: PSDL_Renderer): Pointer; cdecl;
  * render targets, just the window's backbacker. Check your return values!
  *}
 function SDL_RenderGetMetalCommandEncoder(renderer: PSDL_Renderer): Pointer; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetMetalCommandEncoder' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderGetMetalCommandEncoder' {$ENDIF} {$ENDIF};
 
 {**
  * Toggle VSync of the given renderer.
  *}
 function SDL_RenderSetVSync(renderer: PSDL_Renderer; vsync: cint): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetVSync' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_RenderSetVSync' {$ENDIF} {$ENDIF};
 
   {**
    *  Update a rectangle within a planar YV12 or IYUV texture with new pixel data.
@@ -1074,7 +1074,7 @@ function SDL_RenderSetVSync(renderer: PSDL_Renderer; vsync: cint): cint; cdecl;
    *  this function is available if your pixel data is not contiguous.
    *}
 function SDL_UpdateYUVTexture(texture: PSDL_Texture; rect: PSDL_Rect; Yplane: pcuint8; Ypitch: cint32; Uplane: pcuint8; UPitch: cint32; Vplane: pcuint8; VPitch: cint32):cint32;
-   cdecl; external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateYUVTexture' {$ENDIF} {$ENDIF};
+   cdecl; external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateYUVTexture' {$ENDIF} {$ENDIF};
 
 {**
  * Update a rectangle within a planar NV12 or NV21 texture with new pixels.
@@ -1089,4 +1089,4 @@ function SDL_UpdateNVTexture(
 	Const Yplane: Pcuint8; Ypitch: cint;
 	Const UVplane: Pcuint8; UVpitch: cint
 ): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateNVTexture' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UpdateNVTexture' {$ENDIF} {$ENDIF};

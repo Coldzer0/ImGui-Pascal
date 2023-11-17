@@ -2416,7 +2416,7 @@ const
  *  \return SDL_TRUE if the hint was set, SDL_FALSE otherwise
  */}
 function SDL_SetHintWithPriority(const name: PAnsiChar; const value: PAnsiChar; priority: TSDL_HintPriority): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetHintWithPriority' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetHintWithPriority' {$ENDIF} {$ENDIF};
 
 {/**
  *  \brief Set a hint with normal priority
@@ -2424,7 +2424,7 @@ function SDL_SetHintWithPriority(const name: PAnsiChar; const value: PAnsiChar; 
  *  \return SDL_TRUE if the hint was set, SDL_FALSE otherwise
  */}
 function SDL_SetHint(const name: PAnsiChar; const value: PAnsiChar): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetHint' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_SetHint' {$ENDIF} {$ENDIF};
 
 {**
  * Reset a hint to the default value.
@@ -2439,7 +2439,7 @@ function SDL_SetHint(const name: PAnsiChar; const value: PAnsiChar): TSDL_Bool; 
  * \since This function is available since SDL 2.24.0.
  *}
 function SDL_ResetHint(const name: PAnsiChar): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ResetHint' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ResetHint' {$ENDIF} {$ENDIF};
 
 {**
  * Reset all hints to the default values.
@@ -2455,7 +2455,7 @@ function SDL_ResetHint(const name: PAnsiChar): TSDL_Bool; cdecl;
  * \sa SDL_ResetHint
  *}
 procedure SDL_ResetHints(); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ResetHints' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ResetHints' {$ENDIF} {$ENDIF};
 
 {/**
  *  \brief Get a hint
@@ -2463,7 +2463,7 @@ procedure SDL_ResetHints(); cdecl;
  *  \return The string value of a hint variable.
  */}
 function SDL_GetHint(const name: PAnsiChar): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetHint' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetHint' {$ENDIF} {$ENDIF};
 
 {/**
  *  \brief Get a hint
@@ -2471,7 +2471,7 @@ function SDL_GetHint(const name: PAnsiChar): PAnsiChar; cdecl;
  *  \return The boolean value of a hint variable.
  */}
 function SDL_GetHintBoolean(const name: PAnsiChar; default_value: TSDL_Bool): TSDL_Bool; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetHintBoolean' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetHintBoolean' {$ENDIF} {$ENDIF};
 
 {/**
  *  \brief Add a function to watch a particular hint
@@ -2486,7 +2486,7 @@ type
   TSDL_HintCallback = procedure(userdata: Pointer; const name: PAnsiChar; const oldValue: PAnsiChar; const newValue: PAnsiChar); cdecl;
 
 procedure SDL_AddHintCallback(const name: PAnsiChar; callback: TSDL_HintCallback; userdata: Pointer); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AddHintCallback' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AddHintCallback' {$ENDIF} {$ENDIF};
 
 {/**
  *  \brief Remove a function watching a particular hint
@@ -2496,7 +2496,7 @@ procedure SDL_AddHintCallback(const name: PAnsiChar; callback: TSDL_HintCallback
  *  \param userdata A pointer being passed to the callback function
  */}
 procedure SDL_DelHintCallback(const name: PAnsiChar; callback: TSDL_HintCallback; userdata: Pointer); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DelHintCallback' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DelHintCallback' {$ENDIF} {$ENDIF};
 
 {**
  * Clear all hints.
@@ -2513,4 +2513,4 @@ procedure SDL_DelHintCallback(const name: PAnsiChar; callback: TSDL_HintCallback
  * \sa SDL_ResetHints
  *}
 procedure SDL_ClearHints(); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearHints' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearHints' {$ENDIF} {$ENDIF};

@@ -26,4 +26,4 @@
  * \return 0 on success, or -1 on error.
  *}
 function SDL_OpenURL(const url: PAnsiChar): cint; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenURL' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenURL' {$ENDIF} {$ENDIF};

@@ -41,13 +41,13 @@ const
    *  Get the number of registered touch devices.
    *}
 function SDL_GetNumTouchDevices(): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumTouchDevices' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumTouchDevices' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the touch ID with the given index, or 0 if the index is invalid.
    *}
 function SDL_GetTouchDevice(index: cint): TSDL_TouchID; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchDevice' {$ENDIF} {$ENDIF};
 
 {**
  * Get the touch device name as reported from the driver,
@@ -56,7 +56,7 @@ function SDL_GetTouchDevice(index: cint): TSDL_TouchID; cdecl;
  * \since This function is available since SDL 2.0.22.
  *}
 function SDL_GetTouchName(index: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchName' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchName' {$ENDIF} {$ENDIF};
 
 {**
  * Get the type of the given touch device.
@@ -64,17 +64,17 @@ function SDL_GetTouchName(index: cint): PAnsiChar; cdecl;
  * \since This function is available since SDL 2.0.10.
  *}
 function SDL_GetTouchDeviceType(touchID: TSDL_TouchID): TSDL_TouchDeviceType; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchDeviceType' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchDeviceType' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the number of active fingers for a given touch device.
    *}
 function SDL_GetNumTouchFingers(touchID: TSDL_TouchID): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumTouchFingers' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumTouchFingers' {$ENDIF} {$ENDIF};
 
   {**
    *  Get the finger object of the given touch, with the given index.
    *}
 function SDL_GetTouchFinger(touchID: TSDL_TouchID; index: cint): PSDL_Finger; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchFinger' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetTouchFinger' {$ENDIF} {$ENDIF};
 

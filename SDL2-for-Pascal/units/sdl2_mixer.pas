@@ -685,13 +685,13 @@ procedure Mix_CloseAudio cdecl; external MIX_LibName {$IFDEF DELPHI} {$IFDEF MAC
 
 {* We'll use SDL for reporting errors *}
 function Mix_SetError(const fmt: PAnsiChar; args: array of const): cint; cdecl;
-  external SDL_LibName
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}
   name {$IF DEFINED(DELPHI) AND DEFINED(MACOS)} '_SDL_SetError' {$ELSE} 'SDL_SetError' {$ENDIF};
 function Mix_GetError: PAnsiChar; cdecl;
-  external SDL_LibName
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}
   name {$IF DEFINED(DELPHI) AND DEFINED(MACOS)} '_SDL_GetError' {$ELSE} 'SDL_GetError' {$ENDIF};
 procedure Mix_ClearError(); cdecl;
-  external SDL_LibName
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF}
   name {$IF DEFINED(DELPHI) AND DEFINED(MACOS)} '_SDL_ClearError' {$ELSE} 'SDL_ClearError' {$ENDIF};
 
 implementation

@@ -51,4 +51,4 @@ type
  *           field. Will return NIL on error.
  *}
 function SDL_GetPreferredLocales(): PSDL_Locale; cdecl;
-	external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPreferredLocales' {$ENDIF} {$ENDIF};
+	external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetPreferredLocales' {$ENDIF} {$ENDIF};

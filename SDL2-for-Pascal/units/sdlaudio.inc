@@ -220,7 +220,7 @@ type
    * \sa SDL_GetAudioDriver
    *}
 function SDL_GetNumAudioDrivers: cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAudioDrivers' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAudioDrivers' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to get the name of a built in audio driver.
@@ -243,7 +243,7 @@ function SDL_GetNumAudioDrivers: cint; cdecl;
  * \sa SDL_GetNumAudioDrivers
  *}
 function SDL_GetAudioDriver(index: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDriver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDriver' {$ENDIF} {$ENDIF};
 
   {**
    *   Initialization and cleanup
@@ -269,7 +269,7 @@ function SDL_GetAudioDriver(index: cint): PAnsiChar; cdecl;
  * \sa SDL_AudioQuit
  *}
 function SDL_AudioInit(driver_name: PAnsiChar): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioInit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioInit' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to shut down audio if you initialized it with
@@ -284,7 +284,7 @@ function SDL_AudioInit(driver_name: PAnsiChar): cint; cdecl;
  * \sa SDL_AudioInit
  *}
 procedure SDL_AudioQuit; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioQuit' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioQuit' {$ENDIF} {$ENDIF};
 
   {**
  * Get the name of the current audio driver.
@@ -303,7 +303,7 @@ procedure SDL_AudioQuit; cdecl;
  * \sa SDL_AudioInit
  *}
 function SDL_GetCurrentAudioDriver: PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentAudioDriver' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetCurrentAudioDriver' {$ENDIF} {$ENDIF};
 
 {**
  * This function is a legacy means of opening the audio device.
@@ -353,7 +353,7 @@ function SDL_GetCurrentAudioDriver: PAnsiChar; cdecl;
  * \sa SDL_UnlockAudio
  *}
 function SDL_OpenAudio(desired: PSDL_AudioSpec; obtained: PSDL_AudioSpec): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenAudio' {$ENDIF} {$ENDIF};
 
   {**
    *  SDL Audio Device IDs.
@@ -414,7 +414,7 @@ type
  * \sa SDL_OpenAudioDevice
  *}
 function SDL_GetNumAudioDevices(iscapture: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAudioDevices' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetNumAudioDevices' {$ENDIF} {$ENDIF};
 
 {**
  * Get the human-readable name of a specific audio device.
@@ -442,7 +442,7 @@ function SDL_GetNumAudioDevices(iscapture: cint): cint; cdecl;
  * \sa SDL_GetDefaultAudioInfo
  *}
 function SDL_GetAudioDeviceName(index: cint; iscapture: cint): PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceName' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceName' {$ENDIF} {$ENDIF};
 
 {*
  * Get the preferred audio format of a specific audio device.
@@ -468,7 +468,7 @@ function SDL_GetAudioDeviceName(index: cint; iscapture: cint): PAnsiChar; cdecl;
  * \sa SDL_GetDefaultAudioInfo
   }
 function SDL_GetAudioDeviceSpec(index: cint; iscapture: cint; spec: PSDL_AudioSpec): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceSpec' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceSpec' {$ENDIF} {$ENDIF};
 
 {*
  * Get the name and preferred format of the default audio device.
@@ -501,7 +501,7 @@ function SDL_GetAudioDeviceSpec(index: cint; iscapture: cint; spec: PSDL_AudioSp
  * \sa SDL_OpenAudioDevice
   }
 function SDL_GetDefaultAudioInfo(name: PPAnsiChar; spec: PSDL_AudioSpec; iscapture: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDefaultAudioInfo' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetDefaultAudioInfo' {$ENDIF} {$ENDIF};
 
 {**
  * Open a specific audio device.
@@ -619,7 +619,7 @@ function SDL_OpenAudioDevice(device: PAnsiChar;
                              desired: PSDL_AudioSpec;
                              obtained: PSDL_AudioSpec;
                              allowed_changes: cint): TSDL_AudioDeviceID; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenAudioDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_OpenAudioDevice' {$ENDIF} {$ENDIF};
 
   {**
    *   Audio state
@@ -656,7 +656,7 @@ const
  * \sa SDL_GetAudioDeviceStatus
  *}
 function SDL_GetAudioStatus: TSDL_AudioStatus; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioStatus' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioStatus' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to get the current audio state of an audio device.
@@ -670,7 +670,7 @@ function SDL_GetAudioStatus: TSDL_AudioStatus; cdecl;
  * \sa SDL_PauseAudioDevice
  *}
 function SDL_GetAudioDeviceStatus(dev: TSDL_AudioDeviceID): TSDL_AudioStatus; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceStatus' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetAudioDeviceStatus' {$ENDIF} {$ENDIF};
 
 {*Audio State*}
 
@@ -704,7 +704,7 @@ function SDL_GetAudioDeviceStatus(dev: TSDL_AudioDeviceID): TSDL_AudioStatus; cd
  * \sa SDL_PauseAudioDevice
  *}
 procedure SDL_PauseAudio(pause_on: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_PauseAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_PauseAudio' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to pause and unpause audio playback on a specified
@@ -735,7 +735,7 @@ procedure SDL_PauseAudio(pause_on: cint); cdecl;
  * \sa SDL_LockAudioDevice
  *}
 procedure SDL_PauseAudioDevice(dev: TSDL_AudioDeviceID; pause_on: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_PauseAudioDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_PauseAudioDevice' {$ENDIF} {$ENDIF};
 
 {*Pause audio functions*}
 
@@ -825,7 +825,7 @@ function SDL_LoadWAV_RW(src: PSDL_RWops;
                         spec: PSDL_AudioSpec;
                         audio_buf: ppcuint8;
                         audio_len: pcuint32): PSDL_AudioSpec; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadWAV_RW' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LoadWAV_RW' {$ENDIF} {$ENDIF};
 
 {**
  *  Loads a WAV from a file.
@@ -849,7 +849,7 @@ function SDL_LoadWAV(file_: PAnsiChar; spec: PSDL_AudioSpec; audio_buf: ppcuint8
  * \sa SDL_LoadWAV_RW
  *}
 procedure SDL_FreeWAV(audio_buf: pcuint8); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeWAV' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeWAV' {$ENDIF} {$ENDIF};
 
 {**
  * Initialize an SDL_AudioCVT structure for conversion.
@@ -890,7 +890,7 @@ function SDL_BuildAudioCVT(cvt: PSDL_AudioCVT;
                            dst_format: TSDL_AudioFormat;
                            dst_channels: cuint8;
                            dst_rate: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_BuildAudioCVT' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_BuildAudioCVT' {$ENDIF} {$ENDIF};
 
 {**
  * Convert audio data to a desired audio format.
@@ -931,7 +931,7 @@ function SDL_BuildAudioCVT(cvt: PSDL_AudioCVT;
  * \sa SDL_BuildAudioCVT
  *}
 function SDL_ConvertAudio(cvt: PSDL_AudioCVT): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ConvertAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ConvertAudio' {$ENDIF} {$ENDIF};
 
 { SDL_AudioStream is a new audio conversion interface.
    The benefits vs SDL_AudioCVT:
@@ -967,7 +967,7 @@ type
   }
 function SDL_NewAudioStream(src_format: TSDL_AudioFormat; src_channels: cuint8; src_rate: cint; dst_format: TSDL_AudioFormat; dst_channels: cuint8;
            dst_rate: cint): PSDL_AudioStream; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_NewAudioStream' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_NewAudioStream' {$ENDIF} {$ENDIF};
 
 {*
  * Add data to be converted/resampled to the stream.
@@ -987,7 +987,7 @@ function SDL_NewAudioStream(src_format: TSDL_AudioFormat; src_channels: cuint8; 
  * \sa SDL_FreeAudioStream
   }
 function SDL_AudioStreamPut(stream: PSDL_AudioStream; buf: pointer; len: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamPut' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamPut' {$ENDIF} {$ENDIF};
 
 {*
  * Get converted/resampled data from the stream
@@ -1007,7 +1007,7 @@ function SDL_AudioStreamPut(stream: PSDL_AudioStream; buf: pointer; len: cint): 
  * \sa SDL_FreeAudioStream
   }
 function SDL_AudioStreamGet(stream: PSDL_AudioStream; buf: pointer; len: cint): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamGet' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamGet' {$ENDIF} {$ENDIF};
 
 {*
  * Get the number of converted/resampled bytes available.
@@ -1026,7 +1026,7 @@ function SDL_AudioStreamGet(stream: PSDL_AudioStream; buf: pointer; len: cint): 
  * \sa SDL_FreeAudioStream
   }
 function SDL_AudioStreamAvailable(stream: PSDL_AudioStream): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamAvailable' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamAvailable' {$ENDIF} {$ENDIF};
 
 {*
  * Tell the stream that you're done sending data, and anything being buffered
@@ -1046,7 +1046,7 @@ function SDL_AudioStreamAvailable(stream: PSDL_AudioStream): cint; cdecl;
  * \sa SDL_FreeAudioStream
   }
 function SDL_AudioStreamFlush(stream: PSDL_AudioStream): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamFlush' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamFlush' {$ENDIF} {$ENDIF};
 
 {*
  * Clear any pending data in the stream without converting it
@@ -1061,7 +1061,7 @@ function SDL_AudioStreamFlush(stream: PSDL_AudioStream): cint; cdecl;
  * \sa SDL_FreeAudioStream
   }
 procedure SDL_AudioStreamClear(stream: PSDL_AudioStream); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamClear' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_AudioStreamClear' {$ENDIF} {$ENDIF};
 
 {*
  * Free an audio stream
@@ -1076,7 +1076,7 @@ procedure SDL_AudioStreamClear(stream: PSDL_AudioStream); cdecl;
  * \sa SDL_AudioStreamClear
   }
 procedure SDL_FreeAudioStream(stream: PSDL_AudioStream); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeAudioStream' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_FreeAudioStream' {$ENDIF} {$ENDIF};
 
 const
   SDL_MIX_MAXVOLUME = 128;
@@ -1104,7 +1104,7 @@ const
  * \sa SDL_MixAudioFormat
  *}
 procedure SDL_MixAudio(dst: pcuint8; src: pcuint8; len: cuint32; volume: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MixAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MixAudio' {$ENDIF} {$ENDIF};
 
   {**
  * Mix audio data in a specified format.
@@ -1137,7 +1137,7 @@ procedure SDL_MixAudio(dst: pcuint8; src: pcuint8; len: cuint32; volume: cint); 
  * \since This function is available since SDL 2.0.0.
  *}
 procedure SDL_MixAudioFormat(dst: pcuint8; src: pcuint8; format: TSDL_AudioFormat; len: cuint32; volume: cint); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MixAudioFormat' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_MixAudioFormat' {$ENDIF} {$ENDIF};
 
   {**
  * Queue more audio on non-callback devices.
@@ -1186,7 +1186,7 @@ procedure SDL_MixAudioFormat(dst: pcuint8; src: pcuint8; format: TSDL_AudioForma
  * \sa SDL_GetQueuedAudioSize
  *}
 function SDL_QueueAudio(dev: TSDL_AudioDeviceID; data: Pointer; len: cuint32): cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_QueueAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_QueueAudio' {$ENDIF} {$ENDIF};
 
   {**
  * Dequeue more audio on non-callback devices.
@@ -1235,7 +1235,7 @@ function SDL_QueueAudio(dev: TSDL_AudioDeviceID; data: Pointer; len: cuint32): c
  * \sa SDL_GetQueuedAudioSize
  *}
 function SDL_DequeueAudio(dev: TSDL_AudioDeviceID; data: Pointer; len: cuint32): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DequeueAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_DequeueAudio' {$ENDIF} {$ENDIF};
 
 {**
  * Get the number of bytes of still-queued audio.
@@ -1270,7 +1270,7 @@ function SDL_DequeueAudio(dev: TSDL_AudioDeviceID; data: Pointer; len: cuint32):
  * \sa SDL_DequeueAudio
  *}
 function SDL_GetQueuedAudioSize(dev: TSDL_AudioDeviceID): cuint32; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetQueuedAudioSize' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetQueuedAudioSize' {$ENDIF} {$ENDIF};
 
   {**
  * Drop any queued audio data waiting to be sent to the hardware.
@@ -1305,7 +1305,7 @@ function SDL_GetQueuedAudioSize(dev: TSDL_AudioDeviceID): cuint32; cdecl;
  * \sa SDL_DequeueAudio
  *}
 procedure SDL_ClearQueuedAudio(dev: TSDL_AudioDeviceID); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearQueuedAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_ClearQueuedAudio' {$ENDIF} {$ENDIF};
 
   {**
    *   Audio lock functions
@@ -1335,7 +1335,7 @@ procedure SDL_ClearQueuedAudio(dev: TSDL_AudioDeviceID); cdecl;
  * \sa SDL_UnlockAudioDevice
  *}
 procedure SDL_LockAudio; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockAudio' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to lock out the audio callback function for a specified
@@ -1375,7 +1375,7 @@ procedure SDL_LockAudio; cdecl;
  * \sa SDL_UnlockAudioDevice
  *}
 procedure SDL_LockAudioDevice(dev: TSDL_AudioDeviceID); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockAudioDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_LockAudioDevice' {$ENDIF} {$ENDIF};
 
 {**
  * This function is a legacy means of unlocking the audio device.
@@ -1395,7 +1395,7 @@ procedure SDL_LockAudioDevice(dev: TSDL_AudioDeviceID); cdecl;
  * \sa SDL_UnlockAudioDevice
  *}
 procedure SDL_UnlockAudio; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Unlock' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_Unlock' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to unlock the audio callback function for a specified
@@ -1410,7 +1410,7 @@ procedure SDL_UnlockAudio; cdecl;
  * \sa SDL_LockAudioDevice
  *}
 procedure SDL_UnlockAudioDevice(dev: TSDL_AudioDeviceID); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnlockAudioDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_UnlockAudioDevice' {$ENDIF} {$ENDIF};
 
 {*Audio lock functions*}
 
@@ -1430,7 +1430,7 @@ procedure SDL_UnlockAudioDevice(dev: TSDL_AudioDeviceID); cdecl;
  * \sa SDL_OpenAudio
  *}
 procedure SDL_CloseAudio; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CloseAudio' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CloseAudio' {$ENDIF} {$ENDIF};
 
 {**
  * Use this function to shut down audio processing and close the audio device.
@@ -1455,5 +1455,5 @@ procedure SDL_CloseAudio; cdecl;
  * \sa SDL_OpenAudioDevice
  *}
 procedure SDL_CloseAudioDevice(dev: TSDL_AudioDeviceID); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CloseAudioDevice' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_CloseAudioDevice' {$ENDIF} {$ENDIF};
 

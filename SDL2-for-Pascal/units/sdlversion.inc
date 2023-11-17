@@ -103,7 +103,7 @@ function SDL_VERSION_ATLEAST(X,Y,Z: cuint8): Boolean;
  *  SDL_VERSION
  *}
 procedure SDL_GetVersion(ver: PSDL_Version); cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetVersion' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetVersion' {$ENDIF} {$ENDIF};
 
 {**
  *  Get the code revision of SDL that is linked against your program.
@@ -113,7 +113,7 @@ procedure SDL_GetVersion(ver: PSDL_Version); cdecl;
  *  against other revisions. It is NOT an incrementing number.
  *}
 function SDL_GetRevision: PAnsiChar; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRevision' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRevision' {$ENDIF} {$ENDIF};
 
 {**
  *  Get the revision number of SDL that is linked against your program.
@@ -123,4 +123,4 @@ function SDL_GetRevision: PAnsiChar; cdecl;
  *  hg.libsdl.org.
  *}
 function SDL_GetRevisionNumber: cint; cdecl;
-  external SDL_LibName {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRevisionNumber' {$ENDIF} {$ENDIF};
+  external {$IFDEF DYNAMIC_LINK}SDL_LibName{$ENDIF} {$IFDEF DELPHI} {$IFDEF MACOS} name '_SDL_GetRevisionNumber' {$ENDIF} {$ENDIF};
