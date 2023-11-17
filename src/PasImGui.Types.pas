@@ -292,8 +292,8 @@ Type
   // Another way to allow large meshes while keeping 16-bit indices is to handle ImDrawCmd::VtxOffset in your renderer.
   // Read about ImGuiBackendFlags_RendererHasVtxOffset for details.
 
-  {.$Define ImDrawIdx_32}
-  {$IfDef ImDrawIdx_32}
+  {.$Define ImD_32}
+  {$IfDef ImD_32}
     ImDrawIdx = ImU32;
   {$ELSE}
     ImDrawIdx = ImU16; // Default: 16-bit (for maximum compatibility with renderer backends)

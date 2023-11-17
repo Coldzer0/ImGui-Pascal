@@ -1,12 +1,16 @@
 Unit PasImGui.Renderer.OpenGL3;
-
+{$I ImGuiPasDef.inc}
 {$IFDEF FPC}
   {$mode Delphi}{$H+}
-  {$modeswitch anonymousfunctions}
 {$ENDIF}
 {$POINTERMATH ON}
 // Debugging
-{$Define IMGUI_OPENGL_DEBUG}
+{$IfOpt D+}
+  {$If Defined(FPC) or Defined(DelphiXEAndUp)}
+    {$Define IMGUI_LOG}
+  {$EndIf}
+{$EndIf}
+
 
 // Specific OpenGL ES versions
 //{$Define IMGUI_OPENGL_ES2}
@@ -102,26 +106,24 @@ type
 
 Implementation
 
+{$IfDef IMGUI_LOG}
 procedure OnAssert(const Message, Filename: {$IfDef FPC}ShortString{$ELSE}string{$EndIf}; LineNumber: Integer; ErrorAddr: Pointer);
 begin
   raise EAssertionFailed.Create(Format('%s (%s, line %d)', [Message, Filename, LineNumber]));
 end;
 
 procedure GL_CALL(ACall : TGLProc; AError: TError);
-{$IfDef IMGUI_OPENGL_DEBUG}
   var
   gl_err : GLenum;
-{$EndIf}
 begin
   ACall();
-  {$IfDef IMGUI_OPENGL_DEBUG}
   gl_err := glGetError();
   if (gl_err <> 0) then
   begin
     AError(Format('GL error 0x%x',  [gl_err]));
   end;
-  {$EndIf}
 end;
+{$EndIf}
 
 Function ImGui_ImplOpenGL3_GetBackendData(): PImGui_ImplOpenGL3_Data;
 Begin
@@ -177,9 +179,9 @@ begin
   //  draw_data^.DisplayPos+data_data^.DisplaySize (bottom right).
   //    DisplayPos is (0,0) for single viewport apps.
 
-  GL_CALL(procedure begin
-    glViewport(0, 0, GLsizei(fb_width), GLsizei(fb_height));
-  end, procedure(msg : string) begin Assert(False, msg); end);
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glViewport(0, 0, GLsizei(fb_width), GLsizei(fb_height));
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
   L := draw_data^.DisplayPos.x;
   R := draw_data^.DisplayPos.x + draw_data^.DisplaySize.x;
@@ -222,15 +224,31 @@ begin
   {$EndIf}
 
   // Bind vertex/index buffers and setup attributes for ImDrawVert
-  GL_CALL(procedure begin glBindBuffer(GL_ARRAY_BUFFER, bd^.VboHandle); end, procedure(msg : string) begin Assert(False, msg); end);
-  GL_CALL(procedure begin glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bd^.ElementsHandle); end, procedure(msg : string) begin Assert(False, msg); end);
-  GL_CALL(procedure begin glEnableVertexAttribArray(bd^.AttribLocationVtxPos); end, procedure(msg : string) begin Assert(False, msg); end);
-  GL_CALL(procedure begin glEnableVertexAttribArray(bd^.AttribLocationVtxUV); end, procedure(msg : string) begin Assert(False, msg); end);
-  GL_CALL(procedure begin glEnableVertexAttribArray(bd^.AttribLocationVtxColor); end, procedure(msg : string) begin Assert(False, msg); end);
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glBindBuffer(GL_ARRAY_BUFFER, bd^.VboHandle);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, bd^.ElementsHandle);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glEnableVertexAttribArray(bd^.AttribLocationVtxPos);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glEnableVertexAttribArray(bd^.AttribLocationVtxUV);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glEnableVertexAttribArray(bd^.AttribLocationVtxColor);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glVertexAttribPointer(bd^.AttribLocationVtxPos, 2, GL_FLOAT, Boolean(GL_FALSE), sizeof(ImDrawVert), Pointer(IntPtr(@PImDrawVert(nil)^.pos)));
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glVertexAttribPointer(bd^.AttribLocationVtxUV, 2, GL_FLOAT, Boolean(GL_FALSE), sizeof(ImDrawVert), Pointer(IntPtr(@PImDrawVert(nil)^.uv)));
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glVertexAttribPointer(bd^.AttribLocationVtxColor, 4, GL_UNSIGNED_BYTE, Boolean(GL_TRUE), sizeof(ImDrawVert), Pointer(IntPtr(@PImDrawVert(nil)^.col)));
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
 end;
 
@@ -336,7 +354,9 @@ Begin
   //    VertexAttrib calls would overwrite the default one currently bound.
   vertex_array_object := 0;
   {$IfDef IMGUI_OPENGL_USE_VERTEX_ARRAY}
-  GL_CALL(procedure begin glGenVertexArrays(1, @vertex_array_object); end, procedure(msg : string) begin Assert(False, msg); end);
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+  glGenVertexArrays(1, @vertex_array_object);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
   {$EndIf}
   ImGui_ImplOpenGL3_SetupRenderState(draw_data, fb_width, fb_height, vertex_array_object);
 
@@ -367,20 +387,32 @@ Begin
       if (bd^.VertexBufferSize < vtx_buffer_size) then
       begin
         bd^.VertexBufferSize := vtx_buffer_size;
-        GL_CALL(procedure begin glBufferData(GL_ARRAY_BUFFER, bd^.VertexBufferSize, nil, GL_STREAM_DRAW); end, procedure(msg : string) begin Assert(False, msg); end);
+        {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+        glBufferData(GL_ARRAY_BUFFER, bd^.VertexBufferSize, nil, GL_STREAM_DRAW);
+        {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
       end;
       if (bd^.IndexBufferSize < idx_buffer_size) then
       begin
         bd^.IndexBufferSize := idx_buffer_size;
-        GL_CALL(procedure begin glBufferData(GL_ELEMENT_ARRAY_BUFFER, bd^.IndexBufferSize, nil, GL_STREAM_DRAW); end, procedure(msg : string) begin Assert(False, msg); end);
+        {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, bd^.IndexBufferSize, nil, GL_STREAM_DRAW);
+        {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
       end;
-      GL_CALL(procedure begin glBufferSubData(GL_ARRAY_BUFFER, 0, vtx_buffer_size, cmd_list_ptr.VtxBuffer.Data); end, procedure(msg : string) begin Assert(False, msg); end);
-      GL_CALL(procedure begin glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, idx_buffer_size, cmd_list_ptr.IdxBuffer.Data); end, procedure(msg : string) begin Assert(False, msg); end);
+      {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+      glBufferSubData(GL_ARRAY_BUFFER, 0, vtx_buffer_size, cmd_list_ptr.VtxBuffer.Data);
+      {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+      {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+      glBufferSubData(GL_ELEMENT_ARRAY_BUFFER, 0, idx_buffer_size, cmd_list_ptr.IdxBuffer.Data);
+      {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
     end
     else
     begin
-      GL_CALL(procedure begin glBufferData(GL_ARRAY_BUFFER, vtx_buffer_size, cmd_list_ptr.VtxBuffer.Data, GL_STREAM_DRAW); end, procedure(msg : string) begin Assert(False, msg); end);
-      GL_CALL(procedure begin glBufferData(GL_ELEMENT_ARRAY_BUFFER, idx_buffer_size, cmd_list_ptr.IdxBuffer.Data,GL_STREAM_DRAW); end, procedure(msg : string) begin Assert(False, msg); end);
+      {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+      glBufferData(GL_ARRAY_BUFFER, vtx_buffer_size, cmd_list_ptr.VtxBuffer.Data, GL_STREAM_DRAW);
+      {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+      {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+      glBufferData(GL_ELEMENT_ARRAY_BUFFER, idx_buffer_size, cmd_list_ptr.IdxBuffer.Data,GL_STREAM_DRAW);
+      {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
     end;
 
     for cmd_i := 0 to Pred(cmd_list_ptr.CmdBuffer.Size) do
@@ -406,25 +438,34 @@ Begin
         if (clip_max.x <= clip_min.x) or (clip_max.y <= clip_min.y) then
           Continue;
         // Apply scissor/clipping rectangle (Y is inverted in OpenGL)
-        GL_CALL(procedure begin glScissor(Trunc(clip_min.x), Trunc(Single(fb_height - clip_max.y)), Trunc(clip_max.x - clip_min.x), Trunc(clip_max.y - clip_min.y)); end, procedure(msg : string) begin Assert(False, msg); end);
+        {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+        glScissor(Trunc(clip_min.x), Trunc(Single(fb_height - clip_max.y)), Trunc(clip_max.x - clip_min.x), Trunc(clip_max.y - clip_min.y));
+        {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
         // Bind texture, Draw
-        GL_CALL(procedure begin glBindTexture(GL_TEXTURE_2D, {%H-}GLuint(pcmd.GetTexID())); end, procedure(msg : string) begin Assert(False, msg); end);
+        {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+        glBindTexture(GL_TEXTURE_2D, {%H-}GLuint(pcmd.GetTexID()));
+        {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
         {$IfDef IMGUI_OPENGL_MAY_HAVE_VTX_OFFSET}
           if (bd^.GlVersion >= 320) then
           begin
-            GL_CALL(
-            procedure begin glDrawElementsBaseVertex(GL_TRIANGLES, GLsizei(pcmd.ElemCount), {$IfDef ImDrawIdx_32}GL_UNSIGNED_INT{$ELSE}GL_UNSIGNED_SHORT{$EndIf} ,Pointer(IntPtr(pcmd.IdxOffset * sizeof(ImDrawIdx))), GLint(pcmd.VtxOffset)); end,procedure(msg : string)begin Assert(False, msg); end);
+            {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+            glDrawElementsBaseVertex(GL_TRIANGLES, GLsizei(pcmd.ElemCount), {$IfDef ImD_32}GL_UNSIGNED_INT{$ELSE}GL_UNSIGNED_SHORT{$EndIf} ,Pointer(IntPtr(pcmd.IdxOffset * sizeof(ImDrawIdx))), GLint(pcmd.VtxOffset));
+            {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
           end
           else
         {$EndIf}
-          GL_CALL(procedure begin glDrawElements(GL_TRIANGLES, GLsizei(pcmd.ElemCount), {$IfDef ImDrawIdx_32}GL_UNSIGNED_INT{$ELSE}GL_UNSIGNED_SHORT{$EndIf},Pointer(IntPtr(pcmd.IdxOffset * sizeof(ImDrawIdx)))); end,procedure(msg : string)begin Assert(False, msg);end);
+          {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+          glDrawElements(GL_TRIANGLES, GLsizei(pcmd.ElemCount), {$IfDef ImD_32}GL_UNSIGNED_INT{$ELSE}GL_UNSIGNED_SHORT{$EndIf},Pointer(IntPtr(pcmd.IdxOffset * sizeof(ImDrawIdx))));
+          {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
       end;
     end;
   end;
   // Destroy the temporary VAO
   {$IfDef IMGUI_OPENGL_USE_VERTEX_ARRAY}
-    GL_CALL(procedure begin glDeleteVertexArrays(1, @vertex_array_object); end, procedure(msg : string) begin Assert(False, msg); end);
+    {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
+    glDeleteVertexArrays(1, @vertex_array_object);
+    {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
   {$EndIf}
 
   // Restore modified GL state
@@ -584,7 +625,7 @@ Begin
   bd^.UseBufferSubData := False;
   {$ENDIF}
 
-  {$IfDef IMGUI_OPENGL_DEBUG}
+  {$IfDef IMGUI_LOG}
   if IsConsole then
     WriteLn(Format(VersionInfo, [bd^.GlVersion, Integer(bd^.GlProfileIsCompat),
       bd^.GlProfileMask, Integer(bd^.GlProfileIsES2), Integer(bd^.GlProfileIsES3),
@@ -625,7 +666,7 @@ Begin
   // Detect extensions we support
   bd^.HasClipOrigin := (bd^.GlVersion >= 450);
   {$IfDef IMGUI_OPENGL_MAY_HAVE_EXTENSIONS}
-  {$IfDef IMGUI_OPENGL_DEBUG}
+  {$IfDef IMGUI_LOG}
     if IsConsole then
       WriteLn('EXTENSIONS :');
   {$EndIf}
@@ -633,7 +674,7 @@ Begin
   for i := 0 to num_extensions - 1 do
   begin
     extension := PAnsiChar(glGetStringi(GL_EXTENSIONS, i));
-    {$IfDef IMGUI_OPENGL_DEBUG}
+    {$IfDef IMGUI_LOG}
       if IsConsole then
         WriteLn(' [+] ', extension);
     {$EndIf}
@@ -742,21 +783,37 @@ begin
   // Upload texture to graphics system
   // (Bilinear sampling is required by default.
   //    Set 'io.Fonts->Flags |= ImFontAtlasFlags_NoBakedLines' or 'style.AntiAliasedLinesUseTex = false' to allow point/nearest sampling)
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glGetIntegerv(GL_TEXTURE_BINDING_2D, @last_texture);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glGenTextures(1, @bd^.FontTexture);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glBindTexture(GL_TEXTURE_2D, bd^.FontTexture);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
   // Not on WebGL/ES
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glPixelStorei(GL_UNPACK_ROW_LENGTH, 0);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixels);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF}
 
   // Store our identifier
   io.Fonts^.SetTexID(ImTextureID(IntPtr(bd^.FontTexture)));
   // Restore state
+  {$IfDef IMGUI_LOG}GL_CALL(procedure begin {$ENDIF}
   glBindTexture(GL_TEXTURE_2D, last_texture);
+  {$IfDef IMGUI_LOG}end, procedure(msg : string) begin Assert(False, msg); end);{$ENDIF};
   Result := True;
 end;
 
@@ -1028,7 +1085,7 @@ Begin
   Freemem(bd);
 End;
 
-{$IfDef IMGUI_OPENGL_DEBUG}
+{$IfDef IMGUI_LOG}
 initialization
   AssertErrorProc := @OnAssert;
 {$EndIf}
