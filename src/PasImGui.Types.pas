@@ -285,7 +285,21 @@ Type
   PImDrawListSplitter = ^ImDrawListSplitter;
   PImDrawListSharedData = ^ImDrawListSharedData;
   PImDrawList = ^ImDrawList;
-  ImDrawIdx = ImU16;
+  PPImDrawList = ^PImDrawList;
+
+  //---- Use 32-bit vertex indices (default is 16-bit) is one way to allow large meshes with more than 64K vertices.
+  // Your renderer backend will need to support it (most example renderer backends support both 16/32-bit indices).
+  // Another way to allow large meshes while keeping 16-bit indices is to handle ImDrawCmd::VtxOffset in your renderer.
+  // Read about ImGuiBackendFlags_RendererHasVtxOffset for details.
+
+  {.$Define ImDrawIdx_32}
+  {$IfDef ImDrawIdx_32}
+    ImDrawIdx = ImU32;
+  {$ELSE}
+    ImDrawIdx = ImU16; // Default: 16-bit (for maximum compatibility with renderer backends)
+  {$EndIf}
+
+
   PImDrawDataBuilder = ^ImDrawDataBuilder;
   PImDrawData = ^ImDrawData;
   PImDrawCmdHeader = ^ImDrawCmdHeader;
@@ -756,6 +770,8 @@ Type
     Data: PImGuiListClipperData;
   End;
 
+  { ImDrawCmd }
+
   ImDrawCmd = Record
     ClipRect: ImVec4;
     TextureId: ImTextureID;
@@ -764,6 +780,7 @@ Type
     ElemCount: Cardinal;
     UserCallback: ImDrawCallback;
     UserCallbackData: Pointer;
+    function GetTexID() : ImTextureID;
   End;
 
 
@@ -784,6 +801,7 @@ Type
     Capacity: Integer;
     Data: PImDrawCmd;
   End;
+
 
   ImVector_ImDrawIdx = Record
     Size: Integer;
@@ -1573,10 +1591,12 @@ Type
   ImVector_ImDrawList = Record
     Size: Integer;
     Capacity: Integer;
-    Data: PImDrawList;
+    Data: PPImDrawList;
   End;
-  ImVector_ImDrawListPtr = ^ImVector_ImDrawList;
+  ImVector_ImDrawListPtr = ImVector_ImDrawList;
   PImVector_ImDrawListPtr = ^ImVector_ImDrawListPtr;
+
+
 
   ImDrawData = Record
     Valid: Boolean;
@@ -1589,6 +1609,7 @@ Type
     FramebufferScale: ImVec2;
     OwnerViewport: PImGuiViewport;
   End;
+
 
   ImGuiPlatformIO = Record
     Platform_CreateWindow : procedure(viewport : PImGuiViewport); Cdecl;
@@ -2472,6 +2493,14 @@ Type
     U0, V0, U1, V1: Single;
   End;
 
+// Special Draw callback value to request renderer backend to reset the graphics/render state.
+// The renderer backend needs to handle this special value, otherwise it will crash trying to call a function at this address.
+// This is useful, for example, if you submitted callbacks which you know have altered the render state and you want it to be restored.
+// Render state is not reset by default because they are many perfectly useful way of altering render state (e.g. changing shader/blending settings before an Image call).
+
+const
+  ImDrawCallback_ResetRenderState : ImDrawCallback = Pointer(-8);
+
 Implementation
 
 { ImVec2 }
@@ -2509,6 +2538,13 @@ begin
   Self.y := _y;
   Self.z := _z;
   Self.w := _w;
+end;
+
+{ ImDrawCmd }
+
+function ImDrawCmd.GetTexID(): ImTextureID;
+begin
+  Result := TextureId;
 end;
 
 { ImGuiDockRequest }
