@@ -89,9 +89,9 @@ Const
   NODE_SLOT_RADIUS: Single = 4.0;
   NODE_WINDOW_PADDING: ImVec2 = (x: 8.0; y: 8.0);
 Begin
-  ImGui.SetNextWindowSize(ImVec2.New(700, 600), ImGuiCond_FirstUseEver);
+  ImGui.SetNextWindowSize(ImVec2.New(800, 600), ImGuiCond_FirstUseEver);
   ImGui.SetNextWindowPosCenter(ImGuiCond_FirstUseEver);
-  If Not ImGui.Begin_('Greeting') Then
+  If Not ImGui.Begin_('Custom Node Graph') Then
   Begin
     ImGui.End_;  // Early out if the window is collapsed, as an optimization.
     exit;
@@ -122,7 +122,7 @@ Begin
 
   For node_idx := 0 To Pred(nodes.Count) Do
   Begin
-    node := &nodes[node_idx];
+    node := nodes[node_idx];
     ImGui.PushIdInt(node.ID);
     If ImGui.Selectable(node.Name, node.ID = node_selected) Then
       node_selected := node.ID;
@@ -186,9 +186,9 @@ Begin
 
   For link_idx := 0 To Pred(links.Count) Do
   Begin
-    link := &links[link_idx];
-    node_inp := &nodes[link.InputIdx];
-    node_out := &nodes[link.OutputIdx];
+    link := links[link_idx];
+    node_inp := nodes[link.InputIdx];
+    node_out := nodes[link.OutputIdx];
     p1 := offset + node_inp.GetOutputSlotPos(link.InputSlot);
     p2 := offset + node_out.GetInputSlotPos(link.OutputSlot);
     draw_list^.AddBezierCubic(p1, p1 + ImVec2.New(+50, 0), p2 +
@@ -198,7 +198,7 @@ Begin
   // Display nodes
   For node_idx := 0 To Pred(nodes.Count) Do
   Begin
-    node := &nodes[node_idx];
+    node := nodes[node_idx];
 
     ImGui.PushIdInt(node.ID);
     node_rect_min := offset + node.Pos;
@@ -282,7 +282,7 @@ Begin
 
     If node_selected <> -1 Then
     Begin
-      node := &nodes[node_selected];
+      node := nodes[node_selected];
       ImGui.Text('Node "%s"', [node.Name]);
       ImGui.Separator();
       If ImGui.MenuItem('Rename..', nil, False, False) Then
