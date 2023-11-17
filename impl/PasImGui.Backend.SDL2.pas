@@ -12,7 +12,7 @@
   MIT License for more details.
 }
 
-Unit PasImGui.SDL2;
+Unit PasImGui.Backend.SDL2;
 
 {$IFDEF FPC}
   {$mode objfpc}{$H+}{$J-}

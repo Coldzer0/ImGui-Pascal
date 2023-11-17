@@ -12,7 +12,7 @@
   MIT License for more details.
 }
 
-Program ImGuiDemo;
+Program ImGui_SDL2_OpenGL3_Demo;
 {$IFDEF FPC}
   {$mode objfpc}{$H+}{$J-}
 {$ENDIF}
@@ -29,6 +29,7 @@ Program ImGuiDemo;
 {$EndIf}
 {$EndIf}
 
+
 Uses
   {$IFDEF FPC}
   cmem,
@@ -40,9 +41,8 @@ Uses
   PasImGui.Apis,
   PasImGui.Types,
   PasImGui.Enums,
-  OpenGl3.Loader,
-  PasImGui.SDL2,
-  CImGui.Impl.OpenGL3,
+  PasImGui.Backend.SDL2,
+  PasImGui.Renderer.OpenGL3,
   TestWindow,
   imgui_extra,
   CustomNodeGraph;
@@ -208,11 +208,8 @@ Begin
   //open new SDL window with OpenGL rendering support
   If SDL_Init(SDL_INIT_VIDEO or SDL_INIT_TIMER) < 0 Then
   Begin
-    {$IFDEF FPC}
-    SDL_Log('failed to init: %s', [SDL_GetError()]);
-    {$ELSE}
-    Writeln(Format('failed to init: %s', [SDL_GetError()]));
-    {$ENDIF}
+    if IsConsole then
+      Writeln(Format('failed to init: %s', [SDL_GetError()]));
   End;
 
   // Decide GL+GLSL versions
@@ -251,40 +248,12 @@ Begin
     SDL_WINDOWPOS_CENTERED, w, h, flags);
   If window = nil Then
   Begin
-    {$IFDEF FPC}
-    SDL_Log('Failed to create window: %s', [SDL_GetError()]);
-    {$ELSE}
-    Writeln(Format('Failed to create window: %s', [SDL_GetError()]));
-    {$ENDIF}  
+    raise Exception.Create(Format('Failed to create window: %s', [SDL_GetError()]));
     halt;
   End;
 
   gl_context := SDL_GL_CreateContext(window);
   SDL_GL_SetSwapInterval(1); //enable VSync
-
-
-  // Loading OpenGL APIs
-  If Not ImGLInit() Then
-  Begin
-    {$IFDEF FPC}
-    SDL_Log('Error while Loading OpenGL3', []);
-    {$ELSE}
-    {$IFDEF DEBUG}
-    Writeln('Error while Loading OpenGL3');
-    {$ENDIF}
-    {$ENDIF}   
-    Halt;
-  End;
-
-  // Show opengl version sdl uses
-  {$IFDEF FPC}
-  SDL_Log('Opengl version: %s', [glGetString(GL_VERSION)]);
-  {$ELSE}
-  {$IFDEF DEBUG}
-  Writeln(Format('Opengl version: %s', [PAnsiChar(glGetString(GL_VERSION))]));
-  {$ENDIF}
-  {$ENDIF}   
-  
 
   // setup imgui
   ImGui.CreateContext(nil);
@@ -310,7 +279,7 @@ Begin
 
   // Init ImGui SDL2 OpenGL using Pure Pascal
   ImGui_ImplSDL2_InitForOpenGL_Pas(window, gl_context);
-  ImGui_Impl_OpenGL3_Init(glsl_version);
+  ImGui_OpenGL3_Init(glsl_version);
 
 
   { uncomment to set a different gui theme }
@@ -331,8 +300,6 @@ Begin
   //IO^.Fonts^.AddFontDefault();
   IO^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 25.0);
   IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
-
-
 
   // Background Color
   clearColor.x := 0.45;
@@ -357,7 +324,7 @@ Begin
     End;
 
     // start imgui frame
-    ImGui_Impl_OpenGL3_NewFrame();
+    ImGui_OpenGL3_NewFrame();
     ImGui_ImplSDL2_NewFrame_Pas();
     ImGui.NewFrame();
 
@@ -377,7 +344,7 @@ Begin
     glViewport(0, 0, Trunc(IO^.DisplaySize.x), Trunc(IO^.DisplaySize.y));
     glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
     glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_Impl_OpenGL3_RenderDrawData(ImGui.GetDrawData());
+    ImGui_OpenGL3_RenderDrawData(ImGui.GetDrawData());
 
 
     // IMGUI_DOCK
@@ -397,7 +364,7 @@ Begin
   testwin.Free;
 
   // clean up
-  ImGui_Impl_OpenGL3_Shutdown();
+  ImGui_OpenGL3_Shutdown();
   ImGui_ImplSDL2_Shutdown_Pas();
   ImGui.DestroyContext(nil);
 
