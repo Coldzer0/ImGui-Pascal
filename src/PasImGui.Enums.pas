@@ -14,15 +14,7 @@
 
 unit PasImGui.Enums;
 
-{$IfDef FPC}
-  {$mode objfpc}{$H+}
-  {$PACKRECORDS C}
-  {$PackEnum 4}
-  {$WARN 3031 off : Values in enumeration types have to be ascending}
-{$EndIf}
-
 interface
-
 
 Const
   ImGuiWindowFlags_None = 0;

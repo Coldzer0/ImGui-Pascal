@@ -16,9 +16,10 @@ Unit PasImGui.Types;
 
 {$IfDef FPC}
   {$mode Delphi}{$H+}
-  {$PACKRECORDS C}
-  {$PackEnum 4}
+  {$PackRecords C}
   {$modeswitch advancedrecords}
+{$ELSE}
+  {$A8} // this is the closest to C And FPC. Needs a lot of work to match C strcut types.
 {$EndIf}
 
 Interface
@@ -37,11 +38,38 @@ Const
 
 // Main Types
 Type
-  T30Bits = 0..1073741823;
-  T4Bits = 0..15;
-  T3Bits = 0..7;
+  T1Bit  = 0..1;
   T2Bits = 0..3;
-  T1Bit = 0..1;
+  T3Bits = 0..7;
+  T4Bits = 0..15;
+  T5Bits = 0..31;
+  T6Bits = 0..63;
+  T7Bits = 0..127;
+  T8Bits = 0..255;
+  T9Bits = 0..511;
+  T10Bits = 0..1023;
+  T11Bits = 0..2047;
+  T12Bits = 0..4095;
+  T13Bits = 0..8191;
+  T14Bits = 0..16383;
+  T15Bits = 0..32767;
+  T16Bits = 0..65535;
+  T17Bits = 0..131071;
+  T18Bits = 0..262143;
+  T19Bits = 0..524287;
+  T20Bits = 0..1048575;
+  T21Bits = 0..2097151;
+  T22Bits = 0..4194303;
+  T23Bits = 0..8388607;
+  T24Bits = 0..16777215;
+  T25Bits = 0..33554431;
+  T26Bits = 0..67108863;
+  T27Bits = 0..134217727;
+  T28Bits = 0..268435455;
+  T29Bits = 0..536870911;
+  T30Bits = 0..1073741823;
+  T31Bits = 0..2147483647;
+  T32Bits = 0..4294967295;
 
 
   QWord = NativeUInt;
@@ -334,6 +362,10 @@ Type
     Text: PAnsiChar;
   end;
 
+  ImGuiDataTypeTempStorage = Record
+    Data: Array[0..7] of ImU8;
+  End;
+
   ImGuiDataTypeInfo = Record
     Size: size_t;
     Name: Pansichar;
@@ -375,7 +407,7 @@ Type
   ImVector_ImGuiViewportPtr = Record
     Size: Integer;
     Capacity: Integer;
-    Data: PImGuiViewport;
+    Data: PPImGuiViewport;
   End;
 
   ImVector_const_charPtr = Record
@@ -390,8 +422,8 @@ Type
   PImVec1 = ^ImVec1;
 
   ImVec2ih = Record
-    x: Smallint;
-    y: Smallint;
+    x: ImS16;
+    y: ImS16;
   End;
   PImVec2ih = ^ImVec2ih;
 
@@ -563,15 +595,15 @@ Type
   End;
 
   ImGuiStackSizes = Record
-    SizeOfIDStack: Shortint;
-    SizeOfColorStack: Shortint;
-    SizeOfStyleVarStack: Shortint;
-    SizeOfFontStack: Shortint;
-    SizeOfFocusScopeStack: Shortint;
-    SizeOfGroupStack: Shortint;
-    SizeOfItemFlagsStack: Shortint;
-    SizeOfBeginPopupStack: Shortint;
-    SizeOfDisabledStack: Shortint;
+    SizeOfIDStack: ImS16;
+    SizeOfColorStack: ImS16;
+    SizeOfStyleVarStack: ImS16;
+    SizeOfFontStack: ImS16;
+    SizeOfFocusScopeStack: ImS16;
+    SizeOfGroupStack: ImS16;
+    SizeOfItemFlagsStack: ImS16;
+    SizeOfBeginPopupStack: ImS16;
+    SizeOfDisabledStack: ImS16;
   End;
 
 
@@ -580,6 +612,7 @@ Type
     ParentLastItemDataBackup: ImGuiLastItemData;
     StackSizesOnBegin: ImGuiStackSizes;
   End;
+
 
   ImVector_ImGuiWindowStackData = Record
     Size: Integer;
@@ -622,6 +655,7 @@ Type
     WindowID: ImGuiID;
     BackupCursorPos: ImVec2;
     BackupCursorMaxPos: ImVec2;
+    BackupCursorPosPrevLine: ImVec2;
     BackupIndent: ImVec1;
     BackupGroupOffset: ImVec1;
     BackupCurrLineSize: ImVec2;
@@ -629,6 +663,7 @@ Type
     BackupActiveIdIsAlive: ImGuiID;
     BackupActiveIdPreviousFrameIsAlive: Boolean;
     BackupHoveredIdIsAlive: Boolean;
+    BackupIsSameLine: Boolean;
     EmitItem: Boolean;
   End;
 
@@ -793,7 +828,7 @@ Type
   ImDrawCmdHeader = Record
     ClipRect: ImVec4;
     TextureId: ImTextureID;
-    VtxOffset: Cardinal;
+    VtxOffset: ImU32;
   End;
 
   ImVector_ImDrawCmd = Record
@@ -858,20 +893,23 @@ Type
     WantFullRebuild: Boolean;
   End;
 
-  ImGuiTableColumnSettings = {$IFDEF FPC}Bitpacked{$ELSE}packed{$ENDIF} Record
+  ImGuiTableColumnSettings = Record
     WidthOrWeight: Single;
     UserID: ImGuiID;
     Index: ImGuiTableColumnIdx;
     DisplayOrder: ImGuiTableColumnIdx;
     SortOrder: ImGuiTableColumnIdx;
-    SortDirection: T2Bits; // Use 2 bits for the SortDirection
-    IsEnabled: T1Bit; // Use 1 bit for IsEnabled
-    IsStretch: T1Bit; // Use 1 bit for IsStretch
+    union : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      SortDirection: T2Bits;
+      IsEnabled: T1Bit;
+      IsStretch: T1Bit;
+    end;
   End;
 
   ImGuiTableTempData = Record
     TableIndex: Integer;
     LastTimeActive: Single;
+    AngledheadersExtraWidth: Single;
     UserOuterSize: ImVec2;
     DrawSplitter: ImDrawListSplitter;
     HostBackupWorkRect: ImRect;
@@ -883,7 +921,6 @@ Type
     HostBackupItemWidth: Single;
     HostBackupItemWidthStackSize: Integer;
   End;
-
 
   ImGuiTabItem = Record
     ID: ImGuiID;
@@ -927,6 +964,8 @@ Type
     ScrollingSpeed: Single;
     ScrollingRectMinX: Single;
     ScrollingRectMaxX: Single;
+    SeparatorMinX: Single;
+    SeparatorMaxX: Single;
     ReorderRequestTabId: ImGuiID;
     ReorderRequestOffset: ImS16;
     BeginCount: ImS8;
@@ -941,7 +980,7 @@ Type
     TabsNames: ImGuiTextBuffer;
   End;
 
-  ImGuiTableColumn = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
+  ImGuiTableColumn = Record
     Flags: ImGuiTableColumnFlags;
     WidthGiven: Single;
     MinX: Single;
@@ -979,10 +1018,12 @@ Type
     NavLayerCurrent: ImS8;
     AutoFitQueue: ImU8;
     CannotSkipItemsQueue: ImU8;
-    SortDirection: T2Bits;
-    SortDirectionsAvailCount: T2Bits;
-    SortDirectionsAvailMask: T4Bits;
-    SortDirectionsAvailList: ImU8;
+    SortOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      SortDirection: T2Bits;
+      SortDirectionsAvailCount: T2Bits;
+      SortDirectionsAvailMask: T4Bits;
+      SortDirectionsAvailList: ImU8;
+    end;
   End;
 
 
@@ -1038,7 +1079,7 @@ Type
     ColumnUserID: ImGuiID;
     ColumnIndex: ImS16;
     SortOrder: ImS16;
-    SortDirection: ImGuiSortDirection;
+    SortDirection: {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record value : T8Bits;end;
   End;
 
   ImGuiTableSortSpecs = Record
@@ -1047,7 +1088,7 @@ Type
     SpecsDirty: Boolean;
   End;
 
-  ImGuiTable = Record
+  ImGuiTable =  Record
     ID: ImGuiID;
     Flags: ImGuiTableFlags;
     RawData: Pointer;
@@ -1072,10 +1113,12 @@ Type
     RowCellPaddingY: Single;
     RowTextBaseline: Single;
     RowIndentOffsetX: Single;
-    RowFlags: ImGuiTableRowFlags;
-    LastRowFlags: ImGuiTableRowFlags;
+    RowFlagsOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      RowFlags: T16Bits;
+      LastRowFlags: T16Bits;
+    end;
     RowBgColorCounter: Integer;
-    RowBgColor: Array[0..1] Of ImU32;
+    RowBgColor: Array[0..1] of ImU32;
     BorderColorStrong: ImU32;
     BorderColorLight: ImU32;
     BorderX1: Single;
@@ -1093,6 +1136,8 @@ Type
     ResizedColumnNextWidth: Single;
     ResizeLockMinContentsX2: Single;
     RefScale: Single;
+    AngledHeadersHeight: Single;
+    AngledHeadersSlope: Single;
     OuterRect: ImRect;
     InnerRect: ImRect;
     WorkRect: ImRect;
@@ -1115,8 +1160,10 @@ Type
     ColumnsEnabledCount: ImGuiTableColumnIdx;
     ColumnsEnabledFixedCount: ImGuiTableColumnIdx;
     DeclColumnsCount: ImGuiTableColumnIdx;
+    AngledHeadersCount: ImGuiTableColumnIdx;
     HoveredColumnBody: ImGuiTableColumnIdx;
     HoveredColumnBorder: ImGuiTableColumnIdx;
+    HighlightColumnHeader: ImGuiTableColumnIdx;
     AutoFitSingleColumn: ImGuiTableColumnIdx;
     ResizedColumn: ImGuiTableColumnIdx;
     LastResizedColumn: ImGuiTableColumnIdx;
@@ -1142,6 +1189,7 @@ Type
     IsSortSpecsDirty: Boolean;
     IsUsingHeaders: Boolean;
     IsContextPopupOpen: Boolean;
+    DisableDefaultContextMenu: Boolean;
     IsSettingsRequestLoad: Boolean;
     IsSettingsDirty: Boolean;
     IsDefaultDisplayOrder: Boolean;
@@ -1149,6 +1197,8 @@ Type
     IsResetDisplayOrderRequest: Boolean;
     IsUnfrozenRows: Boolean;
     IsDefaultSizingPolicy: Boolean;
+    IsActiveIdAliveBeforeTable: Boolean;
+    IsActiveIdInTable: Boolean;
     HasScrollbarYCurr: Boolean;
     HasScrollbarYPrev: Boolean;
     MemoryCompacted: Boolean;
@@ -1163,8 +1213,9 @@ Type
     ViewportId: ImGuiID;
     DockId: ImGuiID;
     ClassId: ImGuiID;
-    DockOrder: Shortint;
+    DockOrder: ImS16;
     Collapsed: Boolean;
+    IsChild: Boolean;
     WantApply: Boolean;
     WantDelete: Boolean;
   End;
@@ -1546,6 +1597,8 @@ Type
     Used4kPagesMap: Array[0..2 - 1] of ImU8;
   End;
 
+  { ImGuiViewport }
+
   ImGuiViewport = Record
     ID: ImGuiID;
     Flags: ImGuiViewportFlags;
@@ -1564,6 +1617,10 @@ Type
     PlatformRequestMove: Boolean;
     PlatformRequestResize: Boolean;
     PlatformRequestClose: Boolean;
+
+    // Helpers
+    Function GetCenter() : ImVec2;
+    Function GetWorkCenter() : ImVec2;
   End;
 
   ImGuiPlatformMonitor = Record
@@ -1714,14 +1771,14 @@ Type
   End;
 
   ImGuiMenuColumns = Record
-    TotalWidth: Cardinal;
-    NextTotalWidth: Cardinal;
-    Spacing: Word;
-    OffsetIcon: Word;
-    OffsetLabel: Word;
-    OffsetShortcut: Word;
-    OffsetMark: Word;
-    Widths: Array [0..3] Of Word;
+    TotalWidth: ImU32;
+    NextTotalWidth: ImU32;
+    Spacing: ImU16;
+    OffsetIcon: ImU16;
+    OffsetLabel: ImU16;
+    OffsetShortcut: ImU16;
+    OffsetMark: ImU16;
+    Widths: Array[0..3] of ImU16;
   End;
 
   ImVector_ImGuiWindowPtr = Record
@@ -1730,7 +1787,7 @@ Type
     Data: PImGuiWindow;
   End;
 
-  ImGuiDockNode = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
+  ImGuiDockNode = Record
     ID: ImGuiID;
     SharedFlags: ImGuiDockNodeFlags;
     LocalFlags: ImGuiDockNodeFlags;
@@ -1738,7 +1795,7 @@ Type
     MergedFlags: ImGuiDockNodeFlags;
     State: ImGuiDockNodeState;
     ParentNode: PImGuiDockNode;
-    ChildNodes: Array [0..1] Of PImGuiDockNode;
+    ChildNodes: Array[0..1] of PImGuiDockNode;
     Windows: ImVector_ImGuiWindowPtr;
     TabBar: PImGuiTabBar;
     Pos: ImVec2;
@@ -1759,20 +1816,22 @@ Type
     SelectedTabId: ImGuiID;
     WantCloseTabId: ImGuiID;
     RefViewportId: ImGuiID;
-    AuthorityForPos: T3Bits;
-    AuthorityForSize: T3Bits;
-    AuthorityForViewport: T3Bits;
-    IsVisible: T1Bit;
-    IsFocused: T1Bit;
-    IsBgDrawnThisFrame: T1Bit;
-    HasCloseButton: T1Bit;
-    HasWindowMenuButton: T1Bit;
-    HasCentralNodeChild: T1Bit;
-    WantCloseAll: T1Bit;
-    WantLockSizeOnce: T1Bit;
-    WantMouseMove: T1Bit;
-    WantHiddenTabBarUpdate: T1Bit;
-    WantHiddenTabBarToggle: T1Bit;
+    DockOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      AuthorityForPos: T3Bits;
+      AuthorityForSize: T3Bits;
+      AuthorityForViewport: T3Bits;
+      IsVisible: T1Bit;
+      IsFocused: T1Bit;
+      IsBgDrawnThisFrame: T1Bit;
+      HasCloseButton: T1Bit;
+      HasWindowMenuButton: T1Bit;
+      HasCentralNodeChild: T1Bit;
+      WantCloseAll: T1Bit;
+      WantLockSizeOnce: T1Bit;
+      WantMouseMove: T1Bit;
+      WantHiddenTabBarUpdate: T1Bit;
+      WantHiddenTabBarToggle: T1Bit;
+    end;
   End;
 
   ImGuiWindowTempData = Record
@@ -1792,8 +1851,8 @@ Type
     GroupOffset: ImVec1;
     CursorStartPosLossyness: ImVec2;
     NavLayerCurrent: ImGuiNavLayer;
-    NavLayersActiveMask: Smallint;
-    NavLayersActiveMaskNext: Smallint;
+    NavLayersActiveMask: ImS16;
+    NavLayersActiveMaskNext: ImS16;
     NavIsScrollPushableX: Boolean;
     NavHideHighlightOneFrame: Boolean;
     NavWindowHasScrollY: Boolean;
@@ -1801,7 +1860,7 @@ Type
     MenuBarOffset: ImVec2;
     MenuColumns: ImGuiMenuColumns;
     TreeDepth: Integer;
-    TreeJumpToParentOnPopMask: Cardinal;
+    TreeJumpToParentOnPopMask: ImU32;
     ChildWindows: ImVector_ImGuiWindowPtr;
     StateStorage: PImGuiStorage;
     CurrentColumns: PImGuiOldColumns;
@@ -1840,75 +1899,130 @@ Type
 
   ImGuiWindow = Record
     Ctx: PImGuiContext;
-    Name: Pansichar;
+    Name: PAnsiChar;
     ID: ImGuiID;
-    Flags, FlagsPreviousFrame: ImGuiWindowFlags;
+    Flags: ImGuiWindowFlags;
+    FlagsPreviousFrame: ImGuiWindowFlags;
+    ChildFlags: ImGuiChildFlags;
     WindowClass: ImGuiWindowClass;
     Viewport: PImGuiViewportP;
     ViewportId: ImGuiID;
     ViewportPos: ImVec2;
     ViewportAllowPlatformMonitorExtend: Integer;
-    Pos, Size, SizeFull: ImVec2;
-    ContentSize, ContentSizeIdeal, ContentSizeExplicit: ImVec2;
+    Pos: ImVec2;
+    Size: ImVec2;
+    SizeFull: ImVec2;
+    ContentSize: ImVec2;
+    ContentSizeIdeal: ImVec2;
+    ContentSizeExplicit: ImVec2;
     WindowPadding: ImVec2;
-    WindowRounding, WindowBorderSize: Single;
-    DecoOuterSizeX1, DecoOuterSizeY1, DecoOuterSizeX2, DecoOuterSizeY2: Single;
-    DecoInnerSizeX1, DecoInnerSizeY1: Single;
+    WindowRounding: Single;
+    WindowBorderSize: Single;
+    DecoOuterSizeX1: Single;
+    DecoOuterSizeY1: Single;
+    DecoOuterSizeX2: Single;
+    DecoOuterSizeY2: Single;
+    DecoInnerSizeX1: Single;
+    DecoInnerSizeY1: Single;
     NameBufLen: Integer;
-    MoveId, TabId, ChildId: ImGuiID;
-    Scroll, ScrollMax, ScrollTarget, ScrollTargetCenterRatio,
+    MoveId: ImGuiID;
+    TabId: ImGuiID;
+    ChildId: ImGuiID;
+    Scroll: ImVec2;
+    ScrollMax: ImVec2;
+    ScrollTarget: ImVec2;
+    ScrollTargetCenterRatio: ImVec2;
     ScrollTargetEdgeSnapDist: ImVec2;
     ScrollbarSizes: ImVec2;
-    ScrollbarX, ScrollbarY: Boolean;
-    ViewportOwned, Active, WasActive, WriteAccessed: Boolean;
-    Collapsed, WantCollapseToggle, SkipItems, Appearing, Hidden,
+    ScrollbarX: Boolean;
+    ScrollbarY: Boolean;
+    ViewportOwned: Boolean;
+    Active: Boolean;
+    WasActive: Boolean;
+    WriteAccessed: Boolean;
+    Collapsed: Boolean;
+    WantCollapseToggle: Boolean;
+    SkipItems: Boolean;
+    Appearing: Boolean;
+    Hidden: Boolean;
     IsFallbackWindow: Boolean;
-    IsExplicitChild, HasCloseButton: Boolean;
-    ResizeBorderHeld: Shortint;
-    BeginCount, BeginCountPreviousFrame, BeginOrderWithinParent,
-    BeginOrderWithinContext: Shortint;
-    FocusOrder: Shortint;
+    IsExplicitChild: Boolean;
+    HasCloseButton: Boolean;
+    ResizeBorderHovered: ImS8;
+    ResizeBorderHeld: ImS8;
+    BeginCount: ImS16;
+    BeginCountPreviousFrame: ImS16;
+    BeginOrderWithinParent: ImS16;
+    BeginOrderWithinContext: ImS16;
+    FocusOrder: ImS16;
     PopupId: ImGuiID;
-    AutoFitFramesX, AutoFitFramesY, AutoFitChildAxises: Shortint;
+    AutoFitFramesX: ImS8;
+    AutoFitFramesY: ImS8;
     AutoFitOnlyGrows: Boolean;
     AutoPosLastDirection: ImGuiDir;
-    HiddenFramesCanSkipItems, HiddenFramesCannotSkipItems,
-    HiddenFramesForRenderOnly, DisableInputsFrames: Shortint;
-    SetWindowPosAllowFlags, SetWindowSizeAllowFlags, SetWindowCollapsedAllowFlags,
-    SetWindowDockAllowFlags: ImGuiCond;
-    SetWindowPosVal, SetWindowPosPivot: ImVec2;
+    HiddenFramesCanSkipItems: ImS8;
+    HiddenFramesCannotSkipItems: ImS8;
+    HiddenFramesForRenderOnly: ImS8;
+    DisableInputsFrames: ImS8;
+    SetWindowOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      SetWindowPosAllowFlags:       T8Bits;
+      SetWindowSizeAllowFlags:      T8Bits;
+      SetWindowCollapsedAllowFlags: T8Bits;
+      SetWindowDockAllowFlags:      T8Bits;
+    end;
+    SetWindowPosVal: ImVec2;
+    SetWindowPosPivot: ImVec2;
     IDStack: ImVector_ImGuiID;
     DC: ImGuiWindowTempData;
-    OuterRectClipped, InnerRect, InnerClipRect, WorkRect, ParentWorkRect: ImRect;
-    ClipRect, ContentRegionRect: ImRect;
-    HitTestHoleSize, HitTestHoleOffset: ImVec2ih;
-    LastFrameActive, LastFrameJustFocused: Integer;
-    LastTimeActive, ItemWidthDefault: Single;
+    OuterRectClipped: ImRect;
+    InnerRect: ImRect;
+    InnerClipRect: ImRect;
+    WorkRect: ImRect;
+    ParentWorkRect: ImRect;
+    ClipRect: ImRect;
+    ContentRegionRect: ImRect;
+    HitTestHoleSize: ImVec2ih;
+    HitTestHoleOffset: ImVec2ih;
+    LastFrameActive: Integer;
+    LastFrameJustFocused: Integer;
+    LastTimeActive: Single;
+    ItemWidthDefault: Single;
     StateStorage: ImGuiStorage;
     ColumnsStorage: ImVector_ImGuiOldColumns;
-    FontWindowScale, FontDpiScale: Single;
+    FontWindowScale: Single;
+    FontDpiScale: Single;
     SettingsOffset: Integer;
     DrawList: PImDrawList;
     DrawListInst: ImDrawList;
-    ParentWindow, ParentWindowInBeginStack: PImGuiWindow;
-    RootWindow, RootWindowPopupTree, RootWindowDockTree: PImGuiWindow;
-    RootWindowForTitleBarHighlight, RootWindowForNav: PImGuiWindow;
+    ParentWindow: PImGuiWindow;
+    ParentWindowInBeginStack: PImGuiWindow;
+    RootWindow: PImGuiWindow;
+    RootWindowPopupTree: PImGuiWindow;
+    RootWindowDockTree: PImGuiWindow;
+    RootWindowForTitleBarHighlight: PImGuiWindow;
+    RootWindowForNav: PImGuiWindow;
     NavLastChildNavWindow: PImGuiWindow;
-    NavLastIds: Array[0..ImGuiNavLayer_COUNT - 1] Of ImGuiID;
-    NavRectRel: Array[0..ImGuiNavLayer_COUNT - 1] Of ImRect;
-    NavPreferredScoringPosRel: Array[0..ImGuiNavLayer_COUNT - 1] Of ImVec2;
+    NavLastIds: Array[0..ImGuiNavLayer_COUNT - 1] of ImGuiID;
+    NavRectRel: Array[0..ImGuiNavLayer_COUNT - 1] of ImRect;
+    NavPreferredScoringPosRel: Array[0..ImGuiNavLayer_COUNT - 1] of ImVec2;
     NavRootFocusScopeId: ImGuiID;
-    MemoryDrawListIdxCapacity, MemoryDrawListVtxCapacity: Integer;
+    MemoryDrawListIdxCapacity: Integer;
+    MemoryDrawListVtxCapacity: Integer;
     MemoryCompacted: Boolean;
-    DockIsActive, DockNodeIsVisible, DockTabIsVisible, DockTabWantClose: Boolean;
-    DockOrder: Shortint;
+    DockOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      DockIsActive:      T1Bit;
+      DockNodeIsVisible: T1Bit;
+      DockTabIsVisible:  T1Bit;
+      DockTabWantClose:  T1Bit;
+    end;
+    DockOrder: ImS16;
     DockStyle: ImGuiWindowDockStyle;
-    DockNode, DockNodeAsHost: PImGuiDockNode;
+    DockNode: PImGuiDockNode;
+    DockNodeAsHost: PImGuiDockNode;
     DockId: ImGuiID;
     DockTabItemStatusFlags: ImGuiItemStatusFlags;
     DockTabItemRect: ImRect;
   End;
-
 
   ImDrawDataBuilder = Record
     Layers: Array[0..1] Of PImVector_ImDrawListPtr;
@@ -1998,6 +2112,15 @@ Type
     redo_char_point: Integer;
   End;
   PStbUndoState = ^StbUndoState;
+
+  StbTexteditRow = Record
+    x0: Single;
+    x1: Single;
+    baseline_y_delta: Single;
+    ymin: Single;
+    ymax: Single;
+    num_chars: Integer;
+  End;
 
   STB_TexteditState = Record
     cursor: Integer;
@@ -2102,8 +2225,8 @@ Type
     ID: ImGuiID;
     QueryFrameCount: ImS8;
     QuerySuccess: Boolean;
-    DataType: ImGuiDataType;
-    Desc: Array[0..57 - 1] of Char;
+    DataType: Integer;
+    Desc: Array[0..56] of AnsiChar;
   End;
 
   ImVector_ImGuiStackLevelInfo = Record
@@ -2430,8 +2553,9 @@ Type
     MergeMode: Boolean;
     FontBuilderFlags: ImU32;
     RasterizerMultiply: Single;
+    RasterizerDensity: Single;
     EllipsisChar: ImWchar;
-    Name: Array[0..40 - 1] of Char;
+    Name: Array[0..39] of AnsiChar;
     DstFont: PImFont;
   End;
 
@@ -2484,10 +2608,12 @@ Type
     constructor New(SplitAxis_: ImGuiAxis);
   End;
 
-  ImFontGlyph = {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} Record
-    Colored: T1Bit;
-    Visible: T1Bit;
-    Codepoint: T30Bits;
+  ImFontGlyph = Record
+    FontOpt : {$IFDEF FPC}bitpacked{$ELSE}packed{$ENDIF} record
+      Colored:   T1Bit;
+      Visible:   T1Bit;
+      Codepoint: T30Bits;
+    end;
     AdvanceX: Single;
     X0, Y0, X1, Y1: Single;
     U0, V0, U1, V1: Single;
@@ -2545,6 +2671,18 @@ end;
 function ImDrawCmd.GetTexID(): ImTextureID;
 begin
   Result := TextureId;
+end;
+
+{ ImGuiViewport }
+
+function ImGuiViewport.GetCenter(): ImVec2;
+begin
+  Result := ImVec2.New(Pos.x + Size.x * 0.5, Pos.y + Size.y * 0.5);
+end;
+
+function ImGuiViewport.GetWorkCenter(): ImVec2;
+begin
+  Result := ImVec2.New(WorkPos.x + WorkSize.x * 0.5, WorkPos.y + WorkSize.y * 0.5);
 end;
 
 { ImGuiDockRequest }
