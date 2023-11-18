@@ -63,7 +63,6 @@ Uses
   SysUtils,
   glad_gl,
   PasImGui,
-  PasImGui.Apis,
   PasImGui.Enums,
   PasImGui.Types,
   OpenGl3.Loader;
@@ -287,7 +286,6 @@ var
   cmd_list_ptr : ImDrawList;
   vtx_buffer_size, idx_buffer_size: GLsizeiptr;
   pcmd: ImDrawCmd;
-  temp_callback : ImDrawCallback;
 Begin
   // Avoid rendering when minimized, scale coordinates for retina displays (screen coordinates != framebuffer coordinates)
   fb_width := Trunc(draw_data^.DisplaySize.x * draw_data^.FramebufferScale.x);
@@ -418,8 +416,7 @@ Begin
     for cmd_i := 0 to Pred(cmd_list_ptr.CmdBuffer.Size) do
     begin
       pcmd := cmd_list_ptr.CmdBuffer.Data[cmd_i];
-      temp_callback := pcmd.UserCallback;
-      if Assigned(temp_callback) then
+      if @pcmd.UserCallback <> nil then
       begin
         // User callback, registered via ImDrawList::AddCallback()
         // (ImDrawCallback_ResetRenderState is a special callback value used by the user to request the renderer to reset render state.)
