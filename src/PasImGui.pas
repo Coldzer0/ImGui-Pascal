@@ -13,23 +13,23 @@
 }
 
 Unit PasImGui;
+
 {$IfDef FPC}
-  {$mode objfpc}{$H+}
+  {$PACKRECORDS C}
+  {$mode Delphi}{$H+}
   {$ModeSwitch advancedrecords}
   {$modeswitch typehelpers}
   {.$Define INLINE} {There's a bug in FPC Trunk version when we inline helper functions}
 {$EndIf}
+{$MINENUMSIZE 4}
+{$I ImGuiPasDef.inc}
 
+interface
+  Uses
+    SysUtils, Math;
 
-Interface
-
-Uses
-  SysUtils,
-  PasImGui.Enums,
-  PasImGui.Types,
-  PasImGui.Apis;
-
-Const
+{$IfDef DYNAMIC_LINK}
+const
   {$if defined(Darwin)}
     SharedSuffix = 'dylib';
   {$elseif defined(linux)}
@@ -38,6 +38,61 @@ Const
   SharedSuffix = 'dll';
   {$endif}
   CIMGUI_LIB = 'cimgui.' + SharedSuffix;
+{$ELSE}
+    {$IfDef FPC}
+    {$LinkLib libcimgui.a}
+    {$IfDef MSWINDOWS}
+      {$linklib stdc++}
+      {$linklib mingwex}
+      {$linklib mingw32}
+      {$linklib gcc}
+      {$LinkLib oleaut32}
+      {$LinkLib setupapi}
+      {$LinkLib imm32}
+      {$LinkLib version}
+      {$LinkLib winmm}
+      {$LinkLib gdi32}
+      {$LinkLib ole32}
+      {$linklib msvcrt}
+      {$LinkLib msvcrt_atexit}
+      {$linklib kernel32}
+      {$linklib advapi32}
+      {$linklib user32}
+      {$linklib shell32}
+    {$EndIf}
+  {$ELSE}
+  {$MESSAGE Error 'Ops ^_^ no static linking for Delphi :P'}
+  {$EndIf}
+{$EndIf}
+
+{$If Defined(FPC) and (Defined(WIN32) or Defined(WIN64))}
+//Type
+  //TProc = Procedure; cdecl;
+  //function atexit(func : TProc): Integer; stdcall external 'msvcrt' name 'atexit';
+{$EndIf}
+
+
+const
+  {$IF Defined(MSWINDOWS)}
+  _PU = '';
+  {$ELSEIF Defined(MACOS64) or Defined(IOS)}
+  _PU = '_';
+  {$ELSEIF Defined(LINUX) or Defined(ANDROID32) or Defined(ANDROID64)}
+  _PU = '';
+  {$ELSE}
+    {$MESSAGE Error 'Unsupported platform'}
+  {$ENDIF}
+
+
+{$I ImPlotTypes.inc}
+{$I PasImGui.Apis.inc}
+
+Type
+  ImVec3 = record
+    x: Single;
+    y: Single;
+    z: Single;
+  end;
 
 Const
   IMGUI_VERSION = '1.90.0';
@@ -321,7 +376,7 @@ Type
       tint_col: ImVec4): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function Checkbox(_label: PAnsiChar; v: PBoolean): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
-    Class Function CheckboxFlags(_label: PAnsiChar; flags: PImU32;
+    Class Function CheckboxFlags(_label: PAnsiChar; flags: PCardinal;
       flags_value: Int32): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function RadioButtonBool(_label: PAnsiChar; active: Boolean): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
@@ -378,27 +433,27 @@ Type
 
     { Widgets: Sliders (tip: ctrl+click on a slider to input text) }
     Class Function SliderFloat(_label: PAnsiChar; v: Psingle;
-      v_min: Single; v_max: Single; display_format: PAnsiChar = nil;
+      v_min: Single; v_max: Single; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function SliderFloat2(_label: PAnsiChar; v: PSingle;
-      v_min: Single; v_max: Single; display_format: PAnsiChar = nil;
+      v_min: Single; v_max: Single; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function SliderFloat3(_label: PAnsiChar; v: PSingle;
-      v_min: Single; v_max: Single; display_format: PAnsiChar = nil;
+      v_min: Single; v_max: Single; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function SliderFloat4(_label: PAnsiChar; v: PSingle;
-      v_min: Single; v_max: Single; display_format: PAnsiChar = nil;
+      v_min: Single; v_max: Single; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function SliderAngle(_label: PAnsiChar; v_rad: Psingle;
       v_degrees_min: Single = -360.0; v_degrees_max: Single = +360.0;
       format: PAnsiChar = nil;
-      flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean; Inline;
+      flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean; {$IfDef INLINE} inline;{$EndIf}
     Class Function SliderInt(_label: PAnsiChar; v: PInteger; v_min: Longint;
-      v_max: Longint; display_format: PAnsiChar = nil;
+      v_max: Longint; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
 
@@ -408,21 +463,21 @@ Type
     {$IfDef INLINE} inline;{$EndIf}
 
     Class Function SliderInt3(_label: PAnsiChar; v: PInteger;
-      v_min: Longint; v_max: Longint; display_format: PAnsiChar = nil;
+      v_min: Longint; v_max: Longint; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
 
     Class Function SliderInt4(_label: PAnsiChar; v: PInteger;
-      v_min: Longint; v_max: Longint; display_format: PAnsiChar = nil;
+      v_min: Longint; v_max: Longint; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
 
     Class Function VSliderFloat(_label: PAnsiChar; size: ImVec2;
-      v: Psingle; v_min: Single; v_max: Single; display_format: PAnsiChar = nil;
+      v: Psingle; v_min: Single; v_max: Single; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function VSliderInt(_label: PAnsiChar; size: ImVec2; v: PInteger;
-      v_min: Longint; v_max: Longint; display_format: PAnsiChar = nil;
+      v_min: Longint; v_max: Longint; display_format: PAnsiChar;
       flags: ImGuiSliderFlags = ImGuiSliderFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
 
@@ -474,11 +529,11 @@ Type
 
     { Widgets: Input with Keyboard }
     Class Function InputText(_label: PAnsiChar; buf: PAnsiChar;
-      buf_size: size_t; flags: ImGuiInputTextFlags = ImGuiInputTextFlags_None;
+      buf_size: NativeUInt; flags: ImGuiInputTextFlags = ImGuiInputTextFlags_None;
       callback: ImGuiInputTextCallback = nil; user_data: pointer = nil): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Function InputTextMultiline(_label: PAnsiChar; buf: PAnsiChar;
-      buf_size: size_t; size: ImVec2;
+      buf_size: NativeUInt; size: ImVec2;
       flags: ImGuiInputTextFlags = ImGuiInputTextFlags_None;
       callback: ImGuiInputTextCallback = nil; user_data: pointer = nil): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
@@ -722,7 +777,7 @@ Type
     {$IfDef INLINE} inline;{$EndIf}
 
     { Helpers functions to access functions pointers in ImGui::GetIO() }
-    Class Function MemAlloc(sz: size_t): pointer; {$IfDef INLINE} inline;{$EndIf}
+    Class Function MemAlloc(sz: NativeUInt): pointer; {$IfDef INLINE} inline;{$EndIf}
     Class Procedure MemFree(ptr: pointer); {$IfDef INLINE} inline;{$EndIf}
     Class Function GetClipboardText: PAnsiChar; {$IfDef INLINE} inline;{$EndIf}
     Class Procedure SetClipboardText(_text: PAnsiChar); {$IfDef INLINE} inline;{$EndIf}
@@ -740,9 +795,9 @@ Type
     Function AddFontDefault(): PImFont;
     Function AddFontFromFileTTF(filename: PAnsiChar; size_pixels: Single;
       font_cfg: PImFontConfig = nil; glyph_ranges: PImWchar = nil): PImFont;
-    Procedure GetTexDataAsRGBA32(out_pixels: PPImU8; out_width: PInteger;
+    Procedure GetTexDataAsRGBA32(out_pixels: PPByte; out_width: PInteger;
       out_height: PInteger; out_bytes_per_pixel: PInteger = nil);
-    Procedure GetTexDataAsAlpha8(out_pixels: PPImU8; out_width: PInteger;
+    Procedure GetTexDataAsAlpha8(out_pixels: PPByte; out_width: PInteger;
       out_height: PInteger; out_bytes_per_pixel: PInteger);
     Procedure SetTexID(id: ImTextureID);
   End;
@@ -858,8 +913,23 @@ Function ImGuiPlatformMonitor_Create(): PImGuiPlatformMonitor;
 Function IM_COL32(R, G, B, A: ImU32): ImU32;
 
 Implementation
+  uses
+    PasImGui.Utils;
+
+{$If Defined(FPC) and (Defined(WIN32) or Defined(WIN64))}
+  //function OnExit(func : TProc): Integer; public name {$IfDef WIN32}'_'+{$EndIf}'atexit';
+  //begin
+  //  Result := atexit(func);
+  //end;
+{$EndIf}
 
 Function IM_COL32(R, G, B, A: ImU32): ImU32;
+const
+  IM_COL32_R_SHIFT = 0;
+  IM_COL32_G_SHIFT = 8;
+  IM_COL32_B_SHIFT = 16;
+  IM_COL32_A_SHIFT = 24;
+  IM_COL32_A_MASK  = $FF000000;
 Begin
   Result := (A Shl IM_COL32_A_SHIFT) Or (B Shl IM_COL32_B_SHIFT) Or
     (G Shl IM_COL32_G_SHIFT) Or (R Shl IM_COL32_R_SHIFT);
@@ -1590,7 +1660,7 @@ End;
 { Widgets: Text }
 Class Procedure ImGui.Text(Const text_: AnsiString);
 Begin
-  igText(PAnsiChar(text_), []);
+  igText(PAnsiChar(text_));
 End;
 
 Class Procedure ImGui.Text(Const Fmt: AnsiString; Const Args: Array Of Const);
@@ -1605,7 +1675,7 @@ End;
 
 Class Procedure ImGui.TextColored(col: ImVec4; Const fmt: AnsiString);
 Begin
-  igTextColored(col, PAnsiChar(fmt), []);
+  igTextColored(col, PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.TextDisabled(Const fmt: AnsiString; args: Array Of Const);
@@ -1615,7 +1685,7 @@ End;
 
 Class Procedure ImGui.TextDisabled(Const fmt: AnsiString);
 Begin
-  igTextDisabled(PAnsiChar(fmt), []);
+  igTextDisabled(PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.TextWrapped(Const fmt: AnsiString; args: Array Of Const);
@@ -1625,7 +1695,7 @@ End;
 
 Class Procedure ImGui.TextWrapped(Const fmt: AnsiString);
 Begin
-  igTextWrapped(PAnsiChar(fmt), []);
+  igTextWrapped(PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.TextUnformatted(Const _text: AnsiString);
@@ -1647,7 +1717,7 @@ End;
 
 Class Procedure ImGui.LabelText(_label: AnsiString; fmt: AnsiString);
 Begin
-  igLabelText(PAnsiChar(_label), PAnsiChar(fmt), []);
+  igLabelText(PAnsiChar(_label), PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.Bullet;
@@ -1662,7 +1732,7 @@ End;
 
 Class Procedure ImGui.BulletText(Const fmt: AnsiString);
 Begin
-  igBulletText(PAnsiChar(fmt), []);
+  igBulletText(PAnsiChar(fmt));
 End;
 
 { Widgets: Main }
@@ -1704,7 +1774,7 @@ Begin
   Result := igCheckbox(_label, v);
 End;
 
-Class Function ImGui.CheckboxFlags(_label: PAnsiChar; flags: PImU32;
+Class Function ImGui.CheckboxFlags(_label: PAnsiChar; flags: PCardinal;
   flags_value: Int32): Boolean;
 Begin
   { TODO: Do we need to implement other igCheckboxFlags funcs - Time : 11/3/2023 11:46:25 PM }
@@ -1818,6 +1888,8 @@ Class Function ImGui.SliderFloat2(_label: PAnsiChar; v: PSingle;
   v_min: Single; v_max: Single; display_format: PAnsiChar;
   flags: ImGuiSliderFlags): Boolean;
 Begin
+  If display_format = nil Then
+    display_format := '%.3f';
   Result := igSliderFloat2(_label, v, v_min, v_max, display_format, flags);
 End;
 
@@ -1825,6 +1897,8 @@ Class Function ImGui.SliderFloat3(_label: PAnsiChar; v: PSingle;
   v_min: Single; v_max: Single; display_format: PAnsiChar;
   flags: ImGuiSliderFlags): Boolean;
 Begin
+  If display_format = nil Then
+    display_format := '%.3f';
   Result := igSliderFloat3(_label, v, v_min, v_max, display_format, flags);
 End;
 
@@ -1832,6 +1906,8 @@ Class Function ImGui.SliderFloat4(_label: PAnsiChar; v: PSingle;
   v_min: Single; v_max: Single; display_format: PAnsiChar;
   flags: ImGuiSliderFlags): Boolean;
 Begin
+  If display_format = nil Then
+    display_format := '%.3f';
   Result := igSliderFloat4(_label, v, v_min, v_max, display_format, flags);
 End;
 
@@ -1965,14 +2041,14 @@ End;
 
 { Widgets: Input }
 Class Function ImGui.InputText(_label: PAnsiChar; buf: PAnsiChar;
-  buf_size: size_t; flags: ImGuiInputTextFlags; callback: ImGuiInputTextCallback;
+  buf_size: NativeUInt; flags: ImGuiInputTextFlags; callback: ImGuiInputTextCallback;
   user_data: pointer): Boolean;
 Begin
   Result := igInputText(_label, buf, buf_size, flags, callback, user_data);
 End;
 
 Class Function ImGui.InputTextMultiline(_label: PAnsiChar; buf: PAnsiChar;
-  buf_size: size_t; size: ImVec2; flags: ImGuiInputTextFlags;
+  buf_size: NativeUInt; size: ImVec2; flags: ImGuiInputTextFlags;
   callback: ImGuiInputTextCallback; user_data: pointer): Boolean;
 Begin
   Result := igInputTextMultiline(_label, buf, buf_size, size, flags,
@@ -2042,7 +2118,7 @@ End;
 
 Class Function ImGui.TreeNode(str_id: AnsiString; fmt: AnsiString): Boolean;
 Begin
-  Result := igTreeNode_StrStr(PAnsiChar(str_id), PAnsiChar(fmt), []);
+  Result := igTreeNode_StrStr(PAnsiChar(str_id), PAnsiChar(fmt));
 End;
 
 Class Function ImGui.TreeNode(ptr_id: pointer; fmt: AnsiString;
@@ -2053,7 +2129,7 @@ End;
 
 Class Function ImGui.TreeNode(ptr_id: pointer; fmt: AnsiString): Boolean;
 Begin
-  Result := igTreeNode_Ptr(ptr_id, PAnsiChar(fmt), []);
+  Result := igTreeNode_Ptr(ptr_id, PAnsiChar(fmt));
 End;
 
 Class Function ImGui.TreeNodeEx(_label: PAnsiChar; flags: ImGuiTreeNodeFlags): Boolean;
@@ -2070,7 +2146,7 @@ End;
 Class Function ImGui.TreeNodeEx(str_id: PAnsiChar; flags: ImGuiTreeNodeFlags;
   fmt: AnsiString): Boolean;
 Begin
-  Result := igTreeNodeEx_StrStr(str_id, flags, PAnsiChar(fmt), []);
+  Result := igTreeNodeEx_StrStr(str_id, flags, PAnsiChar(fmt));
 End;
 
 Class Function ImGui.TreeNodeEx(ptr_id: pointer; flags: ImGuiTreeNodeFlags;
@@ -2082,7 +2158,7 @@ End;
 Class Function ImGui.TreeNodeEx(ptr_id: pointer; flags: ImGuiTreeNodeFlags;
   fmt: AnsiString): Boolean;
 Begin
-  Result := igTreeNodeEx_Ptr(ptr_id, flags, PAnsiChar(fmt), []);
+  Result := igTreeNodeEx_Ptr(ptr_id, flags, PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.TreePushStr(str_id: PAnsiChar);
@@ -2188,7 +2264,7 @@ End;
 
 Class Procedure ImGui.SetTooltip(fmt: AnsiString);
 Begin
-  igSetTooltip(PAnsiChar(fmt), []);
+  igSetTooltip(PAnsiChar(fmt));
 End;
 
 Class Procedure ImGui.BeginTooltip;
@@ -2327,7 +2403,7 @@ End;
 
 Class Procedure ImGui.LogText(Const fmt: AnsiString);
 Begin
-  igLogText(PAnsiChar(fmt), []);
+  igLogText(PAnsiChar(fmt));
 End;
 
 { Clipping }
@@ -2584,7 +2660,7 @@ Begin
 End;
 
 { Helpers functions to access functions pointers in ImGui::GetIO() }
-Class Function ImGui.MemAlloc(sz: size_t): pointer;
+Class Function ImGui.MemAlloc(sz: NativeUInt): pointer;
 Begin
   Result := igMemAlloc(sz);
 End;
@@ -2624,14 +2700,14 @@ Begin
     font_cfg, glyph_ranges);
 End;
 
-Procedure TImFontAtlasHelper.GetTexDataAsRGBA32(out_pixels: PPImU8;
+Procedure TImFontAtlasHelper.GetTexDataAsRGBA32(out_pixels: PPByte;
   out_width: PInteger; out_height: PInteger; out_bytes_per_pixel: PInteger);
 Begin
   ImFontAtlas_GetTexDataAsRGBA32(@Self, out_pixels, out_width,
     out_height, out_bytes_per_pixel);
 End;
 
-Procedure TImFontAtlasHelper.GetTexDataAsAlpha8(out_pixels: PPImU8;
+Procedure TImFontAtlasHelper.GetTexDataAsAlpha8(out_pixels: PPByte;
   out_width: PInteger; out_height: PInteger; out_bytes_per_pixel: PInteger);
 Begin
   ImFontAtlas_GetTexDataAsAlpha8(@Self, out_pixels, out_width,
@@ -2897,6 +2973,22 @@ Begin
   ImDrawList_PrimVtx(@self, pos, uv, col);
 End;
 
+// operator overloading
 
+class operator ImVec2.Add(lhs, rhs: ImVec2): ImVec2;
+begin
+  Result := ImVec2.new(lhs.x + rhs.x, lhs.y + rhs.y);
+end;
+
+class operator ImVec2.Subtract(lhs, rhs: ImVec2): ImVec2;
+begin
+  Result := ImVec2.new(lhs.x - rhs.x, lhs.y - rhs.y);
+end;
+
+{$I ImGuiApis.Impl.inc}
+
+initialization
+  // Disabling Floating-Point Exceptions
+  SetExceptionMask([exInvalidOp, exDenormalized, exZeroDivide, exOverflow, exUnderflow, exPrecision]);
 
 End.
