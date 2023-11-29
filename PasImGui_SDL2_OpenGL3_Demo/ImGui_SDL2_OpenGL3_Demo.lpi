@@ -25,23 +25,24 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
     </VersionInfo>
-    <BuildModes Count="4">
+    <BuildModes Count="6">
       <Item1 Name="Default" Default="True"/>
-      <Item2 Name="Debug_windows">
+      <Item2 Name="Debug_windows_32">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="ImGui_SDL2_OpenGL3_Demo"/>
+            <Filename Value=".\Win32\ImGui_SDL2_OpenGL3_Demo_debug"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\win64"/>
-            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units"/>
+            <Libraries Value="..\libs\FPC\win32"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <Parsing>
             <SyntaxOptions>
+              <SyntaxMode Value="Delphi"/>
               <IncludeAssertionCode Value="True"/>
             </SyntaxOptions>
           </Parsing>
@@ -53,30 +54,99 @@
               <StackChecks Value="True"/>
             </Checks>
             <VerifyObjMethodCallValidity Value="True"/>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
             <Optimizations>
-              <OptimizationLevel Value="0"/>
+              <OptimizationLevel Value="3"/>
             </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <DebugInfoType Value="dsDwarf2"/>
+              <DebugInfoType Value="dsDwarf3"/>
               <UseHeaptrc Value="True"/>
               <UseExternalDbgSyms Value="True"/>
             </Debugging>
           </Linking>
         </CompilerOptions>
       </Item2>
-      <Item3 Name="Release_windows">
+      <Item3 Name="Release_windows_32">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="ImGui_SDL2_OpenGL3_Demo"/>
+            <Filename Value=".\Win32\ImGui_SDL2_OpenGL3_Demo"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\win64"/>
-            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units"/>
+            <Libraries Value="..\libs\FPC\win32"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <SmartLinkUnit Value="True"/>
+            <TargetCPU Value="i386"/>
+            <TargetOS Value="win32"/>
+            <Optimizations>
+              <OptimizationLevel Value="3"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <GenerateDebugInfo Value="False"/>
+              <RunWithoutDebug Value="True"/>
+            </Debugging>
+            <LinkSmart Value="True"/>
+          </Linking>
+        </CompilerOptions>
+      </Item3>
+      <Item4 Name="Debug_windows_64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value=".\Win64\ImGui_SDL2_OpenGL3_Demo_debug"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);..\src"/>
+            <Libraries Value="..\libs\FPC\win64"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <Parsing>
+            <SyntaxOptions>
+              <SyntaxMode Value="Delphi"/>
+              <IncludeAssertionCode Value="True"/>
+            </SyntaxOptions>
+          </Parsing>
+          <CodeGeneration>
+            <Checks>
+              <IOChecks Value="True"/>
+              <RangeChecks Value="True"/>
+              <OverflowChecks Value="True"/>
+              <StackChecks Value="True"/>
+            </Checks>
+            <VerifyObjMethodCallValidity Value="True"/>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <DebugInfoType Value="dsDwarf3"/>
+              <UseHeaptrc Value="True"/>
+              <UseExternalDbgSyms Value="True"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item4>
+      <Item5 Name="Release_windows_64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value=".\Win64\ImGui_SDL2_OpenGL3_Demo"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);..\src"/>
+            <Libraries Value="..\libs\FPC\win64"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -93,18 +163,18 @@
             <LinkSmart Value="True"/>
           </Linking>
         </CompilerOptions>
-      </Item3>
-      <Item4 Name="Release_linux">
+      </Item5>
+      <Item6 Name="Release_linux_64">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
           <Target>
-            <Filename Value="ImGui_SDL2_OpenGL3_Demo"/>
+            <Filename Value=".\Linux64\ImGui_SDL2_OpenGL3_Demo"/>
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="F:\FPCross\cross\lib\x86_64-linux\;..\libs\linux64"/>
-            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units"/>
+            <Libraries Value="..\libs\FPC\linux64"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
           <CodeGeneration>
@@ -123,7 +193,11 @@
             <LinkSmart Value="True"/>
           </Linking>
         </CompilerOptions>
-      </Item4>
+      </Item6>
+      <SharedMatrixOptions Count="2">
+        <Item1 ID="825586496411" Value="-Xm"/>
+        <Item2 ID="511072737543" Modes="Debug_windows_32" Value="-WN -Cg"/>
+      </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
       <Version Value="2"/>
@@ -134,52 +208,56 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <Units Count="11">
+    <Units Count="12">
       <Unit0>
         <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
         <IsPartOfProject Value="True"/>
       </Unit0>
       <Unit1>
-        <Filename Value="testwindow.pas"/>
+        <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
         <IsPartOfProject Value="True"/>
-        <UnitName Value="TestWindow"/>
       </Unit1>
       <Unit2>
-        <Filename Value="imgui_extra.pas"/>
+        <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="..\OpenGL3\OpenGl3.Loader.pas"/>
+        <Filename Value="..\src\PasImGui.Apis.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="CustomNodeGraph.pas"/>
+        <Filename Value="..\impl\PasImGui.Backend.SDL2.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="..\SDL2-for-Pascal\units\sdl2.pas"/>
+        <Filename Value="..\impl\PasImGui.Renderer.OpenGL3.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="..\src\PasImGui.Apis.pas"/>
+        <Filename Value="..\impl\glad_gl.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="..\impl\PasImGui.Backend.SDL2.pas"/>
+        <Filename Value="..\impl\glfw.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\impl\PasImGui.Renderer.OpenGL3.pas"/>
+        <Filename Value="..\examples\CustomNodeGraph.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit8>
       <Unit9>
-        <Filename Value="..\impl\glad_gl.pas"/>
+        <Filename Value="..\examples\testwindow.pas"/>
         <IsPartOfProject Value="True"/>
+        <UnitName Value="TestWindow"/>
       </Unit9>
       <Unit10>
-        <Filename Value="..\impl\glfw.pas"/>
+        <Filename Value="..\src\PasImGui.Utils.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit10>
+      <Unit11>
+        <Filename Value="..\src\PasImGui.ImPlot.pas"/>
+        <IsPartOfProject Value="True"/>
+      </Unit11>
     </Units>
   </ProjectOptions>
   <CompilerOptions>
@@ -190,7 +268,7 @@
     </Target>
     <SearchPaths>
       <IncludeFiles Value="$(ProjOutDir)"/>
-      <OtherUnitFiles Value="..\OpenGL3"/>
+      <OtherUnitFiles Value="..\OpenGL3;..\examples"/>
       <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
     </SearchPaths>
   </CompilerOptions>
