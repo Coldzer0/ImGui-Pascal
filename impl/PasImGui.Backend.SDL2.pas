@@ -18,7 +18,7 @@ Unit PasImGui.Backend.SDL2;
   {$mode objfpc}{$H+}{$J-}
   {$PackRecords C}
 {$ENDIF}
-
+{$POINTERMATH ON}
 {$Define SDL_HINT_IME_SHOW_UI}
 {$Define SDL_HINT_MOUSE_AUTO_CAPTURE}
 {$Define SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH}
@@ -32,8 +32,7 @@ Uses
   {$EndIf}
   SDL2,
   PasImGui,
-  PasImGui.Enums,
-  PasImGui.Types;
+  PasImGui.Utils;
 
 Function ImGui_ImplSDL2_InitForOpenGL_Pas(window: PSDL_Window;
   sdl_gl_context: Pointer): Boolean;
@@ -68,8 +67,10 @@ Type
     WindowOwned: Boolean;
     GLContext: TSDL_GLContext;
   End;
-
-
+  {$J+}
+Const
+  FLT_MAX : Single = 3.40282347e+038; // This is the same as in compiled cimgui
+  {$J-}
 Implementation
 
 Uses
@@ -120,7 +121,7 @@ Begin
     SDL_GL_MakeCurrent(main_viewport_data^.Window, main_viewport_data^.GLContext);
   End;
 
-  sdl_flags := 0;
+  sdl_flags := SDL_WINDOW_ALLOW_HIGHDPI;
   If use_opengl Then
     sdl_flags := sdl_flags Or SDL_WINDOW_OPENGL;
 
@@ -278,7 +279,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_SetWindowTitle(viewport: PImGuiViewport; title: PAnsiChar); Cdecl;
+Procedure ImGui_ImplSDL2_SetWindowTitle(viewport: PImGuiViewport; Const title: PAnsiChar); Cdecl;
 Var
   vd: PImGui_ImplSDL2_ViewportData;
 Begin
@@ -416,7 +417,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_SetClipboardText({%H-}user_data: Pointer; Text: PAnsiChar); Cdecl;
+Procedure ImGui_ImplSDL2_SetClipboardText({%H-}user_data: Pointer; Const Text: PAnsiChar); Cdecl;
 Begin
   SDL_SetClipboardText(Text);
 End;
@@ -745,7 +746,7 @@ Begin
     End;
     monitor.PlatformHandle := {%H-}Pointer(UIntPtr(n));
 
-    TMonArray(platform_io^.Monitors.Data)[n] := monitor;
+    platform_io^.Monitors.Data[n] := monitor;
     Inc(platform_io^.Monitors.Size, 1);
   End;
 End;
@@ -1150,5 +1151,8 @@ Begin
       Result := False;
   End;
 End;
+
+initialization
+  FLT_MAX := igGET_FLT_MAX();
 
 End.
