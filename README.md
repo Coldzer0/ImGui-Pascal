@@ -10,6 +10,10 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 
 #### Running on Windows
 
+##### ImPlot
+<img src="screenshots/impot.png">
+<br>
+
 ##### FreePascal
 <img src="screenshots/fonts.png">
 <br>
@@ -21,6 +25,9 @@ The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
 #### Running on Linux (FreePascal)
 <img src="screenshots/linux.jpg">
 
+##### ImPlot
+<img src="screenshots/implot_linux.jpg">
+
 ## Building
 - Tested with FreePascal 3.2 and later.
 - Tested with Delphi 12.0
@@ -31,11 +38,13 @@ Check the demo project for more info.
 
 ### TODO
 - Add missing APIs to our `ImGui Class`
+- Add missing APIs to our `ImPlot Class`
 - Add record helpers for some records like `ImGuiIO` & all `ImVector_xxx` records
-- Add Support for [cimplot](https://github.com/cimgui/cimplot)
-- Add Support for [cimnodes](https://github.com/cimgui/cimnodes)
-- Add Support for [cimnodes_r](https://github.com/cimgui/cimnodes_r)
+- Add Support for [cimnodes](https://github.com/cimgui/cimnodes) or [cimnodes_r](https://github.com/cimgui/cimnodes_r)
 - Test on Mac
+
+### In Progress
+- Added APIs for [cimplot](https://github.com/cimgui/cimplot)
 
 ## Acknowledgements & Resources :
 
@@ -43,6 +52,7 @@ Check the demo project for more info.
 
 
 #### Used Projects :
+- [Chet](https://github.com/neslib/Chet)
 - [cimgui](https://github.com/cimgui/cimgui)
 - [imgui-pas](https://github.com/dpethes/imgui-pas)
 - [SDL2 Project](https://github.com/libsdl-org/SDL/tree/SDL2)
@@ -52,6 +62,11 @@ Check the demo project for more info.
 - [ChatGPT](https://chat.openai.com)
 
 ### Change log
+##### 29/11/2023
+- A Full rework for the APIs 
+- Adding ImPlot Support ( APIs Still in progress )
+- Support windows 32bit
+
 ##### 17/11/2023
 - Allow static linking on windows with FPC ( no static for Delphi :P )
 - And wrote the entire `OpenGL3 renderer` in `Pure-Pascal` 

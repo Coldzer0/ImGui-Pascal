@@ -258,7 +258,7 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
   {$ELSE}
-  // GL 3.0 + GLSL 130
+  // GL 4.1 uses GLSL 4.10
   glsl_version := '#version 410';
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
@@ -305,7 +305,7 @@ Begin
 
   // Enable Logging
   ImGuiCtx := ImGui.GetCurrentContext();
-  ImGuiCtx^.LogType := ImGuiLogType_File;
+  ImGuiCtx^.LogType := ImGuiLogType_TTY;
   ImGuiCtx^.LogEnabled := True;
 
   // Enable Keyboard Controls

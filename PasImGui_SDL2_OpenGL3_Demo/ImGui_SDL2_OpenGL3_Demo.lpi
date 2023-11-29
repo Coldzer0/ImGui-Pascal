@@ -36,7 +36,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\FPC\win32"/>
+            <Libraries Value="..\libs\static\win32"/>
             <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
@@ -78,7 +78,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\FPC\win32"/>
+            <Libraries Value="..\libs\static\win32"/>
             <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
@@ -108,7 +108,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\FPC\win64"/>
+            <Libraries Value="..\libs\static\win64"/>
             <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
@@ -145,7 +145,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\FPC\win64"/>
+            <Libraries Value="..\libs\static\win64"/>
             <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>
@@ -173,7 +173,7 @@
           </Target>
           <SearchPaths>
             <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\FPC\linux64"/>
+            <Libraries Value="..\libs\static\linux64"/>
             <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
             <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
           </SearchPaths>

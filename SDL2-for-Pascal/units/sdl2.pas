@@ -93,7 +93,7 @@ interface
   {$ENDIF}
 
 {$IfNDef DYNAMIC_LINK}
-  {$LinkLib SDL2}
+  {$LinkLib 'libSDL2.a'}
 {$ELSE}
 const
 
