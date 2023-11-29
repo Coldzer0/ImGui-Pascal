@@ -17,7 +17,9 @@ Program ImGui_SDL2_OpenGL3_Demo;
   {$mode objfpc}{$H+}{$J-}
 {$ENDIF}
 {$IfDef LINUX}
-  {$LinkLib m}
+  {$IfDef FPC}
+    {$LinkLib m}
+  {$EndIf}
 {$EndIf}
 {$IfOpt D-}
   {$IfDef MSWINDOWS}
@@ -34,25 +36,25 @@ Uses
   {$IFDEF FPC}
   cmem,
   {$ENDIF}
+  Math,
   SysUtils,
   sdl2,
+  glad_gl,
   PasImGui,
-  PasImGui.Apis,
-  PasImGui.Types,
-  PasImGui.Enums,
+  PasImGui.Utils,
+  PasImGui.ImPlot,
   PasImGui.Backend.SDL2,
   PasImGui.Renderer.OpenGL3,
-  glad_gl,
-  TestWindow,
-  imgui_extra,
-  CustomNodeGraph;
+  TestWindow, CustomNodeGraph;
 
 Var
   counter: Integer;
-  showPascalDemoWindow: Boolean = False;
-  showAnotherWindow: Boolean = False;
-  showDemoWindow: Boolean = False;
-  showNodeWindow: Boolean = False;
+  ShowPascalDemoWindow: Boolean = False;
+  ShowAnotherWindow: Boolean = False;
+  ShowDemoWindow: Boolean = False;
+  ShowNodeWindow: Boolean = False;
+  ShowImPlotDemo: Boolean = False;
+  ShowImPlotPascalDemo: Boolean = False;
   clearColor: ImVec4;
   float_value: Single;
 
@@ -72,7 +74,40 @@ Var
   w, h: Integer;
   glsl_version: PAnsiChar = '';
 
+  // LinePlots
+  var
+    xs1, ys1 : Array [0..1000] of Single;
+    xs2, ys2 : Array [0..19] of Double;
 
+  procedure ImPlotPascalDemoWindow();
+  var
+    i: Integer;
+  begin
+    if not ImGui.Begin_('ImPlot Pascal Demo') then
+    begin
+      ImGui.End_();
+      exit;
+    end;
+    for i := 0 to Pred(1001) do
+    begin
+      xs1[i] := i * 0.001;
+      ys1[i] := 0.5 + 0.5 * Sin(50 * (xs1[i] + ImGui.GetTime() / 10));
+    end;
+    for i := 0 to Pred(20) do
+    begin
+      xs2[i] := i * 1/19.0;
+      ys2[i] := xs2[i] * xs2[i];
+    end;
+    if (ImPlot.BeginPlot('Line Plots')) then
+    begin
+      ImPlot.SetupAxes('x','y');
+      ImPlot.PlotLine('f(x)', PSingle(@xs1), PSingle(@ys1), 1001);
+      ImPlot.SetNextMarkerStyle(ImPlotMarker_Circle);
+      ImPlot.PlotLine('g(x)', PDouble(@xs2), PDouble(@ys2), 20, ImPlotLineFlags_Segments);
+      ImPlot.EndPlot();
+    end;
+    ImGui.End_();
+  end;
 
   Procedure ShowGreetingWindows;
   Var
@@ -148,11 +183,12 @@ Var
       ImGui.Begin_('Hello From FreePascal / Delphi', nil, ImGuiWindowFlags_None);
       ImGui.Text('This is some useful text', []);
 
-      ImGui.Checkbox('Demo window', @showDemoWindow);
-      ImGui.Checkbox('Another Pascal window', @showAnotherWindow);
-      ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
+      ImGui.Checkbox('ImGui Demo', @showDemoWindow);
+      ImGui.Checkbox('ImPlot Demo', @ShowImPlotDemo);
+      ImGui.Checkbox('ImPlot Pascal Demo', @ShowImPlotPascalDemo);
       ImGui.Checkbox('Pascal Node Window', @showNodeWindow);
-
+      ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
+      ImGui.Checkbox('Another Pascal window', @showAnotherWindow);
 
       ImGui.SliderFloat('Float', @float_value, 0.0, 1.0, '%.3f', ImGuiSliderFlags_None);
       ImGui.ColorEdit3('Background color', @clearColor, ImGuiColorEditFlags_None);
@@ -165,7 +201,7 @@ Var
       ImGui.SameLine(0.0, -1.0);
       ImGui.Text('counter = %d', [counter]);
 
-      ImGui.Text('Application average %.3f ms/frame (%.1f FPS)',
+      ImGui.Text('Application average %.3f ms/frame (%.f FPS)',
         [1000.0 / IO^.Framerate, IO^.Framerate]);
 
       ImGui.End_();
@@ -182,7 +218,7 @@ Var
     End;
   End;
 
-  Function PasAllocMem(sz: size_t; {%H-}user_data: Pointer): Pointer; Cdecl;
+  Function PasAllocMem(sz: NativeUInt; {%H-}user_data: Pointer): Pointer; Cdecl;
   Begin
     Result := {$IFDEF FPC}cmem.Malloc(sz);{$ELSE}AllocMem(sz);{$ENDIF}
   End;
@@ -223,7 +259,7 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
   {$ELSE}
   // GL 3.0 + GLSL 130
-  glsl_version := '#version 130';
+  glsl_version := '#version 410';
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
@@ -257,6 +293,9 @@ Begin
 
   // setup imgui
   ImGui.CreateContext(nil);
+
+  // Setup ImPlot
+  ImPlot.Initialize();
 
   //set docking
   IO := ImGui.GetIO();
@@ -298,8 +337,8 @@ Begin
 
   // Load Fonts
   //IO^.Fonts^.AddFontDefault();
-  IO^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 25.0);
-  IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
+  IO^.Fonts^.AddFontFromFileTTF('../fonts/DroidSans.ttf', 25.0);
+  IO^.Fonts^.AddFontFromFileTTF('../fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
 
   // Background Color
   clearColor.x := 0.45;
@@ -335,6 +374,10 @@ Begin
         ShowExampleAppCustomNodeGraph(@showNodeWindow);
       If showPascalDemoWindow Then
         testwin.Show(showPascalDemoWindow);
+      if ShowImPlotDemo then
+        ImPlot_ShowDemoWindow(@ShowImPlotDemo);
+      if ShowImPlotPascalDemo then
+        ImPlotPascalDemoWindow();
     End;
 
     // render
