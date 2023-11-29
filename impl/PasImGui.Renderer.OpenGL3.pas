@@ -4,6 +4,7 @@ Unit PasImGui.Renderer.OpenGL3;
   {$mode Delphi}{$H+}
 {$ENDIF}
 {$POINTERMATH ON}
+
 // Debugging
 {$IfOpt D+}
   {$If Defined(FPC) or Defined(DelphiXEAndUp)}
@@ -63,8 +64,7 @@ Uses
   SysUtils,
   glad_gl,
   PasImGui,
-  PasImGui.Enums,
-  PasImGui.Types,
+  PasImGui.Utils,
   OpenGl3.Loader;
 
 Type
@@ -95,13 +95,15 @@ Type
   PImGui_ImplOpenGL3_Data = ^ImGui_ImplOpenGL3_Data;
 
 procedure ImGui_OpenGL3_RenderDrawData(draw_data: PImDrawData);
-Function ImGui_OpenGL3_Init(glsl_version: PAnsiChar): Boolean;
+Function  ImGui_OpenGL3_Init(glsl_version: PAnsiChar): Boolean;
 Procedure ImGui_OpenGL3_NewFrame();
 Procedure ImGui_OpenGL3_Shutdown();
 
 type
   TGLProc = reference to procedure;
   TError = reference to procedure(msg : string);
+const
+  ImDrawCallback_ResetRenderState : ImDrawCallback = Pointer(-8);
 
 Implementation
 
@@ -283,9 +285,9 @@ var
   vertex_array_object : GLuint;
   clip_off, clip_scale, clip_min, clip_max: ImVec2;
 
-  cmd_list_ptr : ImDrawList;
+  cmd_list_ptr : PImDrawList;
   vtx_buffer_size, idx_buffer_size: GLsizeiptr;
-  pcmd: ImDrawCmd;
+  pcmd: PImDrawCmd;
 Begin
   // Avoid rendering when minimized, scale coordinates for retina displays (screen coordinates != framebuffer coordinates)
   fb_width := Trunc(draw_data^.DisplaySize.x * draw_data^.FramebufferScale.x);
@@ -363,13 +365,10 @@ Begin
   clip_scale := draw_data^.FramebufferScale; // (1,1) unless using retina display which are often (2,2)
 
   // Render command lists
+
   for n := 0 to Pred(draw_data^.CmdListsCount) do
   begin
-    //asm
-    //  int3
-    //end;
-    cmd_list_ptr := draw_data^.CmdLists.Data[n]^;
-
+    cmd_list_ptr := draw_data^.CmdLists.Data[n];
     // Upload vertex/index buffers
     // - OpenGL drivers are in a very sorry state nowadays....
     //   During 2021 we attempted to switch from glBufferData() to orphaning+glBufferSubData() following reports
@@ -415,7 +414,7 @@ Begin
 
     for cmd_i := 0 to Pred(cmd_list_ptr.CmdBuffer.Size) do
     begin
-      pcmd := cmd_list_ptr.CmdBuffer.Data[cmd_i];
+      pcmd := @cmd_list_ptr.CmdBuffer.Data[cmd_i];
       if @pcmd.UserCallback <> nil then
       begin
         // User callback, registered via ImDrawList::AddCallback()
@@ -698,9 +697,9 @@ begin
   begin
     // Delete the '#version ' part to isolate the number
     Delete(GlslVersionString, 1, Length('#version '));
-    // Convert the remaining string to an integer
+    GlslVersionString := Trim(GlslVersionString);
     Val(GlslVersionString, Result, Code);
-    if Code <> 0 then
+    if (Result = 0) or (Code <> 0) then
       Result := GLVersion;
   end;
 end;
@@ -725,7 +724,7 @@ begin
   begin
     buf := '';
     SetLength(buf, log_length);
-    glGetShaderInfoLog(handle, log_length, nil, @buf);
+    glGetShaderInfoLog(handle, log_length, nil, @buf[1]);
     if IsConsole then
       WriteLn(Format('%s', [buf]));
     buf := '';
@@ -752,7 +751,7 @@ begin
   begin
     buf := '';
     SetLength(buf, log_length);
-    glGetProgramInfoLog(handle, log_length, nil, @buf);
+    glGetProgramInfoLog(handle, log_length, nil, @buf[1]);
     if IsConsole then
       WriteLn(Format('%s', [buf]));
     buf := '';
@@ -764,7 +763,7 @@ function ImGui_ImplOpenGL3_CreateFontsTexture() : Boolean;
 Var
   bd: PImGui_ImplOpenGL3_Data;
   io: PImGuiIO;
-  pixels : PImU8;
+  pixels : PPByte;
   last_texture : GLint;
   width, height : Integer;
 begin
