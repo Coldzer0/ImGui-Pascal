@@ -67,8 +67,6 @@ Var
   show_grid: Boolean = False;
   node_selected: Integer = -1;
 
-  test : Single = 0.0;
-
 Procedure ShowExampleAppCustomNodeGraph(opened: PBoolean);
 Var
   io: PImGuiIO;
@@ -122,7 +120,7 @@ Begin
   For node_idx := 0 To Pred(nodes.Count) Do
   Begin
     node := nodes[node_idx];
-    ImGui.PushIdInt(node.ID);
+    ImGui.PushId(node.ID);
     If ImGui.Selectable(node.Name, node.ID = node_selected) Then
       node_selected := node.ID;
 
@@ -196,7 +194,7 @@ Begin
   Begin
     node := nodes[node_idx];
 
-    ImGui.PushIdInt(node.ID);
+    ImGui.PushId(node.ID);
     node_rect_min := offset + node.Pos;
 
     // Display node contents first

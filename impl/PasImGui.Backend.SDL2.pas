@@ -67,10 +67,7 @@ Type
     WindowOwned: Boolean;
     GLContext: TSDL_GLContext;
   End;
-  {$J+}
-Const
-  FLT_MAX : Single = 3.40282347e+038; // This is the same as in compiled cimgui
-  {$J-}
+
 Implementation
 
 Uses
@@ -1151,8 +1148,5 @@ Begin
       Result := False;
   End;
 End;
-
-initialization
-  FLT_MAX := igGET_FLT_MAX();
 
 End.
