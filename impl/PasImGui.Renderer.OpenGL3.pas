@@ -161,6 +161,7 @@ begin
   glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
   {$EndIf}
 
+  clip_origin_lower_left := False;
   // Support for GL 4.5 rarely used glClipControl(GL_UPPER_LEFT)
   if GLAD_GL_VERSION_4_5 then
   begin
@@ -662,21 +663,7 @@ Begin
   // Detect extensions we support
   bd^.HasClipOrigin := (bd^.GlVersion >= 450);
   {$IfDef IMGUI_OPENGL_MAY_HAVE_EXTENSIONS}
-  {$IfDef IMGUI_LOG}
-    if IsConsole then
-      WriteLn('EXTENSIONS :');
-  {$EndIf}
-  glGetIntegerv(GL_NUM_EXTENSIONS, @num_extensions);
-  for i := 0 to num_extensions - 1 do
-  begin
-    extension := PAnsiChar(glGetStringi(GL_EXTENSIONS, i));
-    {$IfDef IMGUI_LOG}
-      if IsConsole then
-        WriteLn(' [+] ', extension);
-    {$EndIf}
-    if (extension <> nil) and (StrComp(extension, 'GL_ARB_clip_control') = 0) then
-      bd^.HasClipOrigin := True;
-  end;
+  bd^.HasClipOrigin := hasExt('GL_ARB_clip_control');
   {$EndIf}
 
   If (io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then

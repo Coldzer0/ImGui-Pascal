@@ -3085,10 +3085,12 @@ function gladLoadGL(load: TLoadProc): boolean;
 function gladLoadGLES2(load: TLoadProc): boolean;
 function gladLoadGLSC2(load: TLoadProc): boolean;
 
+function hasExt(const extname: string): Boolean;
 
 implementation
 
-{$DEFINE HAS_GL_NUM_EXTENSIONS}function hasExt(const extname: string): Boolean;
+{$DEFINE HAS_GL_NUM_EXTENSIONS}
+function hasExt(const extname: string): Boolean;
 var
   extensions: PChar;
   loc, terminator: Pchar;
