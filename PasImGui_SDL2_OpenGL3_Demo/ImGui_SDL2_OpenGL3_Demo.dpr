@@ -56,7 +56,6 @@ Var
   ShowImPlotDemo: Boolean = False;
   ShowImPlotPascalDemo: Boolean = False;
   clearColor: ImVec4;
-  float_value: Single;
 
 Var
   ImGuiCtx: PImGuiContext;
@@ -170,28 +169,57 @@ Var
       ImGui.End_;
     End;
   End;
-
+  var
+    GlobalStyleInitalized : Boolean = False;
+    color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops: ImVec3;
   Procedure RenderPascalCode();
   Var
     Pos: ImVec2;
-  Begin
+  begin
+    if not GlobalStyleInitalized then
+    begin
+      color_for_text := ImVec3.New(236.0 / 255.0, 240.0 / 255.0, 241.0 / 255.0);
+      color_for_head := ImVec3.New(41.0 / 255.0, 128.0 / 255.0, 185.0 / 255.0);
+      color_for_area := ImVec3.New(57.0 / 255.0, 79.0 / 255.0, 105.0 / 255.0);
+      color_for_body := ImVec3.New(44.0 / 255.0, 62.0 / 255.0, 80.0 / 255.0);
+      color_for_pops := ImVec3.New(33.0 / 255.0, 46.0 / 255.0, 60.0 / 255.0);
+      GlobalStyleInitalized := True;
+    end;
     //draw your scene or simple windows
     Pos := ImGui.GetCenterViewPort(ImGui.GetMainViewport());
     Pos.y := Pos.y - 160;
     ImGui.SetNextWindowPos(Pos, ImGuiCond_FirstUseEver, ImVec2.New(0.5, 0.5));
     Begin
       ImGui.Begin_('Hello From FreePascal / Delphi', nil, ImGuiWindowFlags_None);
-      ImGui.Text('This is some useful text', []);
+      ImGui.Text('This is some useful text');
 
-      ImGui.Checkbox('ImGui Demo', @showDemoWindow);
+      ImGui.Checkbox('ImGui Demo', @showDemoWindow); ImGui.SameLine();
       ImGui.Checkbox('ImPlot Demo', @ShowImPlotDemo);
       ImGui.Checkbox('ImPlot Pascal Demo', @ShowImPlotPascalDemo);
       ImGui.Checkbox('Pascal Node Window', @showNodeWindow);
       ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
       ImGui.Checkbox('Another Pascal window', @showAnotherWindow);
 
-      ImGui.SliderFloat('Float', @float_value, 0.0, 1.0, '%.3f', ImGuiSliderFlags_None);
-      ImGui.ColorEdit3('Background color', @clearColor, ImGuiColorEditFlags_None);
+      ImGui.Spacing();
+      ImGui.Separator();
+      ImGui.Text('Global Styling Test');
+      ImGui.NewLine();
+
+      ImGui.ColorEdit3('color_for_text', @color_for_text);
+      ImGui.ColorEdit3('color_for_head', @color_for_head);
+      ImGui.ColorEdit3('color_for_area', @color_for_area);
+      ImGui.ColorEdit3('color_for_body', @color_for_body);
+      ImGui.ColorEdit3('color_for_pops', @color_for_pops);
+
+      //If (ImGui.Button('Apply')) Then
+      //begin
+         imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops);
+      //end;
+
+      ImGui.NewLine();
+      ImGui.Separator();
+
+      ImGui.ColorEdit3('Background color', @clearColor);
 
       If (ImGui.Button('Add')) Then
       begin
@@ -233,7 +261,7 @@ Var
 
 Begin
   { TODO: This is here for testing - Remove this later :V }
-  //DeleteFile('imgui.ini');
+  //DeleteFile('MyApp.ini');
 
   // Set the Default Alloc & Free to point to Pascal Allocators
   igSetAllocatorFunctions(@PasAllocMem, @PasFreeMem, nil);
@@ -337,8 +365,8 @@ Begin
 
   // Load Fonts
   //IO^.Fonts^.AddFontDefault();
-  IO^.Fonts^.AddFontFromFileTTF('../fonts/DroidSans.ttf', 25.0);
-  IO^.Fonts^.AddFontFromFileTTF('../fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
+  IO^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 25.0);
+  IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
 
   // Background Color
   clearColor.x := 0.45;
