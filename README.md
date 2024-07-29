@@ -5,7 +5,7 @@
 FreePascal / Delphi bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.90.0
 
 The Binding is based on [cimgui](https://github.com/cimgui/cimgui)
-> cimgui is c-api for imgui (https://github.com/ocornut/imgui) Look at: https://github.com/cimgui for other widgets.
+> cimgui is c-api for imgui (https://github.com/ocornut/imgui).
 
 ## Screenshots
 
