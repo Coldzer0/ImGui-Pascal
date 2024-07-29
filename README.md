@@ -1,5 +1,5 @@
 # ImGui-Pascal
-[![License: LGPL v3](https://img.shields.io/badge/License-LGPL%20v3-blue.svg)](https://www.gnu.org/licenses/lgpl-3.0)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
 [![Discord Badge](https://img.shields.io/badge/discord-blue.svg?logo=discord&logoColor=f5f5f5)](https://discord.gg/RzfYFfRjXY)
 
 FreePascal / Delphi bindings for dear [ImGui](https://github.com/ocornut/imgui) with docking v1.90.0
