@@ -22,7 +22,7 @@ unit OpenGl3.Loader;
 interface
 
 uses
-  glad_gl, SDL2;
+  glad_gl, {$IfDef SDL2}SDL2{$EndIf}{$IfDef GLFW3}GLFW3{$EndIf};
 
 function ImGLInit(): Boolean;
 
@@ -30,7 +30,7 @@ implementation
 
 Function GLFuncLoad(proc: PAnsiChar): Pointer;
 Begin
-  Result := SDL_GL_GetProcAddress(proc);
+  Result := {$IfDef GLFW3}glfwGetProcAddress{$ELSE}SDL_GL_GetProcAddress{$EndIf}(proc);
   Assert(Result <> nil, 'couldn''t load ' + proc);
 End;
 
