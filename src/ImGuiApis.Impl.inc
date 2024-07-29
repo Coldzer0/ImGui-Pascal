@@ -1,24 +1,3 @@
-{ImGuiTableColumnSortSpecs}
-
-function ImGuiTableColumnSortSpecs.GetData0Value(const AIndex: Integer): Cardinal;
-var
-  BitCount, Offset, Mask: Cardinal;
-begin
-  BitCount := AIndex and $FF;
-  Offset := AIndex shr 8;
-  Mask := ((1 shl BitCount) - 1);
-  Result := (Data0 shr Offset) and Mask;
-end;
-
-procedure ImGuiTableColumnSortSpecs.SetData0Value(const AIndex: Integer; const AValue: Cardinal);
-var
-  BitCount, Offset, Mask: Cardinal;
-begin
-  BitCount := AIndex and $FF;
-  Offset := AIndex shr 8;
-  Mask := ((1 shl BitCount) - 1);
-  Data0 := (Data0 and (not (Mask shl Offset))) or (AValue shl Offset);
-end;
 
 {ImFontGlyph}
 
@@ -77,6 +56,28 @@ begin
 end;
 
 procedure ImGuiStackLevelInfo.SetData0Value(const AIndex: Integer; const AValue: Cardinal);
+var
+  BitCount, Offset, Mask: Cardinal;
+begin
+  BitCount := AIndex and $FF;
+  Offset := AIndex shr 8;
+  Mask := ((1 shl BitCount) - 1);
+  Data0 := (Data0 and (not (Mask shl Offset))) or (AValue shl Offset);
+end;
+
+{ImGuiContext}
+
+function ImGuiContext.GetData0Value(const AIndex: Integer): Cardinal;
+var
+  BitCount, Offset, Mask: Cardinal;
+begin
+  BitCount := AIndex and $FF;
+  Offset := AIndex shr 8;
+  Mask := ((1 shl BitCount) - 1);
+  Result := (Data0 shr Offset) and Mask;
+end;
+
+procedure ImGuiContext.SetData0Value(const AIndex: Integer; const AValue: Cardinal);
 var
   BitCount, Offset, Mask: Cardinal;
 begin
@@ -195,3 +196,4 @@ begin
   Mask := ((1 shl BitCount) - 1);
   Data0 := (Data0 and (not (Mask shl Offset))) or (AValue shl Offset);
 end;
+

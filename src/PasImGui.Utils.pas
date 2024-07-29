@@ -31,77 +31,10 @@ interface
 uses
   PasImGui;
 
-Type
-
-  { TImVec2 }
-  TImVec2 = Record helper For ImVec2
-    class function New(const _x, _y: Single) : ImVec2; static;
-  end;
-
-  { TImVec3 }
-  TImVec3 = Record helper For ImVec3
-    class function New(const _x, _y, _z: Single) : ImVec3; static;
-  end;
-
-  { TImVec4 }
-  TImVec4 = Record helper For ImVec4
-    class function New(const _x, _y, _z: Single; _w: Single = 1.0) : ImVec4; static;
-  end;
-
-  { TImDrawCmd }
-
-  TImDrawCmd = Record helper for ImDrawCmd
-    function GetTexID : ImTextureID;
-  end;
-
-
-
 procedure imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops: ImVec3);
 procedure SetupImGuiStyle2();
 
 implementation
-
-class function TImVec2.New(const _x, _y: Single): ImVec2;
-begin
-  Result.x := _x;
-  Result.y := _y;
-end;
-
-{ TImVec3 }
-
-class function TImVec3.New(const _x, _y, _z: Single): ImVec3;
-begin
-  Result.x := _x;
-  Result.y := _y;
-  Result.z := _z;
-end;
-
-{ TImVec4 }
-
-class function TImVec4.New(const _x, _y, _z: Single; _w: Single): ImVec4;
-begin
-  Result.x := _x;
-  Result.y := _y;
-  Result.z := _z;
-  Result.w := _w;
-end;
-
-{ TImDrawCmd }
-
-function TImDrawCmd.GetTexID: ImTextureID;
-begin
-  Result := Self.TextureId;
-end;
-
-//operator Add(lhs, rhs: ImVec2): ImVec2;
-//begin
-//  Result := ImVec2.new(lhs.x + rhs.x, lhs.y + rhs.y);
-//end;
-//
-//operator Subtract(lhs, rhs: ImVec2): ImVec2;
-//begin
-//  Result := ImVec2.new(lhs.x - rhs.x, lhs.y - rhs.y);
-//end;
 
 procedure imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops: ImVec3);
 var

@@ -56,15 +56,11 @@
             <VerifyObjMethodCallValidity Value="True"/>
             <TargetCPU Value="i386"/>
             <TargetOS Value="win32"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
               <DebugInfoType Value="dsDwarf3"/>
               <UseHeaptrc Value="True"/>
-              <UseExternalDbgSyms Value="True"/>
             </Debugging>
           </Linking>
         </CompilerOptions>
@@ -96,6 +92,11 @@
               <RunWithoutDebug Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
           </Linking>
         </CompilerOptions>
       </Item3>
@@ -151,6 +152,7 @@
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
+            <TargetProcessor Value="COREAVX2"/>
             <Optimizations>
               <OptimizationLevel Value="3"/>
             </Optimizations>
@@ -161,6 +163,11 @@
               <RunWithoutDebug Value="True"/>
             </Debugging>
             <LinkSmart Value="True"/>
+            <Options>
+              <Win32>
+                <GraphicApplication Value="True"/>
+              </Win32>
+            </Options>
           </Linking>
         </CompilerOptions>
       </Item5>
@@ -194,9 +201,11 @@
           </Linking>
         </CompilerOptions>
       </Item6>
-      <SharedMatrixOptions Count="2">
+      <SharedMatrixOptions Count="4">
         <Item1 ID="825586496411" Value="-Xm"/>
-        <Item2 ID="511072737543" Modes="Debug_windows_32" Value="-WN -Cg"/>
+        <Item2 ID="187403506791" Modes="Release_windows_64,Release_linux_64,Release_windows_32" Value="-CfAVX -CpCOREAVX -OpCOREAVX"/>
+        <Item3 ID="940053534749" Value="-FWtwpo4-1.wpo -OWall"/>
+        <Item4 ID="883228556756" Modes="Release_windows_64,Debug_windows_64,Release_windows_32,Release_linux_64,Debug_windows_32" Value="-dSDL2"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>
@@ -208,7 +217,7 @@
         <Mode0 Name="default"/>
       </Modes>
     </RunParams>
-    <Units Count="12">
+    <Units Count="11">
       <Unit0>
         <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
         <IsPartOfProject Value="True"/>
@@ -222,42 +231,38 @@
         <IsPartOfProject Value="True"/>
       </Unit2>
       <Unit3>
-        <Filename Value="..\src\PasImGui.Apis.pas"/>
+        <Filename Value="..\impl\PasImGui.Backend.SDL2.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit3>
       <Unit4>
-        <Filename Value="..\impl\PasImGui.Backend.SDL2.pas"/>
+        <Filename Value="..\impl\PasImGui.Renderer.OpenGL3.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit4>
       <Unit5>
-        <Filename Value="..\impl\PasImGui.Renderer.OpenGL3.pas"/>
+        <Filename Value="..\impl\glad_gl.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit5>
       <Unit6>
-        <Filename Value="..\impl\glad_gl.pas"/>
+        <Filename Value="..\impl\glfw.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit6>
       <Unit7>
-        <Filename Value="..\impl\glfw.pas"/>
+        <Filename Value="..\examples\CustomNodeGraph.pas"/>
         <IsPartOfProject Value="True"/>
       </Unit7>
       <Unit8>
-        <Filename Value="..\examples\CustomNodeGraph.pas"/>
-        <IsPartOfProject Value="True"/>
-      </Unit8>
-      <Unit9>
         <Filename Value="..\examples\testwindow.pas"/>
         <IsPartOfProject Value="True"/>
         <UnitName Value="TestWindow"/>
-      </Unit9>
-      <Unit10>
+      </Unit8>
+      <Unit9>
         <Filename Value="..\src\PasImGui.Utils.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit10>
-      <Unit11>
+      </Unit9>
+      <Unit10>
         <Filename Value="..\src\PasImGui.ImPlot.pas"/>
         <IsPartOfProject Value="True"/>
-      </Unit11>
+      </Unit10>
     </Units>
   </ProjectOptions>
   <CompilerOptions>

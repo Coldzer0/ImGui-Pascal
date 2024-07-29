@@ -34,8 +34,7 @@ Uses
   PasImGui,
   PasImGui.Utils;
 
-Function ImGui_ImplSDL2_InitForOpenGL_Pas(window: PSDL_Window;
-  sdl_gl_context: Pointer): Boolean;
+Function ImGui_ImplSDL2_InitForOpenGL_Pas(window: PSDL_Window; sdl_gl_context: Pointer): Boolean;
 Function ImGui_ImplSDL2_ProcessEvent_Pas(event: PSDL_Event): Boolean;
 Procedure ImGui_ImplSDL2_NewFrame_Pas();
 Procedure ImGui_ImplSDL2_Shutdown_Pas();
@@ -126,8 +125,7 @@ Begin
   //if bd^.UseVulkan then
   //  sdl_flags := sdl_flags or SDL_WINDOW_VULKAN;
 
-  sdl_flags := sdl_flags Or (SDL_GetWindowFlags(bd^.Window) And
-    SDL_WINDOW_ALLOW_HIGHDPI);
+  sdl_flags := sdl_flags Or (SDL_GetWindowFlags(bd^.Window) And SDL_WINDOW_ALLOW_HIGHDPI);
 
   sdl_flags := sdl_flags Or SDL_WINDOW_HIDDEN;
 
@@ -148,9 +146,8 @@ Begin
   End;
 
 
-  vd^.Window := SDL_CreateWindow('No Title Yet', Trunc(viewport^.Pos.x),
-    Trunc(viewport^.Pos.y), Trunc(viewport^.Size.x), Trunc(viewport^.Size.y),
-    sdl_flags);
+  vd^.Window := SDL_CreateWindow('No Title Yet', Trunc(viewport^.Pos.x), Trunc(viewport^.Pos.y),
+    Trunc(viewport^.Size.x), Trunc(viewport^.Size.y), sdl_flags);
 
   vd^.WindowOwned := True;
   If use_opengl Then
@@ -346,8 +343,7 @@ Begin
 End;
 
 // Done
-Procedure ImGui_ImplSDL2_InitPlatformInterface(window: PSDL_Window;
-  sdl_gl_context: Pointer);
+Procedure ImGui_ImplSDL2_InitPlatformInterface(window: PSDL_Window; sdl_gl_context: Pointer);
 Var
   platform_io: PImGuiPlatformIO;
   main_viewport: PImGuiViewport;
@@ -421,8 +417,7 @@ End;
 
 // Done
 // Note: native IME will only display if user calls SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1") _before_ SDL_CreateWindow().
-Procedure ImGui_ImplSDL2_SetPlatformImeData(viewport: PImGuiViewport;
-  Data: PImGuiPlatformImeData); Cdecl;
+Procedure ImGui_ImplSDL2_SetPlatformImeData(viewport: PImGuiViewport; Data: PImGuiPlatformImeData); Cdecl;
 Var
   r: TSDL_Rect;
 Begin
@@ -560,8 +555,7 @@ Begin
 End;
 
 // FIXME
-Function ImGui_ImplSDL2_Init(window: PSDL_Window; renderer: PSDL_Renderer;
-  sdl_gl_context: Pointer): Boolean;
+Function ImGui_ImplSDL2_Init(window: PSDL_Window; renderer: PSDL_Renderer; sdl_gl_context: Pointer): Boolean;
 Var
   io: PImGuiIO;
   bd: PImGui_ImplSDL2_Data;
@@ -572,7 +566,7 @@ Var
   info: TSDL_SysWMinfo;
 Const
   global_mouse_whitelist: Array[0..4] Of
-    Pansichar = ('windows', 'cocoa', 'x11', 'DIVE', 'VMAN');
+    PAnsiChar = ('windows', 'cocoa', 'x11', 'DIVE', 'VMAN');
 Begin
 
   io := ImGui.GetIO();
@@ -682,8 +676,7 @@ Begin
 End;
 
 // Done
-Function ImGui_ImplSDL2_InitForOpenGL_Pas(window: PSDL_Window;
-  sdl_gl_context: Pointer): Boolean;
+Function ImGui_ImplSDL2_InitForOpenGL_Pas(window: PSDL_Window; sdl_gl_context: Pointer): Boolean;
 Begin
   Result := ImGui_ImplSDL2_Init(window, nil, sdl_gl_context);
 End;
@@ -774,8 +767,7 @@ Begin
   SDL_CaptureMouse(mouse_btn);
 
   focused_window := SDL_GetKeyboardFocus;
-  is_app_focused := (focused_window <> nil) And
-    ((bd^.Window = focused_window) Or
+  is_app_focused := (focused_window <> nil) And ((bd^.Window = focused_window) Or
     (ImGui.FindViewportByPlatformHandle(focused_window) <> nil));
   {$ELSE}
   focused_window := bd^.Window;
@@ -929,8 +921,8 @@ Begin
   bd^.Time := current_time;
 
 
-  If ((bd^.PendingMouseLeaveFrame > 0) And (bd^.PendingMouseLeaveFrame >=
-    ImGui.GetFrameCount()) And (bd^.MouseButtonsDown = 0)) Then
+  If ((bd^.PendingMouseLeaveFrame > 0) And (bd^.PendingMouseLeaveFrame >= ImGui.GetFrameCount()) And
+    (bd^.MouseButtonsDown = 0)) Then
   Begin
     bd^.MouseWindowID := 0;
     bd^.PendingMouseLeaveFrame := 0;
@@ -943,8 +935,7 @@ Begin
   If (bd^.MouseCanReportHoveredViewport And (ImGui.GetDragDropPayload() = nil)) Then
     io^.BackendFlags := io^.BackendFlags Or ImGuiBackendFlags_HasMouseHoveredViewport
   Else
-    io^.BackendFlags := io^.BackendFlags And Not
-      ImGuiBackendFlags_HasMouseHoveredViewport;
+    io^.BackendFlags := io^.BackendFlags And Not ImGuiBackendFlags_HasMouseHoveredViewport;
 
 
   ImGui_ImplSDL2_UpdateMouseData();
@@ -981,9 +972,8 @@ Begin
   io^.BackendPlatformName := nil;
   io^.BackendPlatformUserData := nil;
 
-  io^.BackendFlags := io^.BackendFlags And Not
-    (ImGuiBackendFlags_HasMouseCursors Or ImGuiBackendFlags_HasSetMousePos Or
-    ImGuiBackendFlags_HasGamepad Or ImGuiBackendFlags_PlatformHasViewports Or
+  io^.BackendFlags := io^.BackendFlags And Not (ImGuiBackendFlags_HasMouseCursors Or
+    ImGuiBackendFlags_HasSetMousePos Or ImGuiBackendFlags_HasGamepad Or ImGuiBackendFlags_PlatformHasViewports Or
     ImGuiBackendFlags_HasMouseHoveredViewport);
 
   // Free Allocated Monitors
@@ -1020,8 +1010,7 @@ Begin
       mouse_pos := ImVec2.New(Single(event^.motion.x), Single(event^.motion.y));
       If Int64(io^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
       Begin
-        SDL_GetWindowPosition(SDL_GetWindowFromID(event^.motion.windowID),
-          @window_x, @window_y);
+        SDL_GetWindowPosition(SDL_GetWindowFromID(event^.motion.windowID), @window_x, @window_y);
         mouse_pos.x := mouse_pos.x + window_x;
         mouse_pos.y := mouse_pos.y + window_y;
       End;
@@ -1126,11 +1115,10 @@ Begin
       Else If window_event = SDL_WINDOWEVENT_FOCUS_LOST Then
         ImGui.AddFocusEvent(False);
 
-      If (window_event = SDL_WINDOWEVENT_CLOSE) Or (window_event =
-        SDL_WINDOWEVENT_MOVED) Or (window_event = SDL_WINDOWEVENT_RESIZED) Then
+      If (window_event = SDL_WINDOWEVENT_CLOSE) Or (window_event = SDL_WINDOWEVENT_MOVED) Or
+        (window_event = SDL_WINDOWEVENT_RESIZED) Then
       Begin
-        viewport := ImGui.FindViewportByPlatformHandle(
-          SDL_GetWindowFromID(event^.window.windowID));
+        viewport := ImGui.FindViewportByPlatformHandle(SDL_GetWindowFromID(event^.window.windowID));
         If viewport <> nil Then
         Begin
           If window_event = SDL_WINDOWEVENT_CLOSE Then

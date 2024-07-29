@@ -15,6 +15,7 @@
 Program ImGui_SDL2_OpenGL3_Demo;
 {$IFDEF FPC}
   {$mode objfpc}{$H+}{$J-}
+  {$Optimization FASTMATH}
 {$ENDIF}
 {$IfDef LINUX}
   {$IfDef FPC}
@@ -53,7 +54,6 @@ Var
   ShowAnotherWindow: Boolean = False;
   ShowDemoWindow: Boolean = False;
   ShowNodeWindow: Boolean = False;
-  ShowImPlotDemo: Boolean = False;
   ShowImPlotPascalDemo: Boolean = False;
   clearColor: ImVec4;
 
@@ -194,7 +194,6 @@ Var
       ImGui.Text('This is some useful text');
 
       ImGui.Checkbox('ImGui Demo', @showDemoWindow); ImGui.SameLine();
-      ImGui.Checkbox('ImPlot Demo', @ShowImPlotDemo);
       ImGui.Checkbox('ImPlot Pascal Demo', @ShowImPlotPascalDemo);
       ImGui.Checkbox('Pascal Node Window', @showNodeWindow);
       ImGui.Checkbox('Pascal Demo Window', @showPascalDemoWindow);
@@ -212,9 +211,9 @@ Var
       ImGui.ColorEdit3('color_for_pops', @color_for_pops);
 
       //If (ImGui.Button('Apply')) Then
-      //begin
+      begin
          imgui_easy_theming(color_for_text, color_for_head, color_for_area, color_for_body, color_for_pops);
-      //end;
+      end;
 
       ImGui.NewLine();
       ImGui.Separator();
@@ -256,8 +255,59 @@ Var
     {$IFDEF FPC}cmem.Free(ptr);{$ELSE}FreeMem(ptr);{$ENDIF}
   End;
 
-
   {$R *.res}
+
+  procedure DrawGUI();
+  begin
+    // start imgui frame
+    ImGui_OpenGL3_NewFrame();
+    ImGui_ImplSDL2_NewFrame_Pas();
+    ImGui.NewFrame();
+
+    // Main UI Code
+    Begin
+      RenderPascalCode();
+      if showNodeWindow then
+        ShowExampleAppCustomNodeGraph(@showNodeWindow);
+      If showPascalDemoWindow Then
+        testwin.Show(showPascalDemoWindow);
+      if ShowImPlotPascalDemo then
+        ImPlotPascalDemoWindow();
+    End;
+
+    // render
+    ImGui.Render();
+    SDL_GL_MakeCurrent(window, gl_context);
+
+    glViewport(0, 0, Trunc(IO^.DisplaySize.x), Trunc(IO^.DisplaySize.y));
+    glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
+    glClear(GL_COLOR_BUFFER_BIT);
+    ImGui_OpenGL3_RenderDrawData(ImGui.GetDrawData());
+
+
+    // IMGUI_DOCK
+    If (IO^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
+    Begin
+      backup_current_window := SDL_GL_GetCurrentWindow();
+      backup_current_context := SDL_GL_GetCurrentContext();
+      ImGui.UpdatePlatformWindows();
+      ImGui.RenderPlatformWindowsDefault(nil, nil);
+      SDL_GL_MakeCurrent(backup_current_window, backup_current_context);
+    End;
+
+    //show frame on display
+    SDL_GL_SwapWindow(window);
+  end;
+
+  function window_redraw_on_resize(userdata: Pointer; e : PSDL_Event): Int32; cdecl;
+  begin
+    if (e^.type_ = SDL_WINDOWEVENT) and (e^.window.event = SDL_WINDOWEVENT_RESIZED) then
+    begin
+      glViewport(0, 0, e^.window.data1, e^.window.data2);
+      DrawGUI();
+    end;
+    Result := 1;
+  end;
 
 Begin
   { TODO: This is here for testing - Remove this later :V }
@@ -302,6 +352,8 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_STENCIL_SIZE, 8);
   SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
   SDL_GetCurrentDisplayMode(0, @current);
+
+
 
   flags := SDL_WINDOW_OPENGL Or SDL_WINDOW_RESIZABLE Or SDL_WINDOW_ALLOW_HIGHDPI;
   //flags := flags or SDL_WINDOW_FULLSCREEN_DESKTOP;
@@ -377,6 +429,8 @@ Begin
   testwin := TTestWindow.Create;
   counter := 0;
   quit := False;
+
+  SDL_SetEventFilter(@window_redraw_on_resize, nil);
   While Not quit Do
   Begin
     //handle input
@@ -390,47 +444,7 @@ Begin
         quit := True;
     End;
 
-    // start imgui frame
-    ImGui_OpenGL3_NewFrame();
-    ImGui_ImplSDL2_NewFrame_Pas();
-    ImGui.NewFrame();
-
-    // Main UI Code
-    Begin
-      RenderPascalCode();
-      if showNodeWindow then
-        ShowExampleAppCustomNodeGraph(@showNodeWindow);
-      If showPascalDemoWindow Then
-        testwin.Show(showPascalDemoWindow);
-      if ShowImPlotDemo then
-        ImPlot_ShowDemoWindow(@ShowImPlotDemo);
-      if ShowImPlotPascalDemo then
-        ImPlotPascalDemoWindow();
-    End;
-
-    // render
-    ImGui.Render();
-    SDL_GL_MakeCurrent(window, gl_context);
-
-    glViewport(0, 0, Trunc(IO^.DisplaySize.x), Trunc(IO^.DisplaySize.y));
-    glClearColor(clearColor.x, clearColor.y, clearColor.z, clearColor.w);
-    glClear(GL_COLOR_BUFFER_BIT);
-    ImGui_OpenGL3_RenderDrawData(ImGui.GetDrawData());
-
-
-    // IMGUI_DOCK
-    If (IO^.ConfigFlags And ImGuiConfigFlags_ViewportsEnable) <> 0 Then
-    Begin
-      backup_current_window := SDL_GL_GetCurrentWindow();
-      backup_current_context := SDL_GL_GetCurrentContext();
-      ImGui.UpdatePlatformWindows();
-      ImGui.RenderPlatformWindowsDefault(nil, nil);
-      SDL_GL_MakeCurrent(backup_current_window, backup_current_context);
-    End;
-
-    //show frame on display
-    SDL_GL_SwapWindow(window);
-    //Assert(glGetError() = GL_NO_ERROR);
+    DrawGUI();
   End;
   testwin.Free;
 
