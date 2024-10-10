@@ -25,82 +25,9 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
     </VersionInfo>
-    <BuildModes Count="7">
+    <BuildModes Count="5">
       <Item1 Name="Default" Default="True"/>
-      <Item2 Name="Debug_windows_32">
-        <CompilerOptions>
-          <Version Value="11"/>
-          <PathDelim Value="\"/>
-          <Target>
-            <Filename Value=".\Win32\ImGui_SDL2_OpenGL3_Demo_debug"/>
-          </Target>
-          <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\static\win32"/>
-            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
-            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
-          </SearchPaths>
-          <Parsing>
-            <SyntaxOptions>
-              <SyntaxMode Value="Delphi"/>
-              <IncludeAssertionCode Value="True"/>
-            </SyntaxOptions>
-          </Parsing>
-          <CodeGeneration>
-            <Checks>
-              <IOChecks Value="True"/>
-              <RangeChecks Value="True"/>
-              <OverflowChecks Value="True"/>
-              <StackChecks Value="True"/>
-            </Checks>
-            <VerifyObjMethodCallValidity Value="True"/>
-            <TargetCPU Value="i386"/>
-            <TargetOS Value="win32"/>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <DebugInfoType Value="dsDwarf3"/>
-              <UseHeaptrc Value="True"/>
-            </Debugging>
-          </Linking>
-        </CompilerOptions>
-      </Item2>
-      <Item3 Name="Release_windows_32">
-        <CompilerOptions>
-          <Version Value="11"/>
-          <PathDelim Value="\"/>
-          <Target>
-            <Filename Value=".\Win32\ImGui_SDL2_OpenGL3_Demo"/>
-          </Target>
-          <SearchPaths>
-            <IncludeFiles Value="$(ProjOutDir);..\src"/>
-            <Libraries Value="..\libs\static\win32"/>
-            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
-            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
-          </SearchPaths>
-          <CodeGeneration>
-            <SmartLinkUnit Value="True"/>
-            <TargetCPU Value="i386"/>
-            <TargetOS Value="win32"/>
-            <Optimizations>
-              <OptimizationLevel Value="3"/>
-            </Optimizations>
-          </CodeGeneration>
-          <Linking>
-            <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <RunWithoutDebug Value="True"/>
-            </Debugging>
-            <LinkSmart Value="True"/>
-            <Options>
-              <Win32>
-                <GraphicApplication Value="True"/>
-              </Win32>
-            </Options>
-          </Linking>
-        </CompilerOptions>
-      </Item3>
-      <Item4 Name="Debug_windows_64">
+      <Item2 Name="Debug_windows_64">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -136,8 +63,8 @@
             </Debugging>
           </Linking>
         </CompilerOptions>
-      </Item4>
-      <Item5 Name="Release_windows_64">
+      </Item2>
+      <Item3 Name="Release_windows_64">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -170,8 +97,8 @@
             </Options>
           </Linking>
         </CompilerOptions>
-      </Item5>
-      <Item6 Name="Release_linux_64">
+      </Item3>
+      <Item4 Name="Release_linux_64">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -200,8 +127,8 @@
             <LinkSmart Value="True"/>
           </Linking>
         </CompilerOptions>
-      </Item6>
-      <Item7 Name="Debug_linux_64">
+      </Item4>
+      <Item5 Name="Debug_linux_64">
         <CompilerOptions>
           <Version Value="11"/>
           <PathDelim Value="\"/>
@@ -229,10 +156,10 @@
             </Debugging>
           </Linking>
         </CompilerOptions>
-      </Item7>
+      </Item5>
       <SharedMatrixOptions Count="2">
-        <Item1 ID="731975208417" Modes="Debug_windows_64,Release_windows_64,Release_windows_32,Debug_windows_32,Debug_linux_64,Release_linux_64" Value="-CfAVX2 -CpCOREAVX2 -OpCOREAVX2 -OoFASTMATH"/>
-        <Item2 ID="883228556756" Modes="Release_windows_64,Debug_windows_64,Release_windows_32,Release_linux_64,Debug_windows_32,Debug_linux_64" Value="-dSDL2"/>
+        <Item1 ID="731975208417" Modes="Debug_windows_64,Release_windows_64,Debug_linux_64,Release_linux_64" Value="-CfAVX2 -CpCOREAVX2 -OpCOREAVX2 -OoFASTMATH"/>
+        <Item2 ID="883228556756" Modes="Release_windows_64,Debug_windows_64,Release_linux_64,Debug_linux_64" Value="-dSDL2"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>

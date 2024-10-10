@@ -10,8 +10,7 @@
         <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
         <IsPartOfProject Value="True"/>
         <IsVisibleTab Value="True"/>
-        <TopLine Value="305"/>
-        <CursorPos X="51" Y="314"/>
+        <CursorPos X="13" Y="35"/>
         <UsageCount Value="200"/>
         <Loaded Value="True"/>
       </Unit0>
@@ -558,7 +557,7 @@
     <Debugger>
       <Backend Value="{3C0CF425-78B8-47D5-875D-A45305AB12A6}"/>
     </Debugger>
-    <JumpHistory Count="13" HistoryIndex="12">
+    <JumpHistory Count="14" HistoryIndex="13">
       <Position1>
         <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
         <Caret Line="347" TopLine="328"/>
@@ -611,6 +610,10 @@
         <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
         <Caret Line="416" Column="71" TopLine="447"/>
       </Position13>
+      <Position14>
+        <Filename Value="ImGui_SDL2_OpenGL3_Demo.dpr"/>
+        <Caret Line="208" Column="63" TopLine="198"/>
+      </Position14>
     </JumpHistory>
     <RunParams>
       <FormatVersion Value="2"/>
