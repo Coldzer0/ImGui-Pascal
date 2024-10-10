@@ -19,6 +19,8 @@ Unit CustomNodeGraph;
 {$IfDef FPC}
   {$mode Delphi}{$H+}
   {$ModeSwitch advancedrecords}
+  //{$CODEALIGN LOCALMIN=16}
+  {$inline on }
 {$EndIf}
 
 Interface
@@ -26,8 +28,7 @@ Interface
 Uses
   Generics.Collections,
   SysUtils,
-  PasImGui,
-  PasImGui.Utils;
+  PasImGui;
 
 Type
   { TNode }
@@ -41,8 +42,8 @@ Type
     InputsCount, OutputsCount: Integer;
     Function GetInputSlotPos(slotNo: Integer): ImVec2;
     Function GetOutputSlotPos(slotNo: Integer): ImVec2;
-    Constructor Create(id_: Integer; Const Name_: PAnsiChar;
-      pos_: ImVec2; Value_: Single; color_: ImVec4; inputsCount_, outputsCount_: Integer);
+    Constructor Create(id_: Integer; Const Name_: PAnsiChar; pos_: ImVec2; Value_: Single;
+      color_: ImVec4; inputsCount_, outputsCount_: Integer);
   End;
 
   { TNodeLink }
@@ -64,7 +65,7 @@ Var
   links: TList<TNodeLink>;
   scrolling: ImVec2 = (x: 0.0; y: 0.0);
   inited: Boolean = False;
-  show_grid: Boolean = False;
+  show_grid: Boolean = True;
   node_selected: Integer = -1;
 
 Procedure ShowExampleAppCustomNodeGraph(opened: PBoolean);
@@ -76,12 +77,13 @@ Var
   offset, win_pos, canvas_sz, p1, p2, node_rect_min, node_rect_max, scene_pos: ImVec2;
   draw_list: PImDrawList;
   GRID_COLOR, node_bg_color: ImU32;
-  GRID_SZ, x, y: Single;
+  x, y: Single;
   old_any_active, node_widgets_active, node_moving_active: Boolean;
   open_context_menu: Boolean;
   node_hovered_in_list: Integer;
   node_hovered_in_scene: Integer;
 Const
+  GRID_SZ : Single = 64.0;
   NODE_SLOT_RADIUS: Single = 4.0;
   NODE_WINDOW_PADDING: ImVec2 = (x: 8.0; y: 8.0);
 Begin
@@ -101,8 +103,8 @@ Begin
     links := TList<TNodeLink>.Create();
 
     nodes.Add(TNode.Create(0, 'MainTex', ImVec2.New(40, 50), 0.5, ImVec4.New(255, 100, 100), 1, 1));
-    nodes.Add(TNode.Create(1, 'BumpMap', ImVec2.New(40, 150), 0.42, ImVec4.New(200, 100, 200), 1, 1));
-    nodes.Add(TNode.Create(2, 'Combine', ImVec2.New(270, 80), 1.0, ImVec4.New(0, 200, 100), 2, 2));
+    nodes.Add(TNode.Create(1, 'BumpMap', ImVec2.New(40, 160), 0.42, ImVec4.New(200, 100, 200), 1, 1));
+    nodes.Add(TNode.Create(2, 'Combine', ImVec2.New(270, 80), 0.0, ImVec4.New(0, 200, 100), 2, 2));
     links.Add(TNodeLink.Create(0, 0, 2, 0));
     links.Add(TNodeLink.Create(1, 0, 2, 1));
 
@@ -113,7 +115,7 @@ Begin
   node_hovered_in_scene := -1;
 
   // Draw a list of nodes on the left side
-  ImGui.BeginChild('node_list', ImVec2.New(100, 0));
+  ImGui.BeginChild('node_list', ImVec2.New(150, 0));
   ImGui.Text('Nodes');
   ImGui.Separator();
 
@@ -127,8 +129,7 @@ Begin
     If ImGui.IsItemHovered() Then
     Begin
       node_hovered_in_list := node.ID;
-      open_context_menu := Boolean(Ord(open_context_menu) Or
-        Ord(ImGui.IsMouseClicked(ImGuiMouseButton_Left)));
+      open_context_menu := open_context_menu Or ImGui.IsMouseClicked(ImGuiMouseButton_Right);
     End;
     ImGui.PopID();
   End;
@@ -138,13 +139,13 @@ Begin
   ImGui.BeginGroup();
 
   // Create our child canvas
-  ImGui.Text('Hold middle mouse button to scroll (%.2f,%.2f)',[scrolling.x, scrolling.y]);
+  ImGui.Text('Hold middle mouse button to scroll (%.2f,%.2f)', [scrolling.x, scrolling.y]);
   ImGui.SameLine();
   ImGui.Checkbox('Show grid', @show_grid);
   ImGui.PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2.New(1, 1));
   ImGui.PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2.New(0, 0));
   ImGui.PushStyleColor(ImGuiCol_ChildBg, IM_COL32(60, 60, 70, 200));
-  ImGui.BeginChild('scrolling_region', ImVec2.New(0, 0), ImGuiChildFlags_None,
+  ImGui.BeginChild('scrolling_region', ImVec2.New(0, 0), ImGuiChildFlags_Border,
     ImGuiWindowFlags_NoScrollbar Or ImGuiWindowFlags_NoMove);
   ImGui.PopStyleVar(); // WindowPadding
   ImGui.PushItemWidth(120.0);
@@ -156,22 +157,22 @@ Begin
   If show_grid Then
   Begin
     GRID_COLOR := IM_COL32(200, 200, 200, 40);
-    GRID_SZ := 64.0;
     win_pos := ImGui.GetCursorScreenPos();
     canvas_sz := ImGui.GetWindowSize();
 
-    x := FMod(scrolling.x, GRID_SZ);
-    while x < canvas_sz.x do
-    begin
+    x := Math.FMod(scrolling.x, GRID_SZ);
+    While x < canvas_sz.x Do
+    Begin
       draw_list^.AddLine(ImVec2.New(x, 0.0) + win_pos, ImVec2.New(x, canvas_sz.y) + win_pos, GRID_COLOR);
-      x := x + GRID_SZ;
-    end;
+      x += GRID_SZ;
+    End;
 
-    y := fmod(scrolling.y, GRID_SZ);
+    //y := scrolling.y - GRID_SZ * Int(scrolling.y/GRID_SZ);
+    y := FMod(scrolling.y, GRID_SZ);
     While y < canvas_sz.y Do
     Begin
       draw_list^.AddLine(ImVec2.New(0.0, y) + win_pos, ImVec2.New(canvas_sz.x, y) + win_pos, GRID_COLOR);
-      y := y + GRID_SZ;
+      y += GRID_SZ;
     End;
   End;
 
@@ -184,9 +185,12 @@ Begin
     link := links[link_idx];
     node_inp := nodes[link.InputIdx];
     node_out := nodes[link.OutputIdx];
+
+    node_out.Value += node_inp.Value;
+
     p1 := offset + node_inp.GetOutputSlotPos(link.InputSlot);
     p2 := offset + node_out.GetInputSlotPos(link.OutputSlot);
-    draw_list^.AddBezierCubic(p1, p1 + ImVec2.New(-50, 0), p2 + ImVec2.New(+50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0);
+    draw_list^.AddBezierCubic(p1, p1 + ImVec2.New(+50, 0), p2 + ImVec2.New(-50, 0), p2, IM_COL32(200, 200, 100, 255), 3.0);
   End;
 
   // Display nodes
@@ -200,6 +204,7 @@ Begin
     // Display node contents first
     draw_list^.ChannelsSetCurrent(1); // Foreground
     old_any_active := ImGui.IsAnyItemActive();
+
     ImGui.SetCursorScreenPos(node_rect_min + NODE_WINDOW_PADDING);
     ImGui.BeginGroup(); // Lock horizontal position
     ImGui.Text('%s', [node.Name]);
@@ -208,7 +213,7 @@ Begin
     ImGui.EndGroup();
 
     // Save the size of what we have emitted and whether any of the widgets are being used
-    node_widgets_active := (Not old_any_active And ImGui.IsAnyItemActive());
+    node_widgets_active := ((Not old_any_active) And ImGui.IsAnyItemActive());
     node.Size := ImGui.GetItemRectSize() + NODE_WINDOW_PADDING + NODE_WINDOW_PADDING;
     node_rect_max := node_rect_min + node.Size;
 
@@ -227,7 +232,7 @@ Begin
       node_selected := node.ID;
 
     If (node_moving_active And ImGui.IsMouseDragging(ImGuiMouseButton_Left)) Then
-      node.Pos := node.Pos + io^.MouseDelta;
+      node.Pos += io^.MouseDelta;
 
     If ((node_hovered_in_list = node.ID) Or (node_hovered_in_scene = node.ID) Or
       ((node_hovered_in_list = -1) And (node_selected = node.ID))) Then
@@ -253,15 +258,15 @@ Begin
   // Open context menu
   If ImGui.IsMouseReleased(ImGuiMouseButton_Right) Then
   Begin
-    If ImGui.IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup) Or
-      (Not ImGui.IsAnyItemHovered()) Then
+    If ImGui.IsWindowHovered(ImGuiHoveredFlags_AllowWhenBlockedByPopup) Or (Not ImGui.IsAnyItemHovered()) Then
     Begin
+      node_selected := -1;
       node_hovered_in_list := -1;
       node_hovered_in_scene := -1;
-      node_selected := -1;
       open_context_menu := True;
     End;
   End;
+
   If open_context_menu Then
   Begin
     ImGui.OpenPopup('context_menu');
@@ -270,6 +275,7 @@ Begin
     If (node_hovered_in_scene <> -1) Then
       node_selected := node_hovered_in_scene;
   End;
+
   // Draw context menu
   ImGui.PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2.New(8, 8));
   If ImGui.BeginPopup('context_menu') Then
@@ -294,8 +300,7 @@ Begin
     Else
     Begin
       If ImGui.MenuItem('Add') Then
-        nodes.Add(Node.Create(nodes.Count, 'New node', scene_pos, 0.5,
-          ImVec4.New(100, 100, 200), 2, 2));
+        nodes.Add(Node.Create(nodes.Count, 'New node', scene_pos, 0.5, ImVec4.New(100, 100, 200), 2, 2));
       If ImGui.MenuItem('Past', nil, False, False) Then
       Begin
       End;
@@ -305,9 +310,9 @@ Begin
   ImGui.PopStyleVar();
 
   // Scrolling
-  If (ImGui.IsWindowHovered() And (Not ImGui.IsAnyItemActive()) And
-    ImGui.IsMouseDragging(ImGuiMouseButton_Middle, 0.0)) Then
-    scrolling := scrolling + io.MouseDelta;
+  If (ImGui.IsWindowHovered() And (Not ImGui.IsAnyItemActive()) And ImGui.IsMouseDragging(
+    ImGuiMouseButton_Middle, 0.0)) Then
+    scrolling += io.MouseDelta;
 
   ImGui.PopItemWidth();
   ImGui.EndChild();
@@ -323,17 +328,17 @@ End;
 Function TNode.GetInputSlotPos(slotNo: Integer): ImVec2;
 Begin
   Result.x := Pos.x;
-  Result.y := Pos.y + Size.y * Single(slotNo + 1) / (Single(InputsCount) + 1);
+  Result.y := Pos.y + Size.y * Single(slotNo + 1) / Single(InputsCount + 1);
 End;
 
 Function TNode.GetOutputSlotPos(slotNo: Integer): ImVec2;
 Begin
   Result.x := Pos.x + Size.x;
-  Result.y := Pos.y + Size.y * Single(slotNo + 1) / (Single(OutputsCount) + 1);
+  Result.y := Pos.y + Size.y * Single(slotNo + 1) / Single(OutputsCount + 1);
 End;
 
-Constructor TNode.Create(id_: Integer; Const Name_: PAnsiChar;
-  pos_: ImVec2; Value_: Single; color_: ImVec4; inputsCount_, outputsCount_: Integer);
+Constructor TNode.Create(id_: Integer; Const Name_: PAnsiChar; pos_: ImVec2; Value_: Single;
+  color_: ImVec4; inputsCount_, outputsCount_: Integer);
 Begin
   Self.ID := id_;
   StrLCopy(Self.Name, name_, SizeOf(Self.Name) - 1);
