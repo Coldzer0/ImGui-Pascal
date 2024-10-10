@@ -25,7 +25,7 @@
       <UseVersionInfo Value="True"/>
       <MajorVersionNr Value="1"/>
     </VersionInfo>
-    <BuildModes Count="6">
+    <BuildModes Count="7">
       <Item1 Name="Default" Default="True"/>
       <Item2 Name="Debug_windows_32">
         <CompilerOptions>
@@ -152,15 +152,15 @@
           </SearchPaths>
           <CodeGeneration>
             <SmartLinkUnit Value="True"/>
-            <TargetProcessor Value="COREAVX2"/>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="win64"/>
             <Optimizations>
               <OptimizationLevel Value="3"/>
             </Optimizations>
           </CodeGeneration>
           <Linking>
             <Debugging>
-              <GenerateDebugInfo Value="False"/>
-              <RunWithoutDebug Value="True"/>
+              <DebugInfoType Value="dsDwarf3"/>
             </Debugging>
             <LinkSmart Value="True"/>
             <Options>
@@ -201,11 +201,38 @@
           </Linking>
         </CompilerOptions>
       </Item6>
-      <SharedMatrixOptions Count="4">
-        <Item1 ID="825586496411" Value="-Xm"/>
-        <Item2 ID="187403506791" Modes="Release_windows_64,Release_linux_64,Release_windows_32" Value="-CfAVX -CpCOREAVX -OpCOREAVX"/>
-        <Item3 ID="940053534749" Value="-FWtwpo4-1.wpo -OWall"/>
-        <Item4 ID="883228556756" Modes="Release_windows_64,Debug_windows_64,Release_windows_32,Release_linux_64,Debug_windows_32" Value="-dSDL2"/>
+      <Item7 Name="Debug_linux_64">
+        <CompilerOptions>
+          <Version Value="11"/>
+          <PathDelim Value="\"/>
+          <Target>
+            <Filename Value=".\Linux64\ImGui_SDL2_OpenGL3_Demo"/>
+          </Target>
+          <SearchPaths>
+            <IncludeFiles Value="$(ProjOutDir);..\src"/>
+            <Libraries Value="..\libs\static\linux64"/>
+            <OtherUnitFiles Value="..\src;..\impl;..\OpenGL3;..\SDL2-for-Pascal\units;..\examples"/>
+            <UnitOutputDirectory Value="lib\$(TargetCPU)-$(TargetOS)"/>
+          </SearchPaths>
+          <CodeGeneration>
+            <TargetCPU Value="x86_64"/>
+            <TargetOS Value="linux"/>
+            <Optimizations>
+              <OptimizationLevel Value="0"/>
+            </Optimizations>
+          </CodeGeneration>
+          <Linking>
+            <Debugging>
+              <RunWithoutDebug Value="True"/>
+              <DebugInfoType Value="dsDwarf3"/>
+              <UseExternalDbgSyms Value="True"/>
+            </Debugging>
+          </Linking>
+        </CompilerOptions>
+      </Item7>
+      <SharedMatrixOptions Count="2">
+        <Item1 ID="731975208417" Modes="Debug_windows_64,Release_windows_64,Release_windows_32,Debug_windows_32,Debug_linux_64,Release_linux_64" Value="-CfAVX2 -CpCOREAVX2 -OpCOREAVX2 -OoFASTMATH"/>
+        <Item2 ID="883228556756" Modes="Release_windows_64,Debug_windows_64,Release_windows_32,Release_linux_64,Debug_windows_32,Debug_linux_64" Value="-dSDL2"/>
       </SharedMatrixOptions>
     </BuildModes>
     <PublishOptions>

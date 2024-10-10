@@ -14,7 +14,7 @@
 
 Program ImGui_SDL2_OpenGL3_Demo;
 {$IFDEF FPC}
-  {$mode objfpc}{$H+}{$J-}
+  {$mode Delphi}{$H+}{$J-}
   {$Optimization FASTMATH}
 {$ENDIF}
 {$IfDef LINUX}
@@ -38,7 +38,7 @@ Uses
   cmem,
   {$ENDIF}
   Math,
-  SysUtils,
+  SysUtils, ctypes,
   sdl2,
   glad_gl,
   PasImGui,
@@ -47,6 +47,8 @@ Uses
   PasImGui.Backend.SDL2,
   PasImGui.Renderer.OpenGL3,
   TestWindow, CustomNodeGraph;
+
+  { TODO: Test with LIBGL_ALWAYS_SOFTWARE - Time : 9/23/2024 4:34:43 PM }
 
 Var
   counter: Integer;
@@ -82,7 +84,7 @@ Var
   var
     i: Integer;
   begin
-    if not ImGui.Begin_('ImPlot Pascal Demo') then
+    if not ImGui.Begin_('ImPlot Pascal Demo', nil, ImGuiWindowFlags_NoDocking) then
     begin
       ImGui.End_();
       exit;
@@ -308,7 +310,11 @@ Var
     end;
     Result := 1;
   end;
-
+var
+  FrameRate : Single = 60.0; // Default to 60 FPS
+  elapsedMS : Single;
+  SleepTime : Integer;
+  Starting_tick: Cuint64;
 Begin
   { TODO: This is here for testing - Remove this later :V }
   //DeleteFile('MyApp.ini');
@@ -341,7 +347,7 @@ Begin
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, 0);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_PROFILE_MASK, SDL_GL_CONTEXT_PROFILE_CORE);
   SDL_GL_SetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, 3);
-  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 0);
+  SDL_GL_SetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, 2);
   {$EndIf}
 
   // From 2.0.18: Enable native IME.
@@ -418,7 +424,7 @@ Begin
   // Load Fonts
   //IO^.Fonts^.AddFontDefault();
   IO^.Fonts^.AddFontFromFileTTF('fonts/DroidSans.ttf', 25.0);
-  IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
+  //IO^.Fonts^.AddFontFromFileTTF('fonts/JetBrainsMonoNerdFontPropo-Italic.ttf ', 28.0);
 
   // Background Color
   clearColor.x := 0.45;
@@ -433,6 +439,7 @@ Begin
   SDL_SetEventFilter(@window_redraw_on_resize, nil);
   While Not quit Do
   Begin
+    starting_tick := SDL_GetPerformanceCounter();
     //handle input
     While SDL_PollEvent(@e) <> 0 Do
     Begin
@@ -443,8 +450,17 @@ Begin
         (e.window.windowID = SDL_GetWindowID(window)) Then
         quit := True;
     End;
-
     DrawGUI();
+
+    // Locaked Frame Rate
+    if FrameRate > 0 then
+    begin
+      elapsedMS := Single(SDL_GetPerformanceCounter() - starting_tick) / Single(SDL_GetPerformanceFrequency()) * 1000.0;
+      SleepTime := Floor((1000.0 / FrameRate) - elapsedMS);
+      if SleepTime <= 0 then
+        SleepTime := 0;
+      SDL_Delay(SleepTime);
+    end;
   End;
   testwin.Free;
 
