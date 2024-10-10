@@ -417,7 +417,7 @@ End;
 
 // Done
 // Note: native IME will only display if user calls SDL_SetHint(SDL_HINT_IME_SHOW_UI, "1") _before_ SDL_CreateWindow().
-Procedure ImGui_ImplSDL2_SetPlatformImeData(viewport: PImGuiViewport; Data: PImGuiPlatformImeData); Cdecl;
+Procedure ImGui_ImplSDL2_SetPlatformImeData(ctx: PImGuiContext; viewport: PImGuiViewport; data: PImGuiPlatformImeData); Cdecl;
 Var
   r: TSDL_Rect;
 Begin
@@ -617,7 +617,7 @@ Begin
   io^.SetClipboardTextFn := @ImGui_ImplSDL2_SetClipboardText;
   io^.GetClipboardTextFn := @ImGui_ImplSDL2_GetClipboardText;
   io^.ClipboardUserData := nil;
-  io^.SetPlatformImeDataFn := @ImGui_ImplSDL2_SetPlatformImeData;
+  io^.PlatformSetImeDataFn := @ImGui_ImplSDL2_SetPlatformImeData;
 
   // Load mouse cursors
   bd^.MouseCursors[ImGuiMouseCursor_Arrow] := SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_ARROW);
@@ -900,8 +900,7 @@ Begin
   io^.DisplaySize := ImVec2.New(Single(w), Single(h));
 
   If (w > 0) And (h > 0) Then
-    io^.DisplayFramebufferScale :=
-      ImVec2.New(Single(display_w) / w, Single(display_h) / h);
+    io^.DisplayFramebufferScale := ImVec2.New(Single(display_w) / w, Single(display_h) / h);
 
   // Update monitors
   If bd^.WantUpdateMonitors Then

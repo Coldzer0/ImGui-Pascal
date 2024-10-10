@@ -1,6 +1,9 @@
 
 {ImFontGlyph}
 
+
+{ImFontGlyph}
+
 function ImFontGlyph.GetData0Value(const AIndex: Integer): Cardinal;
 var
   BitCount, Offset, Mask: Cardinal;
@@ -12,6 +15,28 @@ begin
 end;
 
 procedure ImFontGlyph.SetData0Value(const AIndex: Integer; const AValue: Cardinal);
+var
+  BitCount, Offset, Mask: Cardinal;
+begin
+  BitCount := AIndex and $FF;
+  Offset := AIndex shr 8;
+  Mask := ((1 shl BitCount) - 1);
+  Data0 := (Data0 and (not (Mask shl Offset))) or (AValue shl Offset);
+end;
+
+{ImGuiBoxSelectState}
+
+function ImGuiBoxSelectState.GetData0Value(const AIndex: Integer): Cardinal;
+var
+  BitCount, Offset, Mask: Cardinal;
+begin
+  BitCount := AIndex and $FF;
+  Offset := AIndex shr 8;
+  Mask := ((1 shl BitCount) - 1);
+  Result := (Data0 shr Offset) and Mask;
+end;
+
+procedure ImGuiBoxSelectState.SetData0Value(const AIndex: Integer; const AValue: Cardinal);
 var
   BitCount, Offset, Mask: Cardinal;
 begin

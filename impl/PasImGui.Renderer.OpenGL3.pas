@@ -89,6 +89,7 @@ Type
     ElementsHandle: GLuint;
     VertexBufferSize: GLsizeiptr;
     IndexBufferSize: GLsizeiptr;
+    HasPolygonMode : Boolean;
     HasClipOrigin: Boolean;
     UseBufferSubData: Boolean;
   End;
@@ -612,8 +613,7 @@ Begin
   If (bd^.GlVersion >= 320) Then
     glGetIntegerv(GL_CONTEXT_PROFILE_MASK, @bd^.GlProfileMask);
 
-  bd^.GlProfileIsCompat := (bd^.GlProfileMask And
-    GL_CONTEXT_COMPATIBILITY_PROFILE_BIT) <> 0;
+  bd^.GlProfileIsCompat := (bd^.GlProfileMask And GL_CONTEXT_COMPATIBILITY_PROFILE_BIT) <> 0;
 
   {$IfDef IMGUI_OPENGL_ES3}
     bd^.GlProfileIsES3 := true;
@@ -946,15 +946,13 @@ Begin
   end;
 
   // Create shaders
-  vertex_shader_with_version[0] := @bd^.GlslVersionString[0];
-  vertex_shader_with_version[1] := vertex_shader;
+  vertex_shader_with_version := [@bd^.GlslVersionString[0], vertex_shader];
   vert_handle := glCreateShader(GL_VERTEX_SHADER);
   glShaderSource(vert_handle, 2, @vertex_shader_with_version, nil);
   glCompileShader(vert_handle);
   CheckShader(vert_handle, 'vertex shader');
 
-  fragment_shader_with_version[0] := @bd^.GlslVersionString[0];
-  fragment_shader_with_version[1] := fragment_shader;
+  fragment_shader_with_version := [@bd^.GlslVersionString[0], fragment_shader];
   frag_handle := glCreateShader(GL_FRAGMENT_SHADER);
   glShaderSource(frag_handle, 2, @fragment_shader_with_version, nil);
   glCompileShader(frag_handle);
@@ -999,10 +997,12 @@ Var
   bd: PImGui_ImplOpenGL3_Data;
 Begin
   bd := ImGui_ImplOpenGL3_GetBackendData();
-  Assert(bd <> nil, 'Did you call ImGui_ImplOpenGL3_Init()?');
+  Assert(bd <> nil, 'Context or backend not initialized! Did you call ImGui_OpenGL3_Init()?');
 
   if (bd^.ShaderHandle = 0) then
       ImGui_ImplOpenGL3_CreateDeviceObjects();
+  if (bd^.FontTexture = 0)then
+      ImGui_ImplOpenGL3_CreateFontsTexture();
 End;
 
 procedure ImGui_ImplOpenGL3_ShutdownPlatformInterface();

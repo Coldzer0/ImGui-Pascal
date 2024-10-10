@@ -29,7 +29,7 @@ Interface
 Uses
   SysUtils, Math;
 
-{$IfDef DYNAMIC_LINK}
+  {$IfDef DYNAMIC_LINK}
 Const
   {$if defined(Darwin)}
     SharedSuffix = 'dylib';
@@ -43,7 +43,6 @@ Const
     {$IfDef FPC}
     {$LinkLib libcimgui.a}
     {$IfDef MSWINDOWS}
-      {$linklib stdc++}
       {$linklib mingwex}
       {$linklib mingw32}
       {$linklib gcc}
@@ -55,7 +54,6 @@ Const
       {$LinkLib gdi32}
       {$LinkLib ole32}
       {$linklib msvcrt}
-      {$LinkLib msvcrt_atexit}
       {$linklib kernel32}
       {$linklib advapi32}
       {$linklib user32}
@@ -89,15 +87,15 @@ Type
   End;
 
 Const
-  IMGUI_VERSION = '1.90.9';
-  IMGUI_VERSION_NUM = 19009;
+  IMGUI_VERSION = '1.91.0';
+  IMGUI_VERSION_NUM = 19100;
 
-{$J+}
   // We set default values but we try to get the values using - igGET_FLT_MAX & igGET_FLT_MIN for maximum compatibility.
 Const
+  {$J+}
   FLT_MAX: Single = 3.40282347e+38;
   FLT_MIN: Single = 1.17549435e-38;
-{$J-}
+  {$J-}
 
 
 Type
@@ -201,13 +199,10 @@ Type
       extra_flags: ImGuiWindowFlags): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
     Class Procedure EndChild; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetContentRegionMax(out_: PImVec2); {$IfDef INLINE} inline;{$EndIf}
+    //Class Procedure GetContentRegionMax(out_: PImVec2); {$IfDef INLINE} inline;{$EndIf}
     Class Function GetContentRegionAvail: ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetContentRegionAvailWidth: Single; {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure GetWindowContentRegionMin(out_: PImVec2);
     {$IfDef INLINE} inline;{$EndIf}
-    Class Function GetWindowContentRegionMax(): ImVec2; {$IfDef INLINE} inline;{$EndIf}
-    Class Function GetWindowContentRegionWidth: Single; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowDrawList(): PImDrawList; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowPos: ImVec2; {$IfDef INLINE} inline;{$EndIf}
     Class Function GetWindowSize: ImVec2; {$IfDef INLINE} inline;{$EndIf}
@@ -287,10 +282,6 @@ Type
     Class Function CalcItemWidth(): Single; {$IfDef INLINE} inline;{$EndIf}
     Class Procedure PushTextWrapPos(wrap_pos_x: Single); {$IfDef INLINE} inline;{$EndIf}
     Class Procedure PopTextWrapPos(); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PushTabStop(v: Boolean); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PopTabStop(); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PushButtonRepeat(_repeat: Boolean); {$IfDef INLINE} inline;{$EndIf}
-    Class Procedure PopButtonRepeat(); {$IfDef INLINE} inline;{$EndIf}
 
     {Separator}
     Class Procedure SeparatorText(label_: AnsiString); {$IfDef INLINE} inline;{$EndIf}
@@ -967,11 +958,6 @@ Implementation
 Uses
   PasImGui.Utils;
 
-function ZNew(Size : NativeInt): Pointer;
-begin
-
-end;
-
 Class Function TImVec2.New(Const _x, _y: Single): ImVec2;
 Begin
   Result.x := _x;
@@ -1272,11 +1258,6 @@ Begin
   igEndChild;
 End;
 
-Class Procedure ImGui.GetContentRegionMax(out_: PImVec2);
-Begin
-  igGetContentRegionMax(out_);
-End;
-
 Class Function ImGui.GetContentRegionAvail: ImVec2;
 Begin
   igGetContentRegionAvail(@Result);
@@ -1285,21 +1266,6 @@ End;
 Class Function ImGui.GetContentRegionAvailWidth: Single;
 Begin
   Result := GetContentRegionAvail().x;
-End;
-
-Class Procedure ImGui.GetWindowContentRegionMin(out_: PImVec2);
-Begin
-  igGetWindowContentRegionMin(out_);
-End;
-
-Class Function ImGui.GetWindowContentRegionMax: ImVec2;
-Begin
-  igGetWindowContentRegionMax(@Result);
-End;
-
-Class Function ImGui.GetWindowContentRegionWidth: Single;
-Begin
-  Result := GetWindowContentRegionMax().x;
 End;
 
 Class Function ImGui.GetWindowDrawList: PImDrawList;
@@ -1582,26 +1548,6 @@ End;
 Class Procedure ImGui.PopTextWrapPos;
 Begin
   igPopTextWrapPos;
-End;
-
-Class Procedure ImGui.PushTabStop(v: Boolean);
-Begin
-  igPushTabStop(v);
-End;
-
-Class Procedure ImGui.PopTabStop;
-Begin
-  igPopTabStop;
-End;
-
-Class Procedure ImGui.PushButtonRepeat(_repeat: Boolean);
-Begin
-  igPushButtonRepeat(_repeat);
-End;
-
-Class Procedure ImGui.PopButtonRepeat;
-Begin
-  igPopButtonRepeat;
 End;
 
 Class Procedure ImGui.SeparatorText(label_: AnsiString);
@@ -2969,8 +2915,8 @@ Begin
   ImDrawList_AddTriangleFilled(@self, a, b, c, col);
 End;
 
-Procedure TImDrawListHelper.AddCircle(centre: ImVec2; radius: Single; col: ImU32; num_segments: Longint;
-  thickness: Single);
+Procedure TImDrawListHelper.AddCircle(centre: ImVec2; radius: Single; col: ImU32;
+  num_segments: Longint; thickness: Single);
 Begin
   ImDrawList_AddCircle(@self, centre, radius, col, num_segments, thickness);
 End;

@@ -51,6 +51,18 @@ const
   ImGuiChildFlags_NavFlattened = 256;
 
 type
+  ImGuiItemFlags_ = Integer;
+  PImGuiItemFlags_ = ^ImGuiItemFlags_;
+
+const
+  ImGuiItemFlags_None = 0;
+  ImGuiItemFlags_NoTabStop = 1;
+  ImGuiItemFlags_NoNav = 2;
+  ImGuiItemFlags_NoNavDefaultFocus = 4;
+  ImGuiItemFlags_ButtonRepeat = 8;
+  ImGuiItemFlags_AutoClosePopups = 16;
+
+type
   ImGuiInputTextFlags_ = Integer;
   PImGuiInputTextFlags_ = ^ImGuiInputTextFlags_;
 
@@ -128,11 +140,12 @@ type
 
 const
   ImGuiSelectableFlags_None = 0;
-  ImGuiSelectableFlags_DontClosePopups = 1;
+  ImGuiSelectableFlags_NoAutoClosePopups = 1;
   ImGuiSelectableFlags_SpanAllColumns = 2;
   ImGuiSelectableFlags_AllowDoubleClick = 4;
   ImGuiSelectableFlags_Disabled = 8;
   ImGuiSelectableFlags_AllowOverlap = 16;
+  ImGuiSelectableFlags_Highlight = 32;
 
 type
   ImGuiComboFlags_ = Integer;
@@ -272,7 +285,8 @@ const
   ImGuiDataType_U64 = 7;
   ImGuiDataType_Float = 8;
   ImGuiDataType_Double = 9;
-  ImGuiDataType_COUNT = 10;
+  ImGuiDataType_Bool = 10;
+  ImGuiDataType_COUNT = 11;
 
 type
   ImGuiDir = Integer;
@@ -575,13 +589,14 @@ const
   ImGuiCol_TableBorderLight = 48;
   ImGuiCol_TableRowBg = 49;
   ImGuiCol_TableRowBgAlt = 50;
-  ImGuiCol_TextSelectedBg = 51;
-  ImGuiCol_DragDropTarget = 52;
-  ImGuiCol_NavHighlight = 53;
-  ImGuiCol_NavWindowingHighlight = 54;
-  ImGuiCol_NavWindowingDimBg = 55;
-  ImGuiCol_ModalWindowDimBg = 56;
-  ImGuiCol_COUNT = 57;
+  ImGuiCol_TextLink = 51;
+  ImGuiCol_TextSelectedBg = 52;
+  ImGuiCol_DragDropTarget = 53;
+  ImGuiCol_NavHighlight = 54;
+  ImGuiCol_NavWindowingHighlight = 55;
+  ImGuiCol_NavWindowingDimBg = 56;
+  ImGuiCol_ModalWindowDimBg = 57;
+  ImGuiCol_COUNT = 58;
 
 type
   ImGuiStyleVar_ = Integer;
@@ -613,15 +628,16 @@ const
   ImGuiStyleVar_TabRounding = 22;
   ImGuiStyleVar_TabBorderSize = 23;
   ImGuiStyleVar_TabBarBorderSize = 24;
-  ImGuiStyleVar_TableAngledHeadersAngle = 25;
-  ImGuiStyleVar_TableAngledHeadersTextAlign = 26;
-  ImGuiStyleVar_ButtonTextAlign = 27;
-  ImGuiStyleVar_SelectableTextAlign = 28;
-  ImGuiStyleVar_SeparatorTextBorderSize = 29;
-  ImGuiStyleVar_SeparatorTextAlign = 30;
-  ImGuiStyleVar_SeparatorTextPadding = 31;
-  ImGuiStyleVar_DockingSeparatorSize = 32;
-  ImGuiStyleVar_COUNT = 33;
+  ImGuiStyleVar_TabBarOverlineSize = 25;
+  ImGuiStyleVar_TableAngledHeadersAngle = 26;
+  ImGuiStyleVar_TableAngledHeadersTextAlign = 27;
+  ImGuiStyleVar_ButtonTextAlign = 28;
+  ImGuiStyleVar_SelectableTextAlign = 29;
+  ImGuiStyleVar_SeparatorTextBorderSize = 30;
+  ImGuiStyleVar_SeparatorTextAlign = 31;
+  ImGuiStyleVar_SeparatorTextPadding = 32;
+  ImGuiStyleVar_DockingSeparatorSize = 33;
+  ImGuiStyleVar_COUNT = 34;
 
 type
   ImGuiButtonFlags_ = Integer;
@@ -826,6 +842,38 @@ const
   ImGuiTableBgTarget_CellBg = 3;
 
 type
+  ImGuiMultiSelectFlags_ = Integer;
+  PImGuiMultiSelectFlags_ = ^ImGuiMultiSelectFlags_;
+
+const
+  ImGuiMultiSelectFlags_None = 0;
+  ImGuiMultiSelectFlags_SingleSelect = 1;
+  ImGuiMultiSelectFlags_NoSelectAll = 2;
+  ImGuiMultiSelectFlags_NoRangeSelect = 4;
+  ImGuiMultiSelectFlags_NoAutoSelect = 8;
+  ImGuiMultiSelectFlags_NoAutoClear = 16;
+  ImGuiMultiSelectFlags_NoAutoClearOnReselect = 32;
+  ImGuiMultiSelectFlags_BoxSelect1d = 64;
+  ImGuiMultiSelectFlags_BoxSelect2d = 128;
+  ImGuiMultiSelectFlags_BoxSelectNoScroll = 256;
+  ImGuiMultiSelectFlags_ClearOnEscape = 512;
+  ImGuiMultiSelectFlags_ClearOnClickVoid = 1024;
+  ImGuiMultiSelectFlags_ScopeWindow = 2048;
+  ImGuiMultiSelectFlags_ScopeRect = 4096;
+  ImGuiMultiSelectFlags_SelectOnClick = 8192;
+  ImGuiMultiSelectFlags_SelectOnClickRelease = 16384;
+  ImGuiMultiSelectFlags_NavWrapX = 65536;
+
+type
+  ImGuiSelectionRequestType = Integer;
+  PImGuiSelectionRequestType = ^ImGuiSelectionRequestType;
+
+const
+  ImGuiSelectionRequestType_None = 0;
+  ImGuiSelectionRequestType_SetAll = 1;
+  ImGuiSelectionRequestType_SetRange = 2;
+
+type
   ImDrawFlags_ = Integer;
   PImDrawFlags_ = ^ImDrawFlags_;
 
@@ -892,28 +940,24 @@ type
   PImGuiDataTypePrivate_ = ^ImGuiDataTypePrivate_;
 
 const
-  ImGuiDataType_String = 11;
-  ImGuiDataType_Pointer = 12;
-  ImGuiDataType_ID = 13;
+  ImGuiDataType_String = 12;
+  ImGuiDataType_Pointer = 13;
+  ImGuiDataType_ID = 14;
 
 type
-  ImGuiItemFlags_ = Integer;
-  PImGuiItemFlags_ = ^ImGuiItemFlags_;
+  ImGuiItemFlagsPrivate_ = Integer;
+  PImGuiItemFlagsPrivate_ = ^ImGuiItemFlagsPrivate_;
 
 const
-  ImGuiItemFlags_None = 0;
-  ImGuiItemFlags_NoTabStop = 1;
-  ImGuiItemFlags_ButtonRepeat = 2;
-  ImGuiItemFlags_Disabled = 4;
-  ImGuiItemFlags_NoNav = 8;
-  ImGuiItemFlags_NoNavDefaultFocus = 16;
-  ImGuiItemFlags_SelectableDontClosePopup = 32;
-  ImGuiItemFlags_MixedValue = 64;
-  ImGuiItemFlags_ReadOnly = 128;
-  ImGuiItemFlags_NoWindowHoverableCheck = 256;
-  ImGuiItemFlags_AllowOverlap = 512;
-  ImGuiItemFlags_Inputable = 1024;
-  ImGuiItemFlags_HasSelectionUserData = 2048;
+  ImGuiItemFlags_Disabled = 1024;
+  ImGuiItemFlags_ReadOnly = 2048;
+  ImGuiItemFlags_MixedValue = 4096;
+  ImGuiItemFlags_NoWindowHoverableCheck = 8192;
+  ImGuiItemFlags_AllowOverlap = 16384;
+  ImGuiItemFlags_Inputable = 1048576;
+  ImGuiItemFlags_HasSelectionUserData = 2097152;
+  ImGuiItemFlags_IsMultiSelect = 4194304;
+  ImGuiItemFlags_Default_ = 16;
 
 type
   ImGuiItemStatusFlags_ = Integer;
@@ -1011,8 +1055,8 @@ type
   PImGuiTreeNodeFlagsPrivate_ = ^ImGuiTreeNodeFlagsPrivate_;
 
 const
-  ImGuiTreeNodeFlags_ClipLabelForTrailingButton = 1048576;
-  ImGuiTreeNodeFlags_UpsideDownArrow = 2097152;
+  ImGuiTreeNodeFlags_ClipLabelForTrailingButton = 268435456;
+  ImGuiTreeNodeFlags_UpsideDownArrow = 536870912;
 
 type
   ImGuiSeparatorFlags_ = Integer;
@@ -1125,6 +1169,7 @@ const
   ImGuiNextItemDataFlags_HasOpen = 2;
   ImGuiNextItemDataFlags_HasShortcut = 4;
   ImGuiNextItemDataFlags_HasRefVal = 8;
+  ImGuiNextItemDataFlags_HasStorageID = 16;
 
 type
   ImGuiPopupPositionPolicy = Integer;
@@ -1354,10 +1399,11 @@ const
   ImGuiLocKey_WindowingMainMenuBar = 5;
   ImGuiLocKey_WindowingPopup = 6;
   ImGuiLocKey_WindowingUntitled = 7;
-  ImGuiLocKey_DockingHideTabBar = 8;
-  ImGuiLocKey_DockingHoldShiftToDock = 9;
-  ImGuiLocKey_DockingDragToUndockOrMoveNode = 10;
-  ImGuiLocKey_COUNT = 11;
+  ImGuiLocKey_CopyLink = 8;
+  ImGuiLocKey_DockingHideTabBar = 9;
+  ImGuiLocKey_DockingHoldShiftToDock = 10;
+  ImGuiLocKey_DockingDragToUndockOrMoveNode = 11;
+  ImGuiLocKey_COUNT = 12;
 
 type
   ImGuiDebugLogFlags_ = Integer;
@@ -1893,6 +1939,11 @@ type
   PImGuiStorage = ^ImGuiStorage;
   PImGuiListClipper = ^ImGuiListClipper;
   PImColor = ^ImColor;
+  PImVector_ImGuiSelectionRequest = ^ImVector_ImGuiSelectionRequest;
+  PImGuiMultiSelectIO = ^ImGuiMultiSelectIO;
+  PImGuiSelectionRequest = ^ImGuiSelectionRequest;
+  PImGuiSelectionBasicStorage = ^ImGuiSelectionBasicStorage;
+  PImGuiSelectionExternalStorage = ^ImGuiSelectionExternalStorage;
   PImDrawCmd = ^ImDrawCmd;
   PImDrawVert = ^ImDrawVert;
   PImDrawCmdHeader = ^ImDrawCmdHeader;
@@ -1954,7 +2005,7 @@ type
   PImGuiNextWindowData = ^ImGuiNextWindowData;
   PImGuiNextItemData = ^ImGuiNextItemData;
   PImGuiLastItemData = ^ImGuiLastItemData;
-  PImGuiNavTreeNodeData = ^ImGuiNavTreeNodeData;
+  PImGuiTreeNodeStackData = ^ImGuiTreeNodeStackData;
   PImGuiStackSizes = ^ImGuiStackSizes;
   PImGuiWindowStackData = ^ImGuiWindowStackData;
   PImGuiShrinkWidthItem = ^ImGuiShrinkWidthItem;
@@ -1983,6 +2034,9 @@ type
   PImGuiOldColumnData = ^ImGuiOldColumnData;
   PImVector_ImGuiOldColumnData = ^ImVector_ImGuiOldColumnData;
   PImGuiOldColumns = ^ImGuiOldColumns;
+  PImGuiBoxSelectState = ^ImGuiBoxSelectState;
+  PImGuiMultiSelectTempData = ^ImGuiMultiSelectTempData;
+  PImGuiMultiSelectState = ^ImGuiMultiSelectState;
   PImVector_ImGuiWindowPtr = ^ImVector_ImGuiWindowPtr;
   PImGuiDockNode = ^ImGuiDockNode;
   PImGuiWindowDockStyle = ^ImGuiWindowDockStyle;
@@ -2009,7 +2063,7 @@ type
   PImVector_ImGuiItemFlags = ^ImVector_ImGuiItemFlags;
   PImVector_ImGuiGroupData = ^ImVector_ImGuiGroupData;
   PImVector_ImGuiPopupData = ^ImVector_ImGuiPopupData;
-  PImVector_ImGuiNavTreeNodeData = ^ImVector_ImGuiNavTreeNodeData;
+  PImVector_ImGuiTreeNodeStackData = ^ImVector_ImGuiTreeNodeStackData;
   PImVector_ImGuiViewportPPtr = ^ImVector_ImGuiViewportPPtr;
   PImVector_unsigned_char = ^ImVector_unsigned_char;
   PImVector_ImGuiListClipperData = ^ImVector_ImGuiListClipperData;
@@ -2020,6 +2074,9 @@ type
   PImPool_ImGuiTabBar = ^ImPool_ImGuiTabBar;
   PImVector_ImGuiPtrOrIndex = ^ImVector_ImGuiPtrOrIndex;
   PImVector_ImGuiShrinkWidthItem = ^ImVector_ImGuiShrinkWidthItem;
+  PImVector_ImGuiMultiSelectTempData = ^ImVector_ImGuiMultiSelectTempData;
+  PImVector_ImGuiMultiSelectState = ^ImVector_ImGuiMultiSelectState;
+  PImPool_ImGuiMultiSelectState = ^ImPool_ImGuiMultiSelectState;
   PImVector_ImGuiID = ^ImVector_ImGuiID;
   PImVector_ImGuiSettingsHandler = ^ImVector_ImGuiSettingsHandler;
   PImChunkStream_ImGuiWindowSettings = ^ImChunkStream_ImGuiWindowSettings;
@@ -2142,6 +2199,7 @@ type
   ImFontAtlasFlags = Integer;
   ImGuiBackendFlags = Integer;
   ImGuiButtonFlags = Integer;
+  PImGuiButtonFlags = ^ImGuiButtonFlags;
   ImGuiChildFlags = Integer;
   ImGuiColorEditFlags = Integer;
   ImGuiConfigFlags = Integer;
@@ -2152,8 +2210,11 @@ type
   ImGuiHoveredFlags = Integer;
   ImGuiInputFlags = Integer;
   ImGuiInputTextFlags = Integer;
+  ImGuiItemFlags = Integer;
+  PImGuiItemFlags = ^ImGuiItemFlags;
   ImGuiKeyChord = Integer;
   ImGuiPopupFlags = Integer;
+  ImGuiMultiSelectFlags = Integer;
   ImGuiSelectableFlags = Integer;
   ImGuiSliderFlags = Integer;
   ImGuiTabBarFlags = Integer;
@@ -2172,6 +2233,7 @@ type
   ImWchar16 = Word;
   ImWchar = ImWchar16;
   PImWchar = ^ImWchar;
+  ImGuiSelectionUserData = ImS64;
 
   ImGuiInputTextCallback = function(data: PImGuiInputTextCallbackData): Integer; cdecl;
 
@@ -2241,6 +2303,7 @@ type
     TabBorderSize: Single;
     TabMinWidthForCloseButton: Single;
     TabBarBorderSize: Single;
+    TabBarOverlineSize: Single;
     TableAngledHeadersAngle: Single;
     TableAngledHeadersTextAlign: ImVec2;
     ColorButtonPosition: ImGuiDir;
@@ -2258,7 +2321,7 @@ type
     AntiAliasedFill: Boolean;
     CurveTessellationTol: Single;
     CircleTessellationMaxError: Single;
-    Colors: array [0..56] of ImVec4;
+    Colors: array [0..57] of ImVec4;
     HoverStationaryDelay: Single;
     HoverDelayShort: Single;
     HoverDelayNormal: Single;
@@ -2303,6 +2366,7 @@ type
     ConfigViewportsNoDefaultParent: Boolean;
     MouseDrawCursor: Boolean;
     ConfigMacOSXBehaviors: Boolean;
+    ConfigNavSwapGamepadButtons: Boolean;
     ConfigInputTrickleEventQueue: Boolean;
     ConfigInputTextCursorBlink: Boolean;
     ConfigInputTextEnterKeepActive: Boolean;
@@ -2328,7 +2392,9 @@ type
     GetClipboardTextFn: function(user_data: Pointer): PAnsiChar; cdecl;
     SetClipboardTextFn: procedure(user_data: Pointer; const text: PAnsiChar); cdecl;
     ClipboardUserData: Pointer;
-    SetPlatformImeDataFn: procedure(viewport: PImGuiViewport; data: PImGuiPlatformImeData); cdecl;
+    PlatformOpenInShellFn: function(ctx: PImGuiContext; const path: PAnsiChar): Boolean; cdecl;
+    PlatformOpenInShellUserData: Pointer;
+    PlatformSetImeDataFn: procedure(ctx: PImGuiContext; viewport: PImGuiViewport; data: PImGuiPlatformImeData); cdecl;
     PlatformLocaleDecimalPoint: ImWchar;
     WantCaptureMouse: Boolean;
     WantCaptureKeyboard: Boolean;
@@ -2489,11 +2555,49 @@ type
     ItemsCount: Integer;
     ItemsHeight: Single;
     StartPosY: Single;
+    StartSeekOffsetY: Double;
     TempData: Pointer;
   end;
 
   ImColor = record
     Value: ImVec4;
+  end;
+
+  ImVector_ImGuiSelectionRequest = record
+    Size: Integer;
+    Capacity: Integer;
+    Data: PImGuiSelectionRequest;
+  end;
+
+  ImGuiMultiSelectIO = record
+    Requests: ImVector_ImGuiSelectionRequest;
+    RangeSrcItem: ImGuiSelectionUserData;
+    NavIdItem: ImGuiSelectionUserData;
+    NavIdSelected: Boolean;
+    RangeSrcReset: Boolean;
+    ItemsCount: Integer;
+  end;
+
+  ImGuiSelectionRequest = record
+    Type_: ImGuiSelectionRequestType;
+    Selected: Boolean;
+    RangeDirection: ImS8;
+    RangeFirstItem: ImGuiSelectionUserData;
+    RangeLastItem: ImGuiSelectionUserData;
+  end;
+
+  ImGuiSelectionBasicStorage = record
+    Size: Integer;
+    PreserveOrder: Boolean;
+    UserData: Pointer;
+    AdapterIndexToStorageId: function(self: PImGuiSelectionBasicStorage; idx: Integer): ImGuiID; cdecl;
+    _SelectionOrder: Integer;
+    _Storage: ImGuiStorage;
+  end;
+
+  ImGuiSelectionExternalStorage = record
+    UserData: Pointer;
+    AdapterSetItemSelected: procedure(self: PImGuiSelectionExternalStorage; idx: Integer; selected: Boolean); cdecl;
   end;
 
   ImDrawCallback = procedure(const parent_list: PImDrawList; const cmd: PImDrawCmd); cdecl;
@@ -2832,8 +2936,6 @@ type
   ImGuiActivateFlags = Integer;
   ImGuiDebugLogFlags = Integer;
   ImGuiFocusRequestFlags = Integer;
-  ImGuiItemFlags = Integer;
-  PImGuiItemFlags = ^ImGuiItemFlags;
   ImGuiItemStatusFlags = Integer;
   ImGuiOldColumnFlags = Integer;
   ImGuiNavHighlightFlags = Integer;
@@ -2930,6 +3032,7 @@ type
     TexUvWhitePixel: ImVec2;
     Font: PImFont;
     FontSize: Single;
+    FontScale: Single;
     CurveTessellationTol: Single;
     CircleSegmentMaxError: Single;
     ClipRectFullscreen: ImVec4;
@@ -3068,11 +3171,10 @@ type
     RefreshFlagsVal: ImGuiWindowRefreshFlags;
   end;
 
-  ImGuiSelectionUserData = ImS64;
-
   ImGuiNextItemData = record
     Flags: ImGuiNextItemDataFlags;
     ItemFlags: ImGuiItemFlags;
+    FocusScopeId: ImGuiID;
     SelectionUserData: ImGuiSelectionUserData;
     Width: Single;
     Shortcut: ImGuiKeyChord;
@@ -3080,6 +3182,7 @@ type
     OpenVal: Boolean;
     OpenCond: ImU8;
     RefVal: ImGuiDataTypeStorage;
+    StorageId: ImGuiID;
   end;
 
   ImGuiLastItemData = record
@@ -3093,8 +3196,9 @@ type
     Shortcut: ImGuiKeyChord;
   end;
 
-  ImGuiNavTreeNodeData = record
+  ImGuiTreeNodeStackData = record
     ID: ImGuiID;
+    TreeFlags: ImGuiTreeNodeFlags;
     InFlags: ImGuiItemFlags;
     NavRect: ImRect;
   end;
@@ -3320,6 +3424,60 @@ type
     HostBackupParentWorkRect: ImRect;
     Columns: ImVector_ImGuiOldColumnData;
     Splitter: ImDrawListSplitter;
+  end;
+
+  ImGuiBoxSelectState = record
+    ID: ImGuiID;
+    IsActive: Boolean;
+    IsStarting: Boolean;
+    IsStartedFromVoid: Boolean;
+    IsStartedSetNavIdOnce: Boolean;
+    RequestClear: Boolean;
+  private
+    Data0: Cardinal;
+    function GetData0Value(const AIndex: Integer): Cardinal;
+    procedure SetData0Value(const AIndex: Integer; const AValue: Cardinal);
+  public
+    property KeyMods: Cardinal index $0010 read GetData0Value write SetData0Value; // 16 bits at offset 0 in Data0
+  var
+    StartPosRel: ImVec2;
+    EndPosRel: ImVec2;
+    ScrollAccum: ImVec2;
+    Window: PImGuiWindow;
+    UnclipMode: Boolean;
+    UnclipRect: ImRect;
+    BoxSelectRectPrev: ImRect;
+    BoxSelectRectCurr: ImRect;
+  end;
+
+  ImGuiMultiSelectTempData = record
+    IO: ImGuiMultiSelectIO;
+    Storage: PImGuiMultiSelectState;
+    FocusScopeId: ImGuiID;
+    Flags: ImGuiMultiSelectFlags;
+    ScopeRectMin: ImVec2;
+    BackupCursorMaxPos: ImVec2;
+    LastSubmittedItem: ImGuiSelectionUserData;
+    BoxSelectId: ImGuiID;
+    KeyMods: ImGuiKeyChord;
+    LoopRequestSetAll: ImS8;
+    IsEndIO: Boolean;
+    IsFocused: Boolean;
+    IsKeyboardSetRange: Boolean;
+    NavIdPassedBy: Boolean;
+    RangeSrcPassedBy: Boolean;
+    RangeDstPassedBy: Boolean;
+  end;
+
+  ImGuiMultiSelectState = record
+    Window: PImGuiWindow;
+    ID: ImGuiID;
+    LastFrameActive: Integer;
+    LastSelectionSize: Integer;
+    RangeSelected: ImS8;
+    NavIdSelected: ImS8;
+    RangeSrcItem: ImGuiSelectionUserData;
+    NavIdItem: ImGuiSelectionUserData;
   end;
 
   ImVector_ImGuiWindowPtr = record
@@ -3575,10 +3733,10 @@ type
     Data: PImGuiPopupData;
   end;
 
-  ImVector_ImGuiNavTreeNodeData = record
+  ImVector_ImGuiTreeNodeStackData = record
     Size: Integer;
     Capacity: Integer;
-    Data: PImGuiNavTreeNodeData;
+    Data: PImGuiTreeNodeStackData;
   end;
 
   ImVector_ImGuiViewportPPtr = record
@@ -3643,6 +3801,25 @@ type
     Data: PImGuiShrinkWidthItem;
   end;
 
+  ImVector_ImGuiMultiSelectTempData = record
+    Size: Integer;
+    Capacity: Integer;
+    Data: PImGuiMultiSelectTempData;
+  end;
+
+  ImVector_ImGuiMultiSelectState = record
+    Size: Integer;
+    Capacity: Integer;
+    Data: PImGuiMultiSelectState;
+  end;
+
+  ImPool_ImGuiMultiSelectState = record
+    Buf: ImVector_ImGuiMultiSelectState;
+    Map: ImGuiStorage;
+    FreeIdx: ImPoolIdx;
+    AliveCount: ImPoolIdx;
+  end;
+
   ImVector_ImGuiID = record
     Size: Integer;
     Capacity: Integer;
@@ -3680,6 +3857,7 @@ type
     Font: PImFont;
     FontSize: Single;
     FontBaseSize: Single;
+    FontScale: Single;
     CurrentDpiScale: Single;
     DrawListSharedData: ImDrawListSharedData;
     Time: Double;
@@ -3777,7 +3955,7 @@ type
     GroupStack: ImVector_ImGuiGroupData;
     OpenPopupStack: ImVector_ImGuiPopupData;
     BeginPopupStack: ImVector_ImGuiPopupData;
-    NavTreeNodeStack: ImVector_ImGuiNavTreeNodeData;
+    TreeNodeStack: ImVector_ImGuiTreeNodeStackData;
     Viewports: ImVector_ImGuiViewportPPtr;
     CurrentViewport: PImGuiViewportP;
     MouseViewport: PImGuiViewportP;
@@ -3878,6 +4056,11 @@ type
     TabBars: ImPool_ImGuiTabBar;
     CurrentTabBarStack: ImVector_ImGuiPtrOrIndex;
     ShrinkWidthBuffer: ImVector_ImGuiShrinkWidthItem;
+    BoxSelectState: ImGuiBoxSelectState;
+    CurrentMultiSelect: PImGuiMultiSelectTempData;
+    MultiSelectTempDataStacked: Integer;
+    MultiSelectTempData: ImVector_ImGuiMultiSelectTempData;
+    MultiSelectStorage: ImPool_ImGuiMultiSelectState;
     HoverItemDelayId: ImGuiID;
     HoverItemDelayIdPreviousFrame: ImGuiID;
     HoverItemDelayTimer: Single;
@@ -3932,7 +4115,7 @@ type
     SettingsTables: ImChunkStream_ImGuiTableSettings;
     Hooks: ImVector_ImGuiContextHook;
     HookIdNext: ImGuiID;
-    LocalizationTable: array [0..10] of PAnsiChar;
+    LocalizationTable: array [0..11] of PAnsiChar;
     LogEnabled: Boolean;
     LogType: ImGuiLogType;
     LogFile: ImFileHandle;
@@ -3999,7 +4182,7 @@ type
     MenuBarOffset: ImVec2;
     MenuColumns: ImGuiMenuColumns;
     TreeDepth: Integer;
-    TreeJumpToParentOnPopMask: ImU32;
+    TreeHasStackDataDepthMask: ImU32;
     ChildWindows: ImVector_ImGuiWindowPtr;
     StateStorage: PImGuiStorage;
     CurrentColumns: PImGuiOldColumns;
@@ -5224,18 +5407,6 @@ procedure igSetWindowCollapsed_Str(const name: PAnsiChar; collapsed: Boolean; co
 procedure igSetWindowFocus_Str(const name: PAnsiChar); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetWindowFocus_Str';
 
-procedure igGetContentRegionAvail(pOut: PImVec2); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetContentRegionAvail';
-
-procedure igGetContentRegionMax(pOut: PImVec2); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetContentRegionMax';
-
-procedure igGetWindowContentRegionMin(pOut: PImVec2); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetWindowContentRegionMin';
-
-procedure igGetWindowContentRegionMax(pOut: PImVec2); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetWindowContentRegionMax';
-
 function igGetScrollX(): Single; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetScrollX';
 
@@ -5290,17 +5461,11 @@ procedure igPushStyleVar_Vec2(idx: ImGuiStyleVar; val: ImVec2); cdecl;
 procedure igPopStyleVar(count: Integer); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPopStyleVar';
 
-procedure igPushTabStop(tab_stop: Boolean); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushTabStop';
+procedure igPushItemFlag(option: ImGuiItemFlags; enabled: Boolean); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushItemFlag';
 
-procedure igPopTabStop(); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPopTabStop';
-
-procedure igPushButtonRepeat(repeat_: Boolean); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushButtonRepeat';
-
-procedure igPopButtonRepeat(); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPopButtonRepeat';
+procedure igPopItemFlag(); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPopItemFlag';
 
 procedure igPushItemWidth(item_width: Single); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushItemWidth';
@@ -5346,6 +5511,9 @@ procedure igGetCursorScreenPos(pOut: PImVec2); cdecl;
 
 procedure igSetCursorScreenPos(pos: ImVec2); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetCursorScreenPos';
+
+procedure igGetContentRegionAvail(pOut: PImVec2); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetContentRegionAvail';
 
 procedure igGetCursorPos(pOut: PImVec2); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetCursorPos';
@@ -5434,6 +5602,9 @@ function igGetID_StrStr(const str_id_begin: PAnsiChar; const str_id_end: PAnsiCh
 function igGetID_Ptr(const ptr_id: Pointer): ImGuiID; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetID_Ptr';
 
+function igGetID_Int(int_id: Integer): ImGuiID; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetID_Int';
+
 procedure igTextUnformatted(const text: PAnsiChar; const text_end: PAnsiChar); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTextUnformatted';
 
@@ -5508,6 +5679,12 @@ procedure igProgressBar(fraction: Single; size_arg: ImVec2; const overlay: PAnsi
 
 procedure igBullet(); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igBullet';
+
+function igTextLink(const label_: PAnsiChar): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTextLink';
+
+procedure igTextLinkOpenURL(const label_: PAnsiChar; const url: PAnsiChar); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTextLinkOpenURL';
 
 procedure igImage(user_texture_id: ImTextureID; image_size: ImVec2; uv0: ImVec2; uv1: ImVec2; tint_col: ImVec4; border_col: ImVec4); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImage';
@@ -5722,11 +5899,26 @@ function igCollapsingHeader_BoolPtr(const label_: PAnsiChar; p_visible: PBoolean
 procedure igSetNextItemOpen(is_open: Boolean; cond: ImGuiCond); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetNextItemOpen';
 
+procedure igSetNextItemStorageID(storage_id: ImGuiID); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetNextItemStorageID';
+
 function igSelectable_Bool(const label_: PAnsiChar; selected: Boolean; flags: ImGuiSelectableFlags; size: ImVec2): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSelectable_Bool';
 
 function igSelectable_BoolPtr(const label_: PAnsiChar; p_selected: PBoolean; flags: ImGuiSelectableFlags; size: ImVec2): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSelectable_BoolPtr';
+
+function igBeginMultiSelect(flags: ImGuiMultiSelectFlags; selection_size: Integer; items_count: Integer): PImGuiMultiSelectIO; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igBeginMultiSelect';
+
+function igEndMultiSelect(): PImGuiMultiSelectIO; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igEndMultiSelect';
+
+procedure igSetNextItemSelectionUserData(selection_user_data: ImGuiSelectionUserData); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetNextItemSelectionUserData';
+
+function igIsItemToggledSelection(): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igIsItemToggledSelection';
 
 function igBeginListBox(const label_: PAnsiChar; size: ImVec2): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igBeginListBox';
@@ -6154,6 +6346,9 @@ function igShortcut_Nil(key_chord: ImGuiKeyChord; flags: ImGuiInputFlags): Boole
 procedure igSetNextItemShortcut(key_chord: ImGuiKeyChord; flags: ImGuiInputFlags); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetNextItemShortcut';
 
+procedure igSetItemKeyOwner_Nil(key: ImGuiKey); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetItemKeyOwner_Nil';
+
 function igIsMouseDown_Nil(button: ImGuiMouseButton): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igIsMouseDown_Nil';
 
@@ -6231,6 +6426,12 @@ procedure igDebugStartItemPicker(); cdecl;
 
 function igDebugCheckVersionAndDataLayout(const version_str: PAnsiChar; sz_io: NativeUInt; sz_style: NativeUInt; sz_vec2: NativeUInt; sz_vec4: NativeUInt; sz_drawvert: NativeUInt; sz_drawidx: NativeUInt): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugCheckVersionAndDataLayout';
+
+procedure igDebugLog(const fmt: PAnsiChar) varargs; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugLog';
+
+procedure igDebugLogV(const fmt: PAnsiChar; args: Pointer); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugLogV';
 
 procedure igSetAllocatorFunctions(alloc_func: ImGuiMemAllocFunc; free_func: ImGuiMemFreeFunc; user_data: Pointer); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetAllocatorFunctions';
@@ -6535,6 +6736,9 @@ procedure ImGuiListClipper_IncludeItemByIndex(self: PImGuiListClipper; item_inde
 procedure ImGuiListClipper_IncludeItemsByIndex(self: PImGuiListClipper; item_begin: Integer; item_end: Integer); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiListClipper_IncludeItemsByIndex';
 
+procedure ImGuiListClipper_SeekCursorForItem(self: PImGuiListClipper; item_index: Integer); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiListClipper_SeekCursorForItem';
+
 function ImColor_ImColor_Nil(): PImColor; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImColor_ImColor_Nil';
 
@@ -6558,6 +6762,42 @@ procedure ImColor_SetHSV(self: PImColor; h: Single; s: Single; v: Single; a: Sin
 
 procedure ImColor_HSV(pOut: PImColor; h: Single; s: Single; v: Single; a: Single); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImColor_HSV';
+
+function ImGuiSelectionBasicStorage_ImGuiSelectionBasicStorage(): PImGuiSelectionBasicStorage; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_ImGuiSelectionBasicStorage';
+
+procedure ImGuiSelectionBasicStorage_destroy(self: PImGuiSelectionBasicStorage); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_destroy';
+
+procedure ImGuiSelectionBasicStorage_ApplyRequests(self: PImGuiSelectionBasicStorage; ms_io: PImGuiMultiSelectIO); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_ApplyRequests';
+
+function ImGuiSelectionBasicStorage_Contains(self: PImGuiSelectionBasicStorage; id: ImGuiID): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_Contains';
+
+procedure ImGuiSelectionBasicStorage_Clear(self: PImGuiSelectionBasicStorage); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_Clear';
+
+procedure ImGuiSelectionBasicStorage_Swap(self: PImGuiSelectionBasicStorage; r: PImGuiSelectionBasicStorage); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_Swap';
+
+procedure ImGuiSelectionBasicStorage_SetItemSelected(self: PImGuiSelectionBasicStorage; id: ImGuiID; selected: Boolean); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_SetItemSelected';
+
+function ImGuiSelectionBasicStorage_GetNextSelectedItem(self: PImGuiSelectionBasicStorage; opaque_it: PPointer; out_id: PImGuiID): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_GetNextSelectedItem';
+
+function ImGuiSelectionBasicStorage_GetStorageIdFromIndex(self: PImGuiSelectionBasicStorage; idx: Integer): ImGuiID; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionBasicStorage_GetStorageIdFromIndex';
+
+function ImGuiSelectionExternalStorage_ImGuiSelectionExternalStorage(): PImGuiSelectionExternalStorage; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionExternalStorage_ImGuiSelectionExternalStorage';
+
+procedure ImGuiSelectionExternalStorage_destroy(self: PImGuiSelectionExternalStorage); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionExternalStorage_destroy';
+
+procedure ImGuiSelectionExternalStorage_ApplyRequests(self: PImGuiSelectionExternalStorage; ms_io: PImGuiMultiSelectIO); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiSelectionExternalStorage_ApplyRequests';
 
 function ImDrawCmd_ImDrawCmd(): PImDrawCmd; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImDrawCmd_ImDrawCmd';
@@ -7102,6 +7342,9 @@ function igImCharIsBlankA(c: AnsiChar): Boolean; cdecl;
 function igImCharIsBlankW(c: Cardinal): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImCharIsBlankW';
 
+function igImCharIsXdigitA(c: AnsiChar): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImCharIsXdigitA';
+
 function igImFormatString(buf: PAnsiChar; buf_size: NativeUInt; const fmt: PAnsiChar): Integer varargs; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImFormatString';
 
@@ -7263,6 +7506,9 @@ procedure igImRotate(pOut: PImVec2; v: ImVec2; cos_a: Single; sin_a: Single); cd
 
 function igImLinearSweep(current: Single; target: Single; speed: Single): Single; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImLinearSweep';
+
+function igImLinearRemapClamp(s0: Single; s1: Single; d0: Single; d1: Single; x: Single): Single; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImLinearRemapClamp';
 
 procedure igImMul(pOut: PImVec2; lhs: ImVec2; rhs: ImVec2); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igImMul';
@@ -7702,6 +7948,30 @@ function ImGuiOldColumns_ImGuiOldColumns(): PImGuiOldColumns; cdecl;
 procedure ImGuiOldColumns_destroy(self: PImGuiOldColumns); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiOldColumns_destroy';
 
+function ImGuiBoxSelectState_ImGuiBoxSelectState(): PImGuiBoxSelectState; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiBoxSelectState_ImGuiBoxSelectState';
+
+procedure ImGuiBoxSelectState_destroy(self: PImGuiBoxSelectState); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiBoxSelectState_destroy';
+
+function ImGuiMultiSelectTempData_ImGuiMultiSelectTempData(): PImGuiMultiSelectTempData; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectTempData_ImGuiMultiSelectTempData';
+
+procedure ImGuiMultiSelectTempData_destroy(self: PImGuiMultiSelectTempData); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectTempData_destroy';
+
+procedure ImGuiMultiSelectTempData_Clear(self: PImGuiMultiSelectTempData); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectTempData_Clear';
+
+procedure ImGuiMultiSelectTempData_ClearIO(self: PImGuiMultiSelectTempData); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectTempData_ClearIO';
+
+function ImGuiMultiSelectState_ImGuiMultiSelectState(): PImGuiMultiSelectState; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectState_ImGuiMultiSelectState';
+
+procedure ImGuiMultiSelectState_destroy(self: PImGuiMultiSelectState); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiMultiSelectState_destroy';
+
 function ImGuiDockNode_ImGuiDockNode(id: ImGuiID): PImGuiDockNode; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImGuiDockNode_ImGuiDockNode';
 
@@ -7963,6 +8233,9 @@ procedure igWindowRectRelToAbs(pOut: PImRect; window: PImGuiWindow; r: ImRect); 
 procedure igWindowPosRelToAbs(pOut: PImVec2; window: PImGuiWindow; p: ImVec2); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igWindowPosRelToAbs';
 
+procedure igWindowPosAbsToRel(pOut: PImVec2; window: PImGuiWindow; p: ImVec2); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igWindowPosAbsToRel';
+
 procedure igFocusWindow(window: PImGuiWindow; flags: ImGuiFocusRequestFlags); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igFocusWindow';
 
@@ -8191,20 +8464,8 @@ function igCalcWrapWidthForPos(pos: ImVec2; wrap_pos_x: Single): Single; cdecl;
 procedure igPushMultiItemsWidths(components: Integer; width_full: Single); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushMultiItemsWidths';
 
-function igIsItemToggledSelection(): Boolean; cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igIsItemToggledSelection';
-
-procedure igGetContentRegionMaxAbs(pOut: PImVec2); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetContentRegionMaxAbs';
-
 procedure igShrinkWidths(items: PImGuiShrinkWidthItem; count: Integer; width_excess: Single); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igShrinkWidths';
-
-procedure igPushItemFlag(option: ImGuiItemFlags; enabled: Boolean); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPushItemFlag';
-
-procedure igPopItemFlag(); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igPopItemFlag';
 
 function igGetStyleVarInfo(idx: ImGuiStyleVar): PImGuiDataVarInfo; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetStyleVarInfo';
@@ -8308,7 +8569,7 @@ procedure igNavMoveRequestForward(move_dir: ImGuiDir; clip_dir: ImGuiDir; move_f
 procedure igNavMoveRequestResolveWithLastItem(result: PImGuiNavItemData); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igNavMoveRequestResolveWithLastItem';
 
-procedure igNavMoveRequestResolveWithPastTreeNode(result: PImGuiNavItemData; tree_node_data: PImGuiNavTreeNodeData); cdecl;
+procedure igNavMoveRequestResolveWithPastTreeNode(result: PImGuiNavItemData; tree_node_data: PImGuiTreeNodeStackData); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igNavMoveRequestResolveWithPastTreeNode';
 
 procedure igNavMoveRequestCancel(); cdecl;
@@ -8422,8 +8683,8 @@ procedure igSetKeyOwner(key: ImGuiKey; owner_id: ImGuiID; flags: ImGuiInputFlags
 procedure igSetKeyOwnersForKeyChord(key: ImGuiKeyChord; owner_id: ImGuiID; flags: ImGuiInputFlags); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetKeyOwnersForKeyChord';
 
-procedure igSetItemKeyOwner(key: ImGuiKey; flags: ImGuiInputFlags); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetItemKeyOwner';
+procedure igSetItemKeyOwner_InputFlags(key: ImGuiKey; flags: ImGuiInputFlags); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetItemKeyOwner_InputFlags';
 
 function igTestKeyOwner(key: ImGuiKey; owner_id: ImGuiID): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTestKeyOwner';
@@ -8637,6 +8898,30 @@ type
 
 function igTypingSelectFindBestLeadingMatch(req: PImGuiTypingSelectRequest; items_count: Integer; get_item_name_func: igTypingSelectFindBestLeadingMatch_get_item_name_func; user_data: Pointer): Integer; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTypingSelectFindBestLeadingMatch';
+
+function igBeginBoxSelect(scope_rect: ImRect; window: PImGuiWindow; box_select_id: ImGuiID; ms_flags: ImGuiMultiSelectFlags): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igBeginBoxSelect';
+
+procedure igEndBoxSelect(scope_rect: ImRect; ms_flags: ImGuiMultiSelectFlags); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igEndBoxSelect';
+
+procedure igMultiSelectItemHeader(id: ImGuiID; p_selected: PBoolean; p_button_flags: PImGuiButtonFlags); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igMultiSelectItemHeader';
+
+procedure igMultiSelectItemFooter(id: ImGuiID; p_selected: PBoolean; p_pressed: PBoolean); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igMultiSelectItemFooter';
+
+procedure igMultiSelectAddSetAll(ms: PImGuiMultiSelectTempData; selected: Boolean); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igMultiSelectAddSetAll';
+
+procedure igMultiSelectAddSetRange(ms: PImGuiMultiSelectTempData; selected: Boolean; range_dir: Integer; first_item: ImGuiSelectionUserData; last_item: ImGuiSelectionUserData); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igMultiSelectAddSetRange';
+
+function igGetBoxSelectState(id: ImGuiID): PImGuiBoxSelectState; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetBoxSelectState';
+
+function igGetMultiSelectState(id: ImGuiID): PImGuiMultiSelectState; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGetMultiSelectState';
 
 procedure igSetWindowClipRectBeforeSetChannel(window: PImGuiWindow; clip_rect: ImRect); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetWindowClipRectBeforeSetChannel';
@@ -9001,14 +9286,14 @@ function igTreeNodeBehavior(id: ImGuiID; flags: ImGuiTreeNodeFlags; const label_
 procedure igTreePushOverrideID(id: ImGuiID); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTreePushOverrideID';
 
-procedure igTreeNodeSetOpen(id: ImGuiID; open: Boolean); cdecl;
+function igTreeNodeGetOpen(storage_id: ImGuiID): Boolean; cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTreeNodeGetOpen';
+
+procedure igTreeNodeSetOpen(storage_id: ImGuiID; open: Boolean); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTreeNodeSetOpen';
 
-function igTreeNodeUpdateNextOpen(id: ImGuiID; flags: ImGuiTreeNodeFlags): Boolean; cdecl;
+function igTreeNodeUpdateNextOpen(storage_id: ImGuiID; flags: ImGuiTreeNodeFlags): Boolean; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igTreeNodeUpdateNextOpen';
-
-procedure igSetNextItemSelectionUserData(selection_user_data: ImGuiSelectionUserData); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igSetNextItemSelectionUserData';
 
 function igDataTypeGetInfo(data_type: ImGuiDataType): PImGuiDataTypeInfo; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDataTypeGetInfo';
@@ -9081,12 +9366,6 @@ procedure igGcCompactTransientWindowBuffers(window: PImGuiWindow); cdecl;
 
 procedure igGcAwakeTransientWindowBuffers(window: PImGuiWindow); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igGcAwakeTransientWindowBuffers';
-
-procedure igDebugLog(const fmt: PAnsiChar) varargs; cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugLog';
-
-procedure igDebugLogV(const fmt: PAnsiChar; args: Pointer); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugLogV';
 
 procedure igDebugAllocHook(info: PImGuiDebugAllocInfo; frame_count: Integer; ptr: Pointer; size: NativeUInt); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugAllocHook';
@@ -9172,6 +9451,9 @@ procedure igDebugNodeInputTextState(state: PImGuiInputTextState); cdecl;
 procedure igDebugNodeTypingSelectState(state: PImGuiTypingSelectState); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugNodeTypingSelectState';
 
+procedure igDebugNodeMultiSelectState(state: PImGuiMultiSelectState); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugNodeMultiSelectState';
+
 procedure igDebugNodeWindow(window: PImGuiWindow; const label_: PAnsiChar); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugNodeWindow';
 
@@ -9186,6 +9468,9 @@ procedure igDebugNodeWindowsListByBeginStackParent(windows: PPImGuiWindow; windo
 
 procedure igDebugNodeViewport(viewport: PImGuiViewportP); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugNodeViewport';
+
+procedure igDebugNodePlatformMonitor(monitor: PImGuiPlatformMonitor; const label_: PAnsiChar; idx: Integer); cdecl;
+  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugNodePlatformMonitor';
 
 procedure igDebugRenderKeyboardPreview(draw_list: PImDrawList); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'igDebugRenderKeyboardPreview';
@@ -10417,9 +10702,6 @@ procedure ImPlot_ShowUserGuide(); cdecl;
 
 procedure ImPlot_ShowMetricsWindow(p_popen: PBoolean); cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImPlot_ShowMetricsWindow';
-
-procedure ImPlot_ShowDemoWindow(p_open: PBoolean); cdecl;
-  external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImPlot_ShowDemoWindow';
 
 function ImPlot_ImLog10_Float(x: Single): Single; cdecl;
   external {$IFDEF DYNAMIC_LINK}CIMGUI_LIB{$ENDIF} name _PU + 'ImPlot_ImLog10_Float';
