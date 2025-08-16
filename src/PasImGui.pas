@@ -376,6 +376,8 @@ Type
     Class Function Button(_label: AnsiString): Boolean; Overload; //overload for default size (0,0)
     Class Function SmallButton(_label: PAnsiChar): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
+    Class Function ImGui.ArrowButton(_label: PAnsiChar; _dir: ImGuiDir): Boolean;
+    {$IfDef INLINE} inline;{$EndIf}
     Class Function InvisibleButton(str_id: PAnsiChar; size: ImVec2;
       flags: ImGuiButtonFlags = ImGuiButtonFlags_None): Boolean;
     {$IfDef INLINE} inline;{$EndIf}
@@ -1845,6 +1847,11 @@ End;
 Class Function ImGui.SmallButton(_label: PAnsiChar): Boolean;
 Begin
   Result := igSmallButton(_label);
+End;
+
+Class Function ImGui.ArrowButton(_label: PAnsiChar; _dir: ImGuiDir): Boolean;
+Begin
+  Result := igArrowButton(PAnsiChar(_label), _dir);
 End;
 
 Class Function ImGui.InvisibleButton(str_id: PAnsiChar; size: ImVec2; flags: ImGuiButtonFlags): Boolean;
